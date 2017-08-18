@@ -1,0 +1,41 @@
+@import "../variables"
+
+
+a:hover
+  text-decoration: none
+
+.menubar-side
+  position: fixed
+  font-family: $scrappy-font
+  font-size: larger
+  height: 100%
+  width: $menubar-width
+  top: 3.5em
+  //
+  //@media screen and (max-width: $sm-xs)
+  //  top: 0
+
+.menubar-row
+  margin-left: 1em
+  background-color: white
+  margin-top: .5em
+  border: 1px solid black
+  padding-left: .5em
+  padding-top: 4px
+  color: black
+  width: 100%
+
+  p
+    color: black
+    margin: 0
+
+
+.menubar-row:hover, .menubar-active
+  background: #9f60be
+  cursor: pointer
+
+  p
+    color: white
+    text-decoration: none
+
+

@@ -1,0 +1,52 @@
+@import "../variables"
+
+
+.text-in-header
+  position: absolute
+  text-align: center
+  top: 24%
+  width: 100%
+
+
+
+#header-image
+  color: white
+  font-family: $scrappy-font
+  text-align: center
+  position: relative
+  width: 100%
+  z-index: -1
+  img
+    width: 100%
+
+
+
+
+  h1
+    margin-right: 5%
+    font-size: 450%
+  br
+    display: none
+
+
+
+  //smallest
+  @media screen and (max-width: $xs-xxs)
+    h1
+      text-align: right
+      font-size: 300%
+    br
+      display: inherit
+    img
+      width: 150%
+      margin-left: -25%
+
+  //small
+  @media screen and (min-width: $xs-xxs) and (max-width: $sm-xs)
+    h1
+      text-align: right
+      font-size: 300%
+
+
+
+
