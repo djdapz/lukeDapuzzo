@@ -15,7 +15,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "acorn": "^5.1.1",
     "ajv": "^5.2.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.1",

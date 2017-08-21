@@ -17,12 +17,12 @@ class SocialMediaBar extends Component{
                     </div>
                     <div className="col-1">
                         <a href="https://www.instagram.com/l.p.dapz/" target="blank">
-                            <img src="../../../resources/static/png/ig-icon.sass"/>
+                            <img src="../../../static/png/ig-icon.png"/>
                         </a>
                     </div>
                     <div className="col-1 offset-md-5">
                         <a href="https://www.facebook.com/luke.dapuzzo" target="blank">
-                            <img src="../../../resources/static/png/fb-blue.sass"/>
+                            <img src="../../../static/png/fb-blue.png"/>
                         </a>
                     </div>
                 </div>
