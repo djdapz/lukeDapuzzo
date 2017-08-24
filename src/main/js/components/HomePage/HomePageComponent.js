@@ -20,7 +20,6 @@ class HomePage extends Component{
         return (
 
             <div id="home-page">
-                <HeaderBar header="Welcome"/>
                 <Billboard header="Luke D'Apuzzo"/>
             </div>
 

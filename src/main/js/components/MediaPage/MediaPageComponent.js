@@ -22,7 +22,6 @@ class MediaPage extends Component{
         return (
 
             <div id="home-page">
-                <HeaderBar header="Media"/>
                 {/*<Billboard header="Media Page"/>*/}
             </div>
 

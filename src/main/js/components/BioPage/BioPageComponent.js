@@ -19,7 +19,6 @@ class BioPage extends Component{
         return (
 
             <div id="home-page">
-                <HeaderBar header="Bio"/>
                 {/*<Billboard header="Bio Page"/>*/}
             </div>
 

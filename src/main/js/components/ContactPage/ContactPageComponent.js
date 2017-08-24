@@ -8,6 +8,16 @@ import routes from "../../constants/routes";
 import {routeChanged} from "../../actions/RouteChangedAction"
 import HeaderBar from "../Multipurpose/HeaderBarComponent";
 
+const contactInfo = [
+    {
+        name: "Email",
+        value: "luke@dapuzzo.com"
+    },
+    {
+        name: "Phone Number",
+        value: "(303) 857-6309"
+    }
+];
 
 class ContactPage extends Component{
 
@@ -15,12 +25,31 @@ class ContactPage extends Component{
         this.props.routeChanged(routes.CONTACT)
     }
 
+    renderContactInfo(){
+        contactInfo.map(contact  =>  {
+            return(
+                <div className="contact-row">
+                    something
+                    <span className="contact-name">
+                        {contact.name}:
+                    </span>
+                    <span className="contact-value">
+                        {contact.value}
+                    </span>
+                </div>
+            )
+        })
+
+    }
+
     render() {
         return (
 
-            <div id="home-page">
-                <HeaderBar header="Contact"/>
-                {/*<Billboard header="Contact Page"/>*/}
+            <div id="contact-page" className="main-content">
+                contact page
+                {this.renderContactInfo()}
+                {this.renderContactInfo()}
+
             </div>
 
         )

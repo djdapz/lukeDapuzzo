@@ -1,12 +1,28 @@
 @import "variables"
 
 body
-    background-color: $aqua-luke
+    //background-color: $aqua-luke
+    //background: red
+    //background: -webkit-linear-gradient(left top, red, #2227d0)
+    //background: -o-linear-gradient(bottom right, red, #2227d0)
+    //background: -moz-linear-gradient(bottom right, red, #2227d0)
+    //background: linear-gradient(to bottom right, red, #2227d0)
+    background-repeat: no-repeat
+    background-position: 0 0
+    background-size: cover
+    background-color: white
+    font-family: 'Encode-Sans', sans-serif
 
 .random-text
     width: 50%
 
 .main-content
-    margin-left: $menubar-width * 1.75
-
+    margin-left: $content-left-margin
+    margin-right: 2em
+    top: $header-bar-height
+    margin-bottom: $social-bar-height + 2em
+    margin-top: $header-bar-height + 1em
+html, body
+    overflow: auto
+    height: 100%
 

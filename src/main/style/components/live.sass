@@ -1,15 +1,46 @@
-.table
-  color: black
-  border-color: purple
-
-  thead
-    th
-      border-bottom: 3px solid white
-      border-top: 0
-
-  td
-    border-bottom: 1px solid white
-    border-top: 0
+@import "../variables"
 
 #show-page
+  color: black
   margin-right: 2em
+
+.table-header
+  //background: $purple-luke
+  margin: 1em auto
+  //width: 50%
+h2
+  text-align: center
+  color: black
+  font-family: $header-font
+
+.listing-venue
+  a
+    //color: black
+
+.location
+  width: 50%
+  display: inline
+
+.listing-venue
+  font-size: 150%
+
+.listing-date
+  font-size: 200%
+  font-weight: bold
+  width: 50%
+  float: right
+  text-align: right
+
+.listing-city
+  font-size: 100%
+
+.listing
+  padding-bottom: 1.5em
+  padding-top: 1em
+  border-top: 1px solid black
+  @media screen and (min-width: $lg-md)
+    width: 75%
+    margin-right: auto
+    margin-left: auto
+
+

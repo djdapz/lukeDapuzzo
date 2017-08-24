@@ -1,28 +1,52 @@
 const routes = {
     HOME: {
-        name: "Home",
-        href: "/"
+        displayInMenuBar: false,
+        name: "HOME",
+        href: "/",
+        header: "Welcome",
+        menubarClassName: "home-menubar"
     },
     MUSIC: {
-        name: "Music",
-        href: "/music"
-    },
-    BIO: {
-        name: "Bio",
-        href: "/bio"
-    },
-    CONTACT: {
-        name: "Contact",
-        href: "/contact"
-    },
-    MEDIA: {
-        name: "Media",
-        href: "/media"
+        displayInMenuBar: true,
+        name: "MUSIC",
+        href: "/music",
+        header: "Music",
+        menubarClassName: "music-menubar"
+
     },
     SHOWS: {
-        name: "Shows",
-        href: "/shows"
-    }
+        displayInMenuBar: true,
+        name: "SHOWS",
+        href: "/shows",
+        header: "Shows",
+        menubarClassName: "shows-menubar"
+    },
+    BIO: {
+        displayInMenuBar: true,
+        name: "BIO",
+        href: "/bio",
+        header: "Bio",
+        menubarClassName: "bio-menubar",
+        disable: true
+
+    },
+
+    MEDIA: {
+        displayInMenuBar: false,
+        name: "MEDIA",
+        href: "/media",
+        header: "Media",
+        menubarClassName: "media-menubar",
+    },
+    CONTACT:{
+        displayInMenuBar: true,
+        name: "CONTACT",
+        href: "/contact",
+        header: "Contact",
+        menubarClassName: "contact-menubar",
+        disable: false
+    },
+
 };
 
 export default routes;

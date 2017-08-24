@@ -12,7 +12,7 @@ class Billboard extends Component{
 
             <div id="header-image">
                 <img src="https://i.ytimg.com/vi/SSq2nfv4Jkw/maxresdefault.jpg" />
-                <div className="text-in-header">
+                <div className="main-content text-in-header">
                     {/*<h1>*/}
                         {/*Luke <br/> D'Apuzzo*/}
                     {/*</h1>*/}
