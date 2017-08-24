@@ -12,7 +12,7 @@ class SocialMediaBar extends Component{
             <div id="social-media-bar">
                 <div className="row">
                     {/*TODO - make this more elegant with offset*/}
-                    <div className="col-4">
+                    <div className="col-3">
                         {/*<img src="../../assets/fb_white.png"/>*/}
 
                     </div>
@@ -24,6 +24,11 @@ class SocialMediaBar extends Component{
                     <div className="col-2 offset-md-5">
                         <a href="https://www.facebook.com/luke.dapuzzo" target="blank">
                             <img src={aws.s3 + "/png/fb_white.png"}/>
+                        </a>
+                    </div>
+                    <div className="col-2 offset-md-5">
+                        <a href="https://www.twitter.com/luke.dapuzzo" target="blank">
+                            <img src={aws.s3 + "/png/twitter_white.png"}/>
                         </a>
                     </div>
                 </div>
