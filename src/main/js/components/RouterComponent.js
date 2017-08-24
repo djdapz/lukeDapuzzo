@@ -14,17 +14,15 @@ import routes from "../constants/routes"
 class RouterComponent extends Component{
     render(){
         return(
-            <div>
-                <Switch>
-                    <Route exact path={routes.HOME.href} component={HomePage}/>
-                    <Route path={routes.SHOWS.href} component={ShowPage}/>
-                    <Route path={routes.MUSIC.href} component={MusicPage}/>
-                    <Route path={routes.BIO.href} component={BioPage}/>
-                    <Route path={routes.CONTACT.href} component={ContactPage}/>
-                    <Route path={routes.MEDIA.href} component={MediaPage}/>
-                    <Redirect from="*" to={routes.HOME.href}/>
-                </Switch>
-            </div>
+            <Switch>
+                <Route exact path={routes.HOME.href} component={HomePage}/>
+                <Route path={routes.SHOWS.href} component={ShowPage}/>
+                <Route path={routes.MUSIC.href} component={MusicPage}/>
+                <Route path={routes.BIO.href} component={BioPage}/>
+                <Route path={routes.CONTACT.href} component={ContactPage}/>
+                <Route path={routes.MEDIA.href} component={MediaPage}/>
+                <Redirect from="*" to={routes.HOME.href}/>
+            </Switch>
         )
 
     }
