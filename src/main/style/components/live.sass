@@ -3,6 +3,8 @@
 #show-page
   color: black
   margin-right: 2em
+  @media screen and (max-width: $md-sm)
+    margin-right: 1em
 
 .table-header
   //background: $purple-luke
@@ -23,6 +25,11 @@ h2
 
 .listing-venue
   font-size: 150%
+  @media screen and (max-width: $md-sm) and (min-width: $sm-xs)
+    font-size: 150%
+  @media screen and (max-width: $sm-xs)
+    font-size: 100%
+
 
 .listing-date
   font-size: 200%
@@ -30,6 +37,11 @@ h2
   width: 50%
   float: right
   text-align: right
+  @media screen and (max-width: $md-sm) and (min-width: $sm-xs)
+    font-size: 150%
+  @media screen and (max-width: $sm-xs)
+    font-size: 100%
+
 
 .listing-city
   font-size: 100%
@@ -42,5 +54,6 @@ h2
     width: 75%
     margin-right: auto
     margin-left: auto
+
 
 

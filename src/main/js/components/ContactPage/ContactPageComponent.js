@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
 
 import style from "../../../style/components/contact.sass";
-import Billboard from "../Multipurpose/BillboardComponent";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import routes from "../../constants/routes";
 import {routeChanged} from "../../actions/RouteChangedAction"
-import HeaderBar from "../Multipurpose/HeaderBarComponent";
 
 const contactInfo = [
     {
         name: "Email",
-        value: "luke@dapuzzo.com"
+        value: "luke@rockstar.com"
     },
     {
         name: "Phone Number",
@@ -26,10 +24,9 @@ class ContactPage extends Component{
     }
 
     renderContactInfo(){
-        contactInfo.map(contact  =>  {
+        return contactInfo.map(contact  =>  {
             return(
-                <div className="contact-row">
-                    something
+                <div className="contactt-row">
                     <span className="contact-name">
                         {contact.name}:
                     </span>
@@ -46,10 +43,7 @@ class ContactPage extends Component{
         return (
 
             <div id="contact-page" className="main-content">
-                contact page
                 {this.renderContactInfo()}
-                {this.renderContactInfo()}
-
             </div>
 
         )
