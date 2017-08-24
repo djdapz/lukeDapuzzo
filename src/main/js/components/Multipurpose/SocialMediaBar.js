@@ -32,7 +32,7 @@ class SocialMediaBar extends Component{
                         </a>
                     </div>
                     <div className="col-2 offset-md-5">
-                        <a href="https://www.twitter.com/luke.dapuzzo" target="blank">
+                        <a href="https://www.youtube.com/channel/UCTpMWFBd80Y6KVFlOlCSFHg" target="blank">
                             <img src={aws.s3 + "/png/youtube_white.png"}/>
                         </a>
                     </div>
