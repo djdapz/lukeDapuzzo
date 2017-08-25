@@ -20,6 +20,12 @@ class HomePage extends Component{
         return (
             <div id="home-page">
                 <Billboard header="Luke D'Apuzzo"/>
+
+                <div className="main-content">
+                    <p>
+                        Luke D'Apuzzo is a solo songwriter and musician from Boulder, Colorado.
+                    </p>
+                </div>
             </div>
         )
     }

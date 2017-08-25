@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import routes from "../../constants/routes";
 import {routeChanged} from "../../actions/RouteChangedAction"
+import ContactForm from "./ContactFormComponent";
 
 const contactInfo = [
     {
@@ -43,7 +44,8 @@ class ContactPage extends Component{
         return (
 
             <div id="contact-page" className="main-content">
-                {this.renderContactInfo()}
+                {/*{this.renderContactInfo()}*/}
+                <ContactForm/>
             </div>
 
         )
