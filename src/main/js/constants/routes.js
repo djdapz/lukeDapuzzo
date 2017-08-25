@@ -27,7 +27,6 @@ const routes = {
         href: "/bio",
         header: "Bio",
         menubarClassName: "bio-menubar",
-        disable: true
 
     },
 

@@ -20,9 +20,10 @@ public class EmailService {
 
     public EmailService() {
         distributionList = new ArrayList<>();
-//        distributionList.add("doug@dapuzzo.com");
-//        distributionList.add("june@dapuzzo.com");
+        distributionList.add("doug@dapuzzo.com");
+        distributionList.add("june@dapuzzo.com");
         distributionList.add("devon.dapuzzo@gmail.com");
+        distributionList.add("lpdapz@aol.com");
     }
 
 
