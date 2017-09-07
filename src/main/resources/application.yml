@@ -1,0 +1,14 @@
+spring:
+  data:
+    rest:
+      base-path: /api
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: devondapuzzotesting@gmail.com
+    password: dEvonwEBSITE
+    properties:
+      smtp:
+        auth: true
+        starttls:
+          enable: true

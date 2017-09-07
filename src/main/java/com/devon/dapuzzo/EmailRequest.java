@@ -1,17 +1,33 @@
 package com.devon.dapuzzo;
 
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+import org.apache.commons.validator.routines.EmailValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.ArrayList;
 
 /**
  * Created by devondapuzzo on 8/25/17.
  */
+@Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EmailRequest {
-    public String name;
-    public String email;
-    public String message;
+    String name;
+    String email;
+    String message;
+
+    public EmailRequest(String name, String email, String message) {
+        this.name = name;
+        this.email = email;
+        this.message = message;
+    }
+
+    public EmailRequest(){
+    }
 
     boolean isValid(){
-        return name != null && email != null && message != null;
+        return name != null && email != null && message != null && EmailValidator.getInstance().isValid(email);
     }
 
     String getErrorMessage(){
@@ -24,7 +40,7 @@ public class EmailRequest {
             missingFields.add("name");
         }
 
-        if(email == null){
+        if(email == null || !EmailValidator.getInstance().isValid(email)){
             missingFields.add("email");
         }
 
@@ -42,40 +58,5 @@ public class EmailRequest {
         }
 
         return errorMessage.toString();
-    }
-
-
-    public EmailRequest() {
-    }
-
-    public EmailRequest(String name, String email, String message) {
-        this.name = name;
-        this.email = email;
-        this.message = message;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

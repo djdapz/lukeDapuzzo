@@ -41,9 +41,9 @@ public class EmailService {
     public void sendEmail(EmailRequest emailRequest) {
         StringBuilder email = new StringBuilder();
 
-        email.append("FROM: ").append(emailRequest.name).append('\n').append('\n')
-                .append("EMAIL: ").append(emailRequest.email).append('\n').append('\n')
-                .append(emailRequest.message).append('\n').append('\n');
+        email.append("FROM: ").append(emailRequest.getName()).append('\n').append('\n')
+                .append("EMAIL: ").append(emailRequest.getEmail()).append('\n').append('\n')
+                .append(emailRequest.getMessage()).append('\n').append('\n');
 
         for(String destination: distributionList){
             sendMessage(destination, "LUKE D'APUZZO Website Contact", email.toString());

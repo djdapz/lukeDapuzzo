@@ -2,12 +2,11 @@ package com.devon.dapuzzo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-public class ReactTutorialApplication {
+public class LukeDapuzzoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ReactTutorialApplication.class, args);
+		SpringApplication.run(LukeDapuzzoApplication.class, args);
 	}
 }
