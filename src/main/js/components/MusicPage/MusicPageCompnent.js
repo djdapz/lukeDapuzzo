@@ -11,15 +11,12 @@ import HeaderBar from "../Multipurpose/HeaderBarComponent";
 
 
 const tracks = [
-    90243759,
-    90243752,
-    232915336,
-    193829854,
-    90243750
+    342093458,
+    339525385,
+    341389620,
+    339526349
 ];
-
-
-class MusicPage extends Component{
+    class MusicPage extends Component{
 
     componentDidMount(){
         this.props.routeChanged(routes.MUSIC)

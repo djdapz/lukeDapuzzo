@@ -18,6 +18,13 @@ const dates = [
         style: "Acoustic"
     },
     {
+        date: new Date("6/26/2017"),
+        city: "Boulder, CO",
+        venue: "Battle of the Bands",
+        link: "https://goo.gl/maps/6cwSXNDx9bF2",
+        style: "Full Band"
+    },
+    {
         date: new Date("7/29/2017"),
         city: "Boston, MA",
         venue: "Beebop",

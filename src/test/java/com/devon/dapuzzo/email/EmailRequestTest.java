@@ -1,5 +1,6 @@
-package com.devon.dapuzzo;
+package com.devon.dapuzzo.email;
 
+import com.devon.dapuzzo.email.EmailRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

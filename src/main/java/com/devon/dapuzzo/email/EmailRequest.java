@@ -1,4 +1,4 @@
-package com.devon.dapuzzo;
+package com.devon.dapuzzo.email;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

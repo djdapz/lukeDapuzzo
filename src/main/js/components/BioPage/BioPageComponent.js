@@ -24,7 +24,6 @@ class BioPage extends Component{
                 </p>
 
                 <p>
-
                     Currently I've been trying to make a name for myself and am constantly writing new music. I always wanted to be a musician for a profession and want my music to be heard and inspire the people who listen to it. I am also a performer and have recently done a good amount of acoustic shows and worked in a good amount of bands anywhere from drummer to lead singer and guitarist.
                 </p>
 

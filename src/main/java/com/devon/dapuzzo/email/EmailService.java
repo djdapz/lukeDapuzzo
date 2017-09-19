@@ -1,4 +1,4 @@
-package com.devon.dapuzzo;
+package com.devon.dapuzzo.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -13,9 +13,6 @@ import java.util.ArrayList;
 
 @Component
 public class EmailService {
-
-
-
     public ArrayList<String> distributionList;
 
     public EmailService() {

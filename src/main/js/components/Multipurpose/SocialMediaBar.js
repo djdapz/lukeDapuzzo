@@ -21,7 +21,7 @@ class SocialMediaBar extends Component{
                             <img src={aws.s3 + "/png/ig_icon_white.png"}/>
                         </a>
                     </div>
-                    <div className="col-2 offset-md-5">
+                    <div className="col-2 offset-md-5 social-media-disabled">
                         <a href="https://www.facebook.com/luke.dapuzzo" target="blank">
                             <img src={aws.s3 + "/png/fb_white.png"}/>
                         </a>
