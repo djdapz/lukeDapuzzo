@@ -2,7 +2,6 @@ var path = require('path');
 
 module.exports = {
     entry: './src/main/js/index.js',
-    devtool: 'sourcemaps',
     cache: true,
     output: {
         path: __dirname,
@@ -27,9 +26,5 @@ module.exports = {
     },
     resolve: {
         extensions: [ '.js', '.jsx', '.sass']
-    },
-    devServer: {
-        historyApiFallback: true,
-        contentBase: './'
     }
 };

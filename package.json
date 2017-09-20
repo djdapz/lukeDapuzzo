@@ -6,11 +6,11 @@
   "repository": "git@github.com:StephenGrider/ReduxSimpleStarter.git",
   "devtool": "sourcemaps",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "webpack-dev-server --open --config webpack.dev.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
-    "watch": "webpack --watch -d",
-    "build": "webpack -d"
+    "watch": "webpack --watch -d --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "author": "",
   "license": "ISC",
@@ -41,7 +41,9 @@
     "sass-loader": "^6.0.6",
     "schema-utils": "^0.3.0",
     "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^3.5.5",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-server": "^2.7.1",
+    "webpack-merge": "^4.1.0"
   }
 }
