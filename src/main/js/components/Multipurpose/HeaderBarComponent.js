@@ -1,7 +1,9 @@
-import React, {Component} from "react";
+
+import React, {Component} from 'react';
+
+import style from "../../../style/components/header.sass";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-
 
 class HeaderBar extends Component{
     render() {
@@ -15,7 +17,6 @@ class HeaderBar extends Component{
 
     renderHomeLink() {
         // if(this.props.route.href !== routes.HOME.href){
-        //noinspection ConstantIfStatementJS
         if(true){
             return(
 
