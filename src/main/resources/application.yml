@@ -12,3 +12,8 @@ spring:
         auth: true
         starttls:
           enable: true
+  datasource:
+    url: jdbc:mysql://localhost/test
+    username: dbuser
+    password: dbpass
+    driver-class-name: org.postgresql.Driver

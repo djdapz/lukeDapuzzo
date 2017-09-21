@@ -11,13 +11,12 @@
 		<relativePath/>
 	</parent>
 
-	<groupId>com.greglturnquist</groupId>
-	<artifactId>react-and-spring-data-rest-basic</artifactId>
+	<groupId>com.devon.dapuzzo</groupId>
+	<artifactId>luke-dapuzzo-website</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>React.js and Spring Data REST - Basic</name>
-	<description>An SPA with ReactJS in the frontend and Spring Data REST in the backend</description>
+	<name>Luke D'Apuzzo's website</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -61,6 +60,10 @@
 			<groupId>commons-validator</groupId>
 			<artifactId>commons-validator</artifactId>
 			<version>1.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 		</dependency>
 	</dependencies>
 
