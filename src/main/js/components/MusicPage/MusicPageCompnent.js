@@ -1,13 +1,8 @@
-import React, {Component} from 'react';
-
-import style from "../../../style/components/music.sass";
-import Billboard from "../Multipurpose/BillboardComponent";
+import React, {Component} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {routeChanged} from "../../actions/RouteChangedAction"
+import {routeChanged} from "../../actions/RouteChangedAction";
 import routes from "../../constants/routes";
-import HeaderBar from "../Multipurpose/HeaderBarComponent";
-
 
 
 const tracks = [
