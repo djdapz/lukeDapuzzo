@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import ShowListing from "./ShowListingComponent";
 
-
-
-
 class Table extends Component{
 
     renderLiveRows(){

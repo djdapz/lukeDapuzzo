@@ -17,9 +17,9 @@ const routes = {
     SHOWS: {
         displayInMenuBar: true,
         name: "SHOWS",
-        href: "/shows",
+        href: "/show",
         header: "Shows",
-        menubarClassName: "shows-menubar"
+        menubarClassName: "show-menubar"
     },
     BIO: {
         displayInMenuBar: true,

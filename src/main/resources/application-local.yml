@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: localhost:5432
+    password:
+    username: devondapuzzo
+    driver-class-name: org.postgresql.Driver

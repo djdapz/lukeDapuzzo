@@ -10,8 +10,8 @@ import java.util.ArrayList;
 /**
  * Created by devondapuzzo on 8/25/17.
  */
-@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Data
 public class EmailRequest {
     String name;
     String email;
