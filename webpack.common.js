@@ -5,7 +5,7 @@ module.exports = {
     cache: true,
     output: {
         path: __dirname,
-        filename: './target/classes/public/bundle.js'
+        filename: './build/resources/main/public/bundle.js'
     },
     module: {
         loaders: [

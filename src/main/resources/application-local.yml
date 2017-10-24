@@ -1,6 +1,10 @@
 spring:
   datasource:
-    url: localhost:5432
+    url: jdbc:postgresql://localhost:5432/lukedapuzzo
     password:
     username: devondapuzzo
     driver-class-name: org.postgresql.Driver
+
+flyway:
+  locations: classpath:db/migration,classpath:db/fixtures
+  schemas: public

@@ -7,10 +7,11 @@
   "devtool": "sourcemaps",
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
+    "test": "echo NPM TEST NEEDS TO BE CONFIGURED",
+    "clean": "echo NPM CLEAN NEEDS TO BE CONFIGURED",
     "test:watch": "npm run test -- --watch",
     "watch": "webpack --watch -d --config webpack.dev.js",
-    "build": "webpack --config webpack.dev.js"
+    "build": "webpack --config webpack.deploy.js"
   },
   "author": "",
   "license": "ISC",

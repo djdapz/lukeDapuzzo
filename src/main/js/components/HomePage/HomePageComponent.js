@@ -20,7 +20,7 @@ class HomePage extends Component{
     render() {
         return (
             <div id="home-page">
-                <Billboard header="Luke D'Apuzzo" subtext={subtext}/>
+                <Billboard header="Luke asdfd D'Apuzzo" subtext={subtext}/>
             </div>
         )
     }
