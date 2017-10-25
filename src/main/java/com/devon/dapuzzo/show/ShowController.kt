@@ -8,15 +8,12 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
-@Value
 @RestController
-@AllArgsConstructor
 class ShowController(val showService: ShowService) {
 
-
-    val shows: List<Show>
-        @GetMapping("/api/shows") get() {
-            return showService.allShows
+    @GetMapping("/api/shows")
+    fun shows(): List<Show> {
+            return showService.getAllShows()
         }
 }
 

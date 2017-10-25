@@ -1,21 +1,31 @@
 package com.devon.dapuzzo.util.random
 
+import com.devon.dapuzzo.email.EmailRequest
 import com.devon.dapuzzo.show.Show
 
 import java.sql.Date
 import java.time.LocalDate
+import java.util.*
 import java.util.concurrent.ThreadLocalRandom
+import java.util.stream.IntStream
+
 
 /**
  * Created by devondapuzzo on 9/22/17.
  */
-object Random {
+object LukeRandom {
+
     fun randomInt(): Int {
         val rand = java.util.Random()
         return rand.nextInt(1000000) + 1
     }
 
-    @JvmOverloads fun randomString(length: Int? = 18): String {
+    fun randomInt(bound: Int): Int {
+        val rand = java.util.Random()
+        return rand.nextInt(1000000) % bound + 1
+    }
+
+    fun randomString(length: Int = 18): String {
         val SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
         val salt = StringBuilder()
         val rnd = java.util.Random()
@@ -36,6 +46,34 @@ object Random {
     }
 
     fun randomShow(): Show {
-        return Show();
+        return Show(
+                randomInt(),
+                randomDate(),
+                randomString(),
+                randomString(),
+                randomString(),
+                randomString(),
+                randomString()
+        );
     }
+
+    fun <T> randomList(producer: () -> T): List<T> {
+        val length = randomInt(5) + 2;
+        val list: ArrayList<T> = ArrayList();
+        for (i in 1..length) {
+            list.add(producer.invoke())
+        }
+        return list
+    }
+
+    fun randomEmailRequest() =
+            EmailRequest(
+                    randomString(),
+                    randomEmailAddress(),
+                    randomString()
+            )
+
+    private fun randomEmailAddress(): String = "${randomString(10)}@${randomString(10)}.com"
+
 }
+

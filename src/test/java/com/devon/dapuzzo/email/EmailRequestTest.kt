@@ -1,9 +1,11 @@
 package com.devon.dapuzzo.email
 
 import com.devon.dapuzzo.email.EmailRequest
+import com.devon.dapuzzo.util.random.LukeRandom.randomEmailRequest
+import com.devon.dapuzzo.util.random.LukeRandom.randomString
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-import org.junit.Assert.*
 
 /**
  * Created by devondapuzzo on 9/7/17.
@@ -11,15 +13,14 @@ import org.junit.Assert.*
 class EmailRequestTest {
 
     @Test
-    @Throws(Exception::class)
-    fun shouldVerifyValidEmailAddress() {
-        val emailRequestGood = EmailRequest("joe", "joe@gmail.com", "Hey bro")
-        assertTrue(emailRequestGood.isValid)
+    fun `should verify valid email address`() {
+        val subject = randomEmailRequest()
+        assertThat(subject.isValid).isTrue()
+    }
 
-        var emailRequestBad = EmailRequest(null, null, null)
-        assertFalse(emailRequestBad.isValid)
-
-        emailRequestBad = EmailRequest("joe", "joe@gmailcom", "Hey bro")
-        assertFalse(emailRequestBad.isValid)
+    @Test
+    fun `should reject malformed email address`() {
+        val subject = EmailRequest(randomString(), randomString(), randomString())
+        assertThat(subject.isValid).isFalse()
     }
 }
