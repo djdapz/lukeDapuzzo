@@ -1,16 +1,15 @@
 package com.devon.dapuzzo.show
 
-
-import javax.persistence.*
 import java.io.Serializable
 import java.sql.Date
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.Table
 
-/**
- * Created by devondapuzzo on 9/22/17.
- */
 @Entity
 @Table(name = "all_shows")
-open class Show(
+data class Show(
         @Id
         val id: Int,
         @Column(nullable = false)
@@ -25,4 +24,14 @@ open class Show(
         val google_maps_link: String,
         @Column(nullable = false)
         val style: String
-) : Serializable
+) : Serializable {
+    constructor() : this(
+            0,
+            Date.valueOf("1999-01-10"),
+            "DEFAULT",
+            "DEFAULT",
+            "DEFAULT",
+            "DEFAULT",
+            "DEFAULT"
+    )
+}
