@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor
 import lombok.Value
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -15,5 +16,10 @@ class ShowController(val showService: ShowService) {
     fun shows(): List<Show> {
             return showService.getAllShows()
         }
+
+    @PostMapping("/api/shows")
+    fun createShow(): Show {
+        return showService.createShow()
+    }
 }
 
