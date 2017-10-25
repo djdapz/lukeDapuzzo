@@ -11,10 +11,6 @@ import org.junit.Before
 import org.junit.Test
 import java.util.*
 
-
-/**
- * Created by devondapuzzo on 10/24/17.
- */
 class ShowServiceTest {
 
     val showRepository: ShowRepository = mock()
@@ -38,4 +34,13 @@ class ShowServiceTest {
         subject.getAllShows();
         verify(showRepository).findAll()
     }
+
+    @Test
+    internal fun `should produce random list between 1 and 5 items long`(){
+        val randomList = randomList(LukeRandom::randomInt)
+
+        assertThat(randomList.size).isGreaterThanOrEqualTo(1)
+        assertThat(randomList.size).isLessThanOrEqualTo(5)
+    }
+
 }

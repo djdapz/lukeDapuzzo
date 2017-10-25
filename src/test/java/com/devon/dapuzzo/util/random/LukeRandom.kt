@@ -2,6 +2,7 @@ package com.devon.dapuzzo.util.random
 
 import com.devon.dapuzzo.email.EmailRequest
 import com.devon.dapuzzo.show.Show
+import org.junit.Test
 
 import java.sql.Date
 import java.time.LocalDate
@@ -57,14 +58,8 @@ object LukeRandom {
         );
     }
 
-    fun <T> randomList(producer: () -> T): List<T> {
-        val length = randomInt(5) + 2;
-        val list: ArrayList<T> = ArrayList();
-        for (i in 1..length) {
-            list.add(producer.invoke())
-        }
-        return list
-    }
+    var x : IntRange = (1..randomInt(5))
+    fun <T> randomList(producer: () -> T): List<T> = (1..randomInt(5)).map { producer() }
 
     fun randomEmailRequest() =
             EmailRequest(
