@@ -29,7 +29,6 @@ nbdist/
 node_modules/
 bower_components/
 ### Gradle template
-.gradle/**
 gradle/
 /build/
 lib/
