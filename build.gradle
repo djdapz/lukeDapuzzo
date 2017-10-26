@@ -77,5 +77,3 @@ processResources{
 webpack{
     dependsOn npmInstall
 }
-
-task stage(dependsOn: ['build'])
