@@ -4,7 +4,7 @@ version = '0.0.1-SNAPSHOT'
 description = """Luke D'Apuzzo's website"""
 
 buildscript {
-    ext.kotlin_version = '1.1.2'
+    ext.kotlin_version = '1.1.4-3'
     repositories {
         mavenCentral()
         maven { url 'http://repo.spring.io/release' }
@@ -40,13 +40,6 @@ repositories {
     mavenCentral()
 }
 
-task webpack(type: Exec) {
-    commandLine "npm", "install"
-    commandLine "npm", "run", "build"
-}
-
-build.mustRunAfter webpack
-
 dependencies {
     compile (
             'org.springframework.boot:spring-boot-starter-thymeleaf:1.5.1.RELEASE',
@@ -68,4 +61,14 @@ dependencies {
     }
 }
 
+//HEROKU SPECIFIC TASKS
+task webpack(type: Exec) {
+    commandLine "npm", "install"
+    commandLine "npm", "run", "build"
+}
 
+processResources{
+    dependsOn webpack
+}
+
+task stage(dependsOn: ['build'])

@@ -33283,7 +33283,7 @@ var HomePage = function (_Component) {
             return _react2.default.createElement(
                 "div",
                 { id: "home-page" },
-                _react2.default.createElement(_BillboardComponent2.default, { header: "Luke asdfd D'Apuzzo", subtext: subtext })
+                _react2.default.createElement(_BillboardComponent2.default, { header: "Luke huzzah D'Apuzzo", subtext: subtext })
             );
         }
     }]);
