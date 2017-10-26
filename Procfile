@@ -1,1 +1,1 @@
-web: java -jar build/libs/lukeDapuzzo-0.0.1-SNAPSHOT.jar
+web: ./gradlew bootRun
