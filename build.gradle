@@ -63,12 +63,19 @@ dependencies {
 
 //HEROKU SPECIFIC TASKS
 task webpack(type: Exec) {
-    commandLine "npm", "install"
     commandLine "npm", "run", "build"
+}
+
+task npmInstall(type: Exec){
+    commandLine "npm", "install"
 }
 
 processResources{
     dependsOn webpack
+}
+
+webpack{
+    dependsOn npmInstall
 }
 
 task stage(dependsOn: ['build'])
