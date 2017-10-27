@@ -3,6 +3,7 @@ package com.devon.dapuzzo.show
 import com.devon.dapuzzo.util.random.LukeRandom
 import com.devon.dapuzzo.util.random.LukeRandom.randomList
 import com.devon.dapuzzo.util.random.LukeRandom.randomShow
+import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
@@ -15,24 +16,38 @@ open class ShowServiceTest {
 
     val showRepository: ShowRepository = mock()
     val subject = ShowService(showRepository)
-    val expectedShows = randomList(::randomShow);
+    val expectedShows = randomList(::randomShow)
+    val savedShow = randomShow()
 
 
     @Before
     fun setUp() {
         whenever(showRepository.findAll()).thenReturn(expectedShows)
+        whenever(showRepository.save(any())).thenReturn(savedShow)
     }
 
     @Test
-    internal fun `should return a list of shows`() {
+    internal fun `should return a list of shows on get`() {
         val shows = subject.getAllShows();
         assertThat(shows).containsAll(expectedShows)
     }
 
     @Test
-    internal fun `should call show repository`() {
+    internal fun `should call show repository on get`() {
         subject.getAllShows();
         verify(showRepository).findAll()
+    }
+
+    @Test
+    internal fun `should calL save in show repository on post`(){
+        subject.getAllShows();
+        verify(showRepository).save(savedShow)
+    }
+
+    @Test
+    internal fun `should return saved show on post`() {
+        val show = subject.createShow(savedShow)
+        assertThat(show).isEqualTo(savedShow)
     }
 
     @Test

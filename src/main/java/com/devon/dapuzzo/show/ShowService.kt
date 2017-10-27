@@ -12,7 +12,7 @@ open class ShowService(val showRepository: ShowRepository) {
         return shows
         }
 
-    fun createShow(): Show {
+    fun createShow(show: Show): Show {
         return Show()
     }
 }
