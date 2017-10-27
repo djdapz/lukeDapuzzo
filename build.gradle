@@ -8,13 +8,12 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url 'http://repo.spring.io/release' }
-        maven { url "https://plugins.gradle.org/m2/"}
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 
     dependencies {
         classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.5.2.RELEASE'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "gradle.plugin.com.palantir.npmrun:gradle-npm-run-plugin:0.5.0"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlin_version"
     }
@@ -32,7 +31,6 @@ allOpen {
     annotation("org.springframework.stereotype.Component")
 }
 
-
 //noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.8
 
@@ -41,22 +39,22 @@ repositories {
 }
 
 dependencies {
-    compile (
-            'org.springframework.boot:spring-boot-starter-thymeleaf:1.5.1.RELEASE',
-            'org.springframework.boot:spring-boot-starter-data-jpa:1.5.1.RELEASE',
-            'org.projectlombok:lombok:1.16.12',
-            'org.springframework.boot:spring-boot-starter-mail:1.4.3.RELEASE',
+    compile(
+            'com.fasterxml.jackson.core:jackson-core:2.9.2',
             'commons-validator:commons-validator:1.4.0',
-            'org.postgresql:postgresql:9.4.1212.jre7',
             "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version",
             "org.flywaydb:flyway-core:4.1.0",
-            'com.fasterxml.jackson.core:jackson-core:2.9.2'
+            'org.projectlombok:lombok:1.16.12',
+            'org.postgresql:postgresql:9.4.1212.jre7',
+            'org.springframework.boot:spring-boot-starter-thymeleaf:1.5.1.RELEASE',
+            'org.springframework.boot:spring-boot-starter-data-jpa:1.5.1.RELEASE',
+            'org.springframework.boot:spring-boot-starter-mail:1.4.3.RELEASE',
     )
 
-    runtime group: 'com.h2database', name: 'h2', version:'1.4.193'
+    runtime group: 'com.h2database', name: 'h2', version: '1.4.193'
 
     testCompile "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
-    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.5.1.RELEASE') {
+    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.1.RELEASE') {
         exclude(module: 'commons-logging')
     }
 }
@@ -66,14 +64,19 @@ task webpack(type: Exec) {
     commandLine "npm", "run", "build"
 }
 
-task npmInstall(type: Exec){
+task npmInstall(type: Exec) {
     commandLine "npm", "install"
 }
 
-processResources{
+processResources {
     dependsOn webpack
 }
 
-webpack{
+webpack {
     dependsOn npmInstall
+}
+
+bootRun {
+    //noinspection GroovyAssignabilityCheck
+    systemProperties System.properties
 }

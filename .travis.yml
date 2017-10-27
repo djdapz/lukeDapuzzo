@@ -1,5 +1,9 @@
 language: java
 
+before_install:
+  - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+  - heroku plugins:install heroku-cli-deploy
+
 deploy:
   provider: heroku
   app:

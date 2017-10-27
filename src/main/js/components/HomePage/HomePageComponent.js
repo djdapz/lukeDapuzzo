@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
+// noinspection ES6UnusedImports
 import style from "../../../style/components/home.sass";
 import Billboard from "../Multipurpose/BillboardComponent";
-import HeaderBar from "../Multipurpose/HeaderBarComponent";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import routes from "../../constants/routes";
@@ -15,7 +15,6 @@ class HomePage extends Component{
     componentDidMount(){
         this.props.routeChanged(routes.HOME)
     }
-
 
     render() {
         return (

@@ -1,12 +1,6 @@
-var path = require('path');
-
 module.exports = {
     entry: './src/main/js/index.js',
     cache: true,
-    output: {
-        path: __dirname,
-        filename: './build/resources/main/public/bundle.js'
-    },
     module: {
         loaders: [
             {

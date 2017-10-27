@@ -17,23 +17,22 @@ target/
 
 ### NetBeans ###
 nbproject/private/
-build/
 nbbuild/
-dist/
 nbdist/
 .nb-gradle
 
 
-
-
 node_modules/
 bower_components/
+
+
 ### Gradle template
 gradle/
 .gradle/
-/build/
-lib/
 out/
+build/
+
+src/main/resources/public/bundle.js
 
 # Ignore Gradle GUI config
 gradle-app.setting
