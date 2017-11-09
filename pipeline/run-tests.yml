@@ -11,5 +11,6 @@ inputs:
 
 run:
 #  path: /springpath/luke-dapuzzo/pipeline/run-tests
-  path: luke-dapuzzo-repo/pipeline/run-tests
+  path: bash
+  args: ['luke-dapuzzo-repo/pipeline/run-tests.sh']
 #  args: ['-lsa', 'luke-dapuzzo-repo/pipeline']
