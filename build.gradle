@@ -75,7 +75,7 @@ dependencies {
 //}
 //
 //webpack {
-//    dependsOn npmInstall
+//    dependsOn npmInst all
 //}
 //
 //assemble {
