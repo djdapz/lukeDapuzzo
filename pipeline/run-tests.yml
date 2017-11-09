@@ -22,4 +22,4 @@ run:
     ls -lsa
     cd pipeline
     ls -lsa
-    ./run-tests
+    run-tests
