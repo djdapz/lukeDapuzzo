@@ -12,4 +12,4 @@ inputs:
 run:
 #  path: /springpath/luke-dapuzzo/pipeline/run-tests
   path: ls
-  args: ['-lsa']
+  args: ['-lsa', 'luke-dapuzzo-repo/pipeline']
