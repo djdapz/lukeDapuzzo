@@ -20,4 +20,7 @@ run:
     whoami
     ls -lsa
     pwd
+    cd luke-dapuzzo-app
+    ls -lsa
+    pwd
     ./luke-dapuzzo-app/pipeline/run-tests
