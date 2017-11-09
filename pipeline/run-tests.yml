@@ -9,5 +9,5 @@ inputs:
 - name: luke-dapuzzo-app
 
 run:
-  path: luke-dapuzzo-app/pipeline/run-tests
-
+#  path: luke-dapuzzo-app/pipeline/run-tests
+  path: pwd
