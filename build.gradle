@@ -62,25 +62,25 @@ dependencies {
 }
 
 //HEROKU SPECIFIC TASKS
-task webpack(type: Exec) {
-    commandLine "npm", "run", "build"
-}
-
-task npmInstall(type: Exec) {
-    commandLine "npm", "install"
-}
-
-processResources {
-    dependsOn webpack
-}
-
-webpack {
-    dependsOn npmInstall
-}
-
-assemble {
-    dependsOn webpack
-}
+//task webpack(type: Exec) {
+//    commandLine "npm", "run", "build"
+//}
+//
+//task npmInstall(type: Exec) {
+//    commandLine "npm", "install"
+//}
+//
+//processResources {
+//    dependsOn webpack
+//}
+//
+//webpack {
+//    dependsOn npmInstall
+//}
+//
+//assemble {
+//    dependsOn webpack
+//}
 
 bootRun {
     //noinspection GroovyAssignabilityCheck
