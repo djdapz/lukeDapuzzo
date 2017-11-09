@@ -8,16 +8,16 @@ image_resource:
 inputs:
 - name: luke-dapuzzo-app
 
-#run:
-#  path: luke-dapuzzo-app/pipeline/run-tests
+run:
+  path: luke-dapuzzo-app/pipeline/run-tests
 #  path: pwd
 
-run:
-  path: sh
-  args:
-  - -exc
-  - |
-    ls -lsa
-    cd luke-dapuzzo-app
-    ls -lsa
-    ./gradlew clean test
+#run:
+#  path: sh
+#  args:
+#  - -exc
+#  - |
+#    ls -lsa
+#    cd luke-dapuzzo-app
+#    ls -lsa
+#    ./gradlew clean test
