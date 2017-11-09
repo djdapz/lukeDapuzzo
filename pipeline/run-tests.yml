@@ -9,8 +9,5 @@ inputs:
 - name: luke-dapuzzo-app
 
 run:
-#  path: /springpath/luke-dapuzzo/pipeline/run-tests
-  path: bash
-  args: ['luke-dapuzzo-app/pipeline/run-tests.sh']
-#  args: ['-lsa', 'luke-dapuzzo-repo/pipeline']
+  path: luke-dapuzzo-app/pipeline/run-tests
 
