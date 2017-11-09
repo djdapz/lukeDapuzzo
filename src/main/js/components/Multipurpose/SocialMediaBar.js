@@ -4,7 +4,6 @@ import style from "../../../style/components/social-bar.sass";
 import aws from "../../constants/aws";
 
 
-
 class SocialMediaBar extends Component{
 
     render() {
@@ -27,12 +26,12 @@ class SocialMediaBar extends Component{
                         </a>
                     </div>
                     <div className="col-2 offset-md-5">
-                        <a href="https://www.twitter.com/luke.dapuzzo" target="blank">
+                        <a href="https://twitter.com/Luke_Dapuzzo" target="blank">
                             <img src={aws.s3 + "/png/twitter_white.png"}/>
                         </a>
                     </div>
                     <div className="col-2 offset-md-5">
-                        <a href="https://www.youtube.com/channel/UCTpMWFBd80Y6KVFlOlCSFHg" target="blank">
+                        <a href="https://www.youtube.com/channel/UCz-21g_mn4YuMVtrb9Mlxig/videos?disable_polymer=1" target="blank">
                             <img src={aws.s3 + "/png/youtube_white.png"}/>
                         </a>
                     </div>
