@@ -12,4 +12,4 @@ jobs:
   - get: luke-dapuzzo-repo
     trigger: true
   - task: run-tests
-    file: pipeline/run-tests.yml
+    file: luke-dapuzzo-repo/pipeline/run-tests.yml

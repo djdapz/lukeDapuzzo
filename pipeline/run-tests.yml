@@ -10,4 +10,4 @@ inputs:
   path: springpath/luke-dapuzzo
 
 run:
-  path: luke-dapuzzo-repo/pipeline/run-tests.sh
+  path: springpath/luke-dapuzzo/pipeline/run-tests.sh
