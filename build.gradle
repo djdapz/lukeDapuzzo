@@ -40,20 +40,22 @@ repositories {
 
 dependencies {
     compile(
-            'com.fasterxml.jackson.core:jackson-core:2.9.2',
+            "com.fasterxml.jackson.core:jackson-core:2.9.2",
+            "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.2",
             'commons-validator:commons-validator:1.4.0',
             "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version",
             "org.flywaydb:flyway-core:4.1.0",
-            'org.projectlombok:lombok:1.16.12',
             'org.postgresql:postgresql:9.4.1212.jre7',
             'org.springframework.boot:spring-boot-starter-thymeleaf:1.5.1.RELEASE',
             'org.springframework.boot:spring-boot-starter-data-jpa:1.5.1.RELEASE',
             'org.springframework.boot:spring-boot-starter-mail:1.4.3.RELEASE',
+            "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0"
     )
 
     runtime group: 'com.h2database', name: 'h2', version: '1.4.193'
 
     testCompile "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
+    testCompile "io.rest-assured:rest-assured:3.0.5"
     testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.1.RELEASE') {
         exclude(module: 'commons-logging')
     }
@@ -74,6 +76,10 @@ processResources {
 
 webpack {
     dependsOn npmInstall
+}
+
+assemble {
+    dependsOn webpack
 }
 
 bootRun {

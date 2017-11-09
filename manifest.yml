@@ -1,0 +1,5 @@
+---
+applications:
+- name: luke-dapuzzo
+  memory: 1024M
+  instances: 1

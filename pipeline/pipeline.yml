@@ -1,0 +1,15 @@
+---
+resources:
+- name: luke-dapuzzo-repo
+  type: git
+  source:
+    uri: https://github.com/djdapz/lukeDapuzzo.git
+
+jobs:
+- name: job-test-luke-dapuzzo
+  public: true
+  plan:
+  - get: luke-dapuzzo-repo
+    trigger: true
+  - task: run-tests
+    file: pipeline/run-tests.yml
