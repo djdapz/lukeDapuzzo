@@ -8,6 +8,16 @@ image_resource:
 inputs:
 - name: luke-dapuzzo-app
 
-run:
+#run:
 #  path: luke-dapuzzo-app/pipeline/run-tests
-  path: pwd
+#  path: pwd
+
+run:
+  path: sh
+  args:
+  - -exc
+  - |
+    whoami
+    pwd
+    ls
+    -lsa
