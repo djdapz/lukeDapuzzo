@@ -8,7 +8,6 @@ image_resource:
 inputs:
 - name: test-script
 - name: luke-dapuzzo-repo
-  path: springpath/luke-dapuzzo
 
 run:
 #  path: /springpath/luke-dapuzzo/pipeline/run-tests
