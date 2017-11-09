@@ -6,7 +6,6 @@ image_resource:
   source: {repository: openjdk, tag: 8-jdk-alpine}
 
 inputs:
-- name: test-script
 - name: luke-dapuzzo-app
 
 run:
