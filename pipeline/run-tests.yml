@@ -13,11 +13,5 @@ inputs:
 #  path: pwd
 
 run:
-  path: sh
-  args:
-  - -exc
-  - |
-    whoami
-    pwd
-    ls
-    -lsa
+  path: cd
+  args: ['luke-dapuzzo-app/pipeline && ls -lsa && sh run-tests.sh']
