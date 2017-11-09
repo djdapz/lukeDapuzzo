@@ -4,11 +4,16 @@ resources:
   type: git
   source:
     uri: https://github.com/djdapz/lukeDapuzzo.git
+- name: test-script
+  type: git
+  source:
+    uri: https://github.com/djdapz/lukeDapuzzo.git
 
 jobs:
 - name: job-test-luke-dapuzzo
   public: true
   plan:
+  - get: test-script
   - get: luke-dapuzzo-repo
     trigger: true
   - task: run-tests

@@ -6,8 +6,9 @@ image_resource:
   source: {repository: openjdk, tag: 8-jdk-alpine}
 
 inputs:
+- name: test-script
 - name: luke-dapuzzo-repo
   path: springpath/luke-dapuzzo
 
 run:
-  path: springpath/luke-dapuzzo/pipeline/run-tests.sh
+  path: test-script/pipeline/run-tests.sh
