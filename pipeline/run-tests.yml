@@ -12,5 +12,5 @@ inputs:
 
 run:
 #  path: /springpath/luke-dapuzzo/pipeline/run-tests
-  exec: ls
+  path: ls
   - args: [-lsa]
