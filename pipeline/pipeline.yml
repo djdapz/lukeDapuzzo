@@ -12,4 +12,4 @@ jobs:
   - get: luke-dapuzzo-app
     trigger: true
   - task: web-app-tests
-    file: luke-dapuzzo-app/pipeline/run-tests
+    file: luke-dapuzzo-app/pipeline/run-tests.yml
