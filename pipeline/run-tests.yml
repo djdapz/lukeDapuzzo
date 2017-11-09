@@ -20,6 +20,4 @@ run:
     ls -lsa
     cd luke-dapuzzo-app
     ls -lsa
-    cd pipeline
-    ls -lsa
-    run-tests
+    ./gradlew clean test
