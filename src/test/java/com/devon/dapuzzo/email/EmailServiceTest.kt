@@ -1,9 +1,10 @@
 package com.devon.dapuzzo.email
 
-import com.devon.dapuzzo.util.random.LukeRandom.randomEmailRequest
-import com.nhaarman.mockito_kotlin.*
-import org.junit.Assert.*
-import org.junit.Before
+import com.devon.dapuzzo.util.random.randomEmailRequest
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.times
+import com.nhaarman.mockito_kotlin.verify
 import org.junit.Test
 import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender

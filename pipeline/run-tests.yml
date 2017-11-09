@@ -11,4 +11,4 @@ inputs:
   path: springpath/luke-dapuzzo
 
 run:
-  path: test-script/pipeline/run-tests.sh
+  path: test-script/pipeline/run-tests

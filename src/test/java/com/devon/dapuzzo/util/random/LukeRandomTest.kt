@@ -1,7 +1,5 @@
 package com.devon.dapuzzo.util.random
 
-import com.devon.dapuzzo.util.random.LukeRandom.randomInt
-import com.devon.dapuzzo.util.random.LukeRandom.randomList
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

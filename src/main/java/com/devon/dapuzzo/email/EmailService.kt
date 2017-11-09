@@ -1,11 +1,8 @@
 package com.devon.dapuzzo.email
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Component
-
-import java.util.ArrayList
 
 /**
  * Created by devondapuzzo on 8/25/17.
@@ -24,17 +21,7 @@ class EmailService(val emailSender: JavaMailSender) {
     }
 
     //TODO - consider adding a queueing mechanism
-    fun sendEmail(emailRequest: EmailRequest) {
-        val email = """
-            FROM: ${emailRequest.name} | ${emailRequest.email}
-            -----------------------------------------------------
-            MESSAGE: ${emailRequest.message}
-            """.trimIndent()
-
-        distributionList
-                .forEach {
-                    sendMessage(it, "LUKE D'APUZZO Website Contact", email.toString())
-                }
-    }
-
+    fun sendEmail(emailRequest: EmailRequest) =
+            distributionList
+                    .map { sendMessage(it, "LUKE D'APUZZO Website Contact", emailRequest.formattedMessage) }
 }

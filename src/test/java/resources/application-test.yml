@@ -1,6 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/lukedapuzzo
+    url: jdbc:postgresql://localhost:5432/lukedapuzzo?currentSchema=test
     password:
     username: devondapuzzo
     driver-class-name: org.postgresql.Driver
+
+flyway:
+  schemas: test

@@ -5,7 +5,7 @@ class Table extends Component{
 
     renderLiveRows(){
         return this.props.dates.map(details => {
-            return <ShowListing key={details.date + details.venue} details={details}/>
+            return <ShowListing key={details.id} details={details}/>
         })
     }
 
