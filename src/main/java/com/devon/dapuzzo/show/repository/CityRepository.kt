@@ -1,17 +1,15 @@
 package com.devon.dapuzzo.show.repository
 
+import com.devon.dapuzzo.core.BaseRepository
 import com.devon.dapuzzo.show.domain.entity.CityEntity
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.stereotype.Repository
-import javax.sql.DataSource
 
 @Repository
-class CityRepository(dataSource: DataSource) {
+class CityRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<CityEntity> {
 
-    final val jdbcTemplate: JdbcTemplate = JdbcTemplate(dataSource)
-
-    fun getAllCities(): List<CityEntity> {
+    override fun getAll(): List<CityEntity> {
         return jdbcTemplate.queryForList(
                 "SELECT * FROM city")
                 .map {
@@ -23,15 +21,15 @@ class CityRepository(dataSource: DataSource) {
                 }
     }
 
-    fun add(city: CityEntity): CityEntity {
+    override fun add(item: CityEntity): CityEntity {
         jdbcTemplate.update(
                 "INSERT INTO city(state, name) VALUES(?,?)",
-                city.stateAbbreviation,
-                city.name)
-        return getCityByStateAndName(city)
+                item.stateAbbreviation,
+                item.name)
+        return getCityByStateAndName(item)
     }
 
-    fun getCityById(id: Int?): CityEntity {
+    override fun getById(id: Any) : CityEntity{
         return jdbcTemplate.queryForObject(
                 "SELECT * FROM city WHERE id = ?",
                 getRowMapper(),
@@ -46,7 +44,7 @@ class CityRepository(dataSource: DataSource) {
                 city.stateAbbreviation)
     }
 
-    fun getRowMapper(): RowMapper<CityEntity> {
+    override fun getRowMapper(): RowMapper<CityEntity> {
         return RowMapper { rs, _ ->
             CityEntity(
                     rs.getInt("id"),

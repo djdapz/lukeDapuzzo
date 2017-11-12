@@ -1,0 +1,25 @@
+package com.devon.dapuzzo.song
+
+import com.devon.dapuzzo.song.domain.SongEntity
+import org.springframework.web.bind.annotation.*
+
+@RestController
+class SongController(val songService: SongService){
+
+    @GetMapping("/api/songs")
+    fun getAllSongs() : List<SongEntity> {
+        return songService.getAllSongs()
+    }
+
+    @GetMapping("/api/songs/{songId}")
+    fun getSongById(@PathVariable songId : Int) : SongEntity{
+        return songService.getSongById(songId)
+    }
+
+    @PostMapping("/api/songs")
+    fun createSong(
+            @RequestBody song: SongEntity
+    ) : SongEntity{
+        return songService.createSong(song)
+    }
+}

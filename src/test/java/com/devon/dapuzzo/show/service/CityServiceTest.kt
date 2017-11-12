@@ -1,9 +1,9 @@
 package com.devon.dapuzzo.show.service
 
+import com.devon.dapuzzo.core.random.randomCityEntity
+import com.devon.dapuzzo.core.random.randomState
 import com.devon.dapuzzo.show.domain.City
 import com.devon.dapuzzo.show.repository.CityRepository
-import com.devon.dapuzzo.util.random.randomCityEntity
-import com.devon.dapuzzo.util.random.randomState
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -21,7 +21,7 @@ class CityServiceTest {
     )
 
     val cityRepository = mock<CityRepository> {
-        on { getCityById(any()) } doReturn cityEntity
+        on { getById(any()) } doReturn cityEntity
     }
 
     val stateService = mock<StateService>{
@@ -40,7 +40,7 @@ class CityServiceTest {
     @Test
     internal fun `should call getCityByID`(){
         subject.getCityById(cityEntity.id)
-        verify(cityRepository).getCityById(cityEntity.id)
+        verify(cityRepository).getById(cityEntity.id)
     }
 
     @Test

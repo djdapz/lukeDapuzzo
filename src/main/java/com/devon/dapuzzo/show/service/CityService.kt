@@ -11,7 +11,7 @@ class CityService(
 ) {
     fun
             getCityById(id: Int): City =
-            with(cityRepository.getCityById(id)) {
+            with(cityRepository.getById(id)) {
                 City(
                         id = id,
                         name = name,

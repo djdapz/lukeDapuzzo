@@ -1,9 +1,9 @@
 package com.devon.dapuzzo.show.controller
 
 import com.devon.dapuzzo.config.JsonConfig
+import com.devon.dapuzzo.core.random.randomShow
 import com.devon.dapuzzo.show.domain.Show
 import com.devon.dapuzzo.show.service.ShowService
-import com.devon.dapuzzo.util.random.randomShow
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock

@@ -1,32 +1,29 @@
 package com.devon.dapuzzo.show.repository
 
+import com.devon.dapuzzo.core.BaseRepository
 import com.devon.dapuzzo.show.domain.entity.ShowEntity
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.stereotype.Repository
 import java.sql.Date
 import java.time.LocalDate
-import javax.sql.DataSource
 
 /**
  * Created by devondapuzzo on 9/22/17.
  */
 @Repository
-class ShowRepository(dataSource: DataSource) {
+class ShowRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<ShowEntity> {
 
-    val jdbcTemplate: JdbcTemplate = JdbcTemplate(dataSource)
-
-
-    fun add(show: ShowEntity): ShowEntity {
+    override fun add(item: ShowEntity): ShowEntity {
         jdbcTemplate.update(
                 "INSERT INTO show(venue_id, date, style) VALUES(?,?::DATE,?)",
-                show.venueId,
-                show.date.toString(),
-                show.style)
-        return getShowByVenueDateAndStyle(show)
+                item.venueId,
+                item.date.toString(),
+                item.style)
+        return getShowByVenueDateAndStyle(item)
     }
 
-    fun getAllShows(): List<ShowEntity> {
+    override fun getAll(): List<ShowEntity> {
         return jdbcTemplate.queryForList(
                 "SELECT * FROM SHOW"
         ).map {
@@ -39,7 +36,7 @@ class ShowRepository(dataSource: DataSource) {
         }
     }
 
-    fun getShowById(id: Int): ShowEntity {
+    override fun getById(id: Any): ShowEntity {
         return jdbcTemplate.queryForObject(
                 "SELECT * FROM show WHERE id = ? ",
                 getRowMapper(),
@@ -58,7 +55,7 @@ class ShowRepository(dataSource: DataSource) {
         )
     }
 
-    private fun getRowMapper(): RowMapper<ShowEntity> {
+    override fun getRowMapper(): RowMapper<ShowEntity> {
         return RowMapper { rs, _ ->
             ShowEntity(
                     rs.getInt("id"),
@@ -69,21 +66,4 @@ class ShowRepository(dataSource: DataSource) {
         }
     }
 
-
-
-
-//        public List<ProjectEntity> getAllProjectEntities()
-//        {
-//            return jdbcTemplate.queryForList(
-//                    "SELECT * FROM projects"
-//            ).stream()
-//                    .map({ r ->
-//                        ProjectEntity(
-//                                r.get("id") as Int,
-//                                r.get("name") as String,
-//                                (r.get("start_date") as Date).toLocalDate(),
-//                                r.get("hourly_rate") as Int,
-//                                r.get("budget") as Int
-//                        )
-//                    }).collect(toList<Any>())
 }

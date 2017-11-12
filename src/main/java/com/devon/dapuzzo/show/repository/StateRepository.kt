@@ -1,22 +1,19 @@
 package com.devon.dapuzzo.show.repository
 
 
+import com.devon.dapuzzo.core.BaseRepository
 import com.devon.dapuzzo.show.domain.entity.StateEntity
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.stereotype.Repository
-import javax.sql.DataSource
 
 /**
  * Created by devondapuzzo on 9/22/17.
  */
 @Repository
-class StateRepository(dataSource: DataSource) {
+class StateRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<StateEntity>{
 
-    val jdbcTemplate: JdbcTemplate = JdbcTemplate(dataSource)
-
-
-    fun getAllStates(): List<StateEntity> {
+    override fun getAll(): List<StateEntity> {
         return jdbcTemplate.queryForList(
                 "SELECT * FROM state")
                 .map {
@@ -27,22 +24,22 @@ class StateRepository(dataSource: DataSource) {
                 }
     }
 
-    fun add(state: StateEntity): StateEntity {
+    override fun add(item: StateEntity): StateEntity {
         jdbcTemplate.update(
                 "INSERT INTO State VALUES(?,?)",
-                state.abbreviation,
-                state.name)
-        return state
+                item.abbreviation,
+                item.name)
+        return item
     }
 
-    fun getStateByAbbreviation(abbreviation: String): StateEntity {
+    override fun getById(id: Any): StateEntity {
         return jdbcTemplate.queryForObject(
                 "SELECT * from state WHERE abbreviation = ?",
                 getRowMapper(),
-                abbreviation)
+                id)
     }
 
-    fun getRowMapper(): RowMapper<StateEntity> {
+    override fun getRowMapper(): RowMapper<StateEntity> {
         return RowMapper { rs, _ ->
             StateEntity(
                     rs.getString("abbreviation"),

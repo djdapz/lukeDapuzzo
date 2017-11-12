@@ -1,7 +1,7 @@
 package com.devon.dapuzzo.email
 
-import com.devon.dapuzzo.util.random.randomEmailRequest
-import com.devon.dapuzzo.util.random.randomString
+import com.devon.dapuzzo.core.random.randomEmailRequest
+import com.devon.dapuzzo.core.random.randomString
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

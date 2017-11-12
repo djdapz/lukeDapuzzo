@@ -11,7 +11,7 @@ class ShowService(
 ) {
     fun getAllShows(): List<Show> {
         return showRepository
-                .getAllShows()
+                .getAll()
                 .map {
                     Show(
                             id = it.id,
@@ -24,7 +24,7 @@ class ShowService(
     }
 
 
-    fun getShow(id: Int): Show = with(showRepository.getShowById(id)) {
+    fun getShow(id: Int): Show = with(showRepository.getById(id)) {
         Show(
                 id = id,
                 venue = venueService.getVenue(venueId),

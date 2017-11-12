@@ -1,8 +1,8 @@
 package com.devon.dapuzzo.show.service
 
+import com.devon.dapuzzo.core.random.randomStateEntity
 import com.devon.dapuzzo.show.domain.State
 import com.devon.dapuzzo.show.repository.StateRepository
-import com.devon.dapuzzo.util.random.randomStateEntity
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -17,7 +17,7 @@ class StateServiceTest{
             name = stateEntity.name)
 
     val stateRepository  = mock<StateRepository> {
-        on { getStateByAbbreviation(any()) } doReturn stateEntity
+        on { getById(any()) } doReturn stateEntity
     }
     val subject = StateService(stateRepository)
 

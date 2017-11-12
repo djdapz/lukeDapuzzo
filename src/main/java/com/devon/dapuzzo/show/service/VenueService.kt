@@ -10,7 +10,7 @@ class VenueService(
         val cityService: CityService
 ) {
     fun getVenue(id: Int): Venue =
-            with(venueRepository.getVenueById(id)) {
+            with(venueRepository.getById(id)) {
                 Venue(
                         id = id,
                         name = name,

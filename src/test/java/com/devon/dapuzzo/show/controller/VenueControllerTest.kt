@@ -1,10 +1,10 @@
 package com.devon.dapuzzo.show.controller
 
 import com.devon.dapuzzo.config.JsonConfig
+import com.devon.dapuzzo.core.random.randomList
+import com.devon.dapuzzo.core.random.randomVenue
 import com.devon.dapuzzo.show.domain.Venue
 import com.devon.dapuzzo.show.service.VenueService
-import com.devon.dapuzzo.util.random.randomList
-import com.devon.dapuzzo.util.random.randomVenue
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock

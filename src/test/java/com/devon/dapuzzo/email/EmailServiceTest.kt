@@ -1,6 +1,6 @@
 package com.devon.dapuzzo.email
 
-import com.devon.dapuzzo.util.random.randomEmailRequest
+import com.devon.dapuzzo.core.random.randomEmailRequest
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.times

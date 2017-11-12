@@ -1,4 +1,4 @@
-package com.devon.dapuzzo.util.random
+package com.devon.dapuzzo.core.random
 
 import com.devon.dapuzzo.show.domain.City
 import com.devon.dapuzzo.show.domain.Show

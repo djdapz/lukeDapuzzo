@@ -1,61 +1,61 @@
 package com.devon.dapuzzo.show.repository
 
+import com.devon.dapuzzo.core.random.randomCityEntity
+import com.devon.dapuzzo.core.random.randomStateEntity
+import com.devon.dapuzzo.core.random.randomVenueEntity
 import com.devon.dapuzzo.show.domain.entity.CityEntity
 import com.devon.dapuzzo.show.domain.entity.ShowEntity
 import com.devon.dapuzzo.show.domain.entity.StateEntity
 import com.devon.dapuzzo.show.domain.entity.VenueEntity
-import com.devon.dapuzzo.util.random.randomCityEntity
-import com.devon.dapuzzo.util.random.randomStateEntity
-import com.devon.dapuzzo.util.random.randomVenueEntity
-import org.springframework.jdbc.datasource.SingleConnectionDataSource
+import org.springframework.jdbc.core.JdbcTemplate
 
-internal fun setupState(dataSource: SingleConnectionDataSource,
+internal fun setupState(jdbcTemplate: JdbcTemplate,
                         firstState: StateEntity,
                         secondState: StateEntity) {
-    val stateRepository = StateRepository(dataSource)
+    val stateRepository = StateRepository(jdbcTemplate)
     stateRepository.add(firstState)
     stateRepository.add(secondState)
 }
 
 
-internal fun setupCity(dataSource: SingleConnectionDataSource,
+internal fun setupCity(jdbcTemplate: JdbcTemplate,
                        firstCity: CityEntity,
                        secondCity: CityEntity) {
-    setupCityDependencies(dataSource, firstCity, secondCity)
+    setupCityDependencies(jdbcTemplate, firstCity, secondCity)
 
-    val cityRepository = CityRepository(dataSource)
+    val cityRepository = CityRepository(jdbcTemplate)
     cityRepository.add(firstCity)
     cityRepository.add(secondCity)
 }
 
-internal fun setupVenue(dataSource: SingleConnectionDataSource,
+internal fun setupVenue(jdbcTemplate: JdbcTemplate,
                         firstVenue: VenueEntity,
                         secondVenue: VenueEntity) {
-    setupVenueDependencies(dataSource, firstVenue, secondVenue)
+    setupVenueDependencies(jdbcTemplate, firstVenue, secondVenue)
 
-    val venueRepository = VenueRepository(dataSource)
+    val venueRepository = VenueRepository(jdbcTemplate)
     venueRepository.add(firstVenue)
     venueRepository.add(secondVenue)
 }
 
 
-internal fun setupShowDependencies(dataSource: SingleConnectionDataSource,
+internal fun setupShowDependencies(jdbcTemplate: JdbcTemplate,
                                    firstShow: ShowEntity,
                                    secondShow: ShowEntity) {
-    setupVenue(dataSource, randomVenueEntity(firstShow), randomVenueEntity(secondShow))
+    setupVenue(jdbcTemplate, randomVenueEntity(firstShow), randomVenueEntity(secondShow))
 }
 
 
-internal fun setupVenueDependencies(dataSource: SingleConnectionDataSource,
+internal fun setupVenueDependencies(jdbcTemplate: JdbcTemplate,
                                     firstVenue: VenueEntity,
                                     secondVenue: VenueEntity) {
-    setupCity(dataSource, randomCityEntity(firstVenue), randomCityEntity(secondVenue))
+    setupCity(jdbcTemplate, randomCityEntity(firstVenue), randomCityEntity(secondVenue))
 }
 
-internal fun setupCityDependencies(dataSource: SingleConnectionDataSource,
+internal fun setupCityDependencies(jdbcTemplate: JdbcTemplate,
                                    firstCity: CityEntity,
                                    secondCity: CityEntity) {
-    setupState(dataSource, randomStateEntity(firstCity), randomStateEntity(secondCity))
+    setupState(jdbcTemplate, randomStateEntity(firstCity), randomStateEntity(secondCity))
 }
 
 

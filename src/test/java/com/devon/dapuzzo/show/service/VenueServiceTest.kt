@@ -1,9 +1,9 @@
 package com.devon.dapuzzo.show.service
 
+import com.devon.dapuzzo.core.random.randomCity
+import com.devon.dapuzzo.core.random.randomVenueEntity
 import com.devon.dapuzzo.show.domain.Venue
 import com.devon.dapuzzo.show.repository.VenueRepository
-import com.devon.dapuzzo.util.random.randomCity
-import com.devon.dapuzzo.util.random.randomVenueEntity
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -22,7 +22,7 @@ class VenueServiceTest {
     }
 
     val venueRepository = mock<VenueRepository> {
-        on { getVenueById(any()) } doReturn venueEntity
+        on { getById(any()) } doReturn venueEntity
     }
 
     val cityService = mock<CityService> {
@@ -41,7 +41,7 @@ class VenueServiceTest {
     @Test
     internal fun `should call getVenueById`() {
         subject.getVenue(venueEntity.id)
-        verify(venueRepository).getVenueById(venueEntity.id)
+        verify(venueRepository).getById(venueEntity.id)
     }
 
     @Test

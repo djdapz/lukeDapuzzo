@@ -10,7 +10,6 @@ class VenueController(val venueService: VenueService) {
 
     @GetMapping("/api/venues")
     fun shows(): List<Venue> {
-        venueService.getAllVenues()
-        return emptyList()
+        return venueService.getAllVenues()
     }
 }

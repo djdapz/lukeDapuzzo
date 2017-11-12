@@ -1,17 +1,15 @@
 package com.devon.dapuzzo.show.repository
 
+import com.devon.dapuzzo.core.BaseRepository
 import com.devon.dapuzzo.show.domain.entity.VenueEntity
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.stereotype.Repository
-import javax.sql.DataSource
 
 @Repository
-class VenueRepository(dataSource: DataSource) {
+class VenueRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<VenueEntity> {
 
-    val jdbcTemplate: JdbcTemplate = JdbcTemplate(dataSource)
-
-    fun getAllVenues(): List<VenueEntity> {
+    override fun getAll(): List<VenueEntity> {
         return jdbcTemplate.queryForList(
                 "SELECT * FROM venue")
                 .map {
@@ -24,16 +22,16 @@ class VenueRepository(dataSource: DataSource) {
                 }
     }
 
-    fun add(venue: VenueEntity): VenueEntity {
+    override fun add(item: VenueEntity): VenueEntity {
         jdbcTemplate.update(
                 "INSERT INTO venue(city_id, name, google_maps_link) VALUES(?,?,?)",
-                venue.city_id,
-                venue.name,
-                venue.googleMapsLink)
-        return getVenueByNameAndCity(venue)
+                item.city_id,
+                item.name,
+                item.googleMapsLink)
+        return getVenueByNameAndCity(item)
     }
 
-    fun getVenueById(id: Int): VenueEntity {
+    override fun getById(id: Any): VenueEntity {
         return jdbcTemplate.queryForObject(
                 "SELECT * from venue WHERE id = ?",
                 getRowMapper(),
@@ -48,7 +46,7 @@ class VenueRepository(dataSource: DataSource) {
                 venue.name)
     }
 
-    private fun getRowMapper(): RowMapper<VenueEntity> {
+    override fun getRowMapper(): RowMapper<VenueEntity> {
         return RowMapper { rs, _ ->
             VenueEntity(
                     rs.getInt("id"),

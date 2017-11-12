@@ -1,9 +1,9 @@
 package com.devon.dapuzzo.show.service
 
+import com.devon.dapuzzo.core.random.randomShowEntity
+import com.devon.dapuzzo.core.random.randomVenue
 import com.devon.dapuzzo.show.domain.Show
 import com.devon.dapuzzo.show.repository.ShowRepository
-import com.devon.dapuzzo.util.random.randomShowEntity
-import com.devon.dapuzzo.util.random.randomVenue
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -23,7 +23,7 @@ open class ShowServiceTest {
     )
 
     val showRepository = mock<ShowRepository> {
-        on { getShowById(any()) } doReturn showEntity
+        on { getById(any()) } doReturn showEntity
     }
 
     val venueService = mock<VenueService>{
@@ -42,7 +42,7 @@ open class ShowServiceTest {
     @Test
     internal fun `should call getCityByID`(){
         subject.getShow(showEntity.id)
-        verify(showRepository).getShowById(showEntity.id)
+        verify(showRepository).getById(showEntity.id)
     }
 
     @Test

@@ -1,4 +1,4 @@
-package com.devon.dapuzzo.util.random
+package com.devon.dapuzzo.core.random
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
