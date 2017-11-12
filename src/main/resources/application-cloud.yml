@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://ec2-54-163-232-171.compute-1.amazonaws.com:5432/d4536c32hqd2f6?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+    url: jdbc:postgresql://ec2-54-163-232-171.compute-1.amazonaws.com:5432/d4536c32hqd2f6?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory&currentSchema=test
     password: cd09f011c78b7c212307967c150eec20c7adf71b291afe62df23d2918bfdec08
     username: cwmiwmoyucqpmr
     driver-class-name: org.postgresql.Driver
