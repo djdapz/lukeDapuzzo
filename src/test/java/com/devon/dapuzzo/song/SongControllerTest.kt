@@ -10,8 +10,7 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import java.util.*
@@ -75,5 +74,17 @@ class SongControllerTest {
 
         assertThat(actual).isEqualTo(newSong)
         verify(mockSongService).createSong(newSong)
+    }
+
+    @Test
+    internal fun `should delete show `(){
+        mockMvc
+                .perform(
+                        delete("/api/songs")
+                                .param("id", firstSong.id.toString())
+                                .header("Content-Type", "application/json"))
+                .andExpect(status().isOk)
+
+        verify(mockSongService).delete(firstSong.id)
     }
 }

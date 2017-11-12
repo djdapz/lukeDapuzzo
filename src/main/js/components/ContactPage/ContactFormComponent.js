@@ -8,11 +8,6 @@ import {bindActionCreators} from "redux";
 
 const idToken = '-contact-form';
 
-const clearEmail = {
-    email: "",
-    message: "",
-    name: ""
-};
 
 const EDITING_EMAIL = "EDITING_EMAIL";
 const SENDING_EMAIL = "SENDING_EMAIL";
@@ -21,6 +16,7 @@ const EMAIL_ERROR = "EMAIL_ERROR";
 
 
 class ContactForm extends Component{
+    // noinspection JSUnusedLocalSymbols
     constructor(props){
         super();
 
@@ -87,7 +83,7 @@ class ContactForm extends Component{
         )
     }
 
-    renderEmailError() {
+    static renderEmailError() {
         return(
             <div>
                 <h1>
@@ -100,7 +96,7 @@ class ContactForm extends Component{
         )
     }
 
-    renderSendingEmail() {
+    static renderSendingEmail() {
         return(
             <div>
                 <h1>
@@ -148,7 +144,7 @@ class ContactForm extends Component{
     validateForm(){
         let issues = {};
 
-        if(!this.validateEmail(this.state.email.email)){
+        if(!ContactForm.validateEmail(this.state.email.email)){
             issues.email = "Please enter a valid email";
         }
 
@@ -177,7 +173,7 @@ class ContactForm extends Component{
         this.setState({email: nextState});
     }
 
-    validateEmail(email) {
+    static validateEmail(email) {
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
     }

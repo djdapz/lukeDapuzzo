@@ -34,23 +34,6 @@ class ShowListing extends Component{
     }
 }
 
-// <tr>
-//     <td>
-//         {this.props.details.date.toDateString()}
-//     </td>
-//     <td>
-//         {this.props.details.city}
-//     </td>
-//     <td>
-//         <a href={this.props.details.link} target="blank">
-//             {this.props.details.venue}
-//         </a>
-//     </td>
-//     <td>
-//         {this.props.details.style}
-//     </td>
-// </tr>
-
 
 export default ShowListing;
 

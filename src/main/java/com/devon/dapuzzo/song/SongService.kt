@@ -19,4 +19,8 @@ class SongService(val songRepository: SongRepository){
         return songRepository.getById(id)
     }
 
+    fun delete(id: Int) {
+        songRepository.delete(id)
+    }
+
 }

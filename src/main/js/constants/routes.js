@@ -29,7 +29,6 @@ const routes = {
         menubarClassName: "bio-menubar",
 
     },
-
     MEDIA: {
         displayInMenuBar: false,
         name: "MEDIA",
@@ -45,6 +44,14 @@ const routes = {
         menubarClassName: "contact-menubar",
         disable: false
     },
+    ADMIN:{
+        displayInMenuBar: false,
+        name: "ADMIN",
+        href: "/admin",
+        header: "Admin",
+        menubarClassName: "admin-menubar",
+        disable: false
+    }
 
 };
 

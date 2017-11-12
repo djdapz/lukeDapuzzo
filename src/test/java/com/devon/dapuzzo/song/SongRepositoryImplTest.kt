@@ -29,4 +29,12 @@ class SongRepositoryImplTest : BaseRepositoryTest() {
         assertThat(song).isEqualTo(firstSong)
     }
 
+    @Test
+    internal fun `should delete song from repository`(){
+        subject.delete(firstSong.id)
+        val songs = subject.getAll()
+        assertThat(songs).containsExactlyInAnyOrder(secondSong)
+        assertThat(songs).doesNotContain(firstSong)
+    }
+
 }

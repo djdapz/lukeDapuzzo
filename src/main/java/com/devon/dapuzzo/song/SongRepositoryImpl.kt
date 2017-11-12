@@ -7,6 +7,12 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class SongRepositoryImpl(val jdbcTemplate: JdbcTemplate) : SongRepository {
+    override fun delete(id: Int) {
+        jdbcTemplate.update(
+                "DELETE FROM song WHERE id = ?",
+                id
+        )
+    }
 
     override fun add(item: SongEntity): SongEntity {
         jdbcTemplate.update(
@@ -46,5 +52,7 @@ class SongRepositoryImpl(val jdbcTemplate: JdbcTemplate) : SongRepository {
             )
         }
     }
+
+
 
 }

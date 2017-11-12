@@ -2,9 +2,6 @@
  * Created by devondapuzzo on 8/24/17.
  */
 import React, {Component} from 'react';
-import {sendEmail} from "../../actions/SendEmailAction";
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
 
 const idToken = '-contact-form';
 
@@ -15,6 +12,7 @@ const clearEmail = {
 };
 
 class Input extends Component{
+    // noinspection JSUnusedLocalSymbols
     constructor(props){
         super();
 
@@ -61,7 +59,7 @@ class Input extends Component{
     validateForm(){
         let issues = {};
 
-        if(!this.validateEmail(this.state.email.email)){
+        if(!ContactForm.validateEmail(this.state.email.email)){
             issues.email = "Please enter a valid email";
         }
 
@@ -106,6 +104,7 @@ class Input extends Component{
     }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default Input;
 
 

@@ -22,4 +22,11 @@ class SongController(val songService: SongService){
     ) : SongEntity{
         return songService.createSong(song)
     }
+
+    @DeleteMapping("/api/songs")
+    fun deleteSong(
+            @RequestParam id: Int
+    ){
+        songService.delete(id)
+    }
 }

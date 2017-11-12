@@ -44,5 +44,11 @@ class SongServiceTest{
         assertThat(song).isEqualTo(firstSong)
         verify(songRepository).add(firstSong)
     }
+
+    @Test
+    internal fun `should delete song from repository`(){
+        subject.delete(firstSong.id)
+        verify(songRepository).delete(firstSong.id)
+    }
 }
 
