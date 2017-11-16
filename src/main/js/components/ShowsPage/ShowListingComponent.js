@@ -20,12 +20,12 @@ class ShowListing extends Component{
 
                 <div className="location">
                     <div className="listing-venue">
-                        <a href={this.props.details.venue.google_maps_link} target="blank">
+                        <a href={this.props.details.venue.googleMapsLink} target="blank">
                             {this.props.details.venue.name}
                         </a>
                     </div>
                     <div className="listing-city">
-                        {this.props.details.venue.city}, {this.props.details.venue.city.state.abbreviation}
+                        {this.props.details.venue.city.name}, {this.props.details.venue.city.state.abbreviation}
                     </div>
                 </div>
 

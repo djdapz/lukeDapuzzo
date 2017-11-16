@@ -100,7 +100,7 @@ class NewSong extends Component {
             <div id="new-song-form" className="form-group row">
                 <div className="col-md-4 col-sm-2">
                 </div>
-                <div className="col-md-2 col-sm-4">
+                <div className="col-lg-3 col-md-3 col-sm-5">
                     <input
                         placeholder="Name of Song"
                         type="text"
@@ -109,7 +109,7 @@ class NewSong extends Component {
                         id={`name${idToken}`}
                         onChange={this.onInputChange}/>
                 </div>
-                <div className="col-md-2 col-sm-4">
+                <div className="col-lg-3 col-md-3 col-sm-5">
                     <input
                         placeholder="Soundcloud Id"
                         type="text"

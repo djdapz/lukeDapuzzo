@@ -5,6 +5,8 @@ import routes from "../../constants/routes";
 import {routeChanged} from "../../actions/RouteChangedAction";
 import SongTable from "./SongTableComponent"
 
+import style from "../../../style/components/admin.sass"
+
 class AdminPage extends Component {
 
     componentDidMount() {

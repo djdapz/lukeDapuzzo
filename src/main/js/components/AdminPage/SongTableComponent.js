@@ -40,13 +40,13 @@ class SongTable extends Component {
         if (this.state.createSong) {
             return (
                 <button className="btn btn-warning" onClick={this.cancelSongClicked}>
-                    +
+                    Cancel
                 </button>
             )
         } else {
             return (
                 <button className="btn btn-primary" onClick={this.createSongClicked}>
-                    +
+                    New Song
                 </button>
             )
         }
@@ -95,11 +95,11 @@ class SongTable extends Component {
                         <div className="col-sm-2">
                             {this.renderNewButton()}
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-5">
-                            Song Title
+                        <div className="col-lg-3 col-md-3 col-sm-5 column-header">
+                                Song Title
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-5">
-                            Soundcloud Id
+                        <div className="col-lg-3 col-md-3 col-sm-5 column-header">
+                                Soundcloud Id
                         </div>
                     </div>
                     {this.renderCreateSong()}
