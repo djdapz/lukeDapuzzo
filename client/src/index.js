@@ -1,0 +1,24 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
+
+import style from "../style/app.sass"
+import Bootstrap from "bootstrap";
+import $ from "jquery"
+
+import App from './components/app';
+import reducers from './reducers/index';
+import {BrowserRouter} from "react-router-dom";
+
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers)}>
+      <BrowserRouter>
+          <App />
+      </BrowserRouter>
+  </Provider>
+  , document.getElementById('app'));
+

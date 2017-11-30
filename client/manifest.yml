@@ -1,0 +1,6 @@
+---
+applications:
+- name: luke-dapuzzo-client
+  memory: 512M
+  instances: 1
+  command: npm run start
