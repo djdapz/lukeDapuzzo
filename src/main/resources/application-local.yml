@@ -9,5 +9,10 @@ spring:
       hibernate:
         default_schema: blah
 
+dapuzzo:
+  luke:
+    client:
+      url: http://localhost:9000/bundle.js
+
 flyway:
   schemas: blah

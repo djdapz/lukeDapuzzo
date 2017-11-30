@@ -1,5 +1,5 @@
 ---
 applications:
-- name: luke-dapuzzo
+- name: luke-dapuzzo-dot-com
   memory: 1024M
   instances: 1

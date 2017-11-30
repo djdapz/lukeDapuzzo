@@ -1,6 +1,8 @@
 package com.devon.dapuzzo
 
+import com.devon.dapuzzo.config.UrlConfig
 import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.RequestMapping
 
 /**
@@ -8,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping
  */
 
 @Controller
-class HomeController {
+class HomeController(val urlConfig: UrlConfig) {
 
     @RequestMapping(value = *arrayOf("/", "/media", "/shows", "/music", "/bio", "/contact", "/admin"))
-    fun index(): String {
+    fun index(model: Model): String {
+        model.addAttribute("clientUrl", urlConfig.clientUrl())
         return "index"
     }
 }

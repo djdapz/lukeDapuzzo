@@ -31,7 +31,6 @@ allOpen {
     annotation("org.springframework.stereotype.Component")
 }
 
-//noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.8
 
 repositories {
@@ -61,28 +60,11 @@ dependencies {
     }
 }
 
-//HEROKU SPECIFIC TASKS
-//task webpack(type: Exec) {
-//    commandLine "npm", "run", "build"
-//}
-//
-//task npmInstall(type: Exec) {
-//    commandLine "npm", "install"
-//}
-//
-//processResources {
-//    dependsOn webpack
-//}
-//
-//webpack {
-//    dependsOn npmInst all
-//}
-//
-//assemble {
-//    dependsOn webpack
-//}
-
 bootRun {
     //noinspection GroovyAssignabilityCheck
     systemProperties System.properties
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.3.1' //version required
 }
