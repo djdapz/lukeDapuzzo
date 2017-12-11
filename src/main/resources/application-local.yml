@@ -1,13 +1,13 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/lukedapuzzo?currentSchema=blah
+    url: jdbc:postgresql://localhost:5432/lukedapuzzo?currentSchema=local
     password:
     username: devondapuzzo
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:
       hibernate:
-        default_schema: blah
+        default_schema: local
 
 dapuzzo:
   luke:
@@ -15,4 +15,4 @@ dapuzzo:
       url: http://localhost:9000/bundle.js
 
 flyway:
-  schemas: blah
+  schemas: local

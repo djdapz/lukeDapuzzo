@@ -33,6 +33,7 @@ out/
 build/
 
 src/main/resources/public/bundle.js
+client/dist/bundle.js
 
 # Ignore Gradle GUI config
 gradle-app.setting

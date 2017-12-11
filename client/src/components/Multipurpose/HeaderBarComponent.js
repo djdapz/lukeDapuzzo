@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import aws from "../../constants/aws";
 import SocialMediaIcon from "./SocialMediaIcon";
 
 const iconPaths = [
@@ -13,6 +12,31 @@ const iconPaths = [
 ];
 
 class HeaderBar extends Component {
+    static renderHomeLink() {
+        return (
+            <div>
+                <Link to="/" className="title">
+                    Luke D'Apuzzo
+                </Link>
+                <span className="header-subtext">
+                        A solo songwriter and musician from Boulder, Colorado
+                </span>
+            </div>
+
+        )
+    }
+
+    static renderSocialMediaRow() {
+        const iconElements = iconPaths.map(iconPath => <SocialMediaIcon iconPath={iconPath}/>);
+
+        return (
+            <div className="row">
+                <div className="col-4 col-sm-4 col-md-4 col-lg-8"> </div>
+                {iconElements}
+            </div>
+        )
+    }
+
     render() {
         return (
             <div className="row header-bar">
@@ -20,30 +44,11 @@ class HeaderBar extends Component {
                     {HeaderBar.renderHomeLink()}
                 </div>
                 <div className="col-6">
-                    {this.renderSocialMediaRow()}
+                    {HeaderBar.renderSocialMediaRow()}
                 </div>
 
             </div>
 
-        )
-    }
-
-    static renderHomeLink() {
-        return (
-            <Link to="/" className="title">
-                Luke D'Apuzzo
-            </Link>
-        )
-    }
-
-    renderSocialMediaRow(){
-        const iconElements = iconPaths.map( iconPath => <SocialMediaIcon iconPath={iconPath}/>);
-
-        return(
-            <div className="row">
-                <div className="col-4 col-sm-4 col-md-4 col-lg-8"></div>
-                {iconElements}
-            </div>
         )
     }
 }

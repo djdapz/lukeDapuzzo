@@ -6,8 +6,6 @@ import {bindActionCreators} from "redux";
 import routes from "../../constants/routes";
 import {routeChanged} from "../../actions/RouteChangedAction"
 
-const subtext = "A solo songwriter and musician from Boulder, Colorado";
-
 class HomePage extends Component{
 
     componentDidMount(){
@@ -17,7 +15,7 @@ class HomePage extends Component{
     render() {
         return (
             <div id="home-page">
-                <Billboard header="Luke D'Apuzzo" subtext={subtext}/>
+                <Billboard/>
             </div>
         )
     }
