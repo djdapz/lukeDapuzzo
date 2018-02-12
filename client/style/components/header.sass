@@ -1,38 +1,47 @@
 @import "../variables"
 
-
 .header-bar
-  //font-family: $scrappy-font
-  font-family: $header-font
+  font-family: "Carter One", cursive
   text-align: left
   background-color: black
   color: white
+
   position: fixed
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+  z-index: 1
+  margin: 0
   top: 0
   width: 100%
-  height: $header-bar-height
-  z-index: 1
-  margin-top: 0
-  .title-container
-    padding-left: 1.5em
-    padding-top: $header-bar-height/5
+  height: 4em
   a
     color: white
+  p
+    margin: auto
+  .title-container
+    padding-left: $left-gutter
+    display: flex
   .title
-    margin-top: -7px
     font-size: 200%
-  .header-subtext
+  .sub-title
     margin-left: 1em
     font-family: $main-font
-.row
-  margin-right: 0
-  margin-left: 0
-  margin-top: 0
+    @media screen and (min-width: 0) and (max-width: $sm-xs)
+      display: none
+    @media screen and (min-width: $sm-xs) and (max-width: $md-sm)
+      width: 16em
+
 
   img
     width: $header-bar-height/2
     padding-bottom: $header-bar-height/4
     padding-top: $header-bar-height/4
+    margin-right: $header-bar-height/4
+
+.social-media-icons
+  display: flex
 
 //behaviour specific styling
 .title:hover

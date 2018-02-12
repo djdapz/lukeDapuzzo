@@ -14,13 +14,14 @@ const iconPaths = [
 class HeaderBar extends Component {
     static renderHomeLink() {
         return (
-            <div>
-                <Link to="/" className="title">
-                    Luke D'Apuzzo
-                </Link>
-                <span className="header-subtext">
+            <div className="title-container">
+                    <Link to="/" className="title">
+                        Luke D'Apuzzo
+                    </Link>
+
+                    <p className="sub-title">
                         A solo songwriter and musician from Boulder, Colorado
-                </span>
+                    </p>
             </div>
 
         )
@@ -30,8 +31,7 @@ class HeaderBar extends Component {
         const iconElements = iconPaths.map(iconPath => <SocialMediaIcon iconPath={iconPath}/>);
 
         return (
-            <div className="row">
-                <div className="col-4 col-sm-4 col-md-4 col-lg-8"> </div>
+            <div className="social-media-icons">
                 {iconElements}
             </div>
         )
@@ -40,13 +40,8 @@ class HeaderBar extends Component {
     render() {
         return (
             <div className="row header-bar">
-                <div className="col-6 title-container">
-                    {HeaderBar.renderHomeLink()}
-                </div>
-                <div className="col-6">
-                    {HeaderBar.renderSocialMediaRow()}
-                </div>
-
+                {HeaderBar.renderHomeLink()}
+                {HeaderBar.renderSocialMediaRow()}
             </div>
 
         )

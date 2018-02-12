@@ -4,14 +4,14 @@ import MainContent from "./RouterComponent";
 import HeaderBar from "./Multipurpose/HeaderBarComponent";
 
 export default class App extends Component {
-  render() {
-    return (
-        <div id="app">
-            <HeaderBar/>
-            <MenubarComponent/>
-            <MainContent/>
-        </div>
+    render() {
+        return (
+            <div id="app">
+                <HeaderBar/>
+                <MenubarComponent/>
+                <MainContent/>
+            </div>
 
-  );
-  }
+        );
+    }
 }

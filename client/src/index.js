@@ -1,12 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import {Provider} from 'react-redux';
+import {applyMiddleware, createStore} from 'redux';
 import ReduxPromise from 'redux-promise';
-
-import style from "../style/app.sass"
-import Bootstrap from "bootstrap";
-import $ from "jquery"
 
 import App from './components/app';
 import reducers from './reducers/index';
