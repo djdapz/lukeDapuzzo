@@ -25,6 +25,8 @@ nbdist/
 client/node_modules/
 client/bower_components/
 
+pipeline/credentials.yml
+
 
 ### Gradle template
 gradle/
@@ -46,4 +48,3 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
-
