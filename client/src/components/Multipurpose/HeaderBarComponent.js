@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import SocialMediaIcon from "./SocialMediaIcon";
+import routes from "../../constants/routes";
 
 const iconPaths = [
     "/png/fb_white.png",
@@ -12,10 +13,16 @@ const iconPaths = [
 ];
 
 class HeaderBar extends Component {
-    static renderHomeLink() {
+    renderHomeLink() {
+        let titleClassName = "title";
+
+        if(this.props.route.href === routes.HOME.href){
+            titleClassName += " title-active";
+        }
+
         return (
             <div className="title-container">
-                    <Link to="/" className="title">
+                    <Link to="/" className={titleClassName}>
                         Luke D'Apuzzo
                     </Link>
 
@@ -40,7 +47,7 @@ class HeaderBar extends Component {
     render() {
         return (
             <div className="row header-bar">
-                {HeaderBar.renderHomeLink()}
+                {this.renderHomeLink()}
                 {HeaderBar.renderSocialMediaRow()}
             </div>
 
