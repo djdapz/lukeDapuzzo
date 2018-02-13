@@ -22,5 +22,5 @@ jobs:
     trigger: true
   - get: version
     trigger: false
-  - task: web-app-tests
+  - task: unit-and-integration-tests
     file: luke-dapuzzo-app/pipeline/run-tests.yml
