@@ -3,7 +3,16 @@ resources:
 - name: luke-dapuzzo-app
   type: git
   source:
-    uri: https://github.com/djdapz/lukeDapuzzo.git
+    uri: git@github.com:djdapz/lukeDapuzzo.git
+    private_key: ((github-private-key))
+- name: version
+  type: semver
+  source:
+    driver: git
+    uri: git@github.com:djdapz/lukeDapuzzo.git
+    branch: version
+    file: version
+    private_key: ((github-private-key))
 
 jobs:
 - name: test-luke-app
@@ -11,5 +20,7 @@ jobs:
   plan:
   - get: luke-dapuzzo-app
     trigger: true
+  - get: version
+    trigger: false
   - task: web-app-tests
     file: luke-dapuzzo-app/pipeline/run-tests.yml

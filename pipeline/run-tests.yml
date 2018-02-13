@@ -7,13 +7,15 @@ image_resource:
 
 inputs:
 - name: luke-dapuzzo-app
+- name: version
 
-#run:
-#  path: sh
-#  args:
-#  - -exc
-#  - |
-#    ls -lsa
-#    cd luke-dapuzzo-app
-#    ls -lsa
-#    ./gradlew clean test
+run:
+  path: sh
+  args:
+  - -exc
+  - |
+    ls -lsa
+    cd luke-dapuzzo-app
+    ls -lsa
+    ./gradlew clean test
+    ./gradlew bootRepackage
