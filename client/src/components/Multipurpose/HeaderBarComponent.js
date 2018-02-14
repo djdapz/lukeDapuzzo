@@ -16,7 +16,7 @@ class HeaderBar extends Component {
     renderHomeLink() {
         let titleClassName = "title";
 
-        if(this.props.route.href === routes.HOME.href){
+        if(this.props.route.name === routes.HOME.name){
             titleClassName += " title-active";
         }
 
