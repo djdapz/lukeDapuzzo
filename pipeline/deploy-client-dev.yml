@@ -1,0 +1,22 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: openjdk, tag: 8-jdk-alpine}
+
+inputs:
+- name: luke-dapuzzo-app
+- name: version
+
+run:
+  path: sh
+  args:
+  - -exc
+  - |
+    ls -lsa
+    cd luke-dapuzzo-app
+    ls -lsa
+    ./gradlew clean bootRepackage
+    cf push -p build/libs/lukeDapuzzo-0.0.1-SNAPSHOT.jar
+

@@ -15,12 +15,37 @@ resources:
     private_key: ((github-private-key))
 
 jobs:
-- name: test-luke-app
+- name: unit-and-integration-tests
+  public: true
+  plan:
+  - get: luke-dapuzzo-app
+    trigger: truels
+  - get: version
+    params: {bump: patch}
+    trigger: false
+  - task: unit-and-integration-tests
+    file: luke-dapuzzo-app/pipeline/run-tests.yml
+
+- name: deploy-client-development
   public: true
   plan:
   - get: luke-dapuzzo-app
     trigger: true
+    passed: [unit-and-integration-tests]
   - get: version
     trigger: false
-  - task: unit-and-integration-tests
-    file: luke-dapuzzo-app/pipeline/run-tests.yml
+  - task: build-and-deploy
+    file: luke-dapuzzo-app/pipeline/deploy-backend-client.yml
+
+- name: deploy-backend-development
+  public: true
+  plan:
+  - get: luke-dapuzzo-app
+    trigger: true
+    passed: [unit-and-integration-tests]
+  - get: version
+    trigger: false
+  - task: build-and-deploy
+    file: luke-dapuzzo-app/pipeline/deploy-client-dev.yml
+
+
