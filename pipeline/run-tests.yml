@@ -9,6 +9,9 @@ inputs:
 - name: luke-dapuzzo-app
 - name: version
 
+caches:
+  - path: .gradle/
+
 run:
   path: sh
   args:

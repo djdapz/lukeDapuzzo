@@ -19,7 +19,7 @@ jobs:
   public: true
   plan:
   - get: luke-dapuzzo-app
-    trigger: truels
+    trigger: true
   - get: version
     params: {bump: patch}
     trigger: false
