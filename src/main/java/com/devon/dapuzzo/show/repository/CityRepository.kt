@@ -26,7 +26,9 @@ class CityRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<CityEntity
                 "INSERT INTO city(state, name) VALUES(?,?)",
                 item.stateAbbreviation,
                 item.name)
-        return getCityByStateAndName(item)
+        return item.apply {
+            id = getCityByStateAndName(item).id
+        }
     }
 
     override fun getById(id: Any) : CityEntity{

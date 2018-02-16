@@ -3,7 +3,7 @@ package com.devon.dapuzzo.show.domain.entity
 import com.devon.dapuzzo.show.domain.City
 
 data class CityEntity(
-        val id: Int,
+        var id: Int,
         val stateAbbreviation: String,
         val name: String
 ) {

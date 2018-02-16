@@ -3,8 +3,8 @@ package com.devon.dapuzzo.show.domain.entity
 import com.devon.dapuzzo.show.domain.Venue
 
 data class VenueEntity(
-    val id : Int,
-    val city_id : Int,
+    var id : Int,
+    var city_id : Int,
     val name: String,
     val googleMapsLink: String
 ) {

@@ -3,19 +3,27 @@ package com.devon.dapuzzo.show.repository
 import com.devon.dapuzzo.core.BaseRepositoryTest
 import com.devon.dapuzzo.core.random.randomVenueEntity
 import org.assertj.core.api.Assertions
+import org.junit.Before
 import org.junit.Test
+import org.springframework.beans.factory.annotation.Autowired
 
 class VenueRepositoryTest: BaseRepositoryTest(){
-    val venueRepository: VenueRepository = VenueRepository(jdbcTemplate)
+    @Autowired
+    lateinit var venueRepository: VenueRepository
+
+    @Autowired
+    lateinit var showRepositoryDependencies : ShowRepositoryDependencies
 
     var firstVenue = randomVenueEntity()
     var secondVenue = randomVenueEntity()
 
-    override fun setupDependencies() {
-        setupVenueDependencies(jdbcTemplate, firstVenue, secondVenue)
 
-        firstVenue =  venueRepository.add(firstVenue)
-        secondVenue = venueRepository.add(secondVenue)
+    @Before
+    internal fun setup() {
+        showRepositoryDependencies.setupVenueDependencies(firstVenue, secondVenue)
+
+         venueRepository.add(firstVenue)
+        venueRepository.add(secondVenue)
     }
 
 

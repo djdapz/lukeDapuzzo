@@ -7,55 +7,71 @@ import com.devon.dapuzzo.show.domain.entity.CityEntity
 import com.devon.dapuzzo.show.domain.entity.ShowEntity
 import com.devon.dapuzzo.show.domain.entity.StateEntity
 import com.devon.dapuzzo.show.domain.entity.VenueEntity
-import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.stereotype.Component
 
-internal fun setupState(jdbcTemplate: JdbcTemplate,
-                        firstState: StateEntity,
-                        secondState: StateEntity) {
-    val stateRepository = StateRepository(jdbcTemplate)
-    stateRepository.add(firstState)
-    stateRepository.add(secondState)
+
+@Component
+class ShowRepositoryDependencies(
+        val stateRepository: StateRepository,
+        val cityRepository: CityRepository,
+        val venueRepository: VenueRepository,
+        val showRepository: ShowRepository
+) {
+
+    private fun setupState(firstState: StateEntity, secondState: StateEntity) {
+        stateRepository.add(firstState)
+        stateRepository.add(secondState)
+    }
+
+
+    private fun setupCity(firstCity: CityEntity, secondCity: CityEntity) {
+        setupCityDependencies(firstCity, secondCity)
+
+        cityRepository.add(firstCity)
+        cityRepository.add(secondCity)
+    }
+
+    private fun setupVenue(firstVenue: VenueEntity, secondVenue: VenueEntity) {
+        setupVenueDependencies(firstVenue, secondVenue)
+
+        venueRepository.add(firstVenue)
+        venueRepository.add(secondVenue)
+    }
+
+    fun setupShow(firstShow: ShowEntity, secondShow: ShowEntity) {
+        setupShowDependencies(firstShow, secondShow)
+        showRepository.add(firstShow)
+        showRepository.add(secondShow)
+
+    }
+
+    fun setupShowDependencies(firstShow: ShowEntity, secondShow: ShowEntity) {
+
+        val firstVenue = randomVenueEntity()
+        val secondVenue = randomVenueEntity()
+
+        setupVenue(firstVenue, secondVenue)
+
+        firstShow.venueId = firstVenue.id
+        secondShow.venueId = secondVenue.id
+
+        setupVenue(randomVenueEntity(firstShow), randomVenueEntity(secondShow))
+    }
+
+
+    fun setupVenueDependencies(firstVenue: VenueEntity, secondVenue: VenueEntity) {
+        val firstCity = randomCityEntity()
+        val secondCity = randomCityEntity()
+
+        setupCity(firstCity, secondCity)
+
+        firstVenue.city_id = firstCity.id
+        secondVenue.city_id = secondCity.id
+    }
+
+    fun setupCityDependencies(firstCity: CityEntity, secondCity: CityEntity) {
+        setupState(randomStateEntity(firstCity), randomStateEntity(secondCity))
+    }
+
+
 }
-
-
-internal fun setupCity(jdbcTemplate: JdbcTemplate,
-                       firstCity: CityEntity,
-                       secondCity: CityEntity) {
-    setupCityDependencies(jdbcTemplate, firstCity, secondCity)
-
-    val cityRepository = CityRepository(jdbcTemplate)
-    cityRepository.add(firstCity)
-    cityRepository.add(secondCity)
-}
-
-internal fun setupVenue(jdbcTemplate: JdbcTemplate,
-                        firstVenue: VenueEntity,
-                        secondVenue: VenueEntity) {
-    setupVenueDependencies(jdbcTemplate, firstVenue, secondVenue)
-
-    val venueRepository = VenueRepository(jdbcTemplate)
-    venueRepository.add(firstVenue)
-    venueRepository.add(secondVenue)
-}
-
-
-internal fun setupShowDependencies(jdbcTemplate: JdbcTemplate,
-                                   firstShow: ShowEntity,
-                                   secondShow: ShowEntity) {
-    setupVenue(jdbcTemplate, randomVenueEntity(firstShow), randomVenueEntity(secondShow))
-}
-
-
-internal fun setupVenueDependencies(jdbcTemplate: JdbcTemplate,
-                                    firstVenue: VenueEntity,
-                                    secondVenue: VenueEntity) {
-    setupCity(jdbcTemplate, randomCityEntity(firstVenue), randomCityEntity(secondVenue))
-}
-
-internal fun setupCityDependencies(jdbcTemplate: JdbcTemplate,
-                                   firstCity: CityEntity,
-                                   secondCity: CityEntity) {
-    setupState(jdbcTemplate, randomStateEntity(firstCity), randomStateEntity(secondCity))
-}
-
-

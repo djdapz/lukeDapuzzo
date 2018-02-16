@@ -4,9 +4,9 @@ services:
   concourse-db:
     image: postgres:9.6
     environment:
-      POSTGRES_DB: concourse
-      POSTGRES_USER: concourse
-      POSTGRES_PASSWORD: changeme
+      POSTGRES_DB: lukedapuzzo
+      POSTGRES_USER: devondapuzzo
+      POSTGRES_PASSWORD: pswd1234
       PGDATA: /database
 
   concourse-web:
@@ -22,9 +22,10 @@ services:
       CONCOURSE_BASIC_AUTH_PASSWORD: changeme
 #      CONCOURSE_EXTERNAL_URL: "${CONCOURSE_EXTERNAL_URL}"
       CONCOURSE_POSTGRES_HOST: concourse-db
-      CONCOURSE_POSTGRES_USER: concourse
-      CONCOURSE_POSTGRES_PASSWORD: changeme
-      CONCOURSE_POSTGRES_DATABASE: concourse
+      CONCOURSE_POSTGRES_USER: devondapuzzo
+      CONCOURSE_POSTGRES_PASSWORD: pswd1234
+      CONCOURSE_POSTGRES_DATABASE: lukedapuzzo
+      CONCOURSE_POSTGRES_URL: jdbc:postgresql://concourse-db:5432/lukedapuzzo&currentSchema=test
 
   concourse-worker:
     image: concourse/concourse

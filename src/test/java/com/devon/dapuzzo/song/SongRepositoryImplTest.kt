@@ -3,16 +3,20 @@ package com.devon.dapuzzo.song
 import com.devon.dapuzzo.core.BaseRepositoryTest
 import com.devon.dapuzzo.core.random.randomSongEntity
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Before
 import org.junit.Test
+import org.springframework.beans.factory.annotation.Autowired
 
 class SongRepositoryImplTest : BaseRepositoryTest() {
 
-    val subject: SongRepository = SongRepositoryImpl(jdbcTemplate)
+    @Autowired
+    lateinit var subject: SongRepository
 
     val firstSong = randomSongEntity()
     val secondSong = randomSongEntity()
 
-    override fun setupDependencies() {
+    @Before
+    fun setupDependencies() {
         subject.add(firstSong)
         subject.add(secondSong)
     }

@@ -4,8 +4,8 @@ import com.devon.dapuzzo.show.domain.Show
 import java.time.LocalDate
 
 data class ShowEntity(
-        val id: Int,
-        val venueId: Int,
+        var id: Int,
+        var venueId: Int,
         val date: LocalDate,
         val style: String
 ) {

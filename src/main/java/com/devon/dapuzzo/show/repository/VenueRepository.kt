@@ -4,6 +4,7 @@ import com.devon.dapuzzo.core.BaseRepository
 import com.devon.dapuzzo.show.domain.entity.VenueEntity
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -28,7 +29,9 @@ class VenueRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<VenueEnti
                 item.city_id,
                 item.name,
                 item.googleMapsLink)
-        return getVenueByNameAndCity(item)
+        return item.apply {
+            id = getVenueByNameAndCity(item).id
+        }
     }
 
     override fun getById(id: Any): VenueEntity {
