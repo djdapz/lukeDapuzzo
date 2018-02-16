@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 class HomeController(val urlConfig: UrlConfig) {
 
-    @RequestMapping(value = *arrayOf("/", "/media", "/shows", "/music", "/bio", "/contact", "/admin"))
+    @RequestMapping(value = ["/", "/media", "/show", "/music", "/bio", "/contact", "/admin"])
     fun index(model: Model): String {
         model.addAttribute("clientUrl", urlConfig.clientUrl())
         return "index"

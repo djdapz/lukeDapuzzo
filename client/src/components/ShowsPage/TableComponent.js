@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import ShowListing from "./ShowListingComponent";
 
-class Table extends Component{
+class Table extends Component {
 
-    renderLiveRows(){
+    renderLiveRows() {
+        if (this.props.dates.length === 0) {
+            return <div>
 
-        //todo investivate injecting the Listing component
+                <p id="no-upcoming-shows">No upcoming shows</p>
+                <p id="no-upcoming-shows">For bookings ~<a href="/contact">click here</a>~</p>
+            </div>
+        }
         return this.props.dates.map(details => {
             return <ShowListing key={details.id} details={details}/>
         })
