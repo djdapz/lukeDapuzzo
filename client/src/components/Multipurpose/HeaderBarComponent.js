@@ -35,7 +35,7 @@ class HeaderBar extends Component {
     }
 
     static renderSocialMediaRow() {
-        const iconElements = iconPaths.map(iconPath => <SocialMediaIcon iconPath={iconPath}/>);
+        const iconElements = iconPaths.map(iconPath => <SocialMediaIcon key={iconPath} iconPath={iconPath}/>);
 
         return (
             <div className="social-media-icons">
