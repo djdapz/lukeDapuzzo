@@ -26,7 +26,7 @@ const routes = {
         name: "BIO",
         href: "/bio",
         header: "Bio",
-        menubarClassName: "bio-menubar",
+        menubarClassName: "bio-menubar"
 
     },
     MEDIA: {
@@ -34,23 +34,21 @@ const routes = {
         name: "MEDIA",
         href: "/media",
         header: "Media",
-        menubarClassName: "media-menubar",
+        menubarClassName: "media-menubar"
     },
     CONTACT:{
         displayInMenuBar: true,
         name: "CONTACT",
         href: "/contact",
         header: "Contact",
-        menubarClassName: "contact-menubar",
-        disable: false
+        menubarClassName: "contact-menubar"
     },
     ADMIN:{
         displayInMenuBar: false,
         name: "ADMIN",
         href: "/admin",
         header: "Admin",
-        menubarClassName: "admin-menubar",
-        disable: false
+        menubarClassName: "admin-menubar"
     }
 
 };

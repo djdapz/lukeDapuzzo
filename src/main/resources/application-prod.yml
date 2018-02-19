@@ -11,4 +11,4 @@ server:
 dapuzzo:
   luke:
     client:
-      url: https://luke-dapuzzo-client.cfapps.io/bundle.js
+      url: https://luke-dapuzzo-client-prod.cfapps.io/bundle.js

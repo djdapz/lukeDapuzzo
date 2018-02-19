@@ -5,32 +5,23 @@ import {connect} from "react-redux";
 import routes from "../../constants/routes"
 import {Link} from "react-router-dom";
 
-class Menubar extends Component{
+class Menubar extends Component {
+    menubarPosition;
 
-    renderButtons(){
-       return Object.keys(routes).map(key => {
-           if(routes[key].displayInMenuBar == false){
-               return;
-           }
-           let button = routes[key];
-           let rowClassName = "menubar-row";
+    renderButtons() {
+        return Object.keys(routes).map(key => {
+            if (routes[key].displayInMenuBar === false) {
+                return;
+            }
 
-           if(this.props.route.href === button.href){
-               rowClassName += " menubar-active";
-           }
+            let button = routes[key];
+            let rowClassName = "menubar-row";
 
-           if(button.disable){
-               rowClassName += " menubar-disable";
-               return(
-                   <div key={button.name}>
-                       <div className={rowClassName}>
-                           <p className="menubar-link"> {button.name}</p>
-                       </div>
-                   </div>
-               )
-           }
+            if (this.props.route.href === button.href) {
+                rowClassName += " menubar-active";
+            }
 
-           return(
+            return (
                 <Link key={button.name} to={button.href}>
                     <div className={rowClassName}>
                         <p className="menubar-link"> {button.name}</p>
@@ -42,16 +33,15 @@ class Menubar extends Component{
 
     render() {
         return (
-
-            <div className={`menubar-side ${this.props.route.menubarClassName}`}>
+            <div className={` menubar ${this.props.menubarPosition} ${this.props.route.menubarClassName}`}>
                 {this.renderButtons()}
             </div>
         )
     }
 }
 
-function mapStateToProps(state){
-    return{
+function mapStateToProps(state) {
+    return {
         route: state.route
     }
 }

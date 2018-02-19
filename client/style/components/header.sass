@@ -37,7 +37,6 @@
     @media screen and (min-width: $sm-xs) and (max-width: $md-sm)
       width: 16em
 
-
   img
     width: $header-bar-height/2
     padding-bottom: $header-bar-height/4
@@ -46,6 +45,16 @@
 
 .social-media-icons
   display: flex
+
+#social-media-expanded
+  @media screen and (min-width: 0) and (max-width: $sm-xs)
+    display: none
+
+#social-media-hamburger
+  margin-right: $header-bar-height/2
+  @media screen and (min-width: $sm-xs)
+    display: none
+
 
 //behaviour specific styling
 .title:hover

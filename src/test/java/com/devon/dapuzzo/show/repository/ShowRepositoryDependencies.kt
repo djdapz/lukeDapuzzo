@@ -7,10 +7,12 @@ import com.devon.dapuzzo.show.domain.entity.CityEntity
 import com.devon.dapuzzo.show.domain.entity.ShowEntity
 import com.devon.dapuzzo.show.domain.entity.StateEntity
 import com.devon.dapuzzo.show.domain.entity.VenueEntity
+import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
 
 
 @Component
+@Profile("test")
 class ShowRepositoryDependencies(
         val stateRepository: StateRepository,
         val cityRepository: CityRepository,
