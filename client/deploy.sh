@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 
-cf login -s development
+cf login api.run.pivotal.io -s development
 npm run build
 cf push

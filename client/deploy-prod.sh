@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 
-cf login -s production
+cf login api.run.pivotal.io -s production
 npm run build
 cf push -f manifest-prod.yml

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-cf login -s production
+cf login api.run.pivotal.io -s production
 
 ./gradlew clean  bootRepackage
 
