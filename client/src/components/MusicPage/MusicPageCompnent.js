@@ -4,6 +4,8 @@ import {bindActionCreators} from "redux";
 import {routeChanged} from "../../actions/RouteChangedAction";
 import {getAllSongs} from "../../actions/GetAllSongsAction";
 import routes from "../../constants/routes";
+import MediaQuery from "react-responsive";
+import SpotifyComponent from "./SpotifyComponent";
 
 const spotifySongs = [
     "6SvafzgjQjq1YtdC8g3YNy",
@@ -35,10 +37,8 @@ class MusicPage extends Component {
 
     renderSpotifySongs() {
         return spotifySongs.map(track => {
-            const url = `https://open.spotify.com/embed/track/${track}`;
             return (
-                <iframe className="spotify-song" key={track} src={url} frameBorder="0" allowtransparency="true"
-                        width="300" height="380"/>
+                <SpotifyComponent track={track}/>
             )
         })
     }
@@ -49,6 +49,7 @@ class MusicPage extends Component {
                 <div id="spotify-container">
                     {this.renderSpotifySongs()}
                 </div>
+
                 {this.renderSoundcloudSongs()}
             </div>
 
