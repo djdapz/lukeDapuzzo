@@ -13,8 +13,7 @@ a:hover
   font-family: $header-font
   font-size: larger
   z-index: 1
-  p
-    color: black
+
 
 .menubar-side
   height: 100%
@@ -31,6 +30,10 @@ a:hover
     cursor: pointer
     p
       color: $aqua-luke
+  &.home-menubar
+    p
+      color: white
+      text-shadow: 1px 1px 20px black
 
 .menubar-mobile
   margin-top: 64px
@@ -40,6 +43,8 @@ a:hover
   padding: 1em 1em 0
   background-color: $aqua-luke
   box-shadow: -0.5em 0.5em rgba(0,0,0,.4)
+  p
+    color: black
 
   .menubar-row
     background-color: $aqua-luke
@@ -54,10 +59,3 @@ a:hover
 .menubar-row
   margin-bottom: 1em
   padding-top: 4px
-
-
-
-.home-menubar
-  p
-    color: white
-    text-shadow: 1px 1px 20px black
