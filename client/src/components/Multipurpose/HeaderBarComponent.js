@@ -7,6 +7,8 @@ import routes from "../../constants/routes";
 
 import Menubar from "./MenuBarContainer"
 import MediaQuery from "react-responsive";
+import {bindActionCreators} from "redux";
+import {toggleMobileMenubar} from "../../actions/ToggleMobileMenubarAction";
 
 const iconPaths = [
     "/png/fb_white.png",
@@ -50,13 +52,11 @@ class HeaderBar extends Component {
     }
 
     socialHamburgerPressed(){
-        this.setState({
-            menubarCollapsed: !this.state.menubarCollapsed
-        });
+       this.props.toggleMobileMenubarState(!this.props.menubarCollapsed)
     }
 
     determineMenubarClass() {
-        return this.state.menubarCollapsed === false ? "menubar-collapsed" : "menubar-expanded";
+        return this.props.mobileMenubarState ? "menubar-collapsed" : "menubar-expanded";
     }
 
     renderSocialMediaRow() {
@@ -98,12 +98,16 @@ class HeaderBar extends Component {
 
 function mapStateToProps(state) {
     return {
-        route: state.route
+        route: state.route,
+        mobileMenubarState: state.mobileMenubarState
     }
 }
 
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({toggleMobileMenubarState: toggleMobileMenubar}, dispatch)
+}
 
-export default connect(mapStateToProps)(HeaderBar);
+export default connect(mapStateToProps , mapDispatchToProps)(HeaderBar);
 
 
 

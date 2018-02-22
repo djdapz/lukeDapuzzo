@@ -4,6 +4,9 @@ import {connect} from "react-redux";
 
 import routes from "../../constants/routes"
 import {Link} from "react-router-dom";
+import {bindActionCreators} from "redux";
+import {toggleMobileMenubar} from "../../actions/ToggleMobileMenubarAction";
+import {Redirect} from "react-router";
 
 class Menubar extends Component {
     menubarPosition;
@@ -22,7 +25,7 @@ class Menubar extends Component {
             }
 
             return (
-                <Link key={button.name} to={button.href}>
+                <Link key={button.name} to={button.href} onClick={this.collapseMenubar}>
                     <div className={rowClassName}>
                         <p className="menubar-link"> {button.name}</p>
                     </div>
@@ -30,6 +33,10 @@ class Menubar extends Component {
             )
         })
     }
+
+    collapseMenubar = () => {
+       this.props.toggleMobileMenubarState()
+    };
 
     render() {
         return (
@@ -46,8 +53,11 @@ function mapStateToProps(state) {
     }
 }
 
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({toggleMobileMenubarState: toggleMobileMenubar}, dispatch)
+}
 
-export default connect(mapStateToProps)(Menubar);
+export default connect(mapStateToProps, mapDispatchToProps)(Menubar);
 
 
 

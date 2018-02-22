@@ -1,6 +1,6 @@
 import {ROUTE_CHANGED_ACTION} from "../actions/RouteChangedAction"
 
-let routeReduer = (state =[], action) =>{
+let routeReducer = (state =[], action) =>{
     if(action.type === ROUTE_CHANGED_ACTION){
         return action.payload;
     }
@@ -8,4 +8,4 @@ let routeReduer = (state =[], action) =>{
     return state;
 };
 
-export default routeReduer;
+export default routeReducer;

@@ -5,6 +5,7 @@ import showsReducer from "./ShowsReducer";
 import songsReducer from "./SongsReducer";
 import newSongReducer from "./NewSongReducer"
 import deleteSongReducer from "./DeleteSongReducer";
+import mobileMenubarReducer from "./MobileMenubarReducer";
 
 
 const songRootReducer = combineReducers({
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
     route: routeReducer,
     email: emailReducer,
     shows: showsReducer,
-    songs: songRootReducer
+    songs: songRootReducer,
+    mobileMenubarState: mobileMenubarReducer
 });
 
 export default rootReducer;
