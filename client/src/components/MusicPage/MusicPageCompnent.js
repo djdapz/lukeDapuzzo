@@ -35,10 +35,10 @@ class MusicPage extends Component {
         })
     }
 
-    renderSpotifySongs() {
+    static renderSpotifySongs() {
         return spotifySongs.map(track => {
             return (
-                <SpotifyComponent track={track}/>
+                <SpotifyComponent track={track} key={track}/>
             )
         })
     }
@@ -47,7 +47,7 @@ class MusicPage extends Component {
         return (
             <div id="music-page" className="main-content">
                 <div id="spotify-container">
-                    {this.renderSpotifySongs()}
+                    {MusicPage.renderSpotifySongs()}
                 </div>
 
                 {this.renderSoundcloudSongs()}
