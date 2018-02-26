@@ -7,10 +7,8 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
-                // plugins: ["babel-plugin-transform-decorators"],
                 query: {
-                    presets: ['env', 'react', 'stage-0'],
-                    plugins: ["transform-decorators-legacy"]
+                    presets: ['env', 'react']
 
                 }
             },
