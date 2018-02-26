@@ -1,20 +1,28 @@
 import React, {Component} from 'react';
-import MenubarComponent from "./Multipurpose/MenuBarContainer";
-import MainContent from "./RouterComponent";
-import HeaderBar from "./Multipurpose/HeaderBarComponent";
+import MenubarComponent from "./Navigation/MenuBarContainer";
+import ReactRouter from "./RouterComponent";
+import HeaderBar from "./Navigation/HeaderBarComponent";
 import MediaQuery from "react-responsive";
 
-export default class App extends Component {
+class App extends Component {
+    static renderMenuBarIfNotMobile() {
+        return (
+            <MediaQuery minWidth={776}>
+                <MenubarComponent menubarPosition="menubar-side"/>
+            </MediaQuery>
+        )
+    }
+
     render() {
         return (
             <div id="app">
                 <HeaderBar/>
-                <MediaQuery query="(min-device-width: 768px)">
-                    <MenubarComponent menubarPosition = "menubar-side"/>
-                </MediaQuery>
-                <MainContent/>
+                {App.renderMenuBarIfNotMobile()}
+                <ReactRouter/>
             </div>
 
         );
     }
 }
+
+export default App;

@@ -1,9 +1,13 @@
-import {TOGGLE_MOBILE_MENUBAR_STATE} from "../actions/ToggleMobileMenubarAction";
 import {GET_ALL_SHOWS} from "../actions/GetAllShowsAction";
+import {CLOSE_MOBILE_MENUBAR, OPEN_MOBILE_MENUBAR} from "../actions/ToggleMobileMenubarActions";
 
 let mobileMenubarReducer = (state = false, action) => {
-    if (action.type === TOGGLE_MOBILE_MENUBAR_STATE) {
-        return !state
+
+    if (action.type === OPEN_MOBILE_MENUBAR) {
+        return true;
+    }
+    if (action.type === CLOSE_MOBILE_MENUBAR) {
+        return false;
     }
 
     return state;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import Table from "./TableComponent";
-import HeaderBar from "../Multipurpose/HeaderBarComponent";
+import HeaderBar from "../Navigation/HeaderBarComponent";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {routeChanged} from "../../actions/RouteChangedAction"
@@ -22,7 +22,6 @@ class ShowPage extends Component{
         return (
             <div>
                 <div id="show-page" className="main-content">
-                    {/*<BillboardComponent header="Live Dates"/>*/}
                     <Table dates={this.processedDates.upcoming} title="Upcoming"/>
                     <Table dates={this.processedDates.previous} title="Previous"/>
                 </div>
@@ -33,12 +32,8 @@ class ShowPage extends Component{
 
     processDates() {
         let groupedDates = {
-            previous: [
-
-            ],
-            upcoming: [
-
-            ]
+            previous: [],
+            upcoming: []
         };
 
         let now = new Date();

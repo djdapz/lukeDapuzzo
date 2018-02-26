@@ -6,6 +6,7 @@ import songsReducer from "./SongsReducer";
 import newSongReducer from "./NewSongReducer"
 import deleteSongReducer from "./DeleteSongReducer";
 import mobileMenubarReducer from "./MobileMenubarReducer";
+import isMobileReducer from "./IsMobileReducer";
 
 
 const songRootReducer = combineReducers({
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     email: emailReducer,
     shows: showsReducer,
     songs: songRootReducer,
-    mobileMenubarState: mobileMenubarReducer
+    isMenubarOpen: mobileMenubarReducer,
+    isMobile: isMobileReducer
 });
 
 export default rootReducer;
