@@ -7,8 +7,11 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
+                // plugins: ["babel-plugin-transform-decorators"],
                 query: {
-                    presets: ['react', 'es2015', 'stage-1']
+                    presets: ['env', 'react', 'stage-0'],
+                    plugins: ["transform-decorators-legacy"]
+
                 }
             },
             {
@@ -19,6 +22,6 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [ '.js', '.jsx', '.sass']
+        extensions: ['.js', '.jsx', '.sass']
     }
 };
