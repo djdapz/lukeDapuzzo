@@ -25,16 +25,16 @@ body
 .random-text
   width: 50%
 
+//noinspection CssOptimizeSimilarProperties
 .main-content
   margin-top: $header-bar-height + 1em
   margin-bottom: $social-bar-height + 2em
   margin-left: $content-left-margin
-  @media screen and (max-width: $lg-md)
+  margin-right: $header-bar-height /2
+  @media screen and (max-width: $sm-xs)
     margin-left: auto
     margin-right: auto
     width: 90%
-  @media screen and (min-width: $md-sm) and (max-width: $lg-md)
-    margin-right: 1em
   @media screen and (max-width: $lg-md) and (min-width: $xl-lg)
     margin-right: 2em
   @media screen and (min-width: $xl-lg)
