@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Responsive from 'react-responsive-decorator';
 
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
@@ -10,13 +9,7 @@ import Menubar from "./MenuBarContainer"
 import MediaQuery from "react-responsive";
 import {bindActionCreators} from "redux";
 import {closeMobileMenuBar, openMobileMenuBar} from "../../actions/ToggleMobileMenubarActions";
-
-const iconPaths = [
-    "/png/fb_white.png",
-    "/png/twitter_white.png",
-    "/png/youtube_white.png",
-    "/png/ig_icon_white.png"
-];
+import socialMediaIcons from "../../constants/socialMediaIcons";
 
 class HeaderBar extends Component {
 
@@ -92,7 +85,7 @@ class HeaderBar extends Component {
     }
 
     static renderSocialMediaIcons() {
-        const iconElements = iconPaths.map(iconPath => <SocialMediaIcon key={iconPath} iconPath={iconPath}/>);
+        const iconElements = socialMediaIcons.map(icon => <SocialMediaIcon key={icon.href} icon={icon} color={"white"}/>);
 
         return (
             <div className="social-media-icons">

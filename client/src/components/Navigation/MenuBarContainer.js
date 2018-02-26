@@ -8,6 +8,10 @@ import {bindActionCreators} from "redux";
 import {closeMobileMenuBar} from "../../actions/ToggleMobileMenubarActions";
 import {Redirect} from "react-router";
 
+import socialMediaIcons from "../../constants/socialMediaIcons"
+import SocialMediaIcon from "./SocialMediaIcon";
+import MediaQuery from "react-responsive";
+
 class Menubar extends Component {
     menubarPosition;
 
@@ -35,13 +39,20 @@ class Menubar extends Component {
     }
 
     collapseMenubar() {
-       this.props.closeMobileMenuBar()
+        this.props.closeMobileMenuBar()
     };
+
+    static renderSocialMediaIcons() {
+        return <MediaQuery maxWidth={776}>
+            {socialMediaIcons.map(icon => <SocialMediaIcon icon={icon} color={"black"}/>)}
+        </MediaQuery>
+    }
 
     render() {
         return (
             <div className={` menubar ${this.props.menubarPosition} ${this.props.route.menubarClassName}`}>
                 {this.renderButtons()}
+                {Menubar.renderSocialMediaIcons()}
             </div>
         )
     }
@@ -53,7 +64,7 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
     return bindActionCreators({closeMobileMenuBar: closeMobileMenuBar}, dispatch)
 }
 
