@@ -3,11 +3,12 @@ import MenubarComponent from "./Navigation/MenuBarContainer";
 import ReactRouter from "./RouterComponent";
 import HeaderBar from "./Navigation/HeaderBarComponent";
 import MediaQuery from "react-responsive";
+import {mobileCutoff} from "../constants/constants";
 
 class App extends Component {
     static renderMenuBarIfNotMobile() {
         return (
-            <MediaQuery minWidth={776}>
+            <MediaQuery minWidth={mobileCutoff}>
                 <MenubarComponent menubarPosition="menubar-side"/>
             </MediaQuery>
         )

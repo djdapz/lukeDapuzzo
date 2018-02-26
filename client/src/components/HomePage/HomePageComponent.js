@@ -6,6 +6,7 @@ import {bindActionCreators} from "redux";
 import routes from "../../constants/routes";
 import {routeChanged} from "../../actions/RouteChangedAction"
 import MediaQuery from "react-responsive";
+import {mobileCutoff} from "../../constants/constants";
 
 class HomePage extends Component{
 
@@ -16,10 +17,10 @@ class HomePage extends Component{
     render() {
         return (
             <div id="home-page">
-                <MediaQuery minWidth={776}>
+                <MediaQuery minWidth={mobileCutoff}>
                     <Billboard/>
                 </MediaQuery>
-                <MediaQuery maxWidth={776}>
+                <MediaQuery maxWidth={mobileCutoff}>
                     <Billboard header={"A solo songwriter and musician from Boulder, Colorado"}/>
                 </MediaQuery>
             </div>

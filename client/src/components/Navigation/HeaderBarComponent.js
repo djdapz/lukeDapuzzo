@@ -10,6 +10,7 @@ import MediaQuery from "react-responsive";
 import {bindActionCreators} from "redux";
 import {closeMobileMenuBar, openMobileMenuBar} from "../../actions/ToggleMobileMenubarActions";
 import socialMediaIcons from "../../constants/socialMediaIcons";
+import {mobileCutoff} from "../../constants/constants";
 
 class HeaderBar extends Component {
 
@@ -60,10 +61,10 @@ class HeaderBar extends Component {
     renderNavigation() {
         return(
             <div>
-                <MediaQuery maxWidth={776}>
+                <MediaQuery maxWidth={mobileCutoff}>
                     {this.renderDropdown()}
                 </MediaQuery>
-                <MediaQuery  minWidth={776}>
+                <MediaQuery  minWidth={mobileCutoff}>
                     {HeaderBar.renderSocialMediaIcons()}
                 </MediaQuery>
             </div>

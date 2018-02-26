@@ -11,6 +11,7 @@ import {Redirect} from "react-router";
 import socialMediaIcons from "../../constants/socialMediaIcons"
 import SocialMediaIcon from "./SocialMediaIcon";
 import MediaQuery from "react-responsive";
+import {mobileCutoff} from "../../constants/constants";
 
 class Menubar extends Component {
     menubarPosition;
@@ -43,7 +44,7 @@ class Menubar extends Component {
     };
 
     static renderSocialMediaIcons() {
-        return <MediaQuery maxWidth={776}>
+        return <MediaQuery maxWidth={mobileCutoff}>
             {socialMediaIcons.map(icon => <SocialMediaIcon icon={icon} color={"black"}/>)}
         </MediaQuery>
     }
