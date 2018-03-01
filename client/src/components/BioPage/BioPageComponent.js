@@ -19,7 +19,7 @@ class BioPage extends Component{
 
             <div id="bio-page" className="main-content">
                 <p>
-                    Im Luke D'Apuzzo and I’ve been a musician my whole life. I originally started playing the drums at the age of 6 then after a few years moved to guitar. After that I started singing and playing bass too and because fascinated in the idea of learning to record my own music. Currently I write my own music and combine a modern rock sound with electronic elements and influences from a large variety of genres to create a new sound of my own. Over the past few years I have been recording all of my own songs on Ableton live playing the guitar, drums, bass, piano and singing my own tracks then mixing them together.
+                    I'm Luke D'Apuzzo and I’ve been a musician my whole life. I originally started playing the drums at the age of 6 then after a few years moved to guitar. After that I started singing and playing bass too and because fascinated in the idea of learning to record my own music. Currently I write my own music and combine a modern rock sound with electronic elements and influences from a large variety of genres to create a new sound of my own. Over the past few years I have been recording all of my own songs on Ableton live playing the guitar, drums, bass, piano and singing my own tracks then mixing them together.
                 </p>
 
                 <p>
@@ -29,7 +29,6 @@ class BioPage extends Component{
                 <p>
                     Influences: David Bowie, My Chemical Romance, The Beatles, Green Day, Pierce the Veil, Frank Iero, Bring me the Horizon and many more…
                 </p>
-                {/*<Billboard header="Bio Page"/>*/}
             </div>
 
         )

@@ -29,12 +29,15 @@ class Menubar extends Component {
                 rowClassName += " menubar-active";
             }
 
-            return (
-                <Link key={button.name} to={button.href} onClick={this.collapseMenubar}>
-                    <div className={rowClassName}>
-                        <p className="menubar-link"> {button.name}</p>
-                    </div>
-                </Link>
+            return (<div onClick={this.collapseMenubar}>
+
+                    <Link key={button.name} to={button.href}>
+                        <div className={rowClassName}>
+                            <p className="menubar-link"> {button.name}</p>
+                        </div>
+                    </Link>
+                </div>
+
             )
         })
     }
