@@ -1,14 +1,5 @@
-spring:
-  datasource:
-    url: ${LUKE_DATABASE_URL}
-    password: ${LUKE_DATABASE_PASSWORD}
-    username: ${LUKE_DATABASE_USERNAME}
-    driver-class-name: org.postgresql.Driver
-
-server:
-  port: ${PORT}
-
 dapuzzo:
   luke:
     client:
       url: https://luke-dapuzzo-client-prod.cfapps.io/bundle.js
+    email-distribution-list: doug@dapuzzo.com,june@dapuzzo.com,devon.dapuzzo@gmail.com,lpdapz@aol.com

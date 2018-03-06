@@ -13,3 +13,4 @@ dapuzzo:
   luke:
     client:
       url: http://localhost:9000/bundle.js
+    email-distribution-list: devon@dapuzzo.com,djdapz@aol.com

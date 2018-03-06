@@ -1,5 +1,6 @@
 package com.devon.dapuzzo.core
 
+import com.devon.dapuzzo.show.domain.entity.CityEntity
 import org.springframework.jdbc.core.RowMapper
 
 interface BaseRepository<TYPE> {

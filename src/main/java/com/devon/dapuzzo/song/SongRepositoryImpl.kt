@@ -41,7 +41,7 @@ class SongRepositoryImpl(val jdbcTemplate: JdbcTemplate) : SongRepository {
                 "SELECT * FROM song WHERE id=?",
                         getRowMapper(),
                         id
-        )
+        )!!
     }
 
     override fun getRowMapper(): RowMapper<SongEntity> {

@@ -43,7 +43,6 @@ class ContactPage extends Component{
         return (
 
             <div id="contact-page" className="main-content">
-                {/*{this.renderContactInfo()}*/}
                 <ContactForm/>
             </div>
 

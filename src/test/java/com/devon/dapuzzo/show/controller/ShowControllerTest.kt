@@ -22,12 +22,12 @@ class ShowControllerTest {
 
     private val expectedList = ArrayList<Show>()
 
-    private val mockShowService: ShowService = mock<ShowService> {
+    private val mockShowService: ShowService = mock {
         on {getAllShows()} doReturn expectedList
     }
 
     private val controller = ShowController(mockShowService)
-    private val mockMvc = MockMvcBuilders.standaloneSetup(controller).build()!!
+    private val mockMvc = MockMvcBuilders.standaloneSetup(controller).build()
 
     @Before
     fun setup() {

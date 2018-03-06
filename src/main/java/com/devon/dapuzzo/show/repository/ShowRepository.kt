@@ -20,50 +20,44 @@ class ShowRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<ShowEntity
                 item.venueId,
                 item.date.toString(),
                 item.style)
-        return getShowByVenueDateAndStyle(item)
+        return getShowByVenueDateAndStyle(item)!!
     }
 
-    override fun getAll(): List<ShowEntity> {
-        return jdbcTemplate.queryForList(
-                "SELECT * FROM SHOW"
-        ).map {
-            ShowEntity(
-                    it.get("id") as Int,
-                    it.get("venue_id") as Int,
-                    (it.get("date") as Date).toLocalDate(),
-                    it.get("style") as String
+    override fun getAll(): List<ShowEntity> = jdbcTemplate
+                    .queryForList("SELECT * FROM SHOW")
+                    .map {
+                        ShowEntity(
+                                it["id"] as Int,
+                                it["venue_id"] as Int,
+                                (it["date"] as Date).toLocalDate(),
+                                it["style"] as String
+                        )
+                    }
+
+    override fun getById(id: Any): ShowEntity = jdbcTemplate
+            .queryForObject(
+                    "SELECT * FROM show WHERE id = ? ",
+                    getRowMapper(),
+                    id
+            )!!
+
+
+    fun getShowByVenueDateAndStyle(show: ShowEntity): ShowEntity? = jdbcTemplate
+            .queryForObject(
+                    "SELECT * FROM show WHERE venue_id = ? AND date = ?::DATE AND style = ? ",
+                    getRowMapper(),
+                    show.venueId,
+                    show.date.toString(),
+                    show.style
             )
-        }
-    }
 
-    override fun getById(id: Any): ShowEntity {
-        return jdbcTemplate.queryForObject(
-                "SELECT * FROM show WHERE id = ? ",
-                getRowMapper(),
-               id
+    override fun getRowMapper(): RowMapper<ShowEntity> = RowMapper { rs, _ ->
+        ShowEntity(
+                rs.getInt("id"),
+                rs.getInt("venue_id"),
+                LocalDate.parse(rs.getString("date")),
+                rs.getString("style")
         )
-
-    }
-
-    fun getShowByVenueDateAndStyle(show: ShowEntity): ShowEntity {
-        return jdbcTemplate.queryForObject(
-                "SELECT * FROM show WHERE venue_id = ? AND date = ?::DATE AND style = ? ",
-                getRowMapper(),
-                show.venueId,
-                show.date.toString(),
-                show.style
-        )
-    }
-
-    override fun getRowMapper(): RowMapper<ShowEntity> {
-        return RowMapper { rs, _ ->
-            ShowEntity(
-                    rs.getInt("id"),
-                    rs.getInt("venue_id"),
-                    LocalDate.parse(rs.getString("date")),
-                    rs.getString("style")
-            )
-        }
     }
 
 }

@@ -27,24 +27,22 @@ class CityRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<CityEntity
                 item.stateAbbreviation,
                 item.name)
         return item.apply {
-            id = getCityByStateAndName(item).id
+            id = getCityByStateAndName(item)!!.id
         }
     }
 
-    override fun getById(id: Any) : CityEntity{
-        return jdbcTemplate.queryForObject(
+    override fun getById(id: Any) : CityEntity =
+            jdbcTemplate.queryForObject(
                 "SELECT * FROM city WHERE id = ?",
                 getRowMapper(),
-                id)
-    }
+                id)!!
 
-    fun getCityByStateAndName(city: CityEntity): CityEntity {
-        return jdbcTemplate.queryForObject(
+    fun getCityByStateAndName(city: CityEntity): CityEntity? =
+            jdbcTemplate.queryForObject(
                 "SELECT * FROM city WHERE name = ? and state = ?",
                 getRowMapper(),
                 city.name,
                 city.stateAbbreviation)
-    }
 
     override fun getRowMapper(): RowMapper<CityEntity> {
         return RowMapper { rs, _ ->

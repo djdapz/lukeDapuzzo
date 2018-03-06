@@ -1,5 +1,7 @@
 package com.devon.dapuzzo.email
 
+import com.devon.dapuzzo.config.EmailConfig
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Component
@@ -9,19 +11,15 @@ import org.springframework.stereotype.Component
  */
 
 @Component
-class EmailService(val emailSender: JavaMailSender) {
-    val distributionList: List<String> = listOf("doug@dapuzzo.com", "june@dapuzzo.com", "devon.dapuzzo@gmail.com", "lpdapz@aol.com")
-
-    fun sendMessage(to: String, subject: String, text: String) {
-        val message = SimpleMailMessage()
-        message.setTo(to)
-        message.subject = subject
-        message.text = text
-        emailSender.send(message)
-    }
-
-    //TODO - consider adding a queueing mechanism
+class EmailService(val emailSender: JavaMailSender,
+                   @Value("\${dapuzzo.luke.email-distribution-list}")
+                   val emailAddresses: Array<String>
+) {
     fun sendEmail(emailRequest: EmailRequest) =
-            distributionList
-                    .map { sendMessage(it, "LUKE D'APUZZO Website Contact", emailRequest.formattedMessage) }
+            emailSender.send(
+                    SimpleMailMessage().apply {
+                        setTo(*emailAddresses)
+                        subject = "LUKE D'APUZZO Website Contact"
+                        text = emailRequest.formattedMessage
+                    })
 }

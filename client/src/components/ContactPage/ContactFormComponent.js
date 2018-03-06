@@ -8,7 +8,6 @@ import {bindActionCreators} from "redux";
 
 const idToken = '-contact-form';
 
-
 const EDITING_EMAIL = "EDITING_EMAIL";
 const SENDING_EMAIL = "SENDING_EMAIL";
 const EMAIL_SUCCESS = "EMAIL_SUCCESS";
@@ -61,11 +60,11 @@ class ContactForm extends Component{
             case EDITING_EMAIL:
                return this.renderForm();
             case SENDING_EMAIL:
-                return this.renderSendingEmail();
+                return ContactForm.renderSendingEmail();
             case EMAIL_SUCCESS:
                 return this.renderEmailSuccess();
             case EMAIL_ERROR:
-                return this.renderEmailError();
+                return ContactForm.renderEmailError();
 
         }
     }
@@ -116,7 +115,7 @@ class ContactForm extends Component{
                     <input placeholder="Your Name" type="text" className="form-control" value={this.state.email.name} id={`name${idToken}`} onChange={this.onInputChange}/>
                     <input placeholder="Your Email" type="email" className="form-control" value={this.state.email.email} id={`email${idToken}`} onChange={this.onInputChange}/>
                     <textarea placeholder="Your Message" className="form-control" value={this.state.email.message}  id={`message${idToken}`} onChange={this.onInputChange}/>
-                    <button className="btn btn-primary">Send It</button>
+                    <button className="btn btn-luke">Send It</button>
                 </form>
             </div>
         )
@@ -179,7 +178,6 @@ class ContactForm extends Component{
     }
 
     sendAnother(){
-
         //TODO - clear email reducer!!
         this.setState({
             status: EDITING_EMAIL

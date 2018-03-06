@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository
  * Created by devondapuzzo on 9/22/17.
  */
 @Repository
-class StateRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<StateEntity>{
+class StateRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<StateEntity> {
 
     override fun getAll(): List<StateEntity> {
         return jdbcTemplate.queryForList(
@@ -32,20 +32,18 @@ class StateRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<StateEnti
         return item
     }
 
-    override fun getById(id: Any): StateEntity {
-        return jdbcTemplate.queryForObject(
-                "SELECT * from state WHERE abbreviation = ?",
-                getRowMapper(),
-                id)
-    }
+    override fun getById(id: Any): StateEntity =
+            jdbcTemplate.queryForObject(
+                    "SELECT * FROM state WHERE abbreviation = ?",
+                    getRowMapper(),
+                    id)!!
 
-    override fun getRowMapper(): RowMapper<StateEntity> {
-        return RowMapper { rs, _ ->
-            StateEntity(
-                    rs.getString("abbreviation"),
-                    rs.getString("name")
-            )
-        }
-    }
+    override fun getRowMapper(): RowMapper<StateEntity> =
+            RowMapper { rs, _ ->
+                StateEntity(
+                        rs.getString("abbreviation"),
+                        rs.getString("name")
+                )
+            }
 
 }

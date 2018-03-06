@@ -38,7 +38,7 @@ class VenueRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<VenueEnti
         return jdbcTemplate.queryForObject(
                 "SELECT * from venue WHERE id = ?",
                 getRowMapper(),
-                id)
+                id)!!
     }
 
     fun getVenueByNameAndCity(venue: VenueEntity): VenueEntity {
@@ -46,7 +46,7 @@ class VenueRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<VenueEnti
                 "SELECT * from venue WHERE city_id = ? and name = ?",
                 getRowMapper(),
                 venue.city_id,
-                venue.name)
+                venue.name)!!
     }
 
     override fun getRowMapper(): RowMapper<VenueEntity> {

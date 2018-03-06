@@ -4,8 +4,8 @@ version = '0.0.1-SNAPSHOT'
 description = """Luke D'Apuzzo's website"""
 
 buildscript {
-
     ext.kotlin_version = '1.2.20'
+    ext.spring_boot_version = '2.0.0.RELEASE'
     repositories {
         mavenCentral()
         maven { url 'http://repo.spring.io/release' }
@@ -13,7 +13,7 @@ buildscript {
     }
 
     dependencies {
-        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.5.2.RELEASE'
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: spring_boot_version
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlin_version"
@@ -41,16 +41,15 @@ repositories {
 dependencies {
     compile(
             "com.fasterxml.jackson.core:jackson-core:2.9.2",
-            "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.2",
-            "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.2",
             'commons-validator:commons-validator:1.4.0',
             "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
             "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
             "org.flywaydb:flyway-core:4.1.0",
             'org.postgresql:postgresql:9.4.1212.jre7',
-            'org.springframework.boot:spring-boot-starter-thymeleaf:1.5.1.RELEASE',
-            'org.springframework.boot:spring-boot-starter-data-jpa:1.5.1.RELEASE',
-            'org.springframework.boot:spring-boot-starter-mail:1.4.3.RELEASE',
+            "org.springframework.boot:spring-boot-starter-thymeleaf:$spring_boot_version",
+            "org.springframework.boot:spring-boot-starter-jdbc:$spring_boot_version",
+            "org.springframework.boot:spring-boot-starter-mail:$spring_boot_version",
+            "org.springframework.boot:spring-boot-starter-web:$spring_boot_version",
             "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0"
     )
 
@@ -60,7 +59,7 @@ dependencies {
             "org.jetbrains.kotlin:kotlin-test",
             "org.jetbrains.kotlin:kotlin-test-junit",
     )
-    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.1.RELEASE') {
+    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "$spring_boot_version") {
         exclude(module: 'commons-logging')
     }
 }
