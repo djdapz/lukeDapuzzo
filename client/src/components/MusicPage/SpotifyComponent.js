@@ -3,9 +3,12 @@ import React, {Component} from "react";
 class SpotifyComponent extends Component {
 
     render() {
-        const url = `https://open.spotify.com/embed/track/${this.props.track}`;
         return (
-            <iframe className="spotify-song" key={this.props.track} src={url} frameBorder="0" allowtransparency="true"
+            <iframe className="spotify-song" key={this.props.track}
+                    src={`https://embed.spotify.com/?uri=${this.props.track}&theme=white`}
+                    frameBorder="0"
+                    allowtransparency="true"
+                    width="100%"
                     height="300"/>
 
         )

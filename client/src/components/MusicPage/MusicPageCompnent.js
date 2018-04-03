@@ -7,14 +7,6 @@ import routes from "../../constants/routes";
 import MediaQuery from "react-responsive";
 import SpotifyComponent from "./SpotifyComponent";
 
-const spotifySongs = [
-    "6SvafzgjQjq1YtdC8g3YNy",
-    "2N49Gp6IOj2kNyA60yNM4z",
-    "2qNxNBxKzGADIZXy9XVkSf",
-    "3ollYRRmdUkehbrgphNjUz",
-    "4fkMV91S24xYMBxb0Upf5I"
-];
-
 class MusicPage extends Component {
 
 
@@ -36,11 +28,7 @@ class MusicPage extends Component {
     }
 
     static renderSpotifySongs() {
-        return spotifySongs.map(track => {
-            return (
-                <SpotifyComponent track={track} key={track}/>
-            )
-        })
+        return <SpotifyComponent track={"spotify:album:58aKFIYVnNLw5ruYQOPRiv"}/>
     }
 
     render() {
