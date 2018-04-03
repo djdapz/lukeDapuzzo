@@ -29,9 +29,9 @@ class Menubar extends Component {
                 rowClassName += " menubar-active";
             }
 
-            return (<div onClick={this.collapseMenubar}>
+            return (<div onClick={this.collapseMenubar} key={button.name}>
 
-                    <Link key={button.name} to={button.href}>
+                    <Link  to={button.href}>
                         <div className={rowClassName}>
                             <p className="menubar-link"> {button.name}</p>
                         </div>
@@ -48,7 +48,7 @@ class Menubar extends Component {
 
     static renderSocialMediaIcons() {
         return <MediaQuery maxWidth={mobileCutoff}>
-            {socialMediaIcons.map(icon => <SocialMediaIcon icon={icon} color={"black"}/>)}
+            {socialMediaIcons.map(icon => <SocialMediaIcon icon={icon} key={icon.href} color={"black"}/>)}
         </MediaQuery>
     }
 

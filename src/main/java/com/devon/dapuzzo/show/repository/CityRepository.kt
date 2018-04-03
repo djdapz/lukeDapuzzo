@@ -9,17 +9,17 @@ import org.springframework.stereotype.Repository
 @Repository
 class CityRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<CityEntity> {
 
-    override fun getAll(): List<CityEntity> {
-        return jdbcTemplate.queryForList(
-                "SELECT * FROM city")
-                .map {
-                    CityEntity(
-                            it.get("id") as Int,
-                            it.get("state") as String,
-                            it.get("name") as String
-                    )
-                }
-    }
+    override fun getAll(): List<CityEntity> =
+             jdbcTemplate.queryForList(
+                    "SELECT * FROM city")
+                    .map {
+                        CityEntity(
+                                it.get("id") as Int,
+                                it.get("state") as String,
+                                it.get("name") as String
+                        )
+                    }
+
 
     override fun add(item: CityEntity): CityEntity {
         jdbcTemplate.update(
@@ -31,18 +31,18 @@ class CityRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<CityEntity
         }
     }
 
-    override fun getById(id: Any) : CityEntity =
+    override fun getById(id: Any): CityEntity =
             jdbcTemplate.queryForObject(
-                "SELECT * FROM city WHERE id = ?",
-                getRowMapper(),
-                id)!!
+                    "SELECT * FROM city WHERE id = ?",
+                    getRowMapper(),
+                    id)!!
 
     fun getCityByStateAndName(city: CityEntity): CityEntity? =
             jdbcTemplate.queryForObject(
-                "SELECT * FROM city WHERE name = ? and state = ?",
-                getRowMapper(),
-                city.name,
-                city.stateAbbreviation)
+                    "SELECT * FROM city WHERE name = ? AND state = ?",
+                    getRowMapper(),
+                    city.name,
+                    city.stateAbbreviation)
 
     override fun getRowMapper(): RowMapper<CityEntity> {
         return RowMapper { rs, _ ->

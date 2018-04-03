@@ -1,6 +1,5 @@
 package com.devon.dapuzzo.email
 
-import com.devon.dapuzzo.config.EmailConfig
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
@@ -18,7 +17,7 @@ class EmailService(val emailSender: JavaMailSender,
     fun sendEmail(emailRequest: EmailRequest) =
             emailSender.send(
                     SimpleMailMessage().apply {
-                        setTo(*emailAddresses)
+                        to= emailAddresses
                         subject = "LUKE D'APUZZO Website Contact"
                         text = emailRequest.formattedMessage
                     })

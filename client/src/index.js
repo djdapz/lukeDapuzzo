@@ -13,10 +13,10 @@ import {BrowserRouter} from "react-router-dom";
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-      <BrowserRouter onUpdate={() => window.scrollTo(0, 0)}>
-          <App />
-      </BrowserRouter>
-  </Provider>
-  , document.getElementById('app'));
+    <Provider store={createStoreWithMiddleware(reducers)}>
+        <BrowserRouter onUpdate={() => window.scrollTo(0, 0)}>
+            <App/>
+        </BrowserRouter>
+    </Provider>
+    , document.getElementById('root'));
 
