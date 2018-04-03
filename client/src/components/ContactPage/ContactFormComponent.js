@@ -115,7 +115,7 @@ class ContactForm extends Component{
                     <input placeholder="Your Name" type="text" className="form-control" value={this.state.email.name} id={`name${idToken}`} onChange={this.onInputChange}/>
                     <input placeholder="Your Email" type="email" className="form-control" value={this.state.email.email} id={`email${idToken}`} onChange={this.onInputChange}/>
                     <textarea placeholder="Your Message" className="form-control" value={this.state.email.message}  id={`message${idToken}`} onChange={this.onInputChange}/>
-                    <button className="btn btn-luke">Send It</button>
+                    <button className="btn btn-primary">Send It</button>
                 </form>
             </div>
         )
