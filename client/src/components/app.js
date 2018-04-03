@@ -5,7 +5,6 @@ import HeaderBar from "./Navigation/HeaderBarComponent";
 import Dependencies from "./DependenciesComponent";
 import MediaQuery from "react-responsive";
 import {mobileCutoff} from "../constants/constants";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
     static renderMenuBarIfNotMobile() {
