@@ -4,13 +4,15 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import SocialMediaIcon from "./SocialMediaIcon";
 import routes from "../../constants/routes";
-
 import Menubar from "./MenuBarContainer"
 import MediaQuery from "react-responsive";
 import {bindActionCreators} from "redux";
 import {closeMobileMenuBar, openMobileMenuBar} from "../../actions/ToggleMobileMenubarActions";
-import socialMediaIcons from "../../constants/socialMediaIcons";
+
+import {socialMediaIcons, socialMediaIconColors} from "../../constants/socialMediaIcons";
 import {mobileCutoff} from "../../constants/constants";
+
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
 class HeaderBar extends Component {
 
@@ -59,12 +61,12 @@ class HeaderBar extends Component {
     }
 
     renderNavigation() {
-        return(
+        return (
             <div>
                 <MediaQuery maxWidth={mobileCutoff}>
                     {this.renderDropdown()}
                 </MediaQuery>
-                <MediaQuery  minWidth={mobileCutoff}>
+                <MediaQuery minWidth={mobileCutoff}>
                     {HeaderBar.renderSocialMediaIcons()}
                 </MediaQuery>
             </div>
@@ -75,8 +77,7 @@ class HeaderBar extends Component {
         return (
             <div className="social-media-icons">
                 <div id="social-media-hamburger">
-                        <span className="oi oi-menu" title="menu icon" aria-hidden="true"
-                              onClick={this.socialHamburgerPressed}/>
+                    <FontAwesomeIcon icon="bars" className={"social-media-icon"} onClick={this.socialHamburgerPressed}/>
                 </div>
                 <div className={this.determineMenubarClass()}>
                     <Menubar menubarPosition="menubar-mobile"/>
@@ -86,7 +87,7 @@ class HeaderBar extends Component {
     }
 
     static renderSocialMediaIcons() {
-        const iconElements = socialMediaIcons.map(icon => <SocialMediaIcon key={icon.href} icon={icon} color={"white"}/>);
+        const iconElements = socialMediaIcons.map(icon => <SocialMediaIcon icon={icon} colors={socialMediaIconColors.header}/>);
 
         return (
             <div className="social-media-icons">

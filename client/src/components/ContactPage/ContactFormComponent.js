@@ -6,6 +6,8 @@ import {sendEmail} from "../../actions/SendEmailAction";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 
+import FontAwesomeIcon from "@fortawesome/react-fontawesome/index.es";
+
 const idToken = '-contact-form';
 
 const EDITING_EMAIL = "EDITING_EMAIL";
@@ -14,9 +16,8 @@ const EMAIL_SUCCESS = "EMAIL_SUCCESS";
 const EMAIL_ERROR = "EMAIL_ERROR";
 
 
-class ContactForm extends Component{
-    // noinspection JSUnusedLocalSymbols
-    constructor(props){
+class ContactForm extends Component {
+    constructor() {
         super();
 
         // TODO - THis is really brittle, Would be better with a datastructure of each field,
@@ -38,12 +39,33 @@ class ContactForm extends Component{
     }
 
     render() {
-        return this.renderBasedOnState();
+        this.determineState();
+        return this.renderFormOrMessageing()
     }
 
-    renderBasedOnState(){
-        if(this.state.status === SENDING_EMAIL){
-            if(this.props.email !== null) {
+    renderFormOrMessageing() {
+        if (this.state.status === EDITING_EMAIL) {
+            return this.renderForm();
+        } else {
+            return <div className={"form-messaging"}>{this.renderBasedOnState()}</div>
+        }
+    }
+
+    renderBasedOnState() {
+        switch (this.state.status) {
+            case SENDING_EMAIL:
+                return ContactForm.renderSendingEmail();
+            case EMAIL_SUCCESS:
+                return this.renderEmailSuccess();
+            case EMAIL_ERROR:
+                return ContactForm.renderEmailError();
+        }
+    }
+
+
+    determineState() {
+        if (this.state.status === SENDING_EMAIL) {
+            if (this.props.email !== null) {
                 if (this.props.email.status === 200) {
                     this.setState({
                         status: EMAIL_SUCCESS
@@ -55,26 +77,15 @@ class ContactForm extends Component{
                 }
             }
         }
-
-        switch(this.state.status){
-            case EDITING_EMAIL:
-               return this.renderForm();
-            case SENDING_EMAIL:
-                return ContactForm.renderSendingEmail();
-            case EMAIL_SUCCESS:
-                return this.renderEmailSuccess();
-            case EMAIL_ERROR:
-                return ContactForm.renderEmailError();
-
-        }
     }
 
-    renderEmailSuccess(){
-        return(
+    renderEmailSuccess() {
+        return (
             <div>
                 <h1>
                     Email Sent!
                 </h1>
+                <hr/>
                 <button className="btn" onClick={this.sendAnother}>
                     Send Another?
                 </button>
@@ -83,11 +94,12 @@ class ContactForm extends Component{
     }
 
     static renderEmailError() {
-        return(
+        return (
             <div>
                 <h1>
-                    Sorry, there was an with sending your email.
+                    Sorry, there was a problem sending your email.
                 </h1>
+                <hr/>
                 <button className="btn">
                     Try again?
                 </button>
@@ -96,25 +108,28 @@ class ContactForm extends Component{
     }
 
     static renderSendingEmail() {
-        return(
-            <div>
+        return (<div>
                 <h1>
                     Sending Email
-                    <span>
-                        <img src="https://s3-us-west-2.amazonaws.com/luke-dapuzzo/gif/loading_icon.gif"/>
-                    </span>
                 </h1>
+                <hr/>
+                <span>
+                        <FontAwesomeIcon icon={["fa", "spinner"]} pulse size={"2x"}/>
+                    </span>
             </div>
         )
     }
 
-    renderForm(){
+    renderForm() {
         return (
             <div id="contact-form" className="form-group">
                 <form onSubmit={this.sendEmail}>
-                    <input placeholder="Your Name" type="text" className="form-control" value={this.state.email.name} id={`name${idToken}`} onChange={this.onInputChange}/>
-                    <input placeholder="Your Email" type="email" className="form-control" value={this.state.email.email} id={`email${idToken}`} onChange={this.onInputChange}/>
-                    <textarea placeholder="Your Message" className="form-control" value={this.state.email.message}  id={`message${idToken}`} onChange={this.onInputChange}/>
+                    <input placeholder="Your Name" type="text" className="form-control" value={this.state.email.name}
+                           id={`name${idToken}`} onChange={this.onInputChange}/>
+                    <input placeholder="Your Email" type="email" className="form-control" value={this.state.email.email}
+                           id={`email${idToken}`} onChange={this.onInputChange}/>
+                    <textarea placeholder="Your Message" className="form-control" value={this.state.email.message}
+                              id={`message${idToken}`} onChange={this.onInputChange}/>
                     <button className="btn btn-primary">Send It</button>
                 </form>
             </div>
@@ -122,9 +137,9 @@ class ContactForm extends Component{
     }
 
 
-    sendEmail(event){
+    sendEmail(event) {
         event.preventDefault();
-        if(this.validateForm()){
+        if (this.validateForm()) {
             this.props.sendEmail(this.state.email);
             this.setState(
                 {
@@ -140,34 +155,34 @@ class ContactForm extends Component{
         }
     }
 
-    validateForm(){
+    validateForm() {
         let issues = {};
 
-        if(!ContactForm.validateEmail(this.state.email.email)){
+        if (!ContactForm.validateEmail(this.state.email.email)) {
             issues.email = "Please enter a valid email";
         }
 
-        if(this.state.email.message.length === 0){
+        if (this.state.email.message.length === 0) {
             issues.message = "Please write a message";
         }
 
-        if(this.state.email.name.length === 0){
+        if (this.state.email.name.length === 0) {
             issues.message = "Please tell us your name";
         }
 
-        if(Object.keys(issues).length === 0) {
+        if (Object.keys(issues).length === 0) {
             return true
-        }else{
+        } else {
             return issues
         }
     }
 
-    onInputChange(event){
+    onInputChange(event) {
         let key = event.target.id;
         let nextState = this.state.email;
 
         key = key.replace("-contact-form", "");
-        nextState[key]  = event.target.value;
+        nextState[key] = event.target.value;
 
         this.setState({email: nextState});
     }
@@ -177,7 +192,7 @@ class ContactForm extends Component{
         return re.test(email);
     }
 
-    sendAnother(){
+    sendAnother() {
         //TODO - clear email reducer!!
         this.setState({
             status: EDITING_EMAIL
@@ -185,22 +200,21 @@ class ContactForm extends Component{
     }
 
 
-
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
     return bindActionCreators({sendEmail}, dispatch)
 }
 
-function mapStateToProps(state){
-    return{
+function mapStateToProps(state) {
+    return {
         email: state.email
     }
 }
 
 
 //null means no redux state necessary
-export default connect(mapStateToProps , mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
 
 
 

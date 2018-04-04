@@ -36,17 +36,18 @@
     @media screen and (min-width: $sm-xs) and (max-width: $md-sm)
       width: 18em
 
-  img
-    width: $header-bar-height/2
-    padding-bottom: $header-bar-height/4
-    padding-top: $header-bar-height/4
-    margin-right: $header-bar-height/8
-    margin-left: $header-bar-height/8
+  .social-media-icon
+    font-size: $header-bar-height / 1.6
+    margin-right: auto
+    margin-left: auto
+    width: $header-bar-height/3
+    display: block
 
 .social-media-icons
   @media screen and (min-width: $sm-xs)
     display: flex
-    width: $header-bar-height * 3
+    width: $header-bar-height * 3.25
+    margin-right: $header-bar-height / 4
 
 #social-media-expanded
   width: 12em
@@ -55,10 +56,9 @@
     display: none
 
 #social-media-hamburger
-  margin-right: $header-bar-height/2
+  margin-right: $header-bar-height/4
   @media screen and (min-width: $sm-xs)
     display: none
-
 
 //behaviour specific styling
 .title:hover

@@ -15,11 +15,17 @@
   },
   "author": "djdapz",
   "engines": {
-    "node": "9.10.x"
+    "node": "9.x.x"
   },
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2"
+    "@fortawesome/fontawesome": "^1.1.5",
+    "@fortawesome/fontawesome-free-brands": "^5.0.9",
+    "@fortawesome/fontawesome-free-solid": "^5.0.9",
+    "@fortawesome/react-fontawesome": "^0.0.18",
+    "express": "^4.16.2",
+    "popper.js": "^1.12.9",
+    "prop-types": "15.x"
   },
   "devDependencies": {
     "axios": "^0.17.1",

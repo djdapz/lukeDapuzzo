@@ -1,33 +1,32 @@
 const socialMediaIcons = [
 
     {
-        imagePath: {
-            white: "/png/fb_white.png",
-            black: "/png/fb_black.png",
-        },
+        fontAwesomeName: "facebook",
         href: "https://www.facebook.com/luke.dapuzzo"
     },
     {
-        imagePath: {
-            white: "/png/twitter_white.png",
-            black: "/png/twitter_black.png",
-        },
+        fontAwesomeName: "twitter",
         href: "https://twitter.com/luke_dapuzzo"
     },
     {
-        imagePath: {
-            white: "/png/youtube_white.png",
-            black: "/png/youtube_black.png",
-        },
+        fontAwesomeName: "youtube",
         href: "https://www.youtube.com/channel/UCH14cP9eNx0gDy8kxZqfNZQ"
     },
     {
-        imagePath: {
-            white: "/png/ig_icon_white.png",
-            black: "/png/ig_icon_black.png",
-        },
+        fontAwesomeName: "instagram",
         href: "https://www.instagram.com/l.p.dapz/"
     }
 ];
 
-export default socialMediaIcons;
+const socialMediaIconColors = {
+    header: {
+        hovered: "#62f7c8",
+        default: "white"
+    },
+    dropdown: {
+        hovered: "white",
+        default: "black"
+    }
+};
+
+export {socialMediaIcons, socialMediaIconColors};

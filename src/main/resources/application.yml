@@ -15,6 +15,7 @@ spring:
         auth: true
         starttls:
           enable: true
+
   datasource:
     url: ${LUKE_DATABASE_URL}
     password: ${LUKE_DATABASE_PASSWORD}

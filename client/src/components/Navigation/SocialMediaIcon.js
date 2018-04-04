@@ -1,13 +1,34 @@
 import React, {Component} from 'react';
 
 import aws from "../../constants/aws";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome/index.es";
 
 class SocialMediaIcon extends Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            isHovered: false
+        };
+
+        this.handleHover = this.handleHover.bind(this);
+    }
+
+    handleHover() {
+        this.setState({
+            isHovered: !this.state.isHovered
+        });
+    };
+
     render() {
+        const color = this.state.isHovered ? this.props.colors.hovered : this.props.colors.default;
         return (
-                <a href={this.props.icon.href} target="blank">
-                    <img src={aws.s3 + this.props.icon.imagePath[this.props.color] }/>
-                </a>
+            <a href={this.props.icon.href}>
+                <FontAwesomeIcon className="social-media-icon" key={this.props.icon.href}
+                                 icon={["fab", this.props.icon.fontAwesomeName]}
+                                 onMouseEnter={this.handleHover} onMouseLeave={this.handleHover} color={color}/>
+            </a>
         )
     }
 }
