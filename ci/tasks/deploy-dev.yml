@@ -16,4 +16,4 @@ run:
   path: repo/ci/tasks/deploy-dev.sh
 
 caches:
-  path: gradle
+  - path: gradle
