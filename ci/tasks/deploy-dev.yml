@@ -11,10 +11,10 @@ params:
 
 run:
   path: sh
-    args:
-    - -exc
-    - |
-      echo "SOMETHING WORKS"
+  args:
+  - -exc
+  - |
+    echo "SOMETHING WORKS"
 
 caches:
   - path: gradle
