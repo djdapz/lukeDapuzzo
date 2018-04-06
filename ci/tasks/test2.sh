@@ -3,3 +3,7 @@
 echo "HELLO"
 
 ls -lsa
+
+env
+
+echo $PCF_USERNAME
