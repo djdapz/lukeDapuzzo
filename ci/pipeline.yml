@@ -17,10 +17,10 @@ resources:
 
 jobs:
 
-- name: test
+- name: deploy-development
   public: true
   plan:
-  - get: deploy-development
+  - get: repo
     trigger: true
   - task: test
     file: repo/ci/tasks/deploy-dev.yml

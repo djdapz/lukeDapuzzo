@@ -1,9 +1,9 @@
 ---
 platform: linux
 
-image_resource:
-  type: docker-image
-  source: {repository: openjdk, tag: 8-jdk-alpine}
+#image_resource:
+#  type: docker-image
+#  source: {repository: openjdk, tag: 8-jdk-alpine}
 
 inputs:
 - name: repo
@@ -14,3 +14,6 @@ params:
 
 run:
   path: repo/ci/tasks/deploy-dev.sh
+
+caches:
+  path: gradle
