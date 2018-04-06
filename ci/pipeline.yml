@@ -5,6 +5,11 @@ resources:
   source:
     uri: ((git-repo))
     private_key: ((github-private-key))
+- name: openjdk
+  type: docker-image
+  source:
+    repository: openjdk
+    tag: 8
 
 #- name: version
 #  type: semver
@@ -22,7 +27,11 @@ jobs:
   plan:
   - get: repo
     trigger: true
+  - get: openjdk
+    params:
+      save: true
   - task: test
+    privileged: true
     file: repo/ci/tasks/deploy-dev.yml
     params:
       PCF_USERNAME: ((PCF_USERNAME))
