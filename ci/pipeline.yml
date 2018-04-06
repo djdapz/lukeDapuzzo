@@ -1,0 +1,29 @@
+---
+resources:
+- name: repo
+  type: git
+  source:
+    uri: ((git-repo))
+    private_key: ((github-private-key))
+
+#- name: version
+#  type: semver
+#  source:
+#    driver: git
+#    uri: git@github.com:djdapz/lukeDapuzzo.git
+#    branch: version
+#    file: version
+#    private_key: ((github-private-key))
+
+jobs:
+
+- name: test
+  public: true
+  plan:
+  - get: repo
+    trigger: true
+  - task: test
+    file: repo/ci/tasks/test.yml
+    params:
+      PCF_USERNAME: ((PCF_USERNAME))
+      PCF_PASSWORD: ((PCF_PASSWORD))

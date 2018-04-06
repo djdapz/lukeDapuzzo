@@ -1,0 +1,16 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: openjdk, tag: 8-jdk-alpine}
+
+inputs:
+- name: repo
+
+params:
+  pcf-username:
+  pcf-password:
+
+run:
+  path: repo/ci/tasks/test2.sh
