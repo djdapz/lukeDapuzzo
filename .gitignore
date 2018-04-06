@@ -1,51 +1,16 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-
-### IntelliJ IDEA ###
 .idea
-*.iws
 *.iml
-*.ipr
-
-### NetBeans ###
-nbproject/private/
-nbbuild/
-nbdist/
-.nb-gradle
-
 
 client/node_modules/
-client/bower_components/
 
-pipeline/credentials.yml
+ci/credentials.yml
 
-
-### Gradle template
 gradle/
 .gradle/
 out/
 build/
 
-src/main/resources/public/bundle.js
 client/dist/bundle.js
-
-# Ignore Gradle GUI config
-gradle-app.setting
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
-
-# Cache of project
-.gradletasknamecache
-
-# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
-# gradle/wrapper/gradle-wrapper.properties
-
