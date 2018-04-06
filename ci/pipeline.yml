@@ -20,10 +20,10 @@ jobs:
 - name: test
   public: true
   plan:
-  - get: repo
+  - get: deploy-development
     trigger: true
   - task: test
-    file: repo/ci/tasks/test.yml
+    file: repo/ci/tasks/deploy-dev.yml
     params:
       PCF_USERNAME: ((PCF_USERNAME))
       PCF_PASSWORD: ((PCF_PASSWORD))
