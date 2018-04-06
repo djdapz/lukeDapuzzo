@@ -1,10 +1,6 @@
 ---
 platform: linux
 
-#image_resource:
-#  type: docker-image
-#  source: {repository: openjdk, tag: alpine-jdk-bash}
-
 inputs:
 - name: repo
 - name: openjdk
@@ -14,7 +10,11 @@ params:
   pcf-password:
 
 run:
-  path: repo/ci/tasks/deploy-dev.sh
+  path: sh
+    args:
+    - -exc
+    - |
+      echo "SOMETHING WORKS"
 
 caches:
   - path: gradle
