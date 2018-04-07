@@ -1,10 +1,12 @@
 ---
 resources:
+
 - name: repo
   type: git
   source:
     uri: ((git-repo))
     private_key: ((github-private-key))
+
 - name: openjdk
   type: docker-image
   source:
