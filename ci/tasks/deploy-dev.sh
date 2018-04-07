@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+uname -a
+
 source repo/ci/tasks/common.sh
 
 source repo/ci/tasks/install-linux-brew.sh
