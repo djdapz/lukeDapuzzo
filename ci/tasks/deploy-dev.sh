@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
 pwd
-curl -sL https://deb.nodesource.com/setup_8.x |  bash -
-apt-get install -y nodejs
+
 
 npm -v
 
-wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | apt-key add -
-echo "deb https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list
-apt-get install cf-cli
+source repo/ci/tasks/install-npm.sh
+source repo/ci/tasks/install-cf-cli.sh
+source repo/ci/tasks/common.sh
 
 #################
 ## push server ##
