@@ -35,6 +35,7 @@ jobs:
   - task: test
     privileged: true
     file: repo/ci/tasks/deploy-dev.yml
+    image: openjdk
     params:
       PCF_USERNAME: ((PCF_USERNAME))
       PCF_PASSWORD: ((PCF_PASSWORD))
