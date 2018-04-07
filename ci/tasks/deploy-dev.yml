@@ -1,11 +1,14 @@
 ---
 platform: linux
 
-image_resource: openjdk
+#image_resource:
+#  type: docker-image
+#  source:
+#    repository: openjdk
+#    tag: 8
 
 inputs:
 - name: repo
-- name: openjdk
 
 #params:
 #  pcf-username:
