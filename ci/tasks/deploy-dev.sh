@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-pwd
-
-
-npm -v
-
+source repo/ci/tasks/install-linux-brew.sh
 source repo/ci/tasks/install-npm.sh
 source repo/ci/tasks/install-cf-cli.sh
 source repo/ci/tasks/common.sh
