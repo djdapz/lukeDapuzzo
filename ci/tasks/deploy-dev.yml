@@ -11,9 +11,9 @@ inputs:
 - name: repo
 - name: openjdk
 
-params:
-  pcf-username:
-  pcf-password:
+#params:
+#  pcf-username:
+#  pcf-password:
 
 run:
   path: sh
@@ -22,5 +22,5 @@ run:
   - |
     echo "SOMETHING WORKS"
 
-caches:
-  - path: gradle
+#caches:
+#  - path: gradle
