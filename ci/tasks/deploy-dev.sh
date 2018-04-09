@@ -4,7 +4,6 @@ uname -a
 
 source repo/ci/tasks/common.sh
 
-source repo/ci/tasks/install-linux-brew.sh
 source repo/ci/tasks/install-npm.sh
 source repo/ci/tasks/install-cf-cli.sh
 
