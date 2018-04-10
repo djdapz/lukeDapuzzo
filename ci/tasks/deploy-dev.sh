@@ -8,7 +8,7 @@ source repo/ci/tasks/common.sh
 echo "##################"
 echo "##  install cf  ##"
 echo "##################"
-./repo/ci/tasks/install-cf-cli.sh
+source repo/ci/tasks/install-cf-cli.sh
 
 echo "##################"
 echo "## install npm ##"
