@@ -1,10 +1,18 @@
 #!/usr/bin/env bash
 
-uname -a
-
+echo "##################"
+echo "## gradle cache ##"
+echo "##################"
 source repo/ci/tasks/common.sh
 
+echo "##################"
+echo "## install npm ##"
+echo "##################"
 source repo/ci/tasks/install-npm.sh
+
+echo "##################"
+echo "##  install cf  ##"
+echo "##################"
 source repo/ci/tasks/install-cf-cli.sh
 
 #################
