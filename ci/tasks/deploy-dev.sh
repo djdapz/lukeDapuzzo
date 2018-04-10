@@ -21,18 +21,21 @@ source repo/ci/tasks/install-npm.sh
 ## push server ##
 #################
 
-cd repo
-
-cf login api.run.pivotal.io -s development -u $PCF_USERNAME -p $PCF_PASSWORD
-./gradlew clean bootRepackage
-cf push -p build/libs/lukeDapuzzo-0.0.1-SNAPSHOT.jar
+pushd repo
+    cf login -a api.run.pivotal.io -s development -u $PCF_USERNAME -p $PCF_PASSWORD
+    ./gradlew clean bootRepackage
+    cf push -p build/libs/lukeDapuzzo-0.0.1-SNAPSHOT.jar
+popd
 
 #################
 ## push client ##
 #################
 
-cd client
-npm install
-cf login api.run.pivotal.io -s development -u $PCF_USERNAME -p $PCF_PASSWORD
-npm run build
-cf push -f ../ci/manifests/dev/client-manifest.yml
+pushd repo
+    pushd client
+        npm install
+        cf login -a api.run.pivotal.io -s development -u $PCF_USERNAME -p $PCF_PASSWORD
+        npm run build
+        cf push -f ../ci/manifests/dev/client-manifest.yml
+    popd
+popd
