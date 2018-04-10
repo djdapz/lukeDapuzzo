@@ -24,7 +24,7 @@ export BUILD_VERSION=`cat version/number`
 pushd repo
     cf login -a api.run.pivotal.io -s development -u $PCF_USERNAME -p $PCF_PASSWORD
     ./gradlew clean bootRepackage
-    cf push -p build/libs/lukeDapuzzo-0.0.1-SNAPSHOT.jar
+    cf push -p "build/libs/luke-dapuzzo-${BUILD_VERSION}.jar"
 popd
 
 #################
