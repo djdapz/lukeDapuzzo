@@ -23,7 +23,7 @@ export BUILD_VERSION=`cat version/number`
 
 pushd repo
     cf login -a api.run.pivotal.io -s development -u $PCF_USERNAME -p $PCF_PASSWORD
-    ./gradlew clean bootRepackage
+    ./gradlew clean bootRepackage -Pversion=$BUILD_VERSION
 
     echo "BUILD_VERSION = ${BUILD_VERSION}"
     cf push -p "build/libs/luke-dapuzzo-${BUILD_VERSION}.jar"

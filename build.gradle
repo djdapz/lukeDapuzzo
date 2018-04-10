@@ -1,5 +1,5 @@
 group = 'com.devon.dapuzzo'
-version = '0.0.1'
+version = "$version"
 
 description = """Luke D'Apuzzo's website"""
 
