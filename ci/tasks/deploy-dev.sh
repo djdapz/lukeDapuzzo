@@ -16,7 +16,6 @@ echo "##################"
 source repo/ci/tasks/install-npm.sh
 
 export BUILD_VERSION=`cat version/number`
-echo "BUILD_VERSION = ${BUILD_VERSION}"
 
 #################
 ## push server ##
@@ -25,6 +24,8 @@ echo "BUILD_VERSION = ${BUILD_VERSION}"
 pushd repo
     cf login -a api.run.pivotal.io -s development -u $PCF_USERNAME -p $PCF_PASSWORD
     ./gradlew clean bootRepackage
+
+    echo "BUILD_VERSION = ${BUILD_VERSION}"
     cf push -p "build/libs/luke-dapuzzo-${BUILD_VERSION}.jar"
 popd
 
