@@ -16,6 +16,7 @@ echo "##################"
 source repo/ci/tasks/install-npm.sh
 
 export BUILD_VERSION=`cat version/number`
+echo "BUILD_VERSION = ${BUILD_VERSION}"
 
 #################
 ## push server ##
