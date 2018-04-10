@@ -5,6 +5,9 @@ ROOT_FOLDER=$(pwd)
 GRADLE_CACHE="${ROOT_FOLDER}/gradle"
 
 if [ "$GRADLE_CACHE" != "$GRADLE_HOME" ]
+    echo "HERE"
+    echo "HERE"
+    echo "HERE"
     then ln -s $GRADLE_CACHE $GRADLE_HOME
 fi
 
