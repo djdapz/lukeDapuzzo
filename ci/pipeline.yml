@@ -12,21 +12,23 @@ resources:
   source:
     repository: openjdk
     tag: 8
-#
-#- name: version
-#  type: semver
-#  source:
-#    driver: git
-#    uri: git@github.com:djdapz/lukeDapuzzo.git
-#    branch: version
-#    file: version
-#    private_key: ((github-private-key))
+
+- name: version
+  type: semver
+  source:
+    driver: git
+    uri: git@github.com:djdapz/lukeDapuzzo.git
+    branch: version
+    file: version
+    private_key: ((github-private-key))
 
 jobs:
 
 - name: deploy-development
   public: true
   plan:
+  - get: version
+    params: {bump: patch}
   - get: repo
     trigger: true
   - get: openjdk

@@ -15,7 +15,7 @@ echo "## install npm ##"
 echo "##################"
 source repo/ci/tasks/install-npm.sh
 
-
+export BUILD_VERSION=`cat version/number`
 
 #################
 ## push server ##

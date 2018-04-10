@@ -38,6 +38,8 @@ repositories {
     mavenCentral()
 }
 
+archivesBaseName = "luke-dapuzzo"
+
 dependencies {
     compile(
             "com.fasterxml.jackson.core:jackson-core:2.9.2",
