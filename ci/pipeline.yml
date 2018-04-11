@@ -13,6 +13,13 @@ resources:
     repository: openjdk
     tag: 8
 
+- name: openjdk-npm-cf
+  type: docker-image
+  source:
+    repository: djapx/flight-school-example
+    username: ((dockerhub-username))
+    password: ((dockerhub-password))
+
 - name: version
   type: semver
   source:
@@ -28,7 +35,7 @@ jobs:
   public: true
   plan:
   - get: version
-    params: {bump: patch}
+    trigger: true
   - get: repo
     trigger: true
   - get: openjdk
@@ -41,3 +48,40 @@ jobs:
     params:
       PCF_USERNAME: ((PCF_USERNAME))
       PCF_PASSWORD: ((PCF_PASSWORD))
+  - put: version
+    params: {bump: patch}
+
+
+- name: build-cached-image
+  plan:
+  - get: repo
+  - get: openjdk
+  - task: build-cached-image
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: ubuntu
+
+      outputs:
+      - name: workspace
+
+      inputs:
+      - name: repo
+      - name: openjdk
+
+      run:
+        path: /bin/bash
+        args:
+        - -c
+        - |
+          output_dir=workspace
+
+          cp ./repo/ci/openjdk/Dockerfile "${output_dir}/Dockerfile"
+          cp ./repo/ci/openjdk/install-cf-cli.sh "${output_dir}/install-cf-cli.sh"
+          cp ./repo/ci/openjdk/install-npm.sh "${output_dir}/install-npm.sh"
+
+  - put: openjdk-npm-cf
+    params:
+      build: workspace

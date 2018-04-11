@@ -1,0 +1,14 @@
+---
+platform: linux
+
+inputs:
+- name: openjdk
+
+outputs:
+- name: extended-jdk
+
+run:
+  path: repo/ci/tasks/build-extended-openjdk.sh
+
+caches:
+  - path: gradle

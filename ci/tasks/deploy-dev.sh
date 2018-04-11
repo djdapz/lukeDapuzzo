@@ -17,12 +17,13 @@ source repo/ci/tasks/install-npm.sh
 
 export BUILD_VERSION=`cat version/number`
 
+cf login -a api.run.pivotal.io -s development -u $PCF_USERNAME -p $PCF_PASSWORD
+
 #################
 ## push server ##
 #################
 
 pushd repo
-    cf login -a api.run.pivotal.io -s development -u $PCF_USERNAME -p $PCF_PASSWORD
     ./gradlew clean bootRepackage -Pversion=$BUILD_VERSION
 
     echo "BUILD_VERSION = ${BUILD_VERSION}"
@@ -36,7 +37,6 @@ popd
 pushd repo
     pushd client
         npm install
-        cf login -a api.run.pivotal.io -s development -u $PCF_USERNAME -p $PCF_PASSWORD
         npm run build
         cf push -f ../ci/manifests/dev/client-manifest.yml
     popd
