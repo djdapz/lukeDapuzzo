@@ -8,6 +8,7 @@ inputs:
 params:
   pcf-username:
   pcf-password:
+  pcf-space:
 
 run:
   path: repo/ci/tasks/deploy-dev.sh

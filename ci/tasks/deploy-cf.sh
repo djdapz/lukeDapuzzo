@@ -14,7 +14,7 @@ pushd repo
     ./gradlew clean bootRepackage -Pversion=$BUILD_VERSION
 
     echo "BUILD_VERSION = ${BUILD_VERSION}"
-    cf push -p "build/libs/luke-dapuzzo-${BUILD_VERSION}.jar"
+    cf push -p "build/libs/luke-dapuzzo-${BUILD_VERSION}.jar" -f "./ci/manifests/${PCF_SPACE}/server-manifest.yml"
 popd
 
 #################
@@ -25,6 +25,6 @@ pushd repo
     pushd client
         npm install
         npm run build
-        cf push -f ../ci/manifests/dev/client-manifest.yml
+        cf push -f "../ci/manifests/${PCF_SPACE}/client-manifest.yml"
     popd
 popd

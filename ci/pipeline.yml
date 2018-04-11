@@ -46,8 +46,26 @@ jobs:
     params:
       PCF_USERNAME: ((PCF_USERNAME))
       PCF_PASSWORD: ((PCF_PASSWORD))
+      PCF_SPACE: development
   - put: version
     params: {bump: patch}
+
+- name: deploy-production
+  public: true
+  plan:
+  - get: version
+    passed: ["deploy-development"]
+  - get: repo
+    passed: ["deploy-development"]
+  - get: openjdk-npm-cf
+  - task: test
+    privileged: true
+    file: repo/ci/tasks/deploy-dev.yml
+    image: openjdk-npm-cf
+    params:
+      PCF_USERNAME: ((PCF_USERNAME))
+      PCF_PASSWORD: ((PCF_PASSWORD))
+      PCF_SPACE: production
 
 
 - name: build-openjdk-npm-cf
