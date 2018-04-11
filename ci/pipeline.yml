@@ -49,11 +49,11 @@ jobs:
     params: {bump: patch}
 
 
-- name: build-cached-image
+- name: build-openjdk-npm-cf
   plan:
   - get: repo
   - get: openjdk
-  - task: build-cached-image
+  - task: build-openjdk-npm-cf
     file: repo/ci/openjdk/build-extended-openjdk.yml
   - put: openjdk-npm-cf
     params:
