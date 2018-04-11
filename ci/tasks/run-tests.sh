@@ -2,4 +2,4 @@
 
 echo "here"
 
-./gradlew clean test
+./gradlew clean tests

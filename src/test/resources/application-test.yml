@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${CONCOURSE_POSTGRES_URL:jdbc:postgresql://localhost:5432/lukedapuzzo}
-    password: ${CONCOURSE_POSTGRES_PASSWORD:devondapuzzo}
-    username: ${CONCOURSE_POSTGRES_USER:devondapuzzo}
+    url: ${LUKE_DB_URL:jdbc:postgresql://localhost:5432/lukedapuzzo}
+    password: ${LUKE_DB_PASSWORD:devondapuzzo}
+    username: ${LUKE_DB_USERNAME:devondapuzzo}
     driver-class-name: org.postgresql.Driver
 
 server:

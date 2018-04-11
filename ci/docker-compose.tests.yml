@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  luke-db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_DB: luke-test
+      POSTGRES_PASSWORD: lukeuser
+      POSTGRES_USER: lukepwd
+      PGDATA: /database
+
+  unit-integration-tests:
+    image: openjdk
+    privileged: true
+    links: [luke-db]
+    depends_on: [luke-db]
+    command: "repo/ci/tasks/run-tests.sh"
+    environment:
+      LUKE_DB_URL: jdbc:postgresql://luke-db:5432/luke-test
+      LUKE_DB_USERNAME: lukeuser
+      LUKE_DB_PASSWORD: lukepwd

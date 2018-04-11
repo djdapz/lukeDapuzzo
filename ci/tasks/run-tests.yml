@@ -1,0 +1,42 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: amidos/dcind
+
+inputs:
+- name: version
+- name: repo
+- name: postgres
+
+caches:
+  - path: .gradle/
+
+run:
+  path: sh
+  args:
+  - -exc
+  - |
+    source /docker-lib.sh
+    start_docker
+
+    # Strictly speaking, preloading of Docker images is not required.
+    # However, you might want to do this for a couple of reasons:
+    # - If the image comes from a private repository, it is much easier to let Concourse pull it,
+    #   and then pass it through to the task.
+    # - When the image is passed to the task, Concourse can often get the image from its cache.
+    docker load -i postgres/image
+    docker tag "$(cat postgres/image-id)" "$(cat postgres/repository):$(cat postgres/tag)"
+
+    # This is just to visually check in the log that images have been loaded successfully
+    docker images
+
+    # Run the container with tests and its dependencies.
+    docker-compose -f repo/ci/docker-compose.test.yml run tests
+
+    # Cleanup.
+    # Not sure if this is required.
+    # It's quite possible that Concourse is smart enough to clean up the Docker mess itself.
+    docker-compose -f code/example/integration.yml down
+    docker volume rm $(docker volume ls -q)
