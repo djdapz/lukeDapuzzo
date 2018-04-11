@@ -11,7 +11,7 @@ params:
   pcf-space:
 
 run:
-  path: repo/ci/tasks/deploy-dev.sh
+  path: repo/ci/tasks/deploy-cf.sh
 
 caches:
   - path: gradle
