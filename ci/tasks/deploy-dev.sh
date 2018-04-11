@@ -1,19 +1,6 @@
 #!/usr/bin/env bash
 
-echo "##################"
-echo "## gradle cache ##"
-echo "##################"
 source repo/ci/tasks/common.sh
-
-echo "##################"
-echo "##  install cf  ##"
-echo "##################"
-source repo/ci/tasks/install-cf-cli.sh
-
-echo "##################"
-echo "## install npm ##"
-echo "##################"
-source repo/ci/tasks/install-npm.sh
 
 export BUILD_VERSION=`cat version/number`
 
