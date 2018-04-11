@@ -1,24 +1,25 @@
 ---
 platform: linux
-  image_resource:
-    type: docker-image
-    source:
-      repository: ubuntu
 
-  outputs:
-  - name: workspace
+image_resource:
+  type: docker-image
+  source:
+    repository: ubuntu
 
-  inputs:
-  - name: repo
-  - name: openjdk
+outputs:
+- name: workspace
 
-  run:
-    path: /bin/bash
-    args:
-    - -c
-    - |
-      output_dir=workspace
+inputs:
+- name: repo
+- name: openjdk
 
-      cp ./repo/ci/openjdk/Dockerfile "${output_dir}/Dockerfile"
-      cp ./repo/ci/openjdk/install-cf-cli.sh "${output_dir}/install-cf-cli.sh"
-      cp ./repo/ci/openjdk/install-npm.sh "${output_dir}/install-npm.sh"
+run:
+  path: /bin/bash
+  args:
+  - -c
+  - |
+    output_dir=workspace
+
+    cp ./repo/ci/openjdk/Dockerfile "${output_dir}/Dockerfile"
+    cp ./repo/ci/openjdk/install-cf-cli.sh "${output_dir}/install-cf-cli.sh"
+    cp ./repo/ci/openjdk/install-npm.sh "${output_dir}/install-npm.sh"
