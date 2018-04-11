@@ -8,6 +8,3 @@ if [ "$GRADLE_CACHE" != "$GRADLE_HOME" ];
     then
         ln -s $GRADLE_CACHE $GRADLE_HOME
 fi
-
-cd HOME
-ls -lsa
