@@ -19,7 +19,8 @@ class BioPage extends Component {
 
             <div id="bio-page" className="main-content">
                 <p>
-                    I'm Luke D'Apuzzo and I’ve been a musician my whole life. I originally started playing the drums at
+                    I'm Luke D'Apuzzo and I have been a musician my whole life. I originally started playing the drums
+                    at
                     the age of 6 then after a few years moved to guitar. After that I started singing and playing bass
                     too and because fascinated in the idea of learning to record my own music. Currently I write my own
                     music and combine a modern rock sound with electronic elements and influences from a large variety
