@@ -3,7 +3,8 @@ platform: linux
 
 image_resource:
   type: docker-image
-  source: amidos/dcind
+  source:
+    repository: amidos/dcind
 
 inputs:
 - name: version

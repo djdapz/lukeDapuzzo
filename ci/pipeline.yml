@@ -38,6 +38,7 @@ jobs:
 
 - name: run-tests
   public: true
+  plan:
   - get: version
     trigger: true
   - get: repo
@@ -45,8 +46,8 @@ jobs:
   - get: openjdk
   - get: postgres
   - task: run-tests
-      privileged: true
-      file: repo/ci/tasks/run-tests.yml
+    privileged: true
+    file: repo/ci/tasks/run-tests.yml
 
 - name: deploy-development
   public: true
