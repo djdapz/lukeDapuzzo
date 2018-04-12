@@ -32,10 +32,10 @@ run:
     #    docker tag "$(cat postgres/image-id)" "$(cat postgres/repository):$(cat postgres/tag)"
 
     # This is just to visually check in the log that images have been loaded successfully
-    docker images
+    # docker images
 
     # Run the container with tests and its dependencies.
-    docker-compose -f repo/ci/docker-compose.test.yml run tests
+    docker-compose -f repo/ci/docker-compose.tests.yml run tests
 
     # Cleanup.
     # Not sure if this is required.
