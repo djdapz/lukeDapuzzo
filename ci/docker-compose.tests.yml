@@ -16,7 +16,8 @@ services:
     depends_on: [luke-db]
     command: "ls -lsa"
     volumes:
-      - ./repo:/repo
+      - ../:/repo
+      - ../../../gradle:/gradle
     environment:
       LUKE_DB_URL: jdbc:postgresql://luke-db:5432/luke-test
       LUKE_DB_USERNAME: lukeuser
