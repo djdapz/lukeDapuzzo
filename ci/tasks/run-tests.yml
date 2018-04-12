@@ -35,5 +35,5 @@ run:
     # Cleanup.
     # Not sure if this is required.
     # It's quite possible that Concourse is smart enough to clean up the Docker mess itself.
-    docker-compose -f code/example/integration.yml down
+    docker-compose -f repo/ci/docker-compose.tests.yml down
     docker volume rm $(docker volume ls -q)
