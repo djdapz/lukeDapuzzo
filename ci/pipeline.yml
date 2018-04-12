@@ -54,8 +54,10 @@ jobs:
   plan:
   - get: version
     trigger: true
+    passed: ["run-tests"]
   - get: repo
     trigger: true
+    passed: ["run-tests"]
   - get: openjdk-npm-cf
   - task: build-and-deploy
     privileged: true
