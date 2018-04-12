@@ -35,7 +35,7 @@ run:
     # docker images
 
     # Run the container with tests and its dependencies.
-    docker-compose -f repo/ci/docker-compose.tests.yml run tests
+    docker-compose -f repo/ci/docker-compose.tests.yml run unit-integration-tests
 
     # Cleanup.
     # Not sure if this is required.
