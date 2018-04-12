@@ -44,7 +44,9 @@ jobs:
   - get: repo
     trigger: true
   - get: openjdk
+    params: {save: true}
   - get: postgres
+    params: {save: true}
   - task: run-tests
     privileged: true
     file: repo/ci/tasks/run-tests.yml
@@ -97,3 +99,36 @@ jobs:
   - put: openjdk-npm-cf
     params:
       build: workspace
+
+- name: dummy
+  plan:
+  - get: repo
+  - get: openjdk
+  - get: postgres
+  - task: dummy
+    image: openjdk
+    config:
+      platform: linux
+
+      inputs:
+      - name: repo
+      - name: postgres
+      - name: openjdk
+
+      params:
+        pcf-username:
+        pcf-password:
+        pcf-space:
+
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          ls -lsa
+          cd postgres
+          ls -lsa
+
+      caches:
+        - path: gradle
+
