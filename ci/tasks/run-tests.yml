@@ -27,7 +27,8 @@ run:
     # - If the image comes from a private repository, it is much easier to let Concourse pull it,
     #   and then pass it through to the task.
     # - When the image is passed to the task, Concourse can often get the image from its cache.
-    docker load -i postgres/image
+    ls -lsa
+    docker load -i postgres
     docker tag "$(cat postgres/image-id)" "$(cat postgres/repository):$(cat postgres/tag)"
 
     # This is just to visually check in the log that images have been loaded successfully
