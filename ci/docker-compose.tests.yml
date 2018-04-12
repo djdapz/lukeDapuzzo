@@ -14,7 +14,7 @@ services:
     privileged: true
     links: [luke-db]
     depends_on: [luke-db]
-    command: "./repo/ci/tasks/run-tests.yml"
+    command: "./repo/ci/tasks/run-tests.sh"
     volumes:
       - ../:/repo
       - ../../../gradle:/gradle
