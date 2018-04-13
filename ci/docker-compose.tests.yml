@@ -18,7 +18,3 @@ services:
     volumes:
       - ../:/repo
       - ../../../gradle:/gradle
-    environment:
-      LUKE_DB_URL: jdbc:postgresql://luke-db:5432/luke-test
-      LUKE_DB_USERNAME: lukeuser
-      LUKE_DB_PASSWORD: lukepwd
