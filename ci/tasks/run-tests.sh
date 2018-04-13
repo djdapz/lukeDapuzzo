@@ -7,5 +7,5 @@ export GRADLE_USER_HOME="/gradle/.usergradle"
 export GRADLE_CACHE="/gradle/cache"
 
 pushd repo
-    ./gradlew clean tests
+    ./gradlew clean test
 popd
