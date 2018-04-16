@@ -5,8 +5,8 @@ services:
     image: postgres
     environment:
       POSTGRES_DB: luke-test
-      POSTGRES_PASSWORD: lukeuser
-      POSTGRES_USER: lukepwd
+      POSTGRES_PASSWORD: lukepwd
+      POSTGRES_USER: lukeuser
       PGDATA: /database
 
   unit-integration-tests:
@@ -17,4 +17,4 @@ services:
     command: "./repo/ci/tasks/run-tests.sh"
     volumes:
       - ../:/repo
-      - ../../../gradle:/gradle
+      - ../../../gradle:/gradlegi
