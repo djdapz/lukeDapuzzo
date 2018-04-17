@@ -4,6 +4,9 @@ set -e
 
 echo "here"
 
+ls -lsa
+ls -lsa gradle
+
 export GRADLE_HOME="/gradle/.gradle"
 export GRADLE_USER_HOME="/gradle/.usergradle"
 export GRADLE_CACHE="/gradle/cache"
