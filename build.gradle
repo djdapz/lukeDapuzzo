@@ -1,4 +1,4 @@
-group = 'com.devon.dapuzzo'
+group = 'com.dapuzzo.luke'
 version = "$version"
 
 description = """Luke D'Apuzzo's website"""
@@ -6,10 +6,16 @@ description = """Luke D'Apuzzo's website"""
 buildscript {
     ext.kotlin_version = '1.2.30'
     ext.spring_boot_version = '1.5.9.RELEASE'
+
+
+
     repositories {
         mavenCentral()
-        maven { url 'http://repo.spring.io/release' }
-        maven { url "https://plugins.gradle.org/m2/" }
+        maven { //noinspection GroovyAssignabilityCheck
+            url 'http://repo.spring.io/release' }
+        maven { //noinspection GroovyAssignabilityCheck
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 
     dependencies {
