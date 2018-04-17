@@ -17,4 +17,4 @@ services:
     command: "./repo/ci/tasks/run-tests.sh"
     volumes:
       - ../:/repo
-      - ../../../gradle:/gradlegi
+      - ../../../gradle:/gradle
