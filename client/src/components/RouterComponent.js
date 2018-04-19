@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 
 import ShowPage from "./ShowsPage/ShowPageComponent";
 import HomePage from "./HomePage/HomePageComponent";
-import MusicPage from "./MusicPage/MusicPageCompnent";
+import MusicPage from "./MusicPage/MusicPageComponent";
 import BioPage from "./BioPage/BioPageComponent";
 import ContactPage from "./ContactPage/ContactPageComponent";
 import AdminPage from "./AdminPage/AdminPageComponent";

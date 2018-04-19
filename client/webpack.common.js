@@ -1,28 +1,31 @@
 module.exports = {
-    entry: './src/index.js',
-    cache: true,
+    entry: {
+        app: './src/index.js'
+    },
+    output: {
+        filename: 'bundle.js',
+        path: __dirname + '/dist'
+    },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['env', 'react']
-
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env', 'react']
+                    }
                 }
             },
             {
-                test: /\.sass/,
-                loader: "style-loader!css-loader!sass-loader"
-            },
-            {
-                test: /\.css$/,
-                loader: "style-loader!css-loader"
+                test: /\.scss*/,
+                use: [
+                    {loader: "style-loader"},
+                    {loader: "css-loader"},
+                    {loader: "sass-loader"}
+                ]
             }
         ]
-    },
-    resolve: {
-        extensions: ['.js', '.jsx', '.sass']
     }
 };

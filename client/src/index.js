@@ -4,9 +4,8 @@ import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';
 import ReduxPromise from 'redux-promise';
 
-
-import style from "../style/app.sass"
-
+// noinspection ES6UnusedImports
+import style from '../style/app.scss'
 
 import App from './components/app';
 import reducers from './reducers/index';

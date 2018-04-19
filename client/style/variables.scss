@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css?family=Righteous");
+
+@import url("https://fonts.googleapis.com/css?family=Carter+One|Permanent+Marker|Raleway");
+
+$side-menubar-width: 6em;
+$content-left-margin: $side-menubar-width * 1.75;
+$aqua-luke: #62f7c8;
+$purple-luke: #9f60be;
+
+$scrappy-font: "Sedgwick Ave Display", cursive;
+$header-font: "Carter One", cursive;
+$main-font: "Raleway", sans-serif;
+
+//$header-font: 'Permanent Marker', cursive
+
+$xs-xxs: 576px;
+$sm-xs: 768px;
+$md-sm: 992px;
+$lg-md: 1200px;
+$xl-lg: 1700px;
+
+$header-bar-height: 4em;
+
+$social-icon-size: 2em;
+$social-bar-height: $social-icon-size * 1.5;
+
+$left-gutter: 1.5em;

@@ -1,21 +1,10 @@
-/**
- * Created by devondapuzzo on 9/19/17.
- */
-const merge = require("webpack-merge");
-const common = require("./webpack.common");
+const merge = require('webpack-merge');
+const common = require('./webpack.common.js');
 
-module.exports = merge(common,
-    {
-        output: {
-            path: __dirname,
-            filename: './bundle.js'
-        },
-        devtool: 'sourcemaps',
-        devServer: {
-            port: 9000,
-            historyApiFallback: true,
-            // hot: true,
-            contentBase: './dist'
-        }
+module.exports = merge(common, {
+    devtool: 'inline-source-map',
+    devServer: {
+        port: 9000,
+        contentBase: './dist'
     }
-);
+});

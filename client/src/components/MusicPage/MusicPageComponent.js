@@ -4,11 +4,9 @@ import {bindActionCreators} from "redux";
 import {routeChanged} from "../../actions/RouteChangedAction";
 import {getAllSongs} from "../../actions/GetAllSongsAction";
 import routes from "../../constants/routes";
-import MediaQuery from "react-responsive";
 import SpotifyComponent from "./SpotifyComponent";
 
 class MusicPage extends Component {
-
 
     componentDidMount() {
         this.props.getAllSongs();
@@ -34,9 +32,7 @@ class MusicPage extends Component {
     render() {
         return (
             <div id="music-page" className="main-content">
-                <div id="spotify-container">
-                    {MusicPage.renderSpotifySongs()}
-                </div>
+                {MusicPage.renderSpotifySongs()}
 
                 {this.renderSoundcloudSongs()}
             </div>

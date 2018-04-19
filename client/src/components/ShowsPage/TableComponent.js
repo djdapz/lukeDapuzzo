@@ -4,16 +4,17 @@ import ShowListing from "./ShowListingComponent";
 class Table extends Component {
 
     renderLiveRows() {
-        if (this.props.dates.length === 0) {
+        if (this.props.shows === undefined) {
             return <div>
+                <p className="table-message">No upcoming shows</p>
+                <p className="table-message">For bookings ~<a href="/contact">click here</a>~</p>
 
-                <p id="no-upcoming-shows">No upcoming shows</p>
-                <p id="no-upcoming-shows">For bookings ~<a href="/contact">click here</a>~</p>
             </div>
+        } else {
+            return this.props.shows.map(show => {
+                return <ShowListing key={show.id} show={show}/>
+            })
         }
-        return this.props.dates.map(details => {
-            return <ShowListing key={details.id} details={details}/>
-        })
     }
 
     render() {

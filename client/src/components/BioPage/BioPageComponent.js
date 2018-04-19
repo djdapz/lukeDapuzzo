@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
-import Billboard from "../Multipurpose/BillboardComponent";
 import routes from "../../constants/routes";
 import {routeChanged} from "../../actions/RouteChangedAction";
-import HeaderBar from "../Navigation/HeaderBarComponent";
 
 
 class BioPage extends Component {

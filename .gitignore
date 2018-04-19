@@ -10,7 +10,9 @@ gradle/
 out/
 build/
 
-client/dist/bundle.js
+*bundle.js
+*bundle.js.map
+client/coverage
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
