@@ -1,70 +1,54 @@
 import React, {Component} from 'react';
 
-import Table from "./TableComponent";
-import HeaderBar from "../Navigation/HeaderBarComponent";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {routeChanged} from "../../actions/RouteChangedAction"
+import {routeChanged} from "../../actions/RouteChangedAction";
+import {getAllShows} from "../../api/ShowsApi";
 import routes from "../../constants/routes";
-import {getAllShows} from "../../actions/GetAllShowsAction";
+import Table from "./TableComponent";
 
 
-class ShowPage extends Component{
-    componentDidMount(){
-        this.dates = [];
-        this.props.getAllShows();
+class ShowPage extends Component {
+    constructor() {
+        super();
+        getAllShows()
+    }
+
+    componentDidMount() {
         this.props.routeChanged(routes.SHOWS)
     }
 
     render() {
-        this.dates = this.props.shows;
-        this.processedDates = this.processDates();
+        const processedDates = ShowPage.processDatesAround(Date.now(), this.props.shows);
         return (
-            <div>
-                <div id="show-page" className="main-content">
-                    <Table dates={this.processedDates.upcoming} title="Upcoming"/>
-                    <Table dates={this.processedDates.previous} title="Previous"/>
-                </div>
+            <div id="show-page" className="main-content">
+                <Table dates={processedDates.upcoming} title="Upcoming"/>
+                <Table dates={processedDates.previous} title="Previous"/>
             </div>
-
         )
     }
 
-    processDates() {
-        let groupedDates = {
-            previous: [],
-            upcoming: []
+    static processDatesAround(pivotDate, dates) {
+        return {
+            previous: dates
+                .filter(date => new Date(date.date) <= pivotDate)
+                .sort((a, b) => b.date - a.date),
+
+            upcoming: dates
+                .filter(date => new Date(date.date) > pivotDate)
+                .sort((a, b) => a.date - b.date)
         };
-
-        let now = new Date();
-        now.setHours(0,0,0,0);
-
-        this.dates.map(date => {
-            new Date(date.date) > now ? groupedDates.upcoming.push(date) : groupedDates.previous.push(date);
-        });
-
-        groupedDates.previous.sort((a,b) =>{
-            return b.date - a.date;
-        });
-
-        groupedDates.upcoming.sort((a,b) =>{
-            return a.date - b.date;
-        });
-
-        return groupedDates;
     }
-
 }
 
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({routeChanged, getAllShows}, dispatch)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({routeChanged}, dispatch)
 }
 
-function mapStateToProps(state){
-    return({shows: state.shows});
+function mapStateToProps(state) {
+    return ({shows: state.shows});
 }
 
-//null means no redux state necessary
-export default connect(mapStateToProps , mapDispatchToProps)(ShowPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowPage);
 
 

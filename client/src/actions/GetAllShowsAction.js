@@ -1,16 +1,16 @@
 import axios from "axios";
+import {LUKE_API} from "../config/appConfig";
 
 const GET_ALL_SHOWS = "GET_ALL_SHOWS";
 
-let getAllShows =  function(){
-    const request = axios.get("/api/shows");
+let getAllShowsAction = function (shows) {
     return {
         type: GET_ALL_SHOWS,
-        payload: request
+        payload: shows
     }
 };
 
 export {
-    getAllShows,
+    getAllShowsAction,
     GET_ALL_SHOWS
 };

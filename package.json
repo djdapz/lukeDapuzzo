@@ -4,5 +4,6 @@
   "main": "index.js",
   "repository": "https://github.com/djdapz/lukeDapuzzo.git",
   "author": "djdapz <djdapz@aol.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {}
 }

@@ -1,10 +1,18 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
+const webpack = require('webpack');
 
 module.exports = merge(common, {
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     devServer: {
         port: 9000,
-        contentBase: './dist'
-    }
+        contentBase: './dist',
+        historyApiFallback: true
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.LUKE_ENV': JSON.stringify('DEV'),
+            'process.env.NODE_ENV': JSON.stringify('production')
+        })
+    ]
 });

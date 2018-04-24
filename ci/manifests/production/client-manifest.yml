@@ -4,3 +4,5 @@ applications:
   memory: 512M
   instances: 1
   command: npm run start
+  env:
+    NODE_ENV: prod

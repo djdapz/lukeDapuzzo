@@ -1,6 +1,7 @@
 import ShowListing from "../ShowListingComponent";
 
 import React from 'react';
+import {shallow} from "enzyme";
 
 const show = {
     "id": 1,
@@ -21,59 +22,52 @@ const show = {
     }
 };
 
-describe('Burndown Component', () => {
-    it("should save passed show as prop", () => {
-        const wrapper = mount(<ShowListing show={show}/>);
-
-        expect(wrapper.prop("show")).to.equal(show)
-
-    });
-
+describe('Listing Component', () => {
     it('should render a div with class listing ', function () {
-        const showListingComponent = mount(<ShowListing show={show}/>);
+        const showListingComponent = shallow(<ShowListing show={show}/>);
 
-        expect(showListingComponent.find(".listing")).to.have.length(1);
+        expect(showListingComponent.find(".listing")).toHaveLength(1);
     });
 
     it('should render a listing with a date and location', function () {
-        let listingDiv = mount(<ShowListing show={show}/>).find(".listing");
+        let listingDiv = shallow(<ShowListing show={show}/>).find(".listing");
 
-        expect(listingDiv.find(".listing-date")).to.have.length(1);
-        expect(listingDiv.find(".listing-location")).to.have.length(1)
+        expect(listingDiv.find(".listing-date")).toHaveLength(1);
+        expect(listingDiv.find(".listing-location")).toHaveLength(1)
     });
 
     it('should render the date as a string', function () {
-        let listingDate = mount(<ShowListing show={show}/>).find(".listing-date");
+        let listingDate = shallow(<ShowListing show={show}/>).find(".listing-date");
 
-        expect(listingDate.text()).to.equal("2017-07-23")
+        expect(listingDate.text()).toBe(show.date)
     });
 
     it('should render the venue name in a link under listing-location > listing-venue', () => {
-        let venueName = mount(<ShowListing show={show}/>)
+        let venueName = shallow(<ShowListing show={show}/>)
             .find(".listing-location")
             .find(".listing-venue")
             .find(".alert-link")
             .text();
 
-        expect(venueName).to.equal("The Beebop")
+        expect(venueName).toBe("The Beebop")
     });
 
     it('should add a google maps link around the listing name', function () {
-        let venueLink = mount(<ShowListing show={show}/>)
+        let venueLink = shallow(<ShowListing show={show}/>)
             .find(".listing-location")
             .find(".listing-venue")
             .find(".alert-link");
 
-        expect(venueLink.prop("href")).to.equal("https://goo.gl/maps/6cwSXNDx9bF2");
+        expect(venueLink.prop("href")).toBe("https://goo.gl/maps/6cwSXNDx9bF2");
     });
 
-    it("shold combine city name and city state under listing-city", function(){
-        let cityText = mount(<ShowListing show={show}/>)
+    it("shold combine city name and city state under listing-city", function () {
+        let cityText = shallow(<ShowListing show={show}/>)
             .find(".listing-location")
             .find(".listing-city")
             .text();
 
-        expect(cityText).to.equal("Boston, MA");
+        expect(cityText).toBe("Boston, MA");
 
     })
 });

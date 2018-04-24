@@ -2,15 +2,16 @@ import TableComponent from "../ShowListingComponent";
 
 import React from 'react';
 import Table from "../TableComponent";
+import {shallow} from "enzyme";
 
-describe('Burndown Component', () => {
+describe('Table Component', () => {
     it("should save passed show as prop", () => {
         const headerTitle = shallow(<Table title={"A table-guy"}/>)
             .find(".live-table")
             .find(".table-header")
             .text();
 
-        expect(headerTitle).to.equal("A table-guy");
+        expect(headerTitle).toBe("A table-guy");
     });
 
     it('should tell the user that there are no upcoming shows when no shows are passed', function () {
@@ -18,9 +19,9 @@ describe('Burndown Component', () => {
             .find(".live-table")
             .find(".table-message");
 
-        expect(table).to.have.length(2);
-        expect(table.at(0).text()).to.equal("No upcoming shows");
-        expect(table.at(1).text()).to.equal("For bookings ~click here~");
+        expect(table).toHaveLength(2);
+        expect(table.at(0).text()).toBe("No upcoming shows");
+        expect(table.at(1).text()).toBe("For bookings ~click here~");
     });
 
     it('should link to the contact page when no shows are displayed', function () {
@@ -29,7 +30,7 @@ describe('Burndown Component', () => {
             .find(".table-message")
             .find("a");
 
-        expect(link.prop("href")).to.equal("/contact");
+        expect(link.prop("href")).toBe("/contact");
     });
 
     it('should list all of the shows when they are passed', function () {
@@ -37,12 +38,12 @@ describe('Burndown Component', () => {
         let show2 = {id: 9};
         const showListing = shallow(<Table shows={[show1, show2]} />).find("ShowListing");
 
-        expect(showListing).to.have.length(2);
+        expect(showListing).toHaveLength(2);
 
-        expect(showListing.at(0).key()).to.equal("6");
-        expect(showListing.at(0).props().show).to.equal(show1);
+        expect(showListing.at(0).key()).toBe("6");
+        expect(showListing.at(0).props().show).toBe(show1);
 
-        expect(showListing.at(1).key()).to.equal("9");
-        expect(showListing.at(1).props().show).to.equal(show2);
+        expect(showListing.at(1).key()).toBe("9");
+        expect(showListing.at(1).props().show).toBe(show2);
     });
 });
