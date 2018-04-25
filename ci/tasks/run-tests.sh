@@ -20,3 +20,6 @@ export LUKE_DB_PASSWORD=lukepwd
 pushd repo
     ./gradlew clean test
 popd
+
+ls repo/build/reports/tests/test
+cat repo/build/reports/tests/test/index.html
