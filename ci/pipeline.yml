@@ -43,7 +43,7 @@ jobs:
     trigger: true
   - get: repo
     trigger: true
-  - get: openjdk
+  - get: openjdk-npm-cf
     params: {save: true}
   - get: postgres
     params: {save: true}

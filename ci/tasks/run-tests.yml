@@ -23,19 +23,10 @@ run:
     source /docker-lib.sh
     source repo/ci/tasks/common.sh
 
-    echo "ls -lsa"
-    ls -lsa
-    echo "ls -lsa ../"
-    ls -lsa ../
-    echo "ls -lsa ../../"
-    ls -lsa ../../
-    echo "ls -lsa ../../../"
-    ls -lsa ../../../
-
     start_docker
 
     docker load -i postgres/image
-    docker load -i openjdk/image
+    docker load -i openjdk-npm-cf/image
 
     docker images
 
