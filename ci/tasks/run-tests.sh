@@ -2,13 +2,6 @@
 
 set -e
 
-echo "here"
-
-ls -lsa
-ls -lsa gradle
-
-source common.sh
-
 export GRADLE_HOME="/gradle/.gradle"
 export GRADLE_USER_HOME="/gradle/.usergradle"
 export GRADLE_CACHE="/gradle/caches"
