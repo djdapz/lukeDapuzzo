@@ -1,15 +1,17 @@
 #!/bin/bash
 
-set -e
+#set -e
 
 echo "here"
 
 ls -lsa
 ls -lsa gradle
 
+source common.sh
+
 export GRADLE_HOME="/gradle/.gradle"
 export GRADLE_USER_HOME="/gradle/.usergradle"
-export GRADLE_CACHE="/gradle/cache"
+export GRADLE_CACHE="/gradle/caches"
 
 export LUKE_DB_URL=jdbc:postgresql://luke-db:5432/luke-test?user=lukeuser&password=lukepwd
 export LUKE_DB_USERNAME=lukeuser

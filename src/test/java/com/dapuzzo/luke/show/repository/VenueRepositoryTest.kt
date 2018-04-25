@@ -7,12 +7,12 @@ import org.junit.Before
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-class VenueRepositoryTest: BaseRepositoryTest(){
+class VenueRepositoryTest : BaseRepositoryTest() {
     @Autowired
     lateinit var venueRepository: VenueRepository
 
     @Autowired
-    lateinit var showRepositoryDependencies : ShowRepositoryDependencies
+    lateinit var showRepositoryDependencies: ShowRepositoryDependencies
 
     var firstVenue = randomVenueEntity()
     var secondVenue = randomVenueEntity()
@@ -22,13 +22,13 @@ class VenueRepositoryTest: BaseRepositoryTest(){
     internal fun setup() {
         showRepositoryDependencies.setupVenueDependencies(firstVenue, secondVenue)
 
-         venueRepository.add(firstVenue)
+        venueRepository.add(firstVenue)
         venueRepository.add(secondVenue)
     }
 
 
     @Test
-    internal fun `should get all venues`(){
+    internal fun `should get all venues`() {
         val actualStates = venueRepository.getAll()
 
         Assertions.assertThat(actualStates.size).isEqualTo(2)
@@ -36,7 +36,7 @@ class VenueRepositoryTest: BaseRepositoryTest(){
     }
 
     @Test
-    internal fun `should get venue by id`(){
+    internal fun `should get venue by id`() {
         val actualState = venueRepository.getById(firstVenue.id)
 
         Assertions.assertThat(actualState).isEqualTo(firstVenue)

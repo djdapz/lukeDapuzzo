@@ -8,7 +8,6 @@ services:
       POSTGRES_PASSWORD: lukepwd
       POSTGRES_USER: lukeuser
       PGDATA: /database
-#    command: postgresql
 
   unit-integration-tests:
     image: openjdk
@@ -18,4 +17,4 @@ services:
     command: "./repo/ci/tasks/run-tests.sh"
     volumes:
       - ../:/repo
-      - ../../gradle:/gradle
+      - ../../.gradle/:/gradle
