@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${LUKE_DB_URL:jdbc:postgresql://localhost:5432/luke-test}
-    password: ${LUKE_DB_PASSWORD:lukepwd}
-    username: ${LUKE_DB_USERNAME:lukeuser}
+    url: jdbc:postgresql://luke-db:5432/luke-test
+    password: LUKE_DB_PASSWORD:lukepwd
+    username: LUKE_DB_USERNAME:lukeuser
     driver-class-name: org.postgresql.Driver
 
 server:

@@ -22,4 +22,4 @@ pushd repo
 popd
 
 ls repo/build/reports/tests/test
-cat repo/build/reports/tests/test/index.html
+cat repo/build/test-results/test/TEST-com.dapuzzo.luke.show.repository.ShowRepositoryTest.xml
