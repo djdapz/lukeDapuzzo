@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#set -e
+set -e
 
 echo "here"
 
@@ -20,6 +20,3 @@ export LUKE_DB_PASSWORD=lukepwd
 pushd repo
     ./gradlew clean test
 popd
-
-ls repo/build/reports/tests/test
-cat repo/build/test-results/test/TEST-com.dapuzzo.luke.show.repository.ShowRepositoryTest.xml

@@ -15,6 +15,7 @@ pushd repo
 
     echo "BUILD_VERSION = ${BUILD_VERSION}"
     cf push -p "build/libs/luke-dapuzzo-${BUILD_VERSION}.jar" -f "./ci/manifests/$PCF_SPACE/server-manifest.yml"
+
 popd
 
 #################
