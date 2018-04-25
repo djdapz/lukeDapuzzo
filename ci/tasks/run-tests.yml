@@ -10,7 +10,7 @@ inputs:
 - name: version
 - name: repo
 - name: postgres
-- name: openjdk
+- name: openjdk-npm-cf
 
 caches:
   - path: .gradle/
