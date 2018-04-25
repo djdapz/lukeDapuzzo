@@ -8,17 +8,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 public class AppConfig {
-
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                System.out.println("allowing cors??");
-                registry.addMapping("/.*")
-                        .allowedOrigins("http://localhost:9000")
-                        .allowedOrigins("https://localhost:9000")
-                        .allowedOrigins("localhost:9000");
+                registry.addMapping("/**");
             }
         };
     }

@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/lukedapuzzo?currentSchema=local
-    password:
-    username: devondapuzzo
+    url: jdbc:postgresql://localhost:5432/luke-test
+    password: lukepwd
+    username: lukeuser
 
 dapuzzo:
   luke:

@@ -22,8 +22,8 @@ class ShowPage extends Component {
         const processedDates = ShowPage.processDatesAround(Date.now(), this.props.shows);
         return (
             <div id="show-page" className="main-content">
-                <Table dates={processedDates.upcoming} title="Upcoming"/>
-                <Table dates={processedDates.previous} title="Previous"/>
+                <Table shows={processedDates.upcoming} title="Upcoming"/>
+                <Table shows={processedDates.previous} title="Previous"/>
             </div>
         )
     }

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
-import {getAllSongs} from "../../actions/GetAllSongsAction";
+import {getAllSongsAction} from "../../actions/GetAllSongsAction";
 import SongRow from "./SongRowComponent";
 import NewSong from "./NewSongComponent";
 import {clearNewSong} from "../../actions/ClearNewSongAction";
@@ -112,7 +112,7 @@ class SongTable extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({getAllSongs, clearNewSong, clearDeleteSong}, dispatch)
+    return bindActionCreators({getAllSongs: getAllSongsAction, clearNewSong, clearDeleteSong}, dispatch)
 }
 
 function mapStateToProps(state) {

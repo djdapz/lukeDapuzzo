@@ -2,15 +2,14 @@ import axios from "axios";
 
 const GET_ALL_SONGS = "GET_ALL_SONGS";
 
-let getAllSongs =  function(){
-    const request = axios.get("/api/songs");
+let getAllSongsAction =  function(songs){
     return {
         type: GET_ALL_SONGS,
-        payload: request
+        payload: songs
     }
 };
 
 export {
-    getAllSongs,
+    getAllSongsAction,
     GET_ALL_SONGS
 };

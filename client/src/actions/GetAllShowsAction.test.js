@@ -4,10 +4,6 @@ import {LUKE_API} from "../config/appConfig";
 
 jest.mock('axios');
 
-beforeEach(() => {
-    axios.get.mockResolvedValue("12");
-});
-
 describe("Get all shows acton", () => {
     it('should return an action with type GET_ALL_SHOWS', function () {
         const allShows = getAllShowsAction([]);

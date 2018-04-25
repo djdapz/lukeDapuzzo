@@ -9,17 +9,11 @@ import mobileMenubarReducer from "./MobileMenubarReducer";
 import isMobileReducer from "./IsMobileReducer";
 
 
-const songRootReducer = combineReducers({
-    all: songsReducer,
-    new: newSongReducer,
-    delete: deleteSongReducer
-});
-
 const rootReducer = combineReducers({
     route: routeReducer,
     email: emailReducer,
     shows: showsReducer,
-    songs: songRootReducer,
+    songs: songsReducer,
     isMenubarOpen: mobileMenubarReducer,
     isMobile: isMobileReducer
 });

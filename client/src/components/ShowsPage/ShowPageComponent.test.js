@@ -1,17 +1,18 @@
-import ShowPageComponent from "../ShowPageComponent";
+import ShowPageComponent from "./ShowPageComponent";
 
 import React from 'react';
-import {getAllShows} from "../../../api/ShowsApi";
+import {getAllShows} from "../../api/ShowsApi";
 
 import configureStore from 'redux-mock-store';
-import {routeChanged} from "../../../actions/RouteChangedAction";
-import routes from "../../../constants/routes";
-import {getAllShowsAction} from "../../../actions/GetAllShowsAction";
+import {routeChanged} from "../../actions/RouteChangedAction";
+import routes from "../../constants/routes";
+import {getAllShowsAction} from "../../actions/GetAllShowsAction";
 import {mount, shallow} from "enzyme";
+import {mockStore} from "../../../testConfig/testUtils";
 
 
-jest.mock('../../../api/ShowsApi');
-jest.mock('../../../actions/RouteChangedAction');
+jest.mock('../../api/ShowsApi');
+jest.mock('../../actions/RouteChangedAction');
 
 
 beforeEach(() => {
@@ -77,21 +78,7 @@ describe('Show Page Component', () => {
 
         const sortedDates = ShowPageComponent.processDatesAround(Date.now(), shows);
 
-        expect(tables.at(0).prop("dates")).toContain(...sortedDates.upcoming);
-        expect(tables.at(1).prop("dates")).toContain(...sortedDates.previous);
+        expect(tables.at(0).prop("shows")).toContain(...sortedDates.upcoming);
+        expect(tables.at(1).prop("shows")).toContain(...sortedDates.previous);
     });
 });
-
-function mockStore(state = {}) {
-    return {
-        getState: function () {
-            return state
-        },
-        dispatch: function () {
-            return {}
-        },
-        subscribe: function () {
-
-        }
-    }
-}

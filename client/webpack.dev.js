@@ -11,7 +11,7 @@ module.exports = merge(common, {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.LUKE_ENV': JSON.stringify('DEV'),
+            'process.env.LUKE_ENV': JSON.stringify('LOCAL'),
             'process.env.NODE_ENV': JSON.stringify('production')
         })
     ]

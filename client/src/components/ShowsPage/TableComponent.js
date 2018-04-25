@@ -4,10 +4,10 @@ import ShowListing from "./ShowListingComponent";
 class Table extends Component {
 
     renderLiveRows() {
-        if (this.props.shows === undefined) {
+        if (this.props.shows === undefined || this.props.shows.length === 0) {
             return <div>
                 <p className="table-message">No upcoming shows</p>
-                <p className="table-message">For bookings ~<a href="/contact">click here</a>~</p>
+                <p className="table-message">For bookings ~<a href={"/contact"}>click here</a>~</p>
 
             </div>
         } else {

@@ -1,7 +1,7 @@
-import TableComponent from "../ShowListingComponent";
+import TableComponent from "./ShowListingComponent";
 
 import React from 'react';
-import Table from "../TableComponent";
+import Table from "./TableComponent";
 import {shallow} from "enzyme";
 
 describe('Table Component', () => {
@@ -16,6 +16,16 @@ describe('Table Component', () => {
 
     it('should tell the user that there are no upcoming shows when no shows are passed', function () {
         const table = shallow(<Table/>)
+            .find(".live-table")
+            .find(".table-message");
+
+        expect(table).toHaveLength(2);
+        expect(table.at(0).text()).toBe("No upcoming shows");
+        expect(table.at(1).text()).toBe("For bookings ~click here~");
+    });
+
+    it('should tell the user that there are no upcoming shows when an empty list is passed', function () {
+        const table = shallow(<Table shows={[]}/>)
             .find(".live-table")
             .find(".table-message");
 
