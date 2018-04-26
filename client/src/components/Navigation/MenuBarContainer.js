@@ -13,6 +13,7 @@ import {socialMediaIcons, socialMediaIconColors} from "../../constants/socialMed
 import SocialMediaIcon from "./SocialMediaIcon";
 import MediaQuery from "react-responsive";
 import {mobileCutoff} from "../../constants/constants";
+import {toggleUserAuthentication} from "../../actions/ToggleUserAuthenitcation";
 
 class Menubar extends Component {
     menubarPosition;
@@ -69,7 +70,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({closeMobileMenuBar: closeMobileMenuBar}, dispatch)
+    return bindActionCreators({closeMobileMenuBar}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menubar);

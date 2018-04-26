@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import MenubarComponent from "./Navigation/MenuBarContainer";
-import ReactRouter from "./RouterComponent";
-import HeaderBar from "./Navigation/HeaderBarComponent";
-import Dependencies from "./DependenciesComponent";
+import MenubarComponent from "./components/Navigation/MenuBarContainer";
+import ReactRouter from "./routing/RouterComponent";
+import HeaderBar from "./components/Navigation/HeaderBarComponent";
 import MediaQuery from "react-responsive";
-import {mobileCutoff} from "../constants/constants";
+import {mobileCutoff} from "./constants/constants";
 
 import fontawesome from '@fortawesome/fontawesome'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
@@ -25,7 +24,6 @@ class App extends Component {
     render() {
         return (
             <div id="app">
-                <Dependencies/>
                 <HeaderBar/>
                 {App.renderMenuBarIfNotMobile()}
                 <ReactRouter/>

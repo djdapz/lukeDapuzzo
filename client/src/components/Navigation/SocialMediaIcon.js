@@ -24,8 +24,8 @@ class SocialMediaIcon extends Component {
     render() {
         const color = this.state.isHovered ? this.props.colors.hovered : this.props.colors.default;
         return (
-            <a href={this.props.icon.href} key={this.props.icon.href}>
-                <FontAwesomeIcon className="social-media-icon" key={this.props.icon.href}
+            <a href={this.props.icon.href}>
+                <FontAwesomeIcon className="social-media-icon"
                                  icon={["fab", this.props.icon.fontAwesomeName]}
                                  onMouseEnter={this.handleHover} onMouseLeave={this.handleHover} color={color}/>
             </a>

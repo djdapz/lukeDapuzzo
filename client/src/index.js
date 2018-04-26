@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 // noinspection ES6UnusedImports
 import style from '../style/app.scss'
 
-import App from './components/app';
+import App from './app';
 import reducers from './reducers/index';
 import {BrowserRouter} from "react-router-dom";
 

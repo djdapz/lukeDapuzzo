@@ -49,6 +49,13 @@ const routes = {
         href: "/admin",
         header: "Admin",
         menubarClassName: "admin-menubar"
+    },
+    LOGIN:{
+        displayInMenuBar: false,
+        name: "LOGIN",
+        href: "/login",
+        header: "Login",
+        menubarClassName: "login-menubar"
     }
 
 };

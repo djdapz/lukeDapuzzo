@@ -7,7 +7,12 @@ import newSongReducer from "./NewSongReducer"
 import deleteSongReducer from "./DeleteSongReducer";
 import mobileMenubarReducer from "./MobileMenubarReducer";
 import isMobileReducer from "./IsMobileReducer";
+import userAuthenticationReducer from "./UserAuthenticationReducer";
 
+
+const userReducer = combineReducers({
+    isAuthenticated: userAuthenticationReducer
+});
 
 const rootReducer = combineReducers({
     route: routeReducer,
@@ -15,7 +20,8 @@ const rootReducer = combineReducers({
     shows: showsReducer,
     songs: songsReducer,
     isMenubarOpen: mobileMenubarReducer,
-    isMobile: isMobileReducer
+    isMobile: isMobileReducer,
+    user: userReducer
 });
 
 export default rootReducer;

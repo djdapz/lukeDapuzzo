@@ -7,6 +7,7 @@ import SongRow from "./SongRowComponent";
 import NewSong from "./NewSongComponent";
 import {clearNewSong} from "../../actions/ClearNewSongAction";
 import {clearDeleteSong} from "../../actions/DeleteSongAction";
+import {getAllSongs} from "../../api/SongsApi";
 
 class SongTable extends Component {
 
@@ -24,7 +25,7 @@ class SongTable extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllSongs();
+        getAllSongs();
     }
 
 
@@ -67,59 +68,59 @@ class SongTable extends Component {
     reactToSongCreated() {
         if (this.props.newSong.status === 200) {
             this.setState({createSong: false});
-            this.props.getAllSongs();
+            getAllSongs();
             this.props.clearNewSong();
         }
     }
 
     reactToSongDeleted() {
         if (this.props.deleteSong.status === 200) {
-            this.props.getAllSongs();
+            getAllSongs();
             this.props.clearDeleteSong();
         }
     }
 
     render() {
-        this.reactToSongCreated();
-        this.reactToSongDeleted();
+        // this.reactToSongCreated();
+        // this.reactToSongDeleted();
         return (
-            <div className="live-table">
-                <div className="table-header">
-                    <h2>
-                        Songs
+             <div className="live-table">
+                 <div className="table-header">
+                     <h2>
+                         Songs
 
-                    </h2>
-                    <div className="row header">
-                        <div className="col-md-2">
-                        </div>
-                        <div className="col-sm-2">
-                            {this.renderNewButton()}
-                        </div>
-                        <div className="col-lg-3 col-md-3 col-sm-5 column-header">
-                                Song Title
-                        </div>
-                        <div className="col-lg-3 col-md-3 col-sm-5 column-header">
-                                Soundcloud Id
-                        </div>
-                    </div>
-                    {this.renderCreateSong()}
-                    {this.renderSongRows()}
-                </div>
-            </div>
+                     </h2>
+                     <div className="row header">
+                         <div className="col-md-2">
+                         </div>
+                         <div className="col-sm-2">
+                             {this.renderNewButton()}
+                         </div>
+                         <div className="col-lg-3 col-md-3 col-sm-5 column-header">
+                                 Song Title
+                         </div>
+                         <div className="col-lg-3 col-md-3 col-sm-5 column-header">
+                                 Soundcloud Id
+                         </div>
+                     </div>
+                     {this.renderCreateSong()}
+                     {this.renderSongRows()}
+                 </div>
+             </div>
 
         )
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({getAllSongs: getAllSongsAction, clearNewSong, clearDeleteSong}, dispatch)
+    return bindActionCreators({clearNewSong, clearDeleteSong}, dispatch)
 }
 
 function mapStateToProps(state) {
     return ({
-        songs: state.songs.all,
-        newSong: state.songs.new,
-        deleteSong: state.songs.delete
+        songs: state.songs,
+        // newSong: state.songs.new,
+        // deleteSong: state.songs.delete
     });
 }
 

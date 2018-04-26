@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ShowListing from "./ShowListingComponent";
+import {Link} from "react-router-dom";
 
 class Table extends Component {
 
@@ -7,7 +8,7 @@ class Table extends Component {
         if (this.props.shows === undefined || this.props.shows.length === 0) {
             return <div>
                 <p className="table-message">No upcoming shows</p>
-                <p className="table-message">For bookings ~<a href={"/contact"}>click here</a>~</p>
+                <p className="table-message">For bookings ~<Link to={"/contact"}>click here</Link>~</p>
 
             </div>
         } else {

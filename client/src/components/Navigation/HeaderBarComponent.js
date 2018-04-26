@@ -87,7 +87,7 @@ class HeaderBar extends Component {
     }
 
     static renderSocialMediaIcons() {
-        const iconElements = socialMediaIcons.map(icon => <SocialMediaIcon icon={icon} colors={socialMediaIconColors.header}/>);
+        const iconElements = socialMediaIcons.map(icon => <SocialMediaIcon key={icon.href} icon={icon} colors={socialMediaIconColors.header}/>);
 
         return (
             <div className="social-media-icons">
