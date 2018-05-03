@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "concourse/lite"
 
   # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
+  # boxes will only be checked for updates when the account runs
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false
 

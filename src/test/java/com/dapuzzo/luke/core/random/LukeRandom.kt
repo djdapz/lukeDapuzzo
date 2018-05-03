@@ -1,6 +1,7 @@
 package com.dapuzzo.luke.core.random
 
 import com.dapuzzo.luke.email.EmailRequest
+import com.dapuzzo.luke.security.Account
 import java.sql.Date
 import java.time.LocalDate
 import java.util.concurrent.ThreadLocalRandom
@@ -60,3 +61,7 @@ fun randomEmailRequest() =
 private fun randomEmailAddress(): String = "${randomString(10)}@${randomString(10)}.com"
 
 
+public fun randomAccount(username : String = randomString(), password : String = randomString()): Account = Account(
+        username,
+        password
+)

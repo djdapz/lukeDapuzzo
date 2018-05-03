@@ -1,13 +1,18 @@
 package com.dapuzzo.luke.song
 
-import com.dapuzzo.luke.core.BaseRepositoryTest
+import com.dapuzzo.luke.core.DatabaseTest
 import com.dapuzzo.luke.core.random.randomSongEntity
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 
-class SongRepositoryImplTest : BaseRepositoryTest() {
+@SpringBootTest(classes = [
+    SongRepository::class
+])
+@DatabaseTest
+open class SongRepositoryImplTest {
 
     @Autowired
     lateinit var subject: SongRepository
@@ -34,7 +39,7 @@ class SongRepositoryImplTest : BaseRepositoryTest() {
     }
 
     @Test
-    internal fun `should delete song from repository`(){
+    internal fun `should delete song from repository`() {
         subject.delete(firstSong.id)
         val songs = subject.getAll()
         assertThat(songs).containsExactlyInAnyOrder(secondSong)

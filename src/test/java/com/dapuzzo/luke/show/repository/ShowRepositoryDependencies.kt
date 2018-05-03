@@ -8,16 +8,19 @@ import com.dapuzzo.luke.show.domain.entity.ShowEntity
 import com.dapuzzo.luke.show.domain.entity.StateEntity
 import com.dapuzzo.luke.show.domain.entity.VenueEntity
 import org.springframework.context.annotation.Profile
+import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Component
 
 
 @Component
 class ShowRepositoryDependencies(
-        val stateRepository: StateRepository,
-        val cityRepository: CityRepository,
-        val venueRepository: VenueRepository,
-        val showRepository: ShowRepository
+        jdbcTemplate: JdbcTemplate
+
 ) {
+    private val stateRepository = StateRepository(jdbcTemplate)
+    private val cityRepository = CityRepository(jdbcTemplate)
+    private val venueRepository = VenueRepository(jdbcTemplate)
+    private val showRepository = ShowRepository(jdbcTemplate)
 
     private fun setupState(firstState: StateEntity, secondState: StateEntity) {
         stateRepository.add(firstState)

@@ -1,14 +1,23 @@
 package com.dapuzzo.luke.show.repository
 
-import com.dapuzzo.luke.core.BaseRepositoryTest
+import com.dapuzzo.luke.core.DatabaseTest
 import com.dapuzzo.luke.core.random.randomShowEntity
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 
 
-class ShowRepositoryTest : BaseRepositoryTest() {
+@SpringBootTest(classes = [
+    CityRepository::class,
+    ShowRepositoryDependencies::class,
+    VenueRepository::class,
+    StateRepository::class,
+    ShowRepository::class
+])
+@DatabaseTest
+open class ShowRepositoryTest{
     @Autowired
     lateinit var showRepository: ShowRepository
 
