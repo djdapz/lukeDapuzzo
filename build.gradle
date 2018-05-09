@@ -5,21 +5,17 @@ description = """Luke D'Apuzzo's website"""
 
 buildscript {
     ext.kotlin_version = '1.2.30'
-    ext.spring_boot_version = '1.5.9.RELEASE'
-
-
+    ext.spring_boot_version = '2.0.1.RELEASE'
 
     repositories {
         mavenCentral()
-        maven { //noinspection GroovyAssignabilityCheck
-            url 'http://repo.spring.io/release' }
         maven { //noinspection GroovyAssignabilityCheck
             url "https://plugins.gradle.org/m2/"
         }
     }
 
     dependencies {
-        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: spring_boot_version
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlin_version"
@@ -30,11 +26,19 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: "kotlin-spring"
+apply plugin: "kotlin-kapt"
 apply plugin: "kotlin-noarg"
 apply plugin: 'org.springframework.boot'
 
 
 sourceCompatibility = 1.8
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
 
 repositories {
     mavenCentral()
@@ -52,11 +56,12 @@ dependencies {
             "org.flywaydb:flyway-core:4.1.0",
             'org.postgresql:postgresql:9.4.1212.jre7',
             "org.springframework.boot:spring-boot-starter-jdbc:$spring_boot_version",
+            "org.springframework.boot:spring-boot-starter-actuator:$spring_boot_version",
             "org.springframework.boot:spring-boot-starter-mail:$spring_boot_version",
             "org.springframework.boot:spring-boot-starter-web:$spring_boot_version",
             "org.springframework.boot:spring-boot-starter-security:$spring_boot_version",
-            "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0",
-            'io.jsonwebtoken:jjwt:0.2'
+            "org.springframework.boot:spring-boot-starter-webflux:$spring_boot_version",
+            "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0"
     )
 
     testCompile(
@@ -64,6 +69,7 @@ dependencies {
             "io.rest-assured:rest-assured:3.0.5",
             "org.jetbrains.kotlin:kotlin-test",
             "org.jetbrains.kotlin:kotlin-test-junit",
+            "com.github.javafaker:javafaker:0.14",
     )
     testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "$spring_boot_version") {
         exclude(module: 'commons-logging')

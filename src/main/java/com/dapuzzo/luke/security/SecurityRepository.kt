@@ -1,30 +1,13 @@
 package com.dapuzzo.luke.security
 
-import org.postgresql.util.PSQLException
-import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
-import org.springframework.stereotype.Component
+import com.dapuzzo.luke.core.LukeException
+import com.dapuzzo.luke.core.Result
 
-@Component
-class SecurityRepository(jdbcTemplate: JdbcTemplate) {
-
-
-    val jdbcTemplate = NamedParameterJdbcTemplate(jdbcTemplate)
-
-    fun save(account: Account) =
-                jdbcTemplate.update("INSERT INTO account (username, password) VALUES(:username, :password)",
-                        MapSqlParameterSource()
-                                .addValue("username", account.username)
-                                .addValue("password", account.password)
-                )
-
-    fun doesAccountExist(account: Account): Boolean =
-            jdbcTemplate.queryForObject(
-                    "SELECT count(*) FROM account WHERE username = :username        AND password = :password",
-                    MapSqlParameterSource()
-                            .addValue("username", account.username)
-                            .addValue("password", account.password),
-                    Int::class.java) > 0
+interface SecurityRepository{
+    fun createAccount(credentials: Credentials): Result<Account, LukeException>
+    fun login(credentials: Credentials): Result<Account, LukeException>
+    companion object {
+        val UNAUTHORIZED_MESSAGE = "USER IS NOT AUTHORIZED"
+        val DUPLICATE_USER_MESSAGE= "A USER ALREADY EXISTS WITH THAT USERNAME"
+    }
 }
-

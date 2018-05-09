@@ -17,7 +17,7 @@ class EmailService(val emailSender: JavaMailSender,
     fun sendEmail(emailRequest: EmailRequest) =
             emailSender.send(
                     SimpleMailMessage().apply {
-                        to= emailAddresses
+                        setTo(*emailAddresses)
                         subject = "LUKE D'APUZZO Website Contact"
                         text = emailRequest.formattedMessage
                     })

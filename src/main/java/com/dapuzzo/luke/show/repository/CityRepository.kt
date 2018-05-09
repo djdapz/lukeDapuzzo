@@ -14,9 +14,9 @@ class CityRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<CityEntity
                     "SELECT * FROM city")
                     .map {
                         CityEntity(
-                                it.get("id") as Int,
-                                it.get("state") as String,
-                                it.get("name") as String
+                                it["id"] as Int,
+                                it["state"] as String,
+                                it["name"] as String
                         )
                     }
 

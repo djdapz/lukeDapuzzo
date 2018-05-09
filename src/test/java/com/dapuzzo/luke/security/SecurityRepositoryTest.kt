@@ -1,50 +1,94 @@
 package com.dapuzzo.luke.security
 
+import com.dapuzzo.luke.core.Cleanup
 import com.dapuzzo.luke.core.DatabaseBase
-import com.dapuzzo.luke.core.DatabaseTest
-import com.dapuzzo.luke.core.random.randomAccount
+import com.dapuzzo.luke.core.execute
+import com.dapuzzo.luke.core.random.randomCredentials
 import com.dapuzzo.luke.core.random.randomString
+import com.dapuzzo.luke.security.SecurityRepository.Companion.DUPLICATE_USER_MESSAGE
+import com.dapuzzo.luke.security.SecurityRepository.Companion.UNAUTHORIZED_MESSAGE
+import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.fail
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.security.crypto.password.PasswordEncoder
+import java.sql.ResultSet
+import kotlin.test.fail
 
-class SecurityRepositoryTest : DatabaseBase() {
+@Cleanup
+class SecurityRepositoryImplTest : DatabaseBase(){
+    @Autowired
+    lateinit var subject: SecurityRepository
 
     @Autowired
-    lateinit var jdbcTemplate: JdbcTemplate
+    lateinit var encoder: PasswordEncoder
 
     @Test
-    internal fun `should save a username and password and validate that it matches a record`() {
-        val subject = SecurityRepository(jdbcTemplate)
+    fun shouldSaveAUsernameAndPasswordAndValidateThatItMatchesARecord() {
+        val credentials: Credentials = randomCredentials()
+        subject.createAccount(credentials)
 
-        val account: Account = randomAccount()
-        subject.save(account)
-        assertThat(subject.doesAccountExist(account)).isEqualTo(true)
+        subject.login(credentials)
+                .execute(
+                        { account -> assertThat(account).isEqualTo(Account(credentials.username)) },
+                        { error -> Assertions.fail(error.message) }
+                )
     }
 
     @Test
-    internal fun `should not validate a record that has not been saved`() {
-        val subject = SecurityRepository(jdbcTemplate)
+    fun shouldReturnAdminStatusIfAccountHasBeenUpgraded() {
+        val credentials: Credentials = randomCredentials()
 
-        assertThat(subject.doesAccountExist(randomAccount())).isEqualTo(false)
+        subject.createAccount(credentials)
+
+        jdbcTemplate.execute("UPDATE account \nSET role='ADMIN'  \nWHERE username = '${credentials.username}'")
+
+        subject.login(credentials)
+                .execute(
+                        { account -> assertThat(account).isEqualTo(Account(credentials.username, Role.ADMIN)) },
+                        { error -> Assertions.fail(error.message) }
+                )
     }
 
     @Test
-    internal fun `should not allow two `() {
-        val subject = SecurityRepository(jdbcTemplate)
+    fun shouldNotValidateARecordThatHasNotBeenSaved() {
+        subject.login(randomCredentials())
+                .execute(
+                        { _ -> Assertions.fail("It should have errored") },
+                        { errorMessage -> assertThat(errorMessage.message).isEqualTo(UNAUTHORIZED_MESSAGE) }
+                )
+    }
 
-        val account: Account = randomAccount(username = randomString())
-        val secondAccount = randomAccount(username = account.username)
+    @Test
+    fun shouldNotAllowTwo() {
 
-        subject.save(account)
+        val credentials: Credentials = randomCredentials(username = randomString())
+        val secondAccount = randomCredentials(username = credentials.username)
 
-        try {
-            subject.save(secondAccount)
-//            fail("Should not have successfully saved")
-        } catch (e: Exception) {
-            assertThat(e).isNotNull()
-        }
+        subject.createAccount(credentials)
+        subject.createAccount(secondAccount).execute(
+                { fail() },
+                { errorMessage -> assertThat(errorMessage.message).isEqualTo(DUPLICATE_USER_MESSAGE) }
+        )
+    }
+
+
+    @Test
+    fun shouldSaveHashedPasswordToRepoForLogin() {
+        val credentials: Credentials = randomCredentials(username = randomString())
+
+        subject.createAccount(credentials).execute(
+                {},
+                { fail() }
+        )
+
+        val savedAccount = jdbcTemplate.queryForObject(
+                "SELECT * FROM account\nWHERE username='${credentials.username}'",
+                { resultSet: ResultSet, _: Int ->
+                    Credentials(username = resultSet.getString("username"), password = resultSet.getString("password"))
+                })!!
+
+        assertThat(savedAccount.password).isNotEqualToIgnoringCase(credentials.password)
+        assertThat(encoder.matches(credentials.password, savedAccount.password)).isTrue()
     }
 }

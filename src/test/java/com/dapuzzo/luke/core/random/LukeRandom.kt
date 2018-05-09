@@ -2,14 +2,21 @@ package com.dapuzzo.luke.core.random
 
 import com.dapuzzo.luke.email.EmailRequest
 import com.dapuzzo.luke.security.Account
+import com.dapuzzo.luke.security.Credentials
+import com.github.javafaker.Faker
 import java.sql.Date
 import java.time.LocalDate
 import java.util.concurrent.ThreadLocalRandom
 
 
-/**
- * Created by devondapuzzo on 9/22/17.
- */
+class myFaker {
+    companion object {
+        val INSTANCE = Faker()
+    }
+}
+
+fun faker(): Faker = myFaker.INSTANCE
+
 fun randomInt(): Int {
     val rand = java.util.Random()
     return rand.nextInt(1000000) + 1
@@ -47,7 +54,6 @@ fun randomLocalDate(): LocalDate {
     return LocalDate.ofEpochDay(randomDay)
 }
 
-var x: IntRange = (1..randomInt(5))
 
 fun <T> randomList(producer: () -> T): List<T> = (1..randomInt(5)).map { producer() }
 
@@ -58,10 +64,14 @@ fun randomEmailRequest() =
                 randomString()
         )
 
-private fun randomEmailAddress(): String = "${randomString(10)}@${randomString(10)}.com"
+private fun randomEmailAddress(): String = faker().internet().emailAddress()
 
 
-public fun randomAccount(username : String = randomString(), password : String = randomString()): Account = Account(
+fun randomCredentials(username: String = randomString(), password: String = randomString()): Credentials = Credentials(
         username,
         password
+)
+
+fun randomAccount(): Account = Account(
+        username = faker().gameOfThrones().character()
 )

@@ -15,13 +15,11 @@ spring:
         auth: true
         starttls:
           enable: true
-
   datasource:
     url: ${LUKE_DATABASE_URL}
     password: ${LUKE_DATABASE_PASSWORD}
     username: ${LUKE_DATABASE_USERNAME}
     driver-class-name: org.postgresql.Driver
-
-flyway:
-  locations: classpath:db/migration,classpath:db/fixtures
-  clean-on-validation-error: false
+  flyway:
+    locations: classpath:db/fixtures,classpath:db/migration
+    clean-on-validation-error: false

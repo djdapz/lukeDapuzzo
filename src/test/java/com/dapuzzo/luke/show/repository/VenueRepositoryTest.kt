@@ -1,27 +1,17 @@
 package com.dapuzzo.luke.show.repository
 
-import com.dapuzzo.luke.core.DatabaseTest
+import com.dapuzzo.luke.core.Cleanup
+import com.dapuzzo.luke.core.DatabaseBase
 import com.dapuzzo.luke.core.random.randomVenueEntity
 import org.assertj.core.api.Assertions
 import org.junit.Before
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest(classes = [
-    CityRepository::class,
-    ShowRepositoryDependencies::class,
-    VenueRepository::class,
-    StateRepository::class,
-    ShowRepository::class
-])
-@DatabaseTest
-open class VenueRepositoryTest {
+@Cleanup
+class VenueRepositoryTest : DatabaseBase (){
     @Autowired
     lateinit var venueRepository: VenueRepository
-
-    @Autowired
-    lateinit var showRepositoryDependencies: ShowRepositoryDependencies
 
     var firstVenue = randomVenueEntity()
     var secondVenue = randomVenueEntity()
@@ -29,7 +19,7 @@ open class VenueRepositoryTest {
 
     @Before
     internal fun setup() {
-        showRepositoryDependencies.setupVenueDependencies(firstVenue, secondVenue)
+        ShowRepositoryDependencies(jdbcTemplate).setupVenueDependencies(firstVenue, secondVenue)
 
         venueRepository.add(firstVenue)
         venueRepository.add(secondVenue)

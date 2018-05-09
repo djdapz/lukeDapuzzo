@@ -1,41 +1,32 @@
 package com.dapuzzo.luke.show.repository
 
-import com.dapuzzo.luke.core.DatabaseTest
+import com.dapuzzo.luke.core.Cleanup
+import com.dapuzzo.luke.core.DatabaseBase
 import com.dapuzzo.luke.core.random.randomCityEntity
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest(classes = [
-    ShowRepositoryDependencies::class,
-    CityRepository::class
-])
-@DatabaseTest
-open class CityRepositoryTest {
+@Cleanup
+class CityRepositoryTest : DatabaseBase (){
 
     @Autowired
-    private
     lateinit var cityRepository: CityRepository
-
-    @Autowired
-    private
-    lateinit var showRepositoryDependencies: ShowRepositoryDependencies
 
     val firstCity = randomCityEntity()
     val secondCity = randomCityEntity()
 
     @Before
     fun setupDependencies() {
-        showRepositoryDependencies.setupCityDependencies(firstCity, secondCity)
+        ShowRepositoryDependencies(jdbcTemplate).setupCityDependencies(firstCity, secondCity)
 
         cityRepository.add(firstCity)
         cityRepository.add(secondCity)
     }
 
     @Test
-    internal fun `should get all cities`() {
+    fun shouldGetAllCities() {
         val actualCities = cityRepository.getAll()
 
         assertThat(actualCities.size).isEqualTo(2)
@@ -43,7 +34,7 @@ open class CityRepositoryTest {
     }
 
     @Test
-    internal fun `should get city by abbreviation`() {
+    fun shouldGetAllCititesbyAbbreviation() {
         val actualState = cityRepository.getById(firstCity.id)
 
         assertThat(actualState).isEqualTo(firstCity)
