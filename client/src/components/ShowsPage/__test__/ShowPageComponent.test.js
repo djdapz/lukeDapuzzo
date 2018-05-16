@@ -1,18 +1,15 @@
-import ShowPageComponent from "./ShowPageComponent";
-
 import React from 'react';
-import {getAllShows} from "../../api/ShowsApi";
+import {shallow} from "enzyme";
 
-import configureStore from 'redux-mock-store';
-import {routeChanged} from "../../actions/RouteChangedAction";
-import routes from "../../constants/routes";
-import {getAllShowsAction} from "../../actions/GetAllShowsAction";
-import {mount, shallow} from "enzyme";
-import {mockStore} from "../../../testConfig/testUtils";
+import ShowPageComponent from "../ShowPageComponent";
+import routes from "../../../constants/routes";
+import {routeChanged} from "../../../actions/RouteChangedAction";
+import {mockStore} from "../../../../testConfig/testUtils";
+import {getAllShows} from "../../../api/ShowsApi";
 
 
-jest.mock('../../api/ShowsApi');
-jest.mock('../../actions/RouteChangedAction');
+jest.mock('../../../api/ShowsApi');
+jest.mock('../../../actions/RouteChangedAction');
 
 
 beforeEach(() => {

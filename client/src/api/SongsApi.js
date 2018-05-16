@@ -10,7 +10,7 @@ const getAllSongs = function () {
             store.dispatch(getAllSongsAction(response));
         })
         .catch(function (error) {
-            console.log(error);
+           console.log("error reaching songs api")
         });
 };
 

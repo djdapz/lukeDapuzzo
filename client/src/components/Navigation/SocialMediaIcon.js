@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-
-import aws from "../../constants/aws";
-import FontAwesomeIcon from "@fortawesome/react-fontawesome/index.es";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 
 class SocialMediaIcon extends Component {
 

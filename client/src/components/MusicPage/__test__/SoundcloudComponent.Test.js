@@ -1,6 +1,6 @@
 import {shallow} from "enzyme";
 import React from "react";
-import SoundcloudComponent from "./SoundcloudComponent";
+import SoundcloudComponent from "../SoundcloudComponent";
 
 describe("Soundcloud Copmonent", () => {
     it('should render a div with className soundcloud-frame', function () {

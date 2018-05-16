@@ -1,6 +1,7 @@
 const routes = {
     HOME: {
         displayInMenuBar: false,
+        isProtected: false,
         name: "HOME",
         href: "/",
         header: "Welcome",
@@ -8,14 +9,15 @@ const routes = {
     },
     MUSIC: {
         displayInMenuBar: true,
+        isProtected: false,
         name: "MUSIC",
         href: "/music",
         header: "Music",
         menubarClassName: "music-menubar"
-
     },
     SHOWS: {
         displayInMenuBar: true,
+        isProtected: false,
         name: "SHOWS",
         href: "/show",
         header: "Shows",
@@ -23,35 +25,32 @@ const routes = {
     },
     BIO: {
         displayInMenuBar: true,
+        isProtected: false,
         name: "BIO",
         href: "/bio",
         header: "Bio",
         menubarClassName: "bio-menubar"
 
     },
-    MEDIA: {
-        displayInMenuBar: false,
-        name: "MEDIA",
-        href: "/media",
-        header: "Media",
-        menubarClassName: "media-menubar"
-    },
-    CONTACT:{
+    CONTACT: {
         displayInMenuBar: true,
+        isProtected: false,
         name: "CONTACT",
         href: "/contact",
         header: "Contact",
         menubarClassName: "contact-menubar"
     },
-    ADMIN:{
-        displayInMenuBar: false,
+    ADMIN: {
+        displayInMenuBar: true,
+        isProtected: true,
         name: "ADMIN",
         href: "/admin",
         header: "Admin",
         menubarClassName: "admin-menubar"
     },
-    LOGIN:{
+    LOGIN: {
         displayInMenuBar: false,
+        isProtected: false,
         name: "LOGIN",
         href: "/login",
         header: "Login",

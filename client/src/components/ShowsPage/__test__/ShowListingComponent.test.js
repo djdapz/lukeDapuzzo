@@ -1,4 +1,4 @@
-import ShowListing from "./ShowListingComponent";
+import ShowListing from "../ShowListingComponent";
 
 import React from 'react';
 import {shallow} from "enzyme";

@@ -3,15 +3,14 @@ import routeReducer from "./RouteReducer";
 import emailReducer from "./EmailReducer";
 import showsReducer from "./ShowsReducer";
 import songsReducer from "./SongsReducer";
-import newSongReducer from "./NewSongReducer"
-import deleteSongReducer from "./DeleteSongReducer";
 import mobileMenubarReducer from "./MobileMenubarReducer";
 import isMobileReducer from "./IsMobileReducer";
 import userAuthenticationReducer from "./UserAuthenticationReducer";
-
+import {loginFormReducer} from "./LoginFormReducer";
 
 const userReducer = combineReducers({
-    isAuthenticated: userAuthenticationReducer
+    isAuthenticated: userAuthenticationReducer,
+    loginState: loginFormReducer
 });
 
 const rootReducer = combineReducers({
@@ -21,7 +20,8 @@ const rootReducer = combineReducers({
     songs: songsReducer,
     isMenubarOpen: mobileMenubarReducer,
     isMobile: isMobileReducer,
-    user: userReducer
+    user: userReducer,
+    router: routeReducer
 });
 
 export default rootReducer;

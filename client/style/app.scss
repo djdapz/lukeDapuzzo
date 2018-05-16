@@ -26,8 +26,7 @@ a {
 
 //noinspection CssOptimizeSimilarProperties
 .main-content {
-  margin-top: $header-bar-height + 1em;
-  margin-bottom: $social-bar-height + 2em;
+  padding-top: $header-bar-height + 1em;
   margin-left: $content-left-margin;
   margin-right: $header-bar-height / 2;
 

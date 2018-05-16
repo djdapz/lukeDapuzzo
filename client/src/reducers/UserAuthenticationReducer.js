@@ -1,8 +1,12 @@
-import {TOGGLE_USER_AUTHENTICATION} from "../actions/ToggleUserAuthenitcation";
+import {AUTHORIZE_USER, FAIL_LOGIN} from "../actions/UserActions";
 
-const userAuthenticationReducer = (state = true, action) => {
-    if (action.type === TOGGLE_USER_AUTHENTICATION) {
-        return !state;
+const userAuthenticationReducer = (state = false, action) => {
+    if(action.type === AUTHORIZE_USER){
+        return true;
+    }
+
+    if(action.type === FAIL_LOGIN){
+        return false;
     }
 
     return state;

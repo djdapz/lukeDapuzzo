@@ -9,7 +9,7 @@ import MediaQuery from "react-responsive";
 import {bindActionCreators} from "redux";
 import {closeMobileMenuBar, openMobileMenuBar} from "../../actions/ToggleMobileMenubarActions";
 
-import {socialMediaIcons, socialMediaIconColors} from "../../constants/socialMediaIcons";
+import {socialMediaIconColors, socialMediaIcons} from "../../constants/socialMediaIcons";
 import {mobileCutoff} from "../../constants/constants";
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
@@ -80,7 +80,7 @@ class HeaderBar extends Component {
                     <FontAwesomeIcon icon="bars" className={"social-media-icon"} onClick={this.socialHamburgerPressed}/>
                 </div>
                 <div className={this.determineMenubarClass()}>
-                    <Menubar menubarPosition="menubar-mobile"/>
+                    <Menubar menubarPosition="menubar-mobile"  routes={routes}/>
                 </div>
             </div>
         )

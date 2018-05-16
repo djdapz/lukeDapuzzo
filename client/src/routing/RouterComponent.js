@@ -1,5 +1,5 @@
-import {Redirect, Route, Switch} from 'react-router-dom'
 import React, {Component} from 'react';
+import {Redirect, Route, Switch} from 'react-router'
 
 import ShowPage from "../components/ShowsPage/ShowPageComponent";
 import HomePage from "../components/HomePage/HomePageComponent";
@@ -11,7 +11,6 @@ import AdminPage from "../components/AdminPage/AdminPageComponent";
 import routes from "../constants/routes"
 import LoginPage from "../components/Navigation/LoginPage";
 import PrivateRoute from "./PrivateRoute";
-
 
 class RouterComponent extends Component{
     render(){

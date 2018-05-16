@@ -28,6 +28,6 @@ describe("Get all shows acton", () => {
 
         getAllSongs();
 
-        setTimeout(200, () =>  expect(store.dispatch).toBeCalledWith(allSongsActionResult))
+        setTimeout(200, () => expect(store.dispatch).toBeCalledWith(allSongsActionResult))
     });
 });

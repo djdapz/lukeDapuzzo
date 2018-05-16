@@ -2,45 +2,57 @@ import React, {Component} from 'react';
 
 import {connect} from "react-redux";
 
-import routes from "../../constants/routes"
 import {Link} from "react-router-dom";
 import {bindActionCreators} from "redux";
 import {closeMobileMenuBar} from "../../actions/ToggleMobileMenubarActions";
-import {Redirect} from "react-router";
 
-import {socialMediaIcons, socialMediaIconColors} from "../../constants/socialMediaIcons";
+import {socialMediaIconColors, socialMediaIcons} from "../../constants/socialMediaIcons";
 
 import SocialMediaIcon from "./SocialMediaIcon";
 import MediaQuery from "react-responsive";
 import {mobileCutoff} from "../../constants/constants";
-import {toggleUserAuthentication} from "../../actions/ToggleUserAuthenitcation";
 
 class Menubar extends Component {
+
     menubarPosition;
+    routes;
+
+    constructor(menubarPosition, routes) {
+        super();
+        this.menubarPosition = menubarPosition;
+        this.routes = routes;
+    }
+
+    shouldNotDisplayRoute(route) {
+        return !route.displayInMenuBar
+            || (route.isProtected && !this.props.isAuthenticated)
+    }
 
     renderButtons() {
-        return Object.keys(routes).map(key => {
-            if (routes[key].displayInMenuBar === false) {
-                return;
+        return Object.keys(this.props.routes).map(key => {
+            const route = this.props.routes[key];
+            if (this.shouldNotDisplayRoute(route)) {
+                return
             }
-
-            const button = routes[key];
-            let rowClassName = "menubar-row";
-
-            if (this.props.route.href === button.href) {
-                rowClassName += " menubar-active";
-            }
-
             return (
-                <div onClick={this.collapseMenubar} key={button.name}>
-                    <Link to={button.href}>
-                        <div className={rowClassName}>
-                            <p className="menubar-link"> {button.name}</p>
+                <div onClick={this.collapseMenubar} key={route.name}>
+                    <Link to={route.href}>
+                        <div className={this.rowClassName(route)}>
+                            <p className="menubar-link"> {route.name}</p>
                         </div>
                     </Link>
                 </div>
             )
         })
+    }
+
+    rowClassName(route) {
+        let rowClassName = "menubar-row";
+
+        if (this.props.route.href === route.href) {
+            rowClassName += " menubar-active";
+        }
+        return rowClassName;
     }
 
     collapseMenubar() {
@@ -49,7 +61,8 @@ class Menubar extends Component {
 
     static renderSocialMediaIcons() {
         return <MediaQuery maxWidth={mobileCutoff}>
-            {socialMediaIcons.map(icon => <SocialMediaIcon icon={icon} key={icon.href} colors={socialMediaIconColors.dropdown}/>)}
+            {socialMediaIcons.map(icon => <SocialMediaIcon icon={icon} key={icon.href}
+                                                           colors={socialMediaIconColors.dropdown}/>)}
         </MediaQuery>
     }
 
@@ -65,7 +78,8 @@ class Menubar extends Component {
 
 function mapStateToProps(state) {
     return {
-        route: state.route
+        route: state.route,
+        isAuthenticated: state.user.isAuthenticated
     }
 }
 
