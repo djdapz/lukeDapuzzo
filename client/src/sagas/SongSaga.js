@@ -11,5 +11,6 @@ export function* getSongs() {
         const response = yield call(getNoCredentials, "/songs");
         yield put(allSongsFetched(response.data));
     } catch (e) {
+        console.error(e)
     }
 }

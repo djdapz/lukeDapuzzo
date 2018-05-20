@@ -3,19 +3,19 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {routeChanged} from "../../actions/RouteChangedAction";
-import {getAllShows} from "../../api/ShowsApi";
 import routes from "../../constants/routes";
 import Table from "./TableComponent";
+import {getAllShows} from "../../actions/GetAllShows";
 
 
 class ShowPage extends Component {
     constructor() {
         super();
-        getAllShows()
     }
 
     componentDidMount() {
-        this.props.routeChanged(routes.SHOWS)
+        this.props.routeChanged(routes.SHOWS);
+        this.props.getAllShows()
     }
 
     render() {
@@ -42,7 +42,7 @@ class ShowPage extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({routeChanged}, dispatch)
+    return bindActionCreators({routeChanged, getAllShows}, dispatch)
 }
 
 function mapStateToProps(state) {

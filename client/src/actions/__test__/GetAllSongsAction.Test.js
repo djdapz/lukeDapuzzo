@@ -1,7 +1,4 @@
-import {ALL_SONGS_FETCHED, allSongsFetched, GET_ALL_SONGS, getAllSongs} from "./GetAllSongs";
-import axios from "axios";
-
-jest.mock('axios');
+import {ALL_SONGS_FETCHED, allSongsFetched, GET_ALL_SONGS, getAllSongs} from "../GetAllSongs";
 
 describe("Get all SONGS acton", () => {
     describe("GET_ALL_SONGS", () => {

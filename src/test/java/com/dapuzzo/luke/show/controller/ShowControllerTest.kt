@@ -39,14 +39,14 @@ class ShowControllerTest {
 
     @Test
     fun shouldDelegateToShowServiceOnGet() {
-        mockMvc.perform(get("/api/shows"))
+        mockMvc.perform(get("/shows"))
         verify(mockShowService).getAllShows()
     }
 
     @Test
     internal fun `should return list of shows`(){
         val actualJson = mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/shows"))
+                .perform(MockMvcRequestBuilders.get("/shows"))
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andReturn().response.contentAsString
 
@@ -58,7 +58,7 @@ class ShowControllerTest {
 //    @Test
 //    fun `should request correct mapping for post`() {
 //        mockMvc
-//                .perform(post("/api/shows")
+//                .perform(post("/shows")
 //                        .content(expectedJson)
 //                        .contentType(APPLICATION_JSON))
 //                .andExpect(status().isOk)
@@ -67,7 +67,7 @@ class ShowControllerTest {
 //    @Test
 //    fun `should delegate to show service on post`() {
 //        mockMvc
-//                .perform(post("/api/shows")
+//                .perform(post("/shows")
 //                        .content(expectedJson)
 //                        .contentType(APPLICATION_JSON))
 //        verify(mockShowService).createShow(expected)
@@ -76,7 +76,7 @@ class ShowControllerTest {
 //    @Test
 //    fun `should return show that was created after post`() {
 //        val actualJson = mockMvc
-//                .perform(post("/api/shows")
+//                .perform(post("/shows")
 //                        .content(expectedJson)
 //                        .contentType(APPLICATION_JSON))
 //                .andReturn().response.contentAsString

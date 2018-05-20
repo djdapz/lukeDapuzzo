@@ -1,11 +1,11 @@
 /**
  * Created by devondapuzzo on 9/22/17.
  */
-import {GET_ALL_SHOWS} from "../actions/GetAllShowsAction";
+import {ALL_SHOWS_FETCHED} from "../actions/GetAllShows";
 
 let showsReducer = (state = [], action) =>{
-    if(action.type === GET_ALL_SHOWS){
-        return action.payload.data;
+    if(action.type === ALL_SHOWS_FETCHED){
+        return action.payload;
     }
 
     return state;

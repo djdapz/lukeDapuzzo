@@ -5,10 +5,10 @@ import ShowPageComponent from "../ShowPageComponent";
 import routes from "../../../constants/routes";
 import {routeChanged} from "../../../actions/RouteChangedAction";
 import {mockStore} from "../../../../testConfig/testUtils";
-import {getAllShows} from "../../../api/ShowsApi";
+import {getAllShows} from "../../../actions/GetAllShows";
 
 
-jest.mock('../../../api/ShowsApi');
+jest.mock('../../../actions/GetAllShows');
 jest.mock('../../../actions/RouteChangedAction');
 
 

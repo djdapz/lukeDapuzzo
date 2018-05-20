@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class ShowController(val showService: ShowService) {
 
-    @GetMapping("/api/shows")
+    @GetMapping("/shows")
     fun shows(): List<Show> {
             return showService.getAllShows()
         }
