@@ -1,5 +1,5 @@
-import {loginFormReducer} from "./LoginFormReducer";
-import {AUTHORIZE_USER, FAIL_LOGIN, LOGIN_ACTION} from "../actions/UserActions";
+import {loginFormReducer} from "../LoginFormReducer";
+import {AUTHORIZE_USER, FAIL_LOGIN, LOGIN_ACTION} from "../../actions/UserActions";
 
 describe("User Auth Reducer", () => {
 

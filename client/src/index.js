@@ -6,6 +6,7 @@ import {ConnectedRouter} from 'react-router-redux'
 import style from '../style/app.scss'
 
 import App from './app';
+import {history, store} from "./config/reduxConfig";
 
 
 ReactDOM.render(

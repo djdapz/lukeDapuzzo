@@ -6,24 +6,24 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class SongController(val songService: SongService){
 
-    @GetMapping("/api/songs")
+    @GetMapping("/songs")
     fun getAllSongs() : List<SongEntity> {
         return songService.getAllSongs()
     }
 
-    @GetMapping("/api/songs/{songId}")
+    @GetMapping("/songs/{songId}")
     fun getSongById(@PathVariable songId : Int) : SongEntity{
         return songService.getSongById(songId)
     }
 
-    @PostMapping("/api/songs")
+    @PostMapping("/songs")
     fun createSong(
             @RequestBody song: SongEntity
     ) : SongEntity{
         return songService.createSong(song)
     }
 
-    @DeleteMapping("/api/songs")
+    @DeleteMapping("/songs")
     fun deleteSong(
             @RequestParam id: Int
     ){

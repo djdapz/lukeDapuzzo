@@ -1,5 +1,5 @@
-import userAuthenticationReducer from "./UserAuthenticationReducer";
-import {AUTHORIZE_USER, FAIL_LOGIN} from "../actions/UserActions";
+import userAuthenticationReducer from "../UserAuthenticationReducer";
+import {AUTHORIZE_USER, FAIL_LOGIN} from "../../actions/UserActions";
 
 describe("User Auth Reducer", () => {
     it('should make state true when called with AUTHORIZE_USER', function () {

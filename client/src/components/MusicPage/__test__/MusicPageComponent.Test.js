@@ -2,13 +2,13 @@ import React from "react";
 import {shallow} from "enzyme";
 
 import MusicPageComponent from "../MusicPageComponent";
-import {getAllSongs} from "../../../api/SongsApi";
 import {mockStore} from "../../../../testConfig/testUtils";
 import {routeChanged} from "../../../actions/RouteChangedAction";
 import routes from "../../../constants/routes";
+import {getAllSongs} from "../../../actions/GetAllSongs";
 
 jest.mock("../../../actions/RouteChangedAction");
-jest.mock("../../../api/SongsApi");
+jest.mock("../../../actions/GetAllSongs");
 
 jest.spyOn(global.console, 'error');
 

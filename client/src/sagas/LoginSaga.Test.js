@@ -2,7 +2,7 @@ import {call, put} from 'redux-saga/effects';
 import {push} from 'react-router-redux';
 
 import {login} from './LoginSaga.js';
-import {postNoCredentials} from '../api/api';
+import {postNoCredentials} from '../api/Api';
 import {authorizeUser, failLogin, LOGIN_ACTION, loginAction} from "../actions/UserActions";
 
 describe('Login saga', () => {

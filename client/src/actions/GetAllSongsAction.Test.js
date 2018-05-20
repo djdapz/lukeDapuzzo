@@ -1,20 +1,36 @@
-import {GET_ALL_SONGS, getAllSongsAction} from "./GetAllSongsAction";
+import {ALL_SONGS_FETCHED, allSongsFetched, GET_ALL_SONGS, getAllSongs} from "./GetAllSongs";
 import axios from "axios";
-import {LUKE_API} from "../config/appConfig";
 
 jest.mock('axios');
 
-describe("Get all shows acton", () => {
-    it('should return an action with type GET_ALL_SHOWS', function () {
-        const allSongs = getAllSongsAction([]);
+describe("Get all SONGS acton", () => {
+    describe("GET_ALL_SONGS", () => {
+        it('should return an action with type GET_ALL_SONGS', function () {
+            const allSongs = getAllSongs([]);
 
-        expect(allSongs.type).toEqual(GET_ALL_SONGS)
+            expect(allSongs.type).toEqual(GET_ALL_SONGS)
+        });
+
+        it('should have an empty payload shows passsed to it', function () {
+            const allSongs = getAllSongs("stuff");
+
+            expect(allSongs.payload).toEqual({})
+        });
     });
 
-    it('should forward shows passsed to it', function () {
-        let shows = [1, 2];
-        const allSongs = getAllSongsAction(shows);
+    describe("ALL_SONGS_FETCHED", () => {
+        it('should return an action with type GET_ALL_SHOWS', function () {
+            const allSongs = allSongsFetched([]);
 
-        expect(allSongs.payload).toEqual(shows)
-    });
+            expect(allSongs.type).toEqual(ALL_SONGS_FETCHED)
+        });
+
+        it('should have an empty payload shows passsed to it', function () {
+            let shows = [1, 2];
+            const allSongs = allSongsFetched(shows);
+
+            expect(allSongs.payload).toEqual(shows)
+        });
+    })
+
 });

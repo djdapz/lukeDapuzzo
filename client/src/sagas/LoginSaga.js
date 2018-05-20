@@ -1,6 +1,6 @@
 import {call, put, takeEvery} from "redux-saga/effects"
 import {push} from "react-router-redux/actions"
-import {postNoCredentials} from "../api/api";
+import {postNoCredentials} from "../api/Api";
 import {authorizeUser, failLogin, LOGIN_ACTION} from "../actions/UserActions";
 
 export function* watchLogin() {

@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
-import {getAllSongsAction} from "../../actions/GetAllSongsAction";
 import SongRow from "./SongRowComponent";
 import NewSong from "./NewSongComponent";
 import {clearNewSong} from "../../actions/ClearNewSongAction";
 import {clearDeleteSong} from "../../actions/DeleteSongAction";
-import {getAllSongs} from "../../api/SongsApi";
+import {getAllSongs} from "../../actions/GetAllSongs";
 
 class SongTable extends Component {
 
@@ -25,7 +24,7 @@ class SongTable extends Component {
     }
 
     componentDidMount() {
-        getAllSongs();
+        this.props.getAllSongs();
     }
 
 
@@ -113,7 +112,7 @@ class SongTable extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({clearNewSong, clearDeleteSong}, dispatch)
+    return bindActionCreators({clearNewSong, clearDeleteSong, getAllSongs}, dispatch)
 }
 
 function mapStateToProps(state) {

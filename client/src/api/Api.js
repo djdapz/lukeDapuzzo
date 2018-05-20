@@ -8,3 +8,7 @@ let axiosInstance = axios.create({
 export function postNoCredentials(url, body) {
     return axiosInstance.post(url, body);
 }
+
+export function getNoCredentials(url) {
+    return axiosInstance.get(url);
+}

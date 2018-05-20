@@ -35,7 +35,7 @@ class Menubar extends Component {
                 return
             }
             return (
-                <div onClick={this.collapseMenubar} key={route.name}>
+                <div key={route.name}>
                     <Link to={route.href}>
                         <div className={this.rowClassName(route)}>
                             <p className="menubar-link"> {route.name}</p>
@@ -55,9 +55,9 @@ class Menubar extends Component {
         return rowClassName;
     }
 
-    collapseMenubar() {
-        this.props.closeMobileMenuBar()
-    };
+    // collapseMenubar() {
+    //     this.props.closeMobileMenuBar()
+    // };
 
     static renderSocialMediaIcons() {
         return <MediaQuery maxWidth={mobileCutoff}>

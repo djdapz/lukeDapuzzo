@@ -28,4 +28,3 @@ function mapDispatchToProps(dispatch) {
 
 //null means no redux state necessary
 export default connect(null, mapDispatchToProps)(AdminPage);
-

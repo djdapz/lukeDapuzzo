@@ -1,8 +1,8 @@
-import {GET_ALL_SONGS} from "../actions/GetAllSongsAction"
+import {ALL_SONGS_FETCHED} from "../actions/GetAllSongs";
 
 const songsReducer = (state =[], action) =>{
-    if(action.type === GET_ALL_SONGS){
-        return action.payload.data;
+    if(action.type === ALL_SONGS_FETCHED){
+        return action.payload;
     }
 
     return state;

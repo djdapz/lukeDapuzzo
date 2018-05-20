@@ -25,9 +25,9 @@ class SongControllerTest {
     private val expectedList = Arrays.asList(firstSong, secondSong)
 
     private val mockSongService = mock<SongService> {
-        on {getAllSongs()} doReturn expectedList
-        on {getSongById(any())} doReturn firstSong
-        on {createSong(any())} doReturn newSong
+        on { getAllSongs() } doReturn expectedList
+        on { getSongById(any()) } doReturn firstSong
+        on { createSong(any()) } doReturn newSong
     }
 
     private val controller = SongController(mockSongService)
@@ -35,9 +35,9 @@ class SongControllerTest {
 
 
     @Test
-    internal fun `should return list of shows`(){
+    internal fun `should return list of shows`() {
         val actualJson = mockMvc
-                .perform(get("/api/songs"))
+                .perform(get("/songs"))
                 .andExpect(status().isOk)
                 .andReturn().response.contentAsString
 
@@ -48,9 +48,9 @@ class SongControllerTest {
     }
 
     @Test
-    internal fun `should return show by id`(){
+    internal fun `should return show by id`() {
         val actualJson = mockMvc
-                .perform(get("/api/songs/"+firstSong.id))
+                .perform(get("/songs/" + firstSong.id))
                 .andExpect(status().isOk)
                 .andReturn().response.contentAsString
 
@@ -61,10 +61,10 @@ class SongControllerTest {
     }
 
     @Test
-    internal fun `should add show `(){
+    internal fun `should add show `() {
         val actualJson = mockMvc
                 .perform(
-                        post("/api/songs")
+                        post("/songs")
                                 .content(JsonConfig.asString(newSong))
                                 .header("Content-Type", "application/json"))
                 .andExpect(status().isOk)
@@ -77,10 +77,10 @@ class SongControllerTest {
     }
 
     @Test
-    internal fun `should delete show `(){
+    internal fun `should delete show `() {
         mockMvc
                 .perform(
-                        delete("/api/songs")
+                        delete("/songs")
                                 .param("id", firstSong.id.toString())
                                 .header("Content-Type", "application/json"))
                 .andExpect(status().isOk)

@@ -2,23 +2,22 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {routeChanged} from "../../actions/RouteChangedAction";
-import {getAllSongsAction} from "../../actions/GetAllSongsAction";
 import routes from "../../constants/routes";
 import SpotifyComponent from "./SpotifyComponent";
-import {getAllSongs} from "../../api/SongsApi";
 import SoundcloudComponent from "./SoundcloudComponent";
 
 import PropTypes from 'prop-types';
+import {getAllSongs} from "../../actions/GetAllSongs";
 
 
 class MusicPage extends Component {
 
     constructor() {
         super();
-        getAllSongs();
     }
 
     componentDidMount() {
+        this.props.getAllSongs();
         this.props.routeChanged(routes.MUSIC)
     }
 
@@ -48,7 +47,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({routeChanged}, dispatch)
+    return bindActionCreators({routeChanged, getAllSongs}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPage);
