@@ -10,7 +10,6 @@ export const allShowsFetched = function (shows) {
 
 
 export const getAllShows = function () {
-    console.log("HELLO");
     return {
         type: GET_ALL_SHOWS,
         payload: {}

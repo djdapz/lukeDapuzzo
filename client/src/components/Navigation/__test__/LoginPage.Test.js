@@ -62,7 +62,7 @@ describe("Login Page", () => {
 
         loginPage.setState({"username": "joe", "password": "secretPassword:O"});
 
-        button.find('button').simulate('click');
+        button.simulate('click');
 
         expect(loginAction).toHaveBeenCalledWith("joe", "secretPassword:O")
     });

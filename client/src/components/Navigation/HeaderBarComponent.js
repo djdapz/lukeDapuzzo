@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import SocialMediaIcon from "./SocialMediaIcon";
 import routes from "../../constants/routes";
 import Menubar from "./MenuBarContainer"
@@ -11,20 +10,20 @@ import {closeMobileMenuBar, openMobileMenuBar} from "../../actions/ToggleMobileM
 
 import {socialMediaIconColors, socialMediaIcons} from "../../constants/socialMediaIcons";
 import {mobileCutoff} from "../../constants/constants";
+import {push} from "react-router-redux"
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
 class HeaderBar extends Component {
-
     constructor() {
         super();
         this.state = {
-            menubarCollapsed: false
+            menubarCollapsed: true
         };
 
-        this.renderNavigation = this.renderNavigation.bind(this);
         this.determineMenubarClass = this.determineMenubarClass.bind(this);
         this.socialHamburgerPressed = this.socialHamburgerPressed.bind(this);
+        this.collapseMenuBar = this.collapseMenuBar.bind(this);
     }
 
     renderHomeLink() {
@@ -36,9 +35,9 @@ class HeaderBar extends Component {
 
         return (
             <div className="title-container">
-                <Link to="/" className={titleClassName}>
+                <div onClick={() => this.props.push("/")} className={titleClassName}>
                     Luke D'Apuzzo
-                </Link>
+                </div>
 
                 <p className="sub-title">
                     A solo songwriter and musician from Boulder, Colorado
@@ -49,15 +48,19 @@ class HeaderBar extends Component {
     }
 
     socialHamburgerPressed() {
-        if (this.props.isMenubarOpen) {
-            this.props.closeMobileMenuBar()
-        } else {
-            this.props.openMobileMenuBar()
-        }
+        this.setState({
+            menubarCollapsed: !this.state.menubarCollapsed
+        });
     }
 
     determineMenubarClass() {
-        return this.props.isMenubarOpen ? "menubar-expanded" : "menubar-collapsed";
+        return this.state.menubarCollapsed ? "menubar-collapsed" : "menubar-expanded";
+    }
+
+    collapseMenuBar() {
+        this.setState({
+            menubarCollapsed: true
+        })
     }
 
     renderNavigation() {
@@ -76,18 +79,19 @@ class HeaderBar extends Component {
     renderDropdown() {
         return (
             <div className="social-media-icons">
-                <div id="social-media-hamburger">
-                    <FontAwesomeIcon icon="bars" className={"social-media-icon"} onClick={this.socialHamburgerPressed}/>
+                <div id={"social-media-hamburger"} onClick={this.socialHamburgerPressed}>
+                    <FontAwesomeIcon icon="bars" className={"social-media-icon"}/>
                 </div>
                 <div className={this.determineMenubarClass()}>
-                    <Menubar menubarPosition="menubar-mobile"  routes={routes}/>
+                    <Menubar menubarPosition="menubar-mobile" routes={routes} callback={this.collapseMenuBar}/>
                 </div>
             </div>
         )
     }
 
     static renderSocialMediaIcons() {
-        const iconElements = socialMediaIcons.map(icon => <SocialMediaIcon key={icon.href} icon={icon} colors={socialMediaIconColors.header}/>);
+        const iconElements = socialMediaIcons.map(icon => <SocialMediaIcon key={icon.href} icon={icon}
+                                                                           colors={socialMediaIconColors.header}/>);
 
         return (
             <div className="social-media-icons">
@@ -112,9 +116,7 @@ class HeaderBar extends Component {
 
 function mapStateToProps(state) {
     return {
-        route: state.route,
-        isMenubarOpen: state.isMenubarOpen,
-        isMobile: state.isMobile
+        route: state.route
     }
 }
 
@@ -122,11 +124,13 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(
         {
             openMobileMenuBar: openMobileMenuBar,
-            closeMobileMenuBar: closeMobileMenuBar
+            closeMobileMenuBar: closeMobileMenuBar,
+            push: push
         },
         dispatch
     )
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderBar);
 

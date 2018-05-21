@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 
 import {connect} from "react-redux";
-
-import {Link} from "react-router-dom";
 import {bindActionCreators} from "redux";
 import {closeMobileMenuBar} from "../../actions/ToggleMobileMenubarActions";
 
@@ -11,53 +9,24 @@ import {socialMediaIconColors, socialMediaIcons} from "../../constants/socialMed
 import SocialMediaIcon from "./SocialMediaIcon";
 import MediaQuery from "react-responsive";
 import {mobileCutoff} from "../../constants/constants";
+import NavButton from "./NavButton";
+import PropTypes from "prop-types";
 
 class Menubar extends Component {
 
-    menubarPosition;
-    routes;
-
-    constructor(menubarPosition, routes) {
-        super();
-        this.menubarPosition = menubarPosition;
-        this.routes = routes;
-    }
-
-    shouldNotDisplayRoute(route) {
-        return !route.displayInMenuBar
-            || (route.isProtected && !this.props.isAuthenticated)
+    shouldDisplayRoute(route) {
+        return (route.displayInMenuBar && route.isProtected && this.props.isAuthenticated)
+            || (!route.isProtected && route.displayInMenuBar)
     }
 
     renderButtons() {
         return Object.keys(this.props.routes).map(key => {
             const route = this.props.routes[key];
-            if (this.shouldNotDisplayRoute(route)) {
-                return
+            if (this.shouldDisplayRoute(route)) {
+                return <NavButton route={route} callback={this.props.callback} key={route.name}/>
             }
-            return (
-                <div key={route.name}>
-                    <Link to={route.href}>
-                        <div className={this.rowClassName(route)}>
-                            <p className="menubar-link"> {route.name}</p>
-                        </div>
-                    </Link>
-                </div>
-            )
         })
     }
-
-    rowClassName(route) {
-        let rowClassName = "menubar-row";
-
-        if (this.props.route.href === route.href) {
-            rowClassName += " menubar-active";
-        }
-        return rowClassName;
-    }
-
-    // collapseMenubar() {
-    //     this.props.closeMobileMenuBar()
-    // };
 
     static renderSocialMediaIcons() {
         return <MediaQuery maxWidth={mobileCutoff}>
@@ -86,6 +55,17 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({closeMobileMenuBar}, dispatch)
 }
+
+Menubar.propTypes = {
+    routes: PropTypes.object,
+    menubarPosition: PropTypes.string,
+    callback: PropTypes.func
+};
+
+Menubar.defaultProps = {
+    callback: () => undefined,
+    routes: {}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menubar);
 
