@@ -6,7 +6,6 @@ import routes from "../../constants/routes";
 import Menubar from "./MenuBarContainer"
 import MediaQuery from "react-responsive";
 import {bindActionCreators} from "redux";
-import {closeMobileMenuBar, openMobileMenuBar} from "../../actions/ToggleMobileMenubarActions";
 
 import {socialMediaIconColors, socialMediaIcons} from "../../constants/socialMediaIcons";
 import {mobileCutoff} from "../../constants/constants";
@@ -27,21 +26,16 @@ class HeaderBar extends Component {
     }
 
     renderHomeLink() {
-        let titleClassName = "title";
-
-        if (this.props.route.name === routes.HOME.name) {
-            titleClassName += " title-active";
-        }
-
+        const titleClassName = "title" + (this.props.route === routes.HOME ? " title-active" : "");
         return (
             <div className="title-container">
                 <div onClick={() => this.props.push("/")} className={titleClassName}>
                     Luke D'Apuzzo
                 </div>
-
-                <p className="sub-title">
-                    A solo songwriter and musician from Boulder, Colorado
-                </p>
+                {this.props.route === routes.HOME
+                    ? <p className="sub-title">A solo songwriter and musician from Boulder, Colorado</p>
+                    : ""
+                }
             </div>
 
         )
@@ -123,8 +117,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(
         {
-            openMobileMenuBar: openMobileMenuBar,
-            closeMobileMenuBar: closeMobileMenuBar,
             push: push
         },
         dispatch

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 
 import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import {closeMobileMenuBar} from "../../actions/ToggleMobileMenubarActions";
 
 import {socialMediaIconColors, socialMediaIcons} from "../../constants/socialMediaIcons";
 
@@ -52,10 +50,6 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({closeMobileMenuBar}, dispatch)
-}
-
 Menubar.propTypes = {
     routes: PropTypes.object,
     menubarPosition: PropTypes.string,
@@ -67,7 +61,7 @@ Menubar.defaultProps = {
     routes: {}
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Menubar);
+export default connect(mapStateToProps)(Menubar);
 
 
 
