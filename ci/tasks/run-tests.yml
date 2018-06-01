@@ -10,7 +10,7 @@ inputs:
 - name: version
 - name: repo
 - name: postgres
-- name: openjdk-npm-cf
+- name: openjdk-node-cf
 
 caches:
   - path: .gradle/
@@ -26,7 +26,7 @@ run:
     start_docker
 
     docker load -i postgres/image
-    docker load -i openjdk-npm-cf/image
+    docker load -i openjdk-node-cf/image
 
     docker images
 

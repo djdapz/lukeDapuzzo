@@ -10,7 +10,7 @@ services:
       PGDATA: /database
 
   unit-integration-tests:
-    image: openjdk-npm-cf
+    image: openjdk-node-cf
     privileged: true
     links: [luke-db]
     depends_on: [luke-db]

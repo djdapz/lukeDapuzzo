@@ -18,7 +18,7 @@ resources:
   source:
     repository: postgres
 
-- name: openjdk-npm-cf
+- name: openjdk-node-cf
   type: docker-image
   source:
     repository: djdapz/openjdk-node-cf
@@ -43,7 +43,7 @@ jobs:
     trigger: true
   - get: repo
     trigger: true
-  - get: openjdk-npm-cf
+  - get: openjdk-node-cf
     params: {save: true}
   - get: postgres
     params: {save: true}
@@ -60,11 +60,11 @@ jobs:
   - get: repo
     trigger: true
     passed: ["run-tests"]
-  - get: openjdk-npm-cf
+  - get: openjdk-node-cf
   - task: build-and-deploy
     privileged: true
     file: repo/ci/tasks/deploy-cf.yml
-    image: openjdk-npm-cf
+    image: openjdk-node-cf
     params:
       PCF_USERNAME: ((PCF_USERNAME))
       PCF_PASSWORD: ((PCF_PASSWORD))
@@ -79,23 +79,23 @@ jobs:
     passed: ["deploy-development"]
   - get: repo
     passed: ["deploy-development"]
-  - get: openjdk-npm-cf
+  - get: openjdk-node-cf
   - task: build-and-deploy
     privileged: true
     file: repo/ci/tasks/deploy-cf.yml
-    image: openjdk-npm-cf
+    image: openjdk-node-cf
     params:
       PCF_USERNAME: ((PCF_USERNAME))
       PCF_PASSWORD: ((PCF_PASSWORD))
       PCF_SPACE: production
 
 
-- name: build-openjdk-npm-cf
+- name: build-openjdk-node-cf
   plan:
   - get: repo
   - get: openjdk
-  - task: build-openjdk-npm-cf
+  - task: build-openjdk-node-cf
     file: repo/ci/openjdk/build-extended-openjdk.yml
-  - put: openjdk-npm-cf
+  - put: openjdk-node-cf
     params:
       build: workspace
