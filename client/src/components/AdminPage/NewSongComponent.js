@@ -1,139 +1,57 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {createSong} from "../../actions/CreateSongAction";
+import {createSong, createSongCleared} from "../../actions/CreateSongAction";
+import {CLEAN, FAILED, SUBMITTED, SUCCESS} from "../../constants/formStates";
 
-const idToken = "-new-song-field";
-
-const EDITING = "EDITING";
-const SENDING = "SENDING_SONG";
-const ERROR = "ERROR";
-const SUCCESS = "SUCCESS";
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import NewSongForm from "./NewSongForm";
 
 class NewSong extends Component {
     constructor() {
         super();
-
         this.state = {
-            song: {
-                id: "",
-                name: ""
-            },
-            status: EDITING
+            createSong: false
         };
-        this.onInputChange = this.onInputChange.bind(this);
-        this.createSong = this.createSong.bind(this);
-        this.renderBasedOnState = this.renderBasedOnState.bind(this);
-        this.renderError = this.renderError.bind(this);
     }
 
-    onInputChange(event) {
-        const key = event.target.id.replace(idToken, "");
-        let nextState = this.state.song;
-
-        nextState[key] = event.target.value;
-
-        this.setState({song: nextState});
-    }
-
-    createSong(event) {
-        event.preventDefault();
-        this.props.createSong(this.state.song);
-        this.setState(
-            {
-                song: {
-                    id: "",
-                    name: ""
-                },
-                status: SENDING
-            });
-        //todo, make the state actually clear after success
-        //todo - error handling
-    }
-
-    renderBasedOnState() {
-        if (this.state.status === SENDING) {
-            if (this.props.newSong !== null) {
-                if (this.props.newSong.status === 200) {
-                    this.setState({
-                        status: SUCCESS
-                    });
-                } else if (this.props.newSong.status >= 300) {
-                    this.setState({
-                        status: ERROR
-                    });
-                }
+    UNSAFE_componentWillReceiveProps(newProps) {
+        if (newProps.newSongState === SUCCESS) {
+            this.props.createSongCleared();
+            if (this.state.createSong) {
+                this.setState({
+                    createSong: false
+                })
             }
         }
-
-        switch (this.state.status) {
-            case EDITING:
-                return this.renderForm();
-            case SENDING:
-                return NewSong.renderSending();
-            case ERROR:
-                return this.renderError();
-        }
-    }
-
-    static renderSending() {
-        return (
-            <span className="row">
-                <img className="sendingAnmiation" src="https://s3-us-west-2.amazonaws.com/luke-dapuzzo/gif/loading_icon.gif"/>
-            </span>
-        )
-    }
-
-    renderError() {
-        return (
-            <tr id={this.props.newSong.data.id} className="form-group">
-                <p>
-                    ERROR: {this.props.newSong.status}
-                </p>
-            </tr>
-        )
-    }
-
-
-    renderForm() {
-        return (
-            <div id="new-song-form" className="form-group row">
-                <div className="col-md-4 col-sm-2">
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-5">
-                    <input
-                        placeholder="Name of Song"
-                        type="text"
-                        className="form-control"
-                        value={this.state.song.name}
-                        id={`name${idToken}`}
-                        onChange={this.onInputChange}/>
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-5">
-                    <input
-                        placeholder="Soundcloud Id"
-                        type="text"
-                        className="form-control"
-                        value={this.state.song.id}
-                        id={`id${idToken}`}
-                        onChange={this.onInputChange}/>
-                </div>
-                <button className="btn btn-primary" onClick={this.createSong}>Send It</button>
-            </div>
-        )
     }
 
     render() {
-        return this.renderBasedOnState()
+        return <div className={"song-listing"}>
+            <div className={"action-column"}>
+                {this.renderNewButton()}
+            </div>
+            {this.renderForm()}
+        </div>
+
+    }
+
+
+
+    renderForm() {
+        if (this.state.createSong) {
+            return <NewSongForm/>
+        }
     }
 }
 
+
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({createSong}, dispatch)
+    return bindActionCreators({createSongCleared}, dispatch)
 }
 
 function mapStateToProps(state) {
-    return ({newSong: state.songs.new});
+    return ({newSongState: state.newSong});
 }
 
 //null means no redux state necessary

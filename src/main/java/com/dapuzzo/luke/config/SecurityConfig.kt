@@ -35,7 +35,8 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 .httpBasic().and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/account/create/").permitAll()
+                .antMatchers(HttpMethod.POST, "/account/create").permitAll()
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/**").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/**").authenticated()
     }

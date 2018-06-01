@@ -3,10 +3,15 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
 import SongRow from "./SongRowComponent";
-import NewSong from "./NewSongComponent";
+import NewSongButton from "./NewSongComponent";
 import {clearNewSong} from "../../actions/ClearNewSongAction";
 import {clearDeleteSong} from "../../actions/DeleteSongAction";
 import {getAllSongs} from "../../actions/GetAllSongs";
+import {SUCCESS} from "../../constants/formStates";
+import NewSongForm from "./NewSongForm";
+
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import {createSongCleared} from "../../actions/CreateSongAction";
 
 class SongTable extends Component {
 
@@ -15,40 +20,22 @@ class SongTable extends Component {
         this.state = {
             createSong: false
         };
-
-        this.renderCreateSong = this.renderCreateSong.bind(this);
         this.renderSongRows = this.renderSongRows.bind(this);
-        this.createSongClicked = this.createSongClicked.bind(this);
-        this.cancelSongClicked = this.cancelSongClicked.bind(this);
-        this.renderNewButton = this.renderNewButton.bind(this)
+        this.renderNewButton = this.renderNewButton.bind(this);
     }
 
     componentDidMount() {
         this.props.getAllSongs();
     }
 
-
-    createSongClicked() {
-        this.setState({createSong: true})
-    }
-
-    cancelSongClicked() {
-        this.setState({createSong: false})
-    }
-
-    renderNewButton() {
-        if (this.state.createSong) {
-            return (
-                <button className="btn btn-warning" onClick={this.cancelSongClicked}>
-                    Cancel
-                </button>
-            )
-        } else {
-            return (
-                <button className="btn btn-primary" onClick={this.createSongClicked}>
-                    New Song
-                </button>
-            )
+    UNSAFE_componentWillReceiveProps(newProps) {
+        if (newProps.newSongState === SUCCESS) {
+            this.props.createSongCleared();
+            if (this.state.createSong) {
+                this.setState({
+                    createSong: false
+                })
+            }
         }
     }
 
@@ -56,20 +43,6 @@ class SongTable extends Component {
         return this.props.songs.map(song => {
             return <SongRow key={song.id} details={song}/>
         })
-    }
-
-    renderCreateSong() {
-        if (this.state.createSong) {
-            return <NewSong/>
-        }
-    }
-
-    reactToSongCreated() {
-        if (this.props.newSong.status === 200) {
-            this.setState({createSong: false});
-            getAllSongs();
-            this.props.clearNewSong();
-        }
     }
 
     reactToSongDeleted() {
@@ -80,46 +53,50 @@ class SongTable extends Component {
     }
 
     render() {
-        // this.reactToSongCreated();
         // this.reactToSongDeleted();
         return (
-             <div className="live-table">
-                 <div className="table-header">
-                     <h2>
-                         Songs
-
-                     </h2>
-                     <div className="row header">
-                         <div className="col-md-2">
-                         </div>
-                         <div className="col-sm-2">
-                             {this.renderNewButton()}
-                         </div>
-                         <div className="col-lg-3 col-md-3 col-sm-5 column-header">
-                                 Song Title
-                         </div>
-                         <div className="col-lg-3 col-md-3 col-sm-5 column-header">
-                                 Soundcloud Id
-                         </div>
-                     </div>
-                     {this.renderCreateSong()}
-                     {this.renderSongRows()}
-                 </div>
-             </div>
+            <div className="admin-table">
+                <h2 className={"table-header"}>
+                    Songs
+                </h2>
+                <hr/>
+                <div className="song-listing">
+                    <div className="name-column column-header song-column">
+                        Song Title
+                    </div>
+                    <div className=" id-column column-header  song-column">
+                        Soundcloud Id
+                    </div>
+                    <div className={"action-column  song-column"}>
+                        {this.renderNewButton()}
+                    </div>
+                </div>
+                {this.state.createSong ?  <NewSongForm/> : null}
+                {this.renderSongRows()}
+            </div>
 
         )
+    }
+
+    renderNewButton() {
+        return this.state.createSong
+            ? <button className="btn btn-warning" id={'cancel-button'}
+                      onClick={() => this.setState({createSong: false})}>Cancel</button>
+            : <button className="btn btn-primary" id={"new-song-button"}
+                      onClick={() => this.setState({createSong: true})}>
+                <FontAwesomeIcon icon={["fa", "plus"]} />
+            </button>
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({clearNewSong, clearDeleteSong, getAllSongs}, dispatch)
+    return bindActionCreators({clearDeleteSong, getAllSongs, createSongCleared}, dispatch)
 }
 
 function mapStateToProps(state) {
     return ({
         songs: state.songs,
-        // newSong: state.songs.new,
-        // deleteSong: state.songs.delete
+        newSongState: state.newSong
     });
 }
 

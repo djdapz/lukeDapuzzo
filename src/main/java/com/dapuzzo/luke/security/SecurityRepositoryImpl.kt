@@ -34,7 +34,6 @@ class SecurityRepositoryImpl(jdbcTemplate: JdbcTemplate, val passwordEncoder: Pa
     override fun login(credentials: Credentials): Result<Account, LukeException> {
         return Result
                 .of {
-                    println("logging in : $credentials")
                     namedParameterJdbcTemplate.query(
                             "SELECT * FROM account WHERE username = :username",
                             MapSqlParameterSource().addValue("username", credentials.username),

@@ -8,7 +8,7 @@ import {routeChanged} from "../../actions/RouteChangedAction";
 import {loginAction} from "../../actions/UserActions";
 
 import routes from "../../constants/routes";
-import {FAILED, SUBMITTED} from "../../reducers/LoginFormReducer";
+import {FAILED, SUBMITTED} from "../../constants/formStates";
 
 
 class LoginPage extends Component {

@@ -1,9 +1,6 @@
 import {AUTHORIZE_USER, FAIL_LOGIN, LOGIN_ACTION} from "../actions/UserActions";
+import {CLEAN, FAILED, SUBMITTED, SUCCESS} from "../constants/formStates";
 
-export const SUBMITTED = "SUBMITTED";
-export const FAILED = "FAILED";
-export const SUCCESS = "SUCCESS";
-export const CLEAN = "CLEAN";
 
 export const loginFormReducer = function (state = CLEAN, action) {
     switch (action.type) {

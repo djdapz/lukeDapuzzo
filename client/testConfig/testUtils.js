@@ -12,6 +12,7 @@ const mockStore = function(state = {}) {
     }
 };
 
+
 export {
     mockStore
 }

@@ -11,6 +11,8 @@ export function* login(loginAction) {
     try{
         const response = yield call(postNoCredentials, "/login", loginAction.payload.credentials);
         yield put(authorizeUser(response.data));
+        localStorage.setItem("username", loginAction.payload.credentials.username);
+        localStorage.setItem("password", loginAction.payload.credentials.password);
         yield put(push(loginAction.payload.target))
     }catch (e) {
         yield put(failLogin())

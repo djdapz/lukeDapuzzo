@@ -3,6 +3,8 @@ import {deleteSong} from "../../actions/DeleteSongAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+
 class SongRow extends Component {
 
     constructor() {
@@ -10,26 +12,27 @@ class SongRow extends Component {
         this.deleteSong = this.deleteSong.bind(this);
     }
 
-    deleteSong(){
+    deleteSong() {
         this.props.deleteSong(this.props.details)
     }
 
     render() {
         return (
-            <div className="song-listing row">
-                <div className="col-sm-2 col-md-2">
+            <div className="song-listing">
+                <div className="name-column  song-column">
+                    <p>
+                        {this.props.details.name}
+                    </p>
                 </div>
-                <div className="col-sm-2 col-md-2">
+                <div className="id-column  song-column">
+                    <p>
+                        {this.props.details.id}
+                    </p>
+                </div>
+                <div className={"action-column  song-column"}>
                     <button className="btn btn-danger" onClick={this.deleteSong}>
-                        Delete
+                        <FontAwesomeIcon icon={["fa", "trash"]}/>
                     </button>
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-5">
-
-                    {this.props.details.name}
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-5">
-                    {this.props.details.id}
                 </div>
             </div>
         )

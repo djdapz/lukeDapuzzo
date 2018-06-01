@@ -1,13 +1,15 @@
-import {NEW_SONG_ACTION} from "../actions/CreateSongAction"
-import {CLEAR_NEW_SONG} from "../actions/ClearNewSongAction";
+import {CREATE_SONG_ACTION, CREATE_SONG_FAILED, SONG_CREATED} from "../actions/CreateSongAction"
+import {CLEAN, SUBMITTED, FAILED, SUCCESS} from "../constants/formStates";
 
-let newSongReducer = (state =[], action) =>{
-    if(action.type === NEW_SONG_ACTION){
-        return action.payload;
-    }else if(action.type === CLEAR_NEW_SONG){
-        return []
+export const newSongReducer = function (state = CLEAN, action) {
+    switch (action.type) {
+        case CREATE_SONG_ACTION:
+            return SUBMITTED;
+        case CREATE_SONG_FAILED:
+            return FAILED;
+        case SONG_CREATED:
+            return SUCCESS
     }
-
     return state;
 };
 

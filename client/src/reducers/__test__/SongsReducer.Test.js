@@ -1,5 +1,6 @@
 import {ALL_SONGS_FETCHED} from "../../actions/GetAllSongs";
 import songsReducer from "../SongsReducer";
+import {SONG_CREATED} from "../../actions/CreateSongAction";
 
 const songs = [
     {
@@ -28,4 +29,14 @@ describe("Songs reducer", () => {
 
         expect(defaultValue).toEqual("Default")
     });
+
+    it("should append a newley created song to the list of songs", () => {
+        const songs = songsReducer([{id: 2}], {
+            type: SONG_CREATED,
+            payload: {id: 1}
+        });
+
+        expect(songs[0].id).toEqual(1);
+        expect(songs[1].id).toEqual(2);
+    })
 });

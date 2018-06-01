@@ -9,7 +9,7 @@ describe('Login saga', () => {
     const username = "jimbob";
     const password = "iliketurtles";
 
-    it("is a consumer of the login action", () =>{
+    it("is a consumer of the login action", () => {
         const loginActionContract = {
             payload: {
                 credentials: {username, password},
@@ -49,5 +49,20 @@ describe('Login saga', () => {
         let errorResult = iterator.throw("Error");
 
         expect(errorResult.value).toEqual(put(failLogin()));
+    });
+
+
+    it('saves username and password in local storage', () => {
+        const iterator = login(loginAction(username, password, "/admin"));
+        let userInfo = {username, password, role: "ADMIN"};
+
+        iterator.next();
+        iterator.next({
+            data: userInfo
+        });
+        iterator.next();
+
+        expect(localStorage.getItem("username")).toEqual(username)
+        expect(localStorage.getItem("password")).toEqual(password)
     });
 });

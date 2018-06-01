@@ -5,6 +5,7 @@ import showsReducer from "./ShowsReducer";
 import songsReducer from "./SongsReducer";
 import userAuthenticationReducer from "./UserAuthenticationReducer";
 import {loginFormReducer} from "./LoginFormReducer";
+import newSongReducer from "./NewSongReducer";
 
 const userReducer = combineReducers({
     isAuthenticated: userAuthenticationReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     email: emailReducer,
     shows: showsReducer,
     songs: songsReducer,
+    newSong: newSongReducer,
     user: userReducer,
     router: routeReducer
 });

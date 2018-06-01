@@ -12,3 +12,12 @@ export function postNoCredentials(url, body) {
 export function getNoCredentials(url) {
     return axiosInstance.get(url);
 }
+
+export function postSecure(url, body) {
+    return axiosInstance.post(url, body, {
+        auth: {
+            username: localStorage.getItem("username"),
+            password: localStorage.getItem("password")
+        }
+    })
+}
