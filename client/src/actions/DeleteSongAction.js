@@ -1,31 +1,37 @@
 /**
  * Created by devondapuzzo on 8/24/17.
  */
-import axios from "axios";
 
-const DELETE_SONG = "DELETE_SONG";
-const CLEAR_DELETE_SONG = "CLEAR_DELETE_SONG";
+export const DELETE_SONG_FAILED = "DELETE_SONG_FAILED";
+export const DELETE_SONG = "DELETE_SONG";
+export const CLEAR_DELETE_SONG = "CLEAR_DELETE_SONG";
+export const SONG_DELETED = "SONG_DELETED";
 
-let deleteSong = function (song) {
-    let deleteRequest = axios.delete("/api/songs?id=" + song.id);
-
+export const deleteSong = (id) => {
     return {
         type: DELETE_SONG,
-        payload: deleteRequest
+        payload: {id}
     }
 };
 
 
-let clearDeleteSong = function () {
+export const clearDeleteSong = () => {
     return {
         type: CLEAR_DELETE_SONG,
         payload: []
     }
 };
 
-export {
-    clearDeleteSong,
-    CLEAR_DELETE_SONG,
-    deleteSong,
-    DELETE_SONG
+export const songDeleted = (id) => {
+    return {
+        type: SONG_DELETED,
+        payload: {id}
+    }
+};
+
+export const deleteSongFailed = (status, id) => {
+    return {
+        type: DELETE_SONG_FAILED,
+        payload: {status, id}
+    }
 };

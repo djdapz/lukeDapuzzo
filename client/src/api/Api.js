@@ -21,3 +21,12 @@ export function postSecure(url, body) {
         }
     })
 }
+
+export function deleteSecure(url) {
+    return axiosInstance.delete(url, {
+        auth: {
+            username: localStorage.getItem("username"),
+            password: localStorage.getItem("password")
+        }
+    })
+}

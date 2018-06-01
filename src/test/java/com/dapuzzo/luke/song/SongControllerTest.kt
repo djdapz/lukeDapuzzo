@@ -78,11 +78,9 @@ class SongControllerTest {
 
     @Test
     internal fun `should delete show `() {
-        mockMvc
-                .perform(
-                        delete("/songs")
-                                .param("id", firstSong.id.toString())
-                                .header("Content-Type", "application/json"))
+        mockMvc.perform(
+                delete("/songs/${firstSong.id}")
+                        .header("Content-Type", "application/json"))
                 .andExpect(status().isOk)
 
         verify(mockSongService).delete(firstSong.id)

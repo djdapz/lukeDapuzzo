@@ -13,7 +13,7 @@ class SongRow extends Component {
     }
 
     deleteSong() {
-        this.props.deleteSong(this.props.details)
+        this.props.deleteSong(this.props.details.id)
     }
 
     render() {

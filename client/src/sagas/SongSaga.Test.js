@@ -1,8 +1,9 @@
 import {call, put} from 'redux-saga/effects';
-import {getNoCredentials, postSecure} from '../api/Api';
+import {deleteSecure, getNoCredentials, postSecure} from '../api/Api';
 import {allSongsFetched, GET_ALL_SONGS, getAllSongs} from "../actions/GetAllSongs";
-import {createSongSaga, getSongs} from "./SongSaga";
+import {createSongSaga, deleteSongSaga, getSongs} from "./SongSaga";
 import {CREATE_SONG_ACTION, createSong, createSongFailed, songCreated} from "../actions/CreateSongAction";
+import {DELETE_SONG, deleteSong, deleteSongFailed, songDeleted} from "../actions/DeleteSongAction";
 
 describe('Songs saga', () => {
     describe("get all songs ", () => {
@@ -92,6 +93,45 @@ describe('Songs saga', () => {
             });
 
             expect(secondStep.value).toEqual(put(createSongFailed({status: 404})));
+        });
+    });
+
+    describe("delete a song", () => {
+        it("is a consumer of the delete song action", () => {
+            const createSongContract = {
+                payload: {
+                    id: 2523
+                },
+                type: DELETE_SONG
+            };
+
+            expect(createSongContract).toEqual(deleteSong(2523));
+        });
+
+        it('calls songs api and dispatches a song deleted', () => {
+            const iterator = deleteSongSaga(deleteSong(1234));
+
+            const firstStep = iterator.next();
+
+            expect(firstStep.value).toEqual(call(deleteSecure, `/songs/1234`));
+
+            const secondStep = iterator.next({
+                status: 200
+            });
+
+            expect(secondStep.value).toEqual(put(songDeleted(1234)));
+        });
+
+        it('should dispatch a CREATE_SONG_FAILED action on failure', function () {
+            const iterator = deleteSongSaga(deleteSong(1234));
+
+            iterator.next();
+
+            const secondStep = iterator.next({
+                status: 500
+            });
+
+            expect(secondStep.value).toEqual(put(deleteSongFailed(500, 1234)));
         });
     })
 

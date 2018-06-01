@@ -1,7 +1,7 @@
 import {all, fork} from 'redux-saga/effects';
 
 import {watchLogin} from './LoginSaga';
-import {watchCreateSong, watchGetSongs} from "./SongSaga";
+import {watchCreateSong, watchDeleteSong, watchGetSongs} from "./SongSaga";
 import {watchGetShows} from "./ShowSaga";
 
 export function* lukeSaga() {
@@ -9,6 +9,7 @@ export function* lukeSaga() {
         fork(watchLogin),
         fork(watchGetSongs),
         fork(watchGetShows),
-        fork(watchCreateSong)
+        fork(watchCreateSong),
+        fork(watchDeleteSong)
     ]);
 }
