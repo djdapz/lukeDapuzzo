@@ -31,31 +31,7 @@ run:
     docker images
 
     # Run the container with tests and its dependencies.
-    docker-compose -f repo/ci/docker-compose.tests.yml up -d
-
-    set -e
-
-    export LUKE_DB_URL=jdbc:postgresql://localhost:5432/luke-test?user=lukeuser&password=lukepwd
-    export  LUKE_DB_USERNAME=lukeuser
-    export LUKE_DB_PASSWORD=lukepwd
-
-    echo "about to run tests"
-    echo "LUKE_DB_URL"
-    echo $LUKE_DB_URL
-    echo "LUKE_DB_USERNAME"
-    echo $LUKE_DB_USERNAME
-    echo "LUKE_DB_PASSWORD"
-    echo $LUKE_DB_PASSWORD
-
-    pushd repo
-        ./gradlew clean test
-        pushd client
-            npm install
-            npm test
-        popd
-    popd
-
-
+    docker-compose -f repo/ci/docker-compose.tests.yml run unit-integration-tests
 
     # Cleanup.
     # Not sure if this is required.

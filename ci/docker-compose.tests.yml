@@ -9,12 +9,12 @@ services:
       POSTGRES_USER: lukeuser
       PGDATA: /database
 
-#  unit-integration-tests:
-#    image: djdapz/openjdk-node-cf
-#    privileged: true
-#    links: [luke-db]
-#    depends_on: [luke-db]
-#    command: "./repo/ci/tasks/run-tests.sh"
-#    volumes:
-#      - ../:/repo
-#      - ../../.gradle/:/gradle
+  unit-integration-tests:
+    image: djdapz/openjdk-node-cf
+    privileged: true
+    links: [luke-db]
+    depends_on: [luke-db]
+    command: "./repo/ci/tasks/run-tests.sh"
+    volumes:
+      - ../:/repo
+      - ../../.gradle/:/gradle
