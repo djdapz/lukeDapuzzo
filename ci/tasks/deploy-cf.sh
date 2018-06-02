@@ -12,6 +12,7 @@ cf login -a api.run.pivotal.io -s $PCF_SPACE -u $PCF_USERNAME -p $PCF_PASSWORD
 
 pushd repo
     ./gradlew clean assemble
+    ls build/libs
     cf push -p "build/libs/luke-dapuzzo-${BUILD_VERSION}.jar" -f "./ci/manifests/$PCF_SPACE/server-manifest.yml"
 popd
 
