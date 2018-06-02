@@ -12,11 +12,11 @@ resources:
   source:
     repository: openjdk
     tag: 8
-
-- name: postgres
-  type: docker-image
-  source:
-    repository: postgres
+#
+#- name: postgres
+#  type: docker-image
+#  source:
+#    repository: postgres
 
 - name: openjdk-node-cf
   type: docker-image
@@ -35,31 +35,31 @@ resources:
     private_key: ((github-private-key))
 
 jobs:
-
-- name: run-tests
-  public: true
-  plan:
-  - get: version
-    trigger: true
-  - get: repo
-    trigger: true
-  - get: openjdk-node-cf
-    params: {save: true}
-  - get: postgres
-    params: {save: true}
-  - task: run-tests
-    privileged: true
-    file: repo/ci/tasks/run-tests.yml
+#
+#- name: run-tests
+#  public: true
+#  plan:
+#  - get: version
+#    trigger: true
+#  - get: repo
+#    trigger: true
+#  - get: openjdk-node-cf
+#    params: {save: true}
+#  - get: postgres
+#    params: {save: true}
+#  - task: run-tests
+#    privileged: true
+#    file: repo/ci/tasks/run-tests.yml
 
 - name: deploy-development
   public: true
   plan:
   - get: version
     trigger: true
-    passed: ["run-tests"]
+#    passed: ["run-tests"]
   - get: repo
     trigger: true
-    passed: ["run-tests"]
+#    passed: ["run-tests"]
   - get: openjdk-node-cf
   - task: build-and-deploy
     privileged: true
@@ -69,6 +69,7 @@ jobs:
       PCF_USERNAME: ((PCF_USERNAME))
       PCF_PASSWORD: ((PCF_PASSWORD))
       PCF_SPACE: development
+      LUKE_ENV: dev
   - put: version
     params: {bump: patch}
 
@@ -88,6 +89,7 @@ jobs:
       PCF_USERNAME: ((PCF_USERNAME))
       PCF_PASSWORD: ((PCF_PASSWORD))
       PCF_SPACE: production
+      LUKE_ENV: prod
 
 
 - name: build-openjdk-node-cf

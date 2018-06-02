@@ -1,9 +1,5 @@
 ---
 applications:
-- name: luke-dapuzzo-dot-com-prod
+- name: luke-dapuzzo-api
   memory: 1024M
   instances: 1
-  routes:
-    - route: lukedapuzzo.com
-    - route: www.lukedapuzzo.com
-    - route: luke-dapuzzo-dot-com-prod.cfapps.io

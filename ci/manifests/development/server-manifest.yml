@@ -1,5 +1,5 @@
 ---
 applications:
-- name: luke-dapuzzo-dot-com
+- name: luke-dapuzzo-api-dev
   memory: 1024M
   instances: 1

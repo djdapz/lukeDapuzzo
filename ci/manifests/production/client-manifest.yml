@@ -4,5 +4,9 @@ applications:
   memory: 512M
   instances: 1
   command: npm run start
+  routes:
+      - route: lukedapuzzo.com
+      - route: www.lukedapuzzo.com
+      - route: luke-dapuzzo-dot-com-prod.cfapps.io
   env:
     LUKE_ENV: prod
