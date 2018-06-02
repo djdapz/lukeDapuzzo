@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 source repo/ci/tasks/common.sh
 
 export BUILD_VERSION=`cat version/number`
