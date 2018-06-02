@@ -40,15 +40,4 @@ describe("New Song Form", () => {
          expect(newSongComponent.find("#create-song-button").length).toBe(1);
          expect(newSongComponent.find("#error-message").length).toBe(1)
      });
-
-     it("should clean component and dispatch action on success", function(){
-         const newSongComponent = shallow(<NewSongForm store={mockStore({newSong: SUBMITTED})}/>).dive();
-
-         newSongComponent.setState({id: song.id, name: song.name});
-
-         newSongComponent.setProps({newSongState: SUCCESS});
-
-         expect(newSongComponent.state()).toEqual({id: "", name: ""});
-         expect(createSongCleared).toHaveBeenCalled();
-     })
 });

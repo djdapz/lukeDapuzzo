@@ -28,14 +28,10 @@ class NewSong extends Component {
 
     render() {
         return <div className={"song-listing"}>
-            <div className={"action-column"}>
-                {this.renderNewButton()}
-            </div>
             {this.renderForm()}
         </div>
 
     }
-
 
 
     renderForm() {

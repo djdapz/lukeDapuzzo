@@ -70,7 +70,8 @@ describe('Songs saga', () => {
                 id: 4321
             };
             const secondStep = iterator.next({
-                data: responseSong
+                data: responseSong,
+                status: 200
             });
 
             expect(secondStep.value).toEqual(put(songCreated(responseSong)));

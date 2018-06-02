@@ -6,7 +6,7 @@ import routes from "../../../constants/routes";
 import {routeChanged} from "../../../actions/RouteChangedAction";
 import {mockStore} from "../../../../testConfig/testUtils";
 import {loginAction} from "../../../actions/UserActions";
-import {CLEAN, SUBMITTED} from "../../../reducers/LoginFormReducer";
+import {CLEAN, SUBMITTED} from "../../../constants/formStates";
 
 jest.mock("../../../actions/RouteChangedAction");
 jest.mock("../../../actions/UserActions");
