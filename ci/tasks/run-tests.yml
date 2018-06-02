@@ -31,7 +31,7 @@ run:
     docker images
 
     # Run the container with tests and its dependencies.
-    docker-compose -f repo/ci/docker-compose.tests.yml up
+    docker-compose -f repo/ci/docker-compose.tests.yml up -d
 
     set -e
 
