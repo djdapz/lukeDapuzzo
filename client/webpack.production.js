@@ -3,11 +3,13 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const common = require('./webpack.common.js');
 const webpack = require('webpack');
 
+
 module.exports = merge(common, {
     plugins: [
         new UglifyJSPlugin(),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
+            'process.env.NODE_ENV': JSON.stringify('production'),
+            'process.env.LUKE_ENV': JSON.stringify(process.env.LUKE_ENV)
         })
     ]
 });

@@ -1,9 +1,11 @@
-const environment = process.env.LUKE_ENV.toUpperCase();
-
 const LOCAL = "LOCAL";
 const DEV = "DEV";
 const PROD = "PROD";
 const TEST = "TEST";
+
+const environment = (process.env.LUKE_ENV || LOCAL).toUpperCase();
+
+console.log(environment);
 
 function loadEnv(options) {
     return options[environment] || options[LOCAL]
@@ -16,4 +18,4 @@ let LUKE_API = loadEnv({
     TEST: "www.garbage-url.com"
 });
 
-export  {LUKE_API}
+export {LUKE_API}
