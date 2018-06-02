@@ -1,7 +1,11 @@
 group = 'com.dapuzzo.luke'
-version = "$version"
+version = buildVersion()
 
 description = """Luke D'Apuzzo's website"""
+
+static def buildVersion() {
+    return System.getProperty("BUILD_VERSION") == null ? "0.0.1" : System.getProperty("BUILD_VERSION")
+}
 
 buildscript {
     ext.kotlin_version = '1.2.30'
