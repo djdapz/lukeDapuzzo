@@ -26,6 +26,7 @@ pushd repo
     pushd client
         npm install
         npm run build
+        rm -rf node_modules
         cf push -f "../ci/manifests/$PCF_SPACE/client-manifest.yml"
     popd
 popd
