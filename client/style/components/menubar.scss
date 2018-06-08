@@ -1,5 +1,4 @@
 @import "../variables";
-
 @import url("https://fonts.googleapis.com/css?family=Righteous");
 
 //default styling
@@ -17,42 +16,6 @@ a:hover {
   font-size: larger;
   z-index: 1;
 
-  p {
-    color: black;
-  }
-}
-
-.menubar-side {
-  height: 100%;
-  top: 4em;
-  width: $side-menubar-width;
-
-  .menubar-row {
-    padding-left: $left-gutter;
-    width: 100%;
-
-    p {
-      margin: 0;
-    }
-  }
-
-  .menubar-row:hover, .menubar-active {
-    cursor: pointer;
-
-    p {
-      color: $aqua-luke;
-    }
-  }
-
-  &.home-menubar {
-    p {
-      color: white;
-      text-shadow: 1px 1px 20px black;
-    }
-  }
-}
-
-.menubar-mobile {
   margin-top: 64px;
   top: 0;
   right: 0;
@@ -72,6 +35,10 @@ a:hover {
     p {
       color: white;
     }
+  }
+
+  p {
+    color: black;
   }
 }
 

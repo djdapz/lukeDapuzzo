@@ -58,29 +58,8 @@
   }
 }
 
-.social-media-icons {
-  @media screen and (min-width: $sm-xs) {
-    display: flex;
-    width: $header-bar-height * 3.25;
-    margin-right: $header-bar-height / 4;
-  }
-}
-
-#social-media-expanded {
-  width: 12em;
-  display: flex;
-
-  @media screen and (min-width: 0) and (max-width: $sm-xs) {
-    display: none;
-  }
-}
-
 #social-media-hamburger {
   margin-right: $header-bar-height / 4;
-
-  @media screen and (min-width: $sm-xs) {
-    display: none;
-  }
 }
 
 //behaviour specific styling

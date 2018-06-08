@@ -27,20 +27,11 @@ a {
 //noinspection CssOptimizeSimilarProperties
 .main-content {
   padding-top: $header-bar-height + 1em;
-  margin-left: $content-left-margin;
-  margin-right: $header-bar-height / 2;
 
-  @media screen and (max-width: $sm-xs) {
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-  }
+  padding-left: 1em;
+  padding-right: 1em;
 
-  @media screen and (max-width: $lg-md) and (min-width: $xl-lg) {
-    margin-right: 2em;
-  }
-
-  @media screen and (min-width: $xl-lg) {
+  @media screen and (min-width: $lg-md) {
     margin-left: auto;
     margin-right: auto;
     width: 81em;

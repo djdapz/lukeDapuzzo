@@ -4,11 +4,9 @@ import {connect} from "react-redux";
 import SocialMediaIcon from "./SocialMediaIcon";
 import routes from "../../constants/routes";
 import Menubar from "./MenuBarContainer"
-import MediaQuery from "react-responsive";
 import {bindActionCreators} from "redux";
 
 import {socialMediaIconColors, socialMediaIcons} from "../../constants/socialMediaIcons";
-import {mobileCutoff} from "../../constants/constants";
 import {push} from "react-router-redux"
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
@@ -60,12 +58,7 @@ class HeaderBar extends Component {
     renderNavigation() {
         return (
             <div>
-                <MediaQuery maxWidth={mobileCutoff}>
-                    {this.renderDropdown()}
-                </MediaQuery>
-                <MediaQuery minWidth={mobileCutoff}>
-                    {HeaderBar.renderSocialMediaIcons()}
-                </MediaQuery>
+                {this.renderDropdown()}
             </div>
         )
     }

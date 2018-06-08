@@ -5,8 +5,6 @@ import {connect} from "react-redux";
 import {socialMediaIconColors, socialMediaIcons} from "../../constants/socialMediaIcons";
 
 import SocialMediaIcon from "./SocialMediaIcon";
-import MediaQuery from "react-responsive";
-import {mobileCutoff} from "../../constants/constants";
 import NavButton from "./NavButton";
 import PropTypes from "prop-types";
 
@@ -27,15 +25,13 @@ class Menubar extends Component {
     }
 
     static renderSocialMediaIcons() {
-        return <MediaQuery maxWidth={mobileCutoff}>
-            {socialMediaIcons.map(icon => <SocialMediaIcon icon={icon} key={icon.href}
-                                                           colors={socialMediaIconColors.dropdown}/>)}
-        </MediaQuery>
+        return socialMediaIcons.map(icon => <SocialMediaIcon icon={icon} key={icon.href}
+                                                             colors={socialMediaIconColors.dropdown}/>)
     }
 
     render() {
         return (
-            <div className={` menubar ${this.props.menubarPosition} ${this.props.route.menubarClassName}`}>
+            <div className={` menubar ${this.props.route.menubarClassName}`}>
                 {this.renderButtons()}
                 {Menubar.renderSocialMediaIcons()}
             </div>
