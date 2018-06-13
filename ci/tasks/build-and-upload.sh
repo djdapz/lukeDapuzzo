@@ -8,8 +8,6 @@ export GRADLE_CACHE="/gradle/caches"
 
 export BUILD_VERSION=`cat version/number`
 
-mkdir "~/.aws"
-
 pushd repo
     ./gradlew clean assemble -Pversion=$BUILD_VERSION
     aws s3 cp "build/libs/luke-dapuzzo-${BUILD_VERSION}.jar" "s3://luke-dapuzzo/app/luke-dapuzzo-${BUILD_VERSION}.jar"
