@@ -66,8 +66,8 @@ jobs:
     file: repo/ci/tasks/build-and-upload.yml
     image: openjdk-node-cf
     params:
-      AWS_ACCESS_KEY: ((AWS_ACCESS_KEY))
-      AWS_SECRET_KEY: ((AWS_SECRET_KEY))
+      AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
+      AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
   - put: version
     params: {bump: patch}
 

@@ -10,8 +10,6 @@ export BUILD_VERSION=`cat version/number`
 
 mkdir "~/.aws"
 
-printf "[default]\naws_access_key_id=${AWS_ACCESS_KEY}\naws_secret_access_key=${AWS_SECRET_KEY}" > ~/aws/credentials
-
 pushd repo
     ./gradlew clean assemble -Pversion=$BUILD_VERSION
     aws s3 cp "build/libs/luke-dapuzzo-${BUILD_VERSION}.jar" "s3://luke-dapuzzo/app/luke-dapuzzo-${BUILD_VERSION}.jar"
