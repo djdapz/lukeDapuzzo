@@ -2,9 +2,7 @@
 
 set -e
 
-export GRADLE_HOME="/gradle/.gradle"
-export GRADLE_USER_HOME="/gradle/.usergradle"
-export GRADLE_CACHE="/gradle/caches"
+source repo/ci/tasks/common.sh
 
 export BUILD_VERSION=`cat version/number`
 
