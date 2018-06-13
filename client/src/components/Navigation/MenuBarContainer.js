@@ -31,7 +31,7 @@ class Menubar extends Component {
 
     render() {
         return (
-            <div className={` menubar ${this.props.route.menubarClassName}`}>
+            <div className={` menubar ${this.props.menubarClass}`}>
                 {this.renderButtons()}
                 {Menubar.renderSocialMediaIcons()}
             </div>
@@ -48,7 +48,7 @@ function mapStateToProps(state) {
 
 Menubar.propTypes = {
     routes: PropTypes.object,
-    menubarPosition: PropTypes.string,
+    menubarClass: PropTypes.string,
     callback: PropTypes.func
 };
 

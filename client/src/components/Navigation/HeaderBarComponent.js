@@ -55,24 +55,19 @@ class HeaderBar extends Component {
         })
     }
 
-    renderNavigation() {
-        return (
-            <div>
-                {this.renderDropdown()}
-            </div>
-        )
-    }
-
-    renderDropdown() {
+    renderMenuButton() {
         return (
             <div className="social-media-icons">
                 <div id={"social-media-hamburger"} onClick={this.socialHamburgerPressed}>
                     <FontAwesomeIcon icon="bars" className={"social-media-icon"}/>
                 </div>
-                <div className={this.determineMenubarClass()}>
-                    <Menubar menubarPosition="menubar-mobile" routes={routes} callback={this.collapseMenuBar}/>
-                </div>
             </div>
+        )
+    }
+
+    renderMenubar() {
+        return (
+            <Menubar menubarClass={this.determineMenubarClass()} routes={routes} callback={this.collapseMenuBar}/>
         )
     }
 
@@ -91,10 +86,14 @@ class HeaderBar extends Component {
 
     render() {
         return (
-            <div className="row header-bar">
-                {this.renderHomeLink()}
-                {this.renderNavigation()}
+            <div>
+                <div className="row header-bar">
+                    {this.renderHomeLink()}
+                    {this.renderMenuButton()}
+                </div>
+                {this.renderMenubar()}
             </div>
+
 
         )
     }

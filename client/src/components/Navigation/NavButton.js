@@ -14,7 +14,7 @@ class NavButton extends Component {
 
     render() {
         return <div key={this.props.route.name} className={this.rowClassName()} onClick={this.navigate}>
-            <p className="menubar-link"> {this.props.route.name}</p>
+            <h3 className="menubar-link"> {this.props.route.name}</h3>
         </div>
     }
 
