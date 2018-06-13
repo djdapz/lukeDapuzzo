@@ -15,8 +15,7 @@ describe("Header Bar Component", () => {
                 name: "/some-route"
             }
         })}/>).dive();
-
-        expect(headerbar.find(".menubar-collapsed").length).toEqual(1)
+        expect(headerbar.find("Connect(Menubar)").prop("menubarClass")).toEqual("menubar-collapsed");
     });
 
     it('should expand the dropdown when a user clicks the hamburger', function () {
@@ -29,8 +28,7 @@ describe("Header Bar Component", () => {
         let socialMediaHamburger = headerbar.find("#social-media-hamburger");
         socialMediaHamburger.simulate("click");
 
-        expect(headerbar.find(".menubar-collapsed").length).toEqual(0);
-        expect(headerbar.find(".menubar-expanded").length).toEqual(1);
+        expect(headerbar.find("Connect(Menubar)").prop("menubarClass")).toEqual("menubar-expanded");
     });
 
     it('should collapse the dropdown when a user navigates', function () {
@@ -43,14 +41,14 @@ describe("Header Bar Component", () => {
         const socialMediaHamburger = headerbar.find("#social-media-hamburger");
         socialMediaHamburger.simulate("click");
 
-        expect(headerbar.find(".menubar-collapsed").length).toEqual(0);
-        expect(headerbar.find(".menubar-expanded").length).toEqual(1);
+        expect(headerbar.find("Connect(Menubar)").prop("menubarClass")).toEqual("menubar-expanded");
 
         const menubarContainer = headerbar.find(MenuBarContainer).at(0);
         menubarContainer.props().callback();
 
-        expect(headerbar.find(".menubar-collapsed").length).toEqual(0);
-        expect(headerbar.find(".menubar-expanded").length).toEqual(1);
+        headerbar.update();
+
+        expect(headerbar.find("Connect(Menubar)").prop("menubarClass")).toEqual("menubar-collapsed");
     });
 
     it("should call PUSH on redux-router when title is clicked", () => {

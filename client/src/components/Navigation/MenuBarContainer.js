@@ -31,7 +31,7 @@ class Menubar extends Component {
 
     render() {
         return (
-            <div className={` menubar ${this.props.menubarClass}`}>
+            <div className={`menubar ${this.props.menubarClass}`}>
                 {this.renderButtons()}
                 {Menubar.renderSocialMediaIcons()}
             </div>

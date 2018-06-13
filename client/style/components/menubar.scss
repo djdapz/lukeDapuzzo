@@ -14,10 +14,9 @@ a:hover {
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 0;
-    transition: margin $transition-speed, height $transition-speed, padding $transition-speed;
+    padding-bottom: 0;
+    transition: margin $transition-speed, height $transition-speed,  padding $transition-speed;;
   }
-
-
   height: 0;
   padding: 0;
   transition: height $transition-speed, padding $transition-speed;
@@ -25,11 +24,12 @@ a:hover {
 
 .menubar-expanded {
   .menubar-row {
-    height: 9%;
     margin-top: 1%;
     margin-bottom: 1%;
-    padding-top: 4px;
-    transition: margin $transition-speed, height $transition-speed;
+    padding-top: 3.5%;
+    padding-bottom: 3.5%;
+    height: 11%;
+    transition: margin $transition-speed, height $transition-speed, padding $transition-speed;
 
   }
   height: 100%;
