@@ -1,0 +1,16 @@
+---
+platform: linux
+
+inputs:
+- name: repo
+- name: version
+
+params:
+  AWS_ACCESS_KEY:
+  AWS_SECRET_KEY:
+
+run:
+  path: repo/ci/tasks/build-and-upload.sh
+
+caches:
+  - path: gradle

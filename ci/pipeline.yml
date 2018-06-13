@@ -51,7 +51,7 @@ jobs:
     privileged: true
     file: repo/ci/tasks/run-tests.yml
 
-- name: deploy-development
+- name: build-and-upload
   public: true
   plan:
   - get: version
@@ -61,7 +61,27 @@ jobs:
     trigger: true
     passed: ["run-tests"]
   - get: openjdk-node-cf
-  - task: build-and-deploy
+  - task: build-and-upload
+    privileged: true
+    file: repo/ci/tasks/build-and-upload.yml
+    image: openjdk-node-cf
+    params:
+      AWS_ACCESS_KEY: ((AWS_ACCESS_KEY))
+      AWS_SECRET_KEY: ((AWS_SECRET_KEY))
+  - put: version
+    params: {bump: patch}
+
+- name: deploy-development
+  public: true
+  plan:
+  - get: version
+    trigger: true
+    passed: ["build-and-upload"]
+  - get: repo
+    trigger: true
+    passed: ["build-and-upload"]
+  - get: openjdk-node-cf
+  - task: deploy
     privileged: true
     file: repo/ci/tasks/deploy-cf.yml
     image: openjdk-node-cf
@@ -70,8 +90,6 @@ jobs:
       PCF_PASSWORD: ((PCF_PASSWORD))
       PCF_SPACE: development
       LUKE_ENV: dev
-  - put: version
-    params: {bump: patch}
 
 - name: deploy-production
   public: true

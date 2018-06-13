@@ -5,3 +5,4 @@ ADD install-npm.sh /root/install-npm.sh
 
 RUN ["root/install-cf-cli.sh"]
 RUN ["root/install-npm.sh"]
+RUN ["root/install-aws.sh"]
