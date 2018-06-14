@@ -12,7 +12,7 @@ export LUKE_DB_PASSWORD=lukepwd
 
 pushd repo
     ./gradlew clean test
-    pushd client
+    pushd frontend
         npm install
         npm test
     popd
