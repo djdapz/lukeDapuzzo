@@ -62,7 +62,7 @@ describe('Login saga', () => {
         });
         iterator.next();
 
-        expect(localStorage.getItem("username")).toEqual(username)
+        expect(localStorage.getItem("username")).toEqual(username);
         expect(localStorage.getItem("password")).toEqual(password)
     });
 });

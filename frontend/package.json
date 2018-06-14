@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.dev.js --watch -d ",
     "build": "./node_modules/webpack/bin/webpack.js --config webpack.production.js",
-    "launch": "node server.js",
     "watch": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.dev.js --watch -d ",
     "test": "./node_modules/jest/bin/jest.js",
     "test:watch": "./node_modules/jest/bin/jest.js --watch"

@@ -23,7 +23,7 @@ class ContactPage extends Component{
         this.props.routeChanged(routes.CONTACT)
     }
 
-    renderContactInfo(){
+    static renderContactInfo(){
         return contactInfo.map(contact  =>  {
             return(
                 <div className="contactt-row">

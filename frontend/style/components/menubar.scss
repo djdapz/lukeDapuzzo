@@ -24,11 +24,10 @@ a:hover {
 
 .menubar-expanded {
   .menubar-row {
-    margin-top: 1%;
     margin-bottom: 1%;
-    padding-top: 3.5%;
-    padding-bottom: 3.5%;
-    height: 11%;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    height: 10%;
     transition: margin $transition-speed, height $transition-speed, padding $transition-speed;
 
   }

@@ -1,6 +1,5 @@
 // setup file
 import {configure} from 'enzyme';
-import Enzyme, {shallow, render, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 class LocalStorageMock {
@@ -23,7 +22,7 @@ class LocalStorageMock {
     removeItem(key) {
         delete this.store[key];
     }
-};
+}
 
 global.localStorage = new LocalStorageMock;
 

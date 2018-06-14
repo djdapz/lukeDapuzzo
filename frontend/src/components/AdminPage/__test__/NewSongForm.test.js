@@ -2,8 +2,8 @@ import React from "react"
 import {shallow} from "enzyme";
 import NewSongForm from "../NewSongForm";
 import {mockStore} from "../../../../testConfig/testUtils";
-import {FAILED, SUBMITTED, SUCCESS} from "../../../constants/formStates";
-import {createSong, createSongCleared} from "../../../actions/CreateSongAction";
+import {FAILED, SUBMITTED} from "../../../constants/formStates";
+import {createSong} from "../../../actions/CreateSongAction";
 
 jest.mock("../../../actions/CreateSongAction");
 

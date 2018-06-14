@@ -1,7 +1,7 @@
 .idea
 *.iml
 
-client/node_modules/
+*/node_modules/
 
 ci/credentials.yml
 

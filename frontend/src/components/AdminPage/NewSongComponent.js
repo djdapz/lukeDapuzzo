@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {createSong, createSongCleared} from "../../actions/CreateSongAction";
-import {CLEAN, FAILED, SUBMITTED, SUCCESS} from "../../constants/formStates";
-
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import {createSongCleared} from "../../actions/CreateSongAction";
+import {SUCCESS} from "../../constants/formStates";
 import NewSongForm from "./NewSongForm";
 
 class NewSong extends Component {

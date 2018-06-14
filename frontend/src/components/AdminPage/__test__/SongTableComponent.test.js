@@ -2,7 +2,7 @@ import React from "react";
 import SongTable from "../SongTableComponent"
 import {shallow} from "enzyme";
 import {mockStore} from "../../../../testConfig/testUtils";
-import {CLEAN, SUCCESS} from "../../../constants/formStates";
+import {CLEAN} from "../../../constants/formStates";
 
 describe("Song Table", () => {
     it('should manage a NewSongButton components presence with buttons', function () {

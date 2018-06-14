@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {createSong, createSongCleared} from "../../actions/CreateSongAction";
-import {FAILED, SUBMITTED, SUCCESS} from "../../constants/formStates";
+import {FAILED, SUBMITTED} from "../../constants/formStates";
 
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'

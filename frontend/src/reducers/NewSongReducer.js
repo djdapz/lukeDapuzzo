@@ -1,5 +1,5 @@
 import {CREATE_SONG_ACTION, CREATE_SONG_FAILED, SONG_CREATED} from "../actions/CreateSongAction"
-import {CLEAN, SUBMITTED, FAILED, SUCCESS} from "../constants/formStates";
+import {CLEAN, FAILED, SUBMITTED, SUCCESS} from "../constants/formStates";
 
 export const newSongReducer = function (state = CLEAN, action) {
     switch (action.type) {

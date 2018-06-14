@@ -12,10 +12,10 @@ cf login -a api.run.pivotal.io -s $PCF_SPACE -u $PCF_USERNAME -p $PCF_PASSWORD
 ## push server ##
 #################
 
+
 pushd repo
-    ./gradlew clean assemble -Pversion=$BUILD_VERSION
-    ls build/libs
-    cf push -p "build/libs/luke-dapuzzo-${BUILD_VERSION}.jar" -f "./ci/manifests/$PCF_SPACE/server-manifest.yml"
+    /root/bin/aws s3 cp "s3://luke-dapuzzo/app/luke-dapuzzo-${BUILD_VERSION}.js"  ./luke.jar
+    cf push -p "./luke.jar" -f "./ci/manifests/$PCF_SPACE/server-manifest.yml"
 popd
 
 #################
@@ -23,10 +23,8 @@ popd
 #################
 
 pushd repo
-    pushd client
-        npm install
-        npm run build
-        rm -rf node_modules
+    pushd frontend-server
+        /root/bin/aws s3 cp "s3://luke-dapuzzo/app/bundle-${BUILD_VERSION}.js"  ./dist/bundle.js
         cf push -f "../ci/manifests/$PCF_SPACE/client-manifest.yml"
     popd
 popd

@@ -3,8 +3,6 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
 import SongRow from "./SongRowComponent";
-import NewSongButton from "./NewSongComponent";
-import {clearNewSong} from "../../actions/ClearNewSongAction";
 import {clearDeleteSong} from "../../actions/DeleteSongAction";
 import {getAllSongs} from "../../actions/GetAllSongs";
 import {SUCCESS} from "../../constants/formStates";
