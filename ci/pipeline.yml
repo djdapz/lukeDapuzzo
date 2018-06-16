@@ -61,6 +61,7 @@ jobs:
     trigger: true
     passed: ["run-tests"]
   - get: openjdk-node-cf
+    params: {save: true}
   - task: build-and-upload
     privileged: true
     file: repo/ci/tasks/build-and-upload.yml
@@ -80,6 +81,7 @@ jobs:
     trigger: true
     passed: ["build-and-upload"]
   - get: openjdk-node-cf
+    params: {save: true}
   - task: deploy
     privileged: true
     file: repo/ci/tasks/deploy-cf.yml
@@ -100,6 +102,7 @@ jobs:
   - get: repo
     passed: ["deploy-development"]
   - get: openjdk-node-cf
+    params: {save: true}
   - task: build-and-deploy
     privileged: true
     file: repo/ci/tasks/deploy-cf.yml
