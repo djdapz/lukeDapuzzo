@@ -3,12 +3,10 @@ const DEV = "DEV";
 const PROD = "PROD";
 const TEST = "TEST";
 
-const environment = (process.env.LUKE_ENV || LOCAL).toUpperCase();
-
-console.log(environment);
+console.log(env);
 
 function loadEnv(options) {
-    return options[environment] || options[LOCAL]
+    return options[env.environment] || options[LOCAL]
 }
 
 let LUKE_API = loadEnv({
