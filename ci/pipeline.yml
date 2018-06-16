@@ -40,7 +40,7 @@ jobs:
   public: true
   plan:
   - get: version
-    trigger: true
+    params: {bump: patch}
   - get: repo
     trigger: true
   - get: openjdk-node-cf
@@ -69,7 +69,6 @@ jobs:
       AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
       AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
   - put: version
-    params: {bump: patch}
 
 - name: deploy-development
   public: true
