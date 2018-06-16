@@ -27,6 +27,6 @@ class LocalStorageMock {
 global.localStorage = new LocalStorageMock;
 
 
-process.env.LUKE_ENV = "TEST";
+global.env = {environment: "TEST"};
 
 configure({adapter: new Adapter()});
