@@ -40,7 +40,6 @@ jobs:
   public: true
   plan:
   - get: version
-    params: {bump: patch}
   - get: repo
     trigger: true
   - get: openjdk-node-cf
@@ -50,6 +49,8 @@ jobs:
   - task: run-tests
     privileged: true
     file: repo/ci/tasks/run-tests.yml
+  - put: version
+    params: {bump: patch}
 
 - name: build-and-upload
   public: true
@@ -69,7 +70,6 @@ jobs:
     params:
       AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
       AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
-  - put: version
 
 - name: deploy-development
   public: true
