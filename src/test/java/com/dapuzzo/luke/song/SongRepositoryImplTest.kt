@@ -43,10 +43,8 @@ class SongRepositoryImplTest : DatabaseBase (){
     internal fun `should delete song from repository`() {
         subject.delete(firstSong.id)
         subject.getAll().also {
-            assertThat(it).containsExactlyInAnyOrder(secondSong)
             assertThat(it).doesNotContain(firstSong)
+            assertThat(it).containsExactlyInAnyOrder(secondSong)
         }
-
     }
-
 }

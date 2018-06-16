@@ -11,7 +11,7 @@ export LUKE_DB_USERNAME=lukeuser
 export LUKE_DB_PASSWORD=lukepwd
 
 pushd repo
-    ./gradlew clean test
+    ./gradlew clean test --info
     pushd frontend
         npm install
         npm test
