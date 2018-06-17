@@ -6,8 +6,10 @@ const fs = require('fs');
 
 // noinspection ES6ModulesDependencies
 const port = process.env.PORT || 3000;
+const buildDir = __dirname + "/dist";
 
-fs.writeFile(__dirname + "/dist/config.js", "var env =" +JSON.stringify(config) , function(err) {
+
+fs.writeFile(buildDir + "/config.js", "var env =" +JSON.stringify(config) , function(err) {
     if(err) {
         return console.log(err);
     }
@@ -16,10 +18,10 @@ fs.writeFile(__dirname + "/dist/config.js", "var env =" +JSON.stringify(config) 
 });
 
 
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(buildDir));
 
 app.get('*', function (request, response){
-    response.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
+    response.sendFile(path.resolve(buildDir, 'index.html'))
 });
 
 app.listen(port);

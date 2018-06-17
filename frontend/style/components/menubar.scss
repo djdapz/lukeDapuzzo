@@ -1,8 +1,8 @@
 @import "../variables";
 @import url("https://fonts.googleapis.com/css?family=Righteous");
 
-$transparent-aqua-background: #62f7c8e3;
-$transition-speed: .75s;
+$transparent-aqua-background: rgba(98, 247, 200, 0.9);
+$transition-speed: .5s;
 
 a:hover {
   text-decoration: none;
@@ -17,9 +17,10 @@ a:hover {
     padding-bottom: 0;
     transition: margin $transition-speed, height $transition-speed,  padding $transition-speed;;
   }
+
+  top: 0;
   height: 0;
   padding: 0;
-  transition: height $transition-speed, padding $transition-speed;
 }
 
 .menubar-expanded {
@@ -29,36 +30,35 @@ a:hover {
     padding-bottom: 2.5%;
     height: 10%;
     transition: margin $transition-speed, height $transition-speed, padding $transition-speed;
-
   }
+
+  top: $header-bar-height;
+  padding: 1em;
   height: 100%;
-  padding: 64px 1em 1em;
-  transition: height $transition-speed,  padding $transition-speed;
+  padding-bottom: $header-bar-height;
 }
 
 .menubar {
   position: fixed;
   font-family: "Carter One", cursive;
   font-size: larger;
-  top: 0;
   right: 0;
   width: 100%;
   background-color: $transparent-aqua-background;
   z-index: 1;
+
+  transition: height $transition-speed, padding $transition-speed, top $transition-speed;
 
   .menubar-row {
     text-align: center;
   }
 
   .social-media-icon {
-    font-size: $header-bar-height / 2;
+    font-size: $header-bar-height /1.5;
     margin-right: auto;
     margin-left: auto;
-    width: $header-bar-height / 3;
     display: block;
   }
-
-
 
   .menubar-row:hover, .menubar-active {
     cursor: pointer;

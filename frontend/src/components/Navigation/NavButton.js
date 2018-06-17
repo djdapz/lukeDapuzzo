@@ -24,13 +24,13 @@ class NavButton extends Component {
     }
 
     rowClassName() {
-            let rowClassName = "menubar-row";
+        let rowClassName = "menubar-row";
 
-            if (this.props.route.href === this.props.currentRoute.href) {
+        if (this.props.route.href === this.props.currentRoute.href) {
             rowClassName += " menubar-active";
         }
-            return rowClassName;
-        }
+        return rowClassName;
+    }
 }
 
 NavButton.propTypes = {
@@ -63,4 +63,5 @@ function mapDispatchToProps(dispatch) {
         dispatch
     )
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(NavButton);

@@ -27,7 +27,7 @@ class HeaderBar extends Component {
         const titleClassName = "title" + (this.props.route === routes.HOME ? " title-active" : "");
         return (
             <div className="title-container">
-                <div onClick={() => this.props.push("/")} className={titleClassName}>
+                <div onClick={() => {this.props.push("/"); this.setState({menubarCollapsed: true});}} className={titleClassName}>
                     Luke D'Apuzzo
                 </div>
                 {this.props.route === routes.HOME

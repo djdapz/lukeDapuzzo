@@ -6,7 +6,7 @@ module.exports = merge(common, {
     devtool: 'source-map',
     devServer: {
         port: 9000,
-        contentBase: './dist',
+        contentBase: '../frontend-server/dist',
         historyApiFallback: true
     },
     plugins: [
