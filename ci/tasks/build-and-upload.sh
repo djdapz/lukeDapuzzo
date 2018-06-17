@@ -15,7 +15,8 @@ pushd repo
     pushd frontend
         npm install
         npm run build
-
+    popd
+    pushd frontend-server
         echo " >>>> Uploading bundle.js to aws"
         /root/bin/aws s3 cp "./dist/bundle.js" "s3://luke-dapuzzo/app/bundle-${BUILD_VERSION}.js"
         echo " <<<< Uploaded bundle.js to aws"
