@@ -10,20 +10,21 @@ jest.mock("../../../actions/CreateSongAction");
 describe("New Song Form", () => {
     const song = {
         id: 1,
-        name: "hey pretty girl"
+        name: "hey pretty girl",
+        type: "SPOTIFY_SONG"
     };
 
     it('should dispatch a create song action on submit', function () {
         const newSongComponent = shallow(<NewSongForm store={mockStore({newSong: "CLEAN"})}/>).dive();
 
-
-        newSongComponent.setState({id: song.id, name: song.name});
+        newSongComponent.setState({id: song.id, name: song.name, type: song.type});
         newSongComponent.find("#create-song-button").simulate("click");
 
         expect(createSong).toHaveBeenCalledWith(song);
         expect(newSongComponent.state()).toEqual({
             id: 1,
-            name: "hey pretty girl"
+            name: "hey pretty girl",
+            type: "SPOTIFY_SONG"
         })
     });
 

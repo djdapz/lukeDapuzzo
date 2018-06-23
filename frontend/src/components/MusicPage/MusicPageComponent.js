@@ -3,11 +3,13 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {routeChanged} from "../../actions/RouteChangedAction";
 import routes from "../../constants/routes";
-import SpotifyComponent from "./SpotifyComponent";
 import SoundcloudComponent from "./SoundcloudComponent";
 
 import PropTypes from 'prop-types';
 import {getAllSongs} from "../../actions/GetAllSongs";
+import {SOUNDCLOUD_SONG, SPOTIFY_ALBUM, SPOTIFY_SONG} from "../../constants/musicTypes";
+import SpotifySong from "./SpotifySong";
+import SpotifyAlbum from "./SpotifyAlbum";
 
 
 class MusicPage extends Component {
@@ -22,13 +24,28 @@ class MusicPage extends Component {
     }
 
     renderSoundcloudSongs() {
-        return this.props.songs.map(song => <SoundcloudComponent key={song.id} song={song}/>)
+        if (this.props.songs[SOUNDCLOUD_SONG] !== undefined) {
+            return this.props.songs[SOUNDCLOUD_SONG].map(song => <SoundcloudComponent key={song.id} song={song}/>)
+        }
+    }
+
+    renderSpotifyAlbums() {
+        if (this.props.songs[SPOTIFY_ALBUM] !== undefined) {
+            return this.props.songs[SPOTIFY_ALBUM].map(song => <SpotifyAlbum key={song.id} track={song}/>)
+        }
+    }
+
+    renderSpotifySongs() {
+        if (this.props.songs[SPOTIFY_SONG] !== undefined) {
+            return this.props.songs[SPOTIFY_SONG].map(song => <SpotifySong key={song.id} track={song}/>)
+        }
     }
 
     render() {
         return (
             <div id="music-page" className="main-content">
-                <SpotifyComponent track={"spotify:album:58aKFIYVnNLw5ruYQOPRiv"}/>
+                {this.renderSpotifyAlbums()}
+                {this.renderSpotifySongs()}
                 {this.renderSoundcloudSongs()}
             </div>
         )

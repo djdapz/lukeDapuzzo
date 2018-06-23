@@ -4,7 +4,7 @@ version = "$version"
 description = """Luke D'Apuzzo's website"""
 
 buildscript {
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.2.50'
     ext.spring_boot_version = '2.0.1.RELEASE'
 
     repositories {
@@ -70,6 +70,7 @@ dependencies {
             "org.jetbrains.kotlin:kotlin-test",
             "org.jetbrains.kotlin:kotlin-test-junit",
             "com.github.javafaker:javafaker:0.14",
+            'com.jayway.jsonpath:json-path-assert:2.4.0',
     )
     testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "$spring_boot_version") {
         exclude(module: 'commons-logging')

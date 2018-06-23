@@ -9,13 +9,13 @@ a:hover {
 }
 
 .menubar-collapsed {
-  .menubar-row{
+  .menubar-row {
     height: 0;
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 0;
-    transition: margin $transition-speed, height $transition-speed,  padding $transition-speed;;
+    transition: margin $transition-speed, height $transition-speed, padding $transition-speed;;
   }
 
   top: 0;
@@ -25,7 +25,7 @@ a:hover {
 
 .menubar-expanded {
   .menubar-row {
-    margin-bottom: 1%;
+    //margin-bottom: 1%;
     padding-top: 2.5%;
     padding-bottom: 2.5%;
     height: 10%;
@@ -39,6 +39,10 @@ a:hover {
 }
 
 .menubar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: center;
   position: fixed;
   font-family: "Carter One", cursive;
   font-size: larger;
@@ -51,6 +55,7 @@ a:hover {
 
   .menubar-row {
     text-align: center;
+    width: 100%;
   }
 
   .social-media-icon {

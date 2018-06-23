@@ -9,10 +9,10 @@ import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 @Cleanup
-class SongRepositoryImplTest : DatabaseBase (){
+class MusicRepositoryImplTest : DatabaseBase (){
 
     @Autowired
-    lateinit var subject: SongRepository
+    lateinit var subject: MusicRepository
 
     val firstSong = randomSongEntity()
     val secondSong = randomSongEntity()

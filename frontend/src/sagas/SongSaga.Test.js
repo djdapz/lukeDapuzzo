@@ -21,7 +21,7 @@ describe('Songs saga', () => {
 
             const firstStep = iterator.next();
 
-            expect(firstStep.value).toEqual(call(getNoCredentials, `/songs`));
+            expect(firstStep.value).toEqual(call(getNoCredentials, `/music`));
 
             const songs = [
                 {
@@ -63,7 +63,7 @@ describe('Songs saga', () => {
 
             const firstStep = iterator.next();
 
-            expect(firstStep.value).toEqual(call(postSecure, `/songs`, song));
+            expect(firstStep.value).toEqual(call(postSecure, `/music`, song));
 
             const responseSong = {
                 name: "actually the same song",
@@ -87,7 +87,7 @@ describe('Songs saga', () => {
 
             const firstStep = iterator.next();
 
-            expect(firstStep.value).toEqual(call(postSecure, `/songs`, song));
+            expect(firstStep.value).toEqual(call(postSecure, `/music`, song));
 
             const secondStep = iterator.next({
                 status: 404
@@ -114,7 +114,7 @@ describe('Songs saga', () => {
 
             const firstStep = iterator.next();
 
-            expect(firstStep.value).toEqual(call(deleteSecure, `/songs/1234`));
+            expect(firstStep.value).toEqual(call(deleteSecure, `/music/1234`));
 
             const secondStep = iterator.next({
                 status: 200

@@ -10,6 +10,7 @@ const userAuthenticationReducer = (state = false, action) => {
     }
 
     return state;
+    // return true;
 };
 
 export default userAuthenticationReducer

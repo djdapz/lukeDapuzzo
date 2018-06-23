@@ -7,10 +7,10 @@ export const DELETE_SONG = "DELETE_SONG";
 export const CLEAR_DELETE_SONG = "CLEAR_DELETE_SONG";
 export const SONG_DELETED = "SONG_DELETED";
 
-export const deleteSong = (id) => {
+export const deleteSong = (id, type) => {
     return {
         type: DELETE_SONG,
-        payload: {id}
+        payload: {id, type}
     }
 };
 
@@ -22,10 +22,10 @@ export const clearDeleteSong = () => {
     }
 };
 
-export const songDeleted = (id) => {
+export const songDeleted = (id, type) => {
     return {
         type: SONG_DELETED,
-        payload: {id}
+        payload: {id, type}
     }
 };
 

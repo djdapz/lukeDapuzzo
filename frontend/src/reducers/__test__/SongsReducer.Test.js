@@ -3,23 +3,30 @@ import songsReducer from "../SongsReducer";
 import {SONG_CREATED} from "../../actions/CreateSongAction";
 import {SONG_DELETED} from "../../actions/DeleteSongAction";
 
-const songs = [
-    {
-        name: "I just wanna be happy"
-    },
-    {
-        name: "and make other happy"
-
-    }
-];
 describe("Songs reducer", () => {
     it('should return the list of songs', function () {
         let reducedSongs = songsReducer("Default", {
             type: ALL_SONGS_FETCHED,
-            payload: songs
+            payload: [
+                {
+                    name: "I just wanna be happy"
+                },
+                {
+                    name: "and make other happy"
+
+                }
+            ]
         });
 
-        expect(reducedSongs).toEqual(songs)
+        expect(reducedSongs).toEqual([
+            {
+                name: "I just wanna be happy"
+            },
+            {
+                name: "and make other happy"
+
+            }
+        ])
     });
 
     it('should return the default if it was not the fetch songs action', function () {
@@ -32,30 +39,77 @@ describe("Songs reducer", () => {
     });
 
     it("should append a newley created song to the list of songs", () => {
-        const songs = songsReducer([{id: 2}], {
-            type: SONG_CREATED,
-            payload: {id: 1}
-        });
 
-        expect(songs[0].id).toEqual(1);
-        expect(songs[1].id).toEqual(2);
+        let originalSongs = {
+            SPOTIFY_SONG: [
+                {id: 1, name: "song1"},
+                {id: 3, name: "song3"}
+            ]
+        };
+
+        let expectedSongs = {
+            SPOTIFY_SONG: [
+                {id: 2, name: "song2"},
+                {id: 1, name: "song1"},
+                {id: 3, name: "song3"}
+            ]
+        };
+
+        const songDeletedAction = {
+            type: SONG_CREATED,
+            payload: {id: 2, name: "song2", type: "SPOTIFY_SONG"}
+        };
+
+        expect(songsReducer(originalSongs, songDeletedAction)).toEqual(expectedSongs);
+    });
+
+    it("should append a newley created song to the list of songs when that type is new", () => {
+
+        let originalSongs = {
+            SPOTIFY_SONG: [
+                {id: 1, name: "song1"},
+                {id: 3, name: "song3"}
+            ]
+        };
+
+        let expectedSongs = {
+            SPOTIFY_SONG: [
+                {id: 1, name: "song1"},
+                {id: 3, name: "song3"}
+            ],
+            SOUNDCLOUD_SONG: [
+                {id: 2, name: "song2"}
+            ]
+
+        };
+
+        const songDeletedAction = {
+            type: SONG_CREATED,
+            payload: {id: 2, name: "song2", type: "SOUNDCLOUD_SONG"}
+        };
+
+        expect(songsReducer(originalSongs, songDeletedAction)).toEqual(expectedSongs);
     });
 
     it('should remove a song when a song sucessfully deleted', function () {
-        let originalSongs = [
-            {id: 1},
-            {id: 2},
-            {id: 3}
-        ];
+        let originalSongs = {
+            SPOTIFY_SONG: [
+                {id: 1, name: "song1"},
+                {id: 2, name: "song2"},
+                {id: 3, name: "song3"}
+            ]
+        };
 
-        let expectedSongs = [
-            {id: 1},
-            {id: 3}
-        ];
+        let expectedSongs = {
+            SPOTIFY_SONG: [
+                {id: 1, name: "song1"},
+                {id: 3, name: "song3"}
+            ]
+        };
 
         const songDeletedAction = {
             type: SONG_DELETED,
-            payload: {id: 2}
+            payload: {id: 2, name: "song2", type: "SPOTIFY_SONG"}
         };
 
         expect(songsReducer(originalSongs, songDeletedAction)).toEqual(expectedSongs);

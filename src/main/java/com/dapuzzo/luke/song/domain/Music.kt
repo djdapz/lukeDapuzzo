@@ -1,6 +1,6 @@
 package com.dapuzzo.luke.song.domain
 
-data class SongEntity(
-        val id : Int,
+data class Music(
+        val id: String,
         val name: String
 )

@@ -19,7 +19,7 @@ export function* watchDeleteSong() {
 
 export function* getSongs() {
     try {
-        const response = yield call(getNoCredentials, "/songs");
+        const response = yield call(getNoCredentials, "/music");
         yield put(allSongsFetched(response.data));
     } catch (e) {
         console.error(e)
@@ -28,7 +28,7 @@ export function* getSongs() {
 
 export function* createSongSaga(song) {
     try {
-        const response = yield call(postSecure, "/songs", song.payload);
+        const response = yield call(postSecure, "/music", song.payload);
         if(response.status !== 200) { // noinspection ExceptionCaughtLocallyJS
             throw response;
         }
@@ -42,11 +42,11 @@ export function* createSongSaga(song) {
 export function* deleteSongSaga(song) {
     try {
         console.log(song);
-        const response = yield call(deleteSecure, `/songs/${song.payload.id}`);
+        const response = yield call(deleteSecure, `/music/${song.payload.id}`);
         if(response.status !== 200) { // noinspection ExceptionCaughtLocallyJS
             throw response;
         }
-        yield put(songDeleted(song.payload.id));
+        yield put(songDeleted(song.payload.id, song.payload.type));
     } catch (e) {
         console.error(e);
         yield put(deleteSongFailed(e.status, song.payload.id))

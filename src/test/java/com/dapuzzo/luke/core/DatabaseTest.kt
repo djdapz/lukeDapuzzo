@@ -1,6 +1,7 @@
 package com.dapuzzo.luke.core
 
 
+import com.dapuzzo.luke.LukeDapuzzoApplication
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
@@ -16,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = NONE)
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = ["classpath:cleanup.sql"])
-@SpringBootTest
+@SpringBootTest(classes= [LukeDapuzzoApplication::class])
 abstract class DatabaseBase {
     @Autowired
     lateinit var jdbcTemplate: JdbcTemplate
