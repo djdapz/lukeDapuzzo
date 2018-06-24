@@ -1,9 +1,4 @@
 const socialMediaIcons = [
-
-    {
-        fontAwesomeName: "facebook",
-        href: "https://www.facebook.com/luke.dapuzzo"
-    },
     {
         fontAwesomeName: "twitter",
         href: "https://twitter.com/luke_dapuzzo"
