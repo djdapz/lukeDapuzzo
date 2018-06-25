@@ -31,7 +31,7 @@ class HeaderBar extends Component {
                     Luke D'Apuzzo
                 </div>
                 {this.props.route === routes.HOME
-                    ? <p className="sub-title">A solo songwriter and musician from Boulder, Colorado</p>
+                    ? <h5 className="sub-title">A solo songwriter and musician from Boulder, Colorado</h5>
                     : ""
                 }
             </div>
