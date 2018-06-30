@@ -7,7 +7,6 @@ import com.dapuzzo.luke.show.domain.entity.CityEntity
 import com.dapuzzo.luke.show.domain.entity.ShowEntity
 import com.dapuzzo.luke.show.domain.entity.StateEntity
 import com.dapuzzo.luke.show.domain.entity.VenueEntity
-import org.springframework.context.annotation.Profile
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Component
 

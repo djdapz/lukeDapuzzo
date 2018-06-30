@@ -30,6 +30,9 @@ class SongRow extends Component {
                     </p>
                 </div>
                 <div className={"action-column  song-column"}>
+                    <button className="btn btn-primary" onClick={this.deleteSong}>
+                        <FontAwesomeIcon icon={["fa", "edit"]}/>
+                    </button>
                     <button className="btn btn-danger" onClick={this.deleteSong}>
                         <FontAwesomeIcon icon={["fa", "trash"]}/>
                     </button>

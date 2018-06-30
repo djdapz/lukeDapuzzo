@@ -2,7 +2,6 @@ package com.dapuzzo.luke.song
 
 import com.dapuzzo.luke.config.JsonConfig
 import com.dapuzzo.luke.core.random.randomSongEntity
-import com.dapuzzo.luke.song.domain.Music
 import com.dapuzzo.luke.song.domain.MusicEntity
 import com.dapuzzo.luke.song.domain.MusicEntity.MusicType.SPOTIFY_ALBUM
 import com.dapuzzo.luke.song.domain.MusicEntity.MusicType.SPOTIFY_SONG
@@ -24,25 +23,21 @@ class MusicControllerTest {
     private val firstMusic = randomSongEntity(type = SPOTIFY_SONG)
     private val secondMusic = randomSongEntity(type = SPOTIFY_ALBUM)
 
-    private val music = HashMap<MusicEntity.MusicType, List<Music>>().apply {
-        this[SPOTIFY_SONG] = asList(firstMusic.toMusic())
-        this[SPOTIFY_ALBUM] = asList(secondMusic.toMusic())
-    }
+    private val music = asList(firstMusic, secondMusic)
+
     //language=json
-    val expectedMapOfSongs = """    {
-      "SPOTIFY_ALBUM": [
-        {
-          "id": "missingValue",
-          "name": "missingValue"
-        }
-      ],
-      "SPOTIFY_SONG": [
-        {
-          "id": "missingValue",
-          "name": "missingValue"
-        }
-      ]
-    }""".trimIndent()
+    val expectedMapOfSongs = """[
+  {
+    "id": "missingValue",
+    "name": "missingValue",
+    "type": "SPOTIFY_ALBUM"
+  },
+  {
+    "id": "missingValue",
+    "name": "missingValue",
+    "type": "SPOTIFY_SONG"
+  }
+]""".trimIndent()
     private val newSong = randomSongEntity()
 
     private val mockSongService = mock<MusicService> {
@@ -57,14 +52,11 @@ class MusicControllerTest {
 
     @Test
     internal fun `should return list of music`() {
-
         mockMvc
                 .perform(get("/music"))
                 .andExpect(status().isOk)
                 .andDo { println(it.response.contentAsString) }
                 .andExpect({ content().json(expectedMapOfSongs) })
-
-
     }
 
     @Test

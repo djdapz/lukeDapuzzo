@@ -1,12 +1,8 @@
-.soundcloud-frame {
-  margin-bottom: 1em;
+@import "../variables";
 
-  .widget {
-    border: 1px solid #ff0f0f;
-  }
-}
+$base-spacing: 2em;
 
-#spotify-container {
+.inner-music-row {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
@@ -14,6 +10,74 @@
   justify-content: center;
 }
 
-.spotify-song {
-  margin-bottom: 2em;
+.outer-music-row {
+  display: flex;
+  background: #000000;
+  padding: $base-spacing;
+  box-shadow: -20px 19px #888888;
+  margin-bottom: $base-spacing;
+
+  @media screen and (max-width: $xs-xxs) {
+    flex-direction: column;
+  }
+
 }
+
+.music-container {
+  margin-left: $base-spacing/2;
+  margin-right: $base-spacing/2;
+  height: 377px;
+  border: white solid 30px;
+  width: 377px;
+}
+
+.music-iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.music-label-container {
+  background-color: white;
+
+  .music-label {
+    text-align: center;
+    h1 {
+    }
+  }
+}
+
+@media screen and (min-width: $xs-xxs) {
+  .music-label-container {
+    width: 5em;
+    position: relative;
+
+    .music-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      h1 {
+        transform: rotate(270deg);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $xs-xxs) {
+  .music-label-container {
+    text-align: center;
+    width: 100%;
+    margin-bottom: $base-spacing;
+  }
+
+  .music-container {
+    margin-bottom: $base-spacing;
+  }
+
+  .outer-music-row{
+    box-shadow: none;
+  }
+}
+
+
+

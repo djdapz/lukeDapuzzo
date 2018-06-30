@@ -38,74 +38,38 @@ describe("Songs reducer", () => {
         expect(defaultValue).toEqual("Default")
     });
 
-    it("should append a newley created song to the list of songs", () => {
+    it("should append a newley created song to the beginning of the list of songs", () => {
 
-        let originalSongs = {
-            SPOTIFY_SONG: [
-                {id: 1, name: "song1"},
-                {id: 3, name: "song3"}
-            ]
-        };
+        let originalSongs = [
+            {id: 1, name: "song1"},
+            {id: 3, name: "song3"}
+        ];
 
-        let expectedSongs = {
-            SPOTIFY_SONG: [
-                {id: 2, name: "song2"},
-                {id: 1, name: "song1"},
-                {id: 3, name: "song3"}
-            ]
-        };
+        let expectedSongs = [
+            {id: 2, name: "song2"},
+            {id: 1, name: "song1"},
+            {id: 3, name: "song3"}
+        ];
 
         const songDeletedAction = {
             type: SONG_CREATED,
-            payload: {id: 2, name: "song2", type: "SPOTIFY_SONG"}
-        };
-
-        expect(songsReducer(originalSongs, songDeletedAction)).toEqual(expectedSongs);
-    });
-
-    it("should append a newley created song to the list of songs when that type is new", () => {
-
-        let originalSongs = {
-            SPOTIFY_SONG: [
-                {id: 1, name: "song1"},
-                {id: 3, name: "song3"}
-            ]
-        };
-
-        let expectedSongs = {
-            SPOTIFY_SONG: [
-                {id: 1, name: "song1"},
-                {id: 3, name: "song3"}
-            ],
-            SOUNDCLOUD_SONG: [
-                {id: 2, name: "song2"}
-            ]
-
-        };
-
-        const songDeletedAction = {
-            type: SONG_CREATED,
-            payload: {id: 2, name: "song2", type: "SOUNDCLOUD_SONG"}
+            payload: {id: 2, name: "song2"}
         };
 
         expect(songsReducer(originalSongs, songDeletedAction)).toEqual(expectedSongs);
     });
 
     it('should remove a song when a song sucessfully deleted', function () {
-        let originalSongs = {
-            SPOTIFY_SONG: [
-                {id: 1, name: "song1"},
-                {id: 2, name: "song2"},
-                {id: 3, name: "song3"}
-            ]
-        };
+        let originalSongs = [
+            {id: 1, name: "song1"},
+            {id: 2, name: "song2"},
+            {id: 3, name: "song3"}
+        ];
 
-        let expectedSongs = {
-            SPOTIFY_SONG: [
-                {id: 1, name: "song1"},
-                {id: 3, name: "song3"}
-            ]
-        };
+        let expectedSongs = [
+            {id: 1, name: "song1"},
+            {id: 3, name: "song3"}
+        ];
 
         const songDeletedAction = {
             type: SONG_DELETED,

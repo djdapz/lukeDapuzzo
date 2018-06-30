@@ -1,15 +1,13 @@
 package com.dapuzzo.luke.song
 
-import com.dapuzzo.luke.song.domain.Music
 import com.dapuzzo.luke.song.domain.MusicEntity
-import com.dapuzzo.luke.song.domain.MusicEntity.MusicType
 import org.springframework.web.bind.annotation.*
 
 @RestController
 class MusicController(val musicService: MusicService) {
 
     @GetMapping("/music")
-    fun getAllSongs(): Map<MusicType, Collection<Music>> = musicService.getAllMusic()
+    fun getAllSongs(): List<MusicEntity> = musicService.getAllMusic()
 
     @GetMapping("/music/{musicId}")
     fun getSongById(@PathVariable musicId: String): MusicEntity = musicService.getMusicById(musicId)

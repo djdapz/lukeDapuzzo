@@ -5,30 +5,28 @@ import {mockStore} from "../../../../testConfig/testUtils";
 
 describe("Admin Page", () => {
     it('should render a table for each music type', () => {
-        let songs = {
-            "SOUNDCLOUD_SONG": [
-                {
-                    "id": "1232",
-                    "name": "whats new"
-                },
-                {
-                    "id": "1235",
-                    "name": "pussycat"
-                }
-            ],
-            "SPOTIFY_ALBUM": [
-                {
-                    "id": "1236",
-                    "name": "I Like it when you sleep for you are so beautiful yet unaware of it"
-                }
-            ],
-            "SPOTIFY_SONG": [
-                {
-                    "id": "1234",
-                    "name": "hello it's me"
-                }
-            ]
-        };
+        let songs = [
+            {
+                "id": "1232",
+                "name": "whats new",
+                "type": "SOUNDCLOUD_SONG"
+            },
+            {
+                "id": "1235",
+                "name": "pussycat",
+                "type": "SOUNDCLOUD_SONG"
+            },
+            {
+                "id": "1236",
+                "name": "I Like it when you sleep for you are so beautiful yet unaware of it",
+                "type": "SPOTIFY_ALBUM"
+            },
+            {
+                "id": "1234",
+                "name": "hello it's me",
+                "type": "SPOTIFY_SONG"
+            }
+        ];
 
         let adminPage = shallow(<AdminPage store={mockStore({songs})}/>).dive();
 
@@ -36,18 +34,18 @@ describe("Admin Page", () => {
     });
 
     it('should only a table for a music type thats present', () => {
-        let songs = {
-            "SOUNDCLOUD_SONG": [
-                {
-                    "id": "1232",
-                    "name": "whats new"
-                },
-                {
-                    "id": "1235",
-                    "name": "pussycat"
-                }
-            ]
-        };
+        let songs = [
+            {
+                "id": "1232",
+                "name": "whats new",
+                "type": "SOUNDCLOUD_SONG"
+            },
+            {
+                "id": "1235",
+                "name": "pussycat",
+                "type": "SOUNDCLOUD_SONG"
+            }
+        ];
 
         let adminPage = shallow(<AdminPage store={mockStore({songs})}/>).dive();
 

@@ -42,13 +42,23 @@ class AdminPage extends Component {
     }
 
     renderTableForAllTypes() {
-        return musicTypes.map(type => {
-                const music = this.props.songs[type.api];
-                if (music !== undefined && music.length > 0) {
-                    return <SongTable songs={music} type={type}/>
-                }
-            }
-        )
+        if (this.props.songs && this.props.songs.length > 0) {
+            return musicTypes
+                .map(type => {
+                    return {
+                        "type": type,
+                        "songs": this.props.songs.filter(song => song.type === type.api)
+                    }
+                })
+                .filter(songList => {
+                    return songList.songs.length > 0
+                })
+                .map(songList => {
+
+                    return <SongTable songs={songList.songs} type={songList.type}/>
+                });
+        }
+
     }
 }
 

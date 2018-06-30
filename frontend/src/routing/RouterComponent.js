@@ -12,9 +12,9 @@ import routes from "../constants/routes"
 import LoginPage from "../components/Navigation/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 
-class RouterComponent extends Component{
-    render(){
-        return(
+class RouterComponent extends Component {
+    render() {
+        return (
             <Switch>
                 <Route exact path={routes.HOME.href} component={HomePage}/>
                 <Route path={routes.SHOWS.href} component={ShowPage}/>
@@ -26,7 +26,6 @@ class RouterComponent extends Component{
                 <Redirect from="*" to={routes.HOME.href}/>
             </Switch>
         )
-
     }
 }
 
