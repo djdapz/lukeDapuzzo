@@ -17,7 +17,6 @@ class MusicPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllSongs();
         this.props.routeChanged(routes.MUSIC)
     }
 

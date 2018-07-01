@@ -18,11 +18,6 @@ describe('Music Page Component', () => {
         expect(routeChanged).toHaveBeenCalledWith(routes.MUSIC)
     });
 
-    it('should call the get songs api upon construction', function () {
-        shallow(<MusicPageComponent store={mockStore({songs: []})}/>).dive();
-        expect(getAllSongs).toHaveBeenCalled()
-    });
-
     it('should render a div with id music-page and class main-content', function () {
         let musicPage = shallow(<MusicPageComponent store={mockStore({songs: []})}/>)
             .dive();

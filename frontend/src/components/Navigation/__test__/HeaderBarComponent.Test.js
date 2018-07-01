@@ -5,6 +5,11 @@ import HeaderBar from "../HeaderBarComponent"
 import {mockStore} from "../../../../testConfig/testUtils";
 import {push} from "react-router-redux"
 import MenuBarContainer from "../MenuBarContainer";
+import {getAllSongs} from "../../../actions/GetAllSongs";
+import {getAllShows} from "../../../actions/GetAllShows";
+
+jest.mock("../../../actions/GetAllSongs");
+jest.mock("../../../actions/GetAllShows");
 
 jest.mock("react-router-redux");
 
@@ -63,4 +68,15 @@ describe("Header Bar Component", () => {
 
         expect(push).toHaveBeenCalledWith("/")
     })
+
+    it('should call getall songs and shows when the page initially loads', function () {
+        shallow(<HeaderBar store={mockStore({
+            route: {
+                name: "/some-route"
+            }
+        })}/>).dive();
+
+        expect(getAllSongs).toHaveBeenCalled();
+        expect(getAllShows).toHaveBeenCalled();
+    });
 });

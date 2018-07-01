@@ -10,6 +10,8 @@ import {socialMediaIconColors, socialMediaIcons} from "../../constants/socialMed
 import {push} from "react-router-redux"
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import {getAllSongs} from "../../actions/GetAllSongs";
+import {getAllShows} from "../../actions/GetAllShows";
 
 class HeaderBar extends Component {
     constructor() {
@@ -21,6 +23,11 @@ class HeaderBar extends Component {
         this.determineMenubarClass = this.determineMenubarClass.bind(this);
         this.socialHamburgerPressed = this.socialHamburgerPressed.bind(this);
         this.collapseMenuBar = this.collapseMenuBar.bind(this);
+    }
+
+    componentDidMount(){
+        this.props.getAllSongs();
+        this.props.getAllShows();
     }
 
     renderHomeLink() {
@@ -109,7 +116,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(
         {
-            push: push
+            push, getAllShows, getAllSongs
         },
         dispatch
     )

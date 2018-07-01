@@ -1,6 +1,6 @@
 @import "../variables";
 
-$base-spacing: 2em;
+$base-spacing: 1em;
 
 .inner-music-row {
   display: flex;
@@ -15,7 +15,7 @@ $base-spacing: 2em;
   background: #000000;
   padding: $base-spacing;
   box-shadow: -20px 19px #888888;
-  margin-bottom: $base-spacing;
+  margin-bottom: $base-spacing * 2;
 
   @media screen and (max-width: $xs-xxs) {
     flex-direction: column;
@@ -24,8 +24,7 @@ $base-spacing: 2em;
 }
 
 .music-container {
-  margin-left: $base-spacing/2;
-  margin-right: $base-spacing/2;
+  margin: $base-spacing;
   height: 377px;
   border: white solid 30px;
   width: 377px;
@@ -38,6 +37,7 @@ $base-spacing: 2em;
 
 .music-label-container {
   background-color: white;
+  margin: $base-spacing;
 
   .music-label {
     text-align: center;
@@ -74,7 +74,7 @@ $base-spacing: 2em;
     margin-bottom: $base-spacing;
   }
 
-  .outer-music-row{
+  .outer-music-row {
     box-shadow: none;
   }
 }

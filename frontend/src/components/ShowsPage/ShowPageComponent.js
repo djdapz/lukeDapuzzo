@@ -15,7 +15,6 @@ class ShowPage extends Component {
 
     componentDidMount() {
         this.props.routeChanged(routes.SHOWS);
-        this.props.getAllShows()
     }
 
     render() {
@@ -42,7 +41,7 @@ class ShowPage extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({routeChanged, getAllShows}, dispatch)
+    return bindActionCreators({routeChanged}, dispatch)
 }
 
 function mapStateToProps(state) {
