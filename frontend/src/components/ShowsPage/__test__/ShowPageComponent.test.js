@@ -5,7 +5,6 @@ import ShowPageComponent from "../ShowPageComponent";
 import routes from "../../../constants/routes";
 import {routeChanged} from "../../../actions/RouteChangedAction";
 import {mockStore} from "../../../../testConfig/testUtils";
-import {getAllShows} from "../../../actions/GetAllShows";
 
 
 jest.mock('../../../actions/GetAllShows');
@@ -39,10 +38,6 @@ const latestAfter = {
 const shows = [latestAfter, earliestAfter, earliestBefore, latestBefore];
 
 describe('Show Page Component', () => {
-    it('should list all of the shows when they are passed', function () {
-        shallow(<ShowPageComponent store={mockStore({shows: []})}/>).dive();
-        expect(getAllShows).toHaveBeenCalled();
-    });
 
     it('should dispatch the the route has changed', function () {
         shallow(<ShowPageComponent store={mockStore({shows: []})}/>).dive();
