@@ -32,7 +32,6 @@ class AdminPage extends Component {
 
     render() {
         return (
-
             <div id="admin-page" className="main-content">
                 <NewSongForm/>
                 {this.renderTableForAllTypes()}
@@ -54,7 +53,6 @@ class AdminPage extends Component {
                     return songList.songs.length > 0
                 })
                 .map(songList => {
-
                     return <SongTable songs={songList.songs} type={songList.type}/>
                 });
         }
