@@ -3,7 +3,7 @@ import {shallow} from "enzyme";
 
 import ShowPageComponent from "../ShowPageComponent";
 import routes from "../../../constants/routes";
-import {routeChanged} from "../../../actions/RouteChangedAction";
+
 import {mockStore} from "../../../../testConfig/testUtils";
 
 

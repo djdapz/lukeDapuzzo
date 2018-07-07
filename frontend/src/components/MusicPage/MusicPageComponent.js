@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {routeChanged} from "../../actions/RouteChangedAction";
-import routes from "../../constants/routes";
 
 import PropTypes from 'prop-types';
 import {getAllSongs} from "../../actions/GetAllSongs";
@@ -15,11 +13,6 @@ class MusicPage extends Component {
     constructor() {
         super();
     }
-
-    componentDidMount() {
-        this.props.routeChanged(routes.MUSIC)
-    }
-
     render() {
         return (
             <div id="music-page" className="main-content">
@@ -43,7 +36,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({routeChanged, getAllSongs}, dispatch)
+    return bindActionCreators({getAllSongs}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPage);

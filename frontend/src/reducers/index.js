@@ -7,6 +7,8 @@ import userAuthenticationReducer from "./UserAuthenticationReducer";
 import {loginFormReducer} from "./LoginFormReducer";
 import newSongReducer from "./NewSongReducer";
 
+import {routerReducer} from 'react-router-redux'
+
 const userReducer = combineReducers({
     isAuthenticated: userAuthenticationReducer,
     loginState: loginFormReducer
@@ -19,7 +21,8 @@ const rootReducer = combineReducers({
     songs: songsReducer,
     newSong: newSongReducer,
     user: userReducer,
-    router: routeReducer
+    router: routeReducer,
+    reduxRouter: routerReducer
 });
 
 export default rootReducer;

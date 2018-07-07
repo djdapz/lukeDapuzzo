@@ -3,9 +3,8 @@ import {shallow} from "enzyme";
 
 import MusicPageComponent from "../MusicPageComponent";
 import {mockStore} from "../../../../testConfig/testUtils";
-import {routeChanged} from "../../../actions/RouteChangedAction";
+
 import routes from "../../../constants/routes";
-import {getAllSongs} from "../../../actions/GetAllSongs";
 
 jest.mock("../../../actions/RouteChangedAction");
 jest.mock("../../../actions/GetAllSongs");

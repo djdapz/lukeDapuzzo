@@ -1,9 +1,4 @@
 import React, {Component} from 'react';
-
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import routes from "../../constants/routes";
-import {routeChanged} from "../../actions/RouteChangedAction"
 import ContactForm from "./ContactFormComponent";
 
 const contactInfo = [
@@ -18,11 +13,6 @@ const contactInfo = [
 ];
 
 class ContactPage extends Component{
-
-    componentDidMount(){
-        this.props.routeChanged(routes.CONTACT)
-    }
-
     static renderContactInfo(){
         return contactInfo.map(contact  =>  {
             return(
@@ -50,14 +40,7 @@ class ContactPage extends Component{
     }
 }
 
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({routeChanged}, dispatch)
-}
-
-//null means no redux state necessary
-export default connect(null , mapDispatchToProps)(ContactPage);
-
-
+export default ContactPage;
 
 
 

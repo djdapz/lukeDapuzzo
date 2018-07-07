@@ -4,10 +4,8 @@ import {connect} from "react-redux";
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
 import {bindActionCreators} from "redux";
-import {routeChanged} from "../../actions/RouteChangedAction";
-import {loginAction} from "../../actions/UserActions";
 
-import routes from "../../constants/routes";
+import {loginAction} from "../../actions/UserActions";
 import {FAILED, SUBMITTED} from "../../constants/formStates";
 
 
@@ -23,10 +21,6 @@ class LoginPage extends Component {
         this.submitLogin = this.submitLogin.bind(this);
         this.renderButtonOrSpinnyWheel = this.renderButtonOrSpinnyWheel.bind(this);
         this.listenForSubmit = this.listenForSubmit.bind(this);
-    }
-
-    componentDidMount() {
-        this.props.routeChanged(routes.LOGIN)
     }
 
     handleUsernameChange(event) {
@@ -86,7 +80,7 @@ class LoginPage extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({routeChanged, loginAction}, dispatch)
+    return bindActionCreators({ loginAction}, dispatch)
 }
 
 function mapStateToProps(state) {

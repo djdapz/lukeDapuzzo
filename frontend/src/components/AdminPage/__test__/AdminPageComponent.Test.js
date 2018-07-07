@@ -1,54 +1,19 @@
-import {shallow} from "enzyme";
+import {mount} from "enzyme";
 import React from "react";
 import AdminPage from "../AdminPageComponent";
-import {mockStore} from "../../../../testConfig/testUtils";
+import ReactRouterEnzymeContext from "react-router-enzyme-context";
 
 describe("Admin Page", () => {
-    it('should render a table for each music type', () => {
-        let songs = [
-            {
-                "id": "1232",
-                "name": "whats new",
-                "type": "SOUNDCLOUD_SONG"
-            },
-            {
-                "id": "1235",
-                "name": "pussycat",
-                "type": "SOUNDCLOUD_SONG"
-            },
-            {
-                "id": "1236",
-                "name": "I Like it when you sleep for you are so beautiful yet unaware of it",
-                "type": "SPOTIFY_ALBUM"
-            },
-            {
-                "id": "1234",
-                "name": "hello it's me",
-                "type": "SPOTIFY_SONG"
-            }
-        ];
+    const mockRouter = new ReactRouterEnzymeContext();
 
-        let adminPage = shallow(<AdminPage store={mockStore({songs})}/>).dive();
+    it('should maybe do a thing', function () {
 
-        expect(adminPage.find("SongTable").length).toBe(3);
+        mockRouter.props().history.go('/admin/songs');
+        const adminPath = mount(<AdminPage {...mockRouter.props()}/>, mockRouter.get());
+
+        console.log(adminPath.html());
+
+        expect(adminPath.find("SongAdmin").length).toBe(1);
     });
 
-    it('should only a table for a music type thats present', () => {
-        let songs = [
-            {
-                "id": "1232",
-                "name": "whats new",
-                "type": "SOUNDCLOUD_SONG"
-            },
-            {
-                "id": "1235",
-                "name": "pussycat",
-                "type": "SOUNDCLOUD_SONG"
-            }
-        ];
-
-        let adminPage = shallow(<AdminPage store={mockStore({songs})}/>).dive();
-
-        expect(adminPage.find("SongTable").length).toBe(1);
-    })
 });

@@ -31,7 +31,7 @@ class HeaderBar extends Component {
     }
 
     renderHomeLink() {
-        const titleClassName = "title" + (this.props.route === routes.HOME ? " title-active" : "");
+        const titleClassName = "title" + (this.props.route.location.pathname === routes.HOME.href ? " title-active" : "");
         return (
             <div className="title-container">
                 <div onClick={() => {this.props.push("/"); this.setState({menubarCollapsed: true});}} className={titleClassName}>
@@ -109,7 +109,7 @@ class HeaderBar extends Component {
 
 function mapStateToProps(state) {
     return {
-        route: state.route
+        route: state.reduxRouter
     }
 }
 

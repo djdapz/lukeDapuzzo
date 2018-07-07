@@ -9,7 +9,7 @@ class PrivateRoute extends React.Component {
         if (store.getState().user.isAuthenticated) {
             const rest = {...this.props};
             delete rest.component;
-            return <Route {...rest} component={this.props.component}/>
+            return <Route exact {...rest} component={this.props.component}/>
         }
         return <Redirect to={{
             pathname: "/login",

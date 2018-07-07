@@ -3,7 +3,7 @@ import {shallow} from "enzyme";
 
 import LoginPage from "../LoginPage";
 import routes from "../../../constants/routes";
-import {routeChanged} from "../../../actions/RouteChangedAction";
+
 import {mockStore} from "../../../../testConfig/testUtils";
 import {loginAction} from "../../../actions/UserActions";
 import {CLEAN, SUBMITTED} from "../../../constants/formStates";

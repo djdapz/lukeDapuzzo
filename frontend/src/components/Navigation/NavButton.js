@@ -26,7 +26,9 @@ class NavButton extends Component {
     rowClassName() {
         let rowClassName = "menubar-row";
 
-        if (this.props.route.href === this.props.currentRoute.href) {
+        console.log(this.props);
+
+        if (this.props.route.href === this.props.router.location.pathname) {
             rowClassName += " menubar-active";
         }
         return rowClassName;
@@ -49,12 +51,6 @@ NavButton.defaultProps = {
     callback: () => undefined
 };
 
-function mapStateToProps(state) {
-    return {
-        currentRoute: state.route
-    }
-}
-
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(
         {
@@ -62,6 +58,12 @@ function mapDispatchToProps(dispatch) {
         },
         dispatch
     )
+}
+
+function mapStateToProps(state) {
+    return {
+        router: state.reduxRouter
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavButton);

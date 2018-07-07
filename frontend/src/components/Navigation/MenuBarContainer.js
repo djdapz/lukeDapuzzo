@@ -41,7 +41,6 @@ class Menubar extends Component {
 
 function mapStateToProps(state) {
     return {
-        route: state.route,
         isAuthenticated: state.user.isAuthenticated
     }
 }
