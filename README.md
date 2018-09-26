@@ -8,4 +8,4 @@ package with `./gradlew clean bootRepackage`
 
 run with `./graldew clean bootRun`
 
-**note local instance of postgres sql must be running
+**run `docker-compose up -d` before spinning up the backend server
