@@ -54,7 +54,7 @@ open class ShowServiceTest {
     @Test
     fun shouldDeleteSong(){
         subject.deleteShow(123)
-        verify(showRepository.delete(123))
+        verify(showRepository).delete(123)
     }
 
 }
