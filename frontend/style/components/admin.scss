@@ -2,16 +2,16 @@
 
 #admin-page {
   text-align: center;
-  .admin-table{
+  .admin-table {
     display: flex;
   }
 
-  .table-header, .padding-for-centering{
+  .table-header, .padding-for-centering {
     text-align: center;
     width: 20%;
   }
 
-  .table-content{
+  .table-content {
     width: 80%;
   }
 
@@ -41,7 +41,7 @@
     padding: .5em 1em;
   }
 
-  .song-listing {
+  .admin-listing {
     display: flex;
     justify-content: center;
     align-items: baseline;
@@ -52,7 +52,7 @@
       margin-left: auto;
     }
 
-    .song-column {
+    .song-column, .show-column {
       padding: 0.375rem 0.75rem;
     }
 
@@ -72,5 +72,25 @@
     .song-type-column {
       width: 175px;
     }
+
+    .date-column {
+      width: 125px;
+    }
+    .venue-column {
+      width: 200px;
+    }
+
+    .venue-link-column {
+      width: 400px;
+    }
+
+    .style-column {
+      width: 100px;
+    }
+
+    .city-column {
+      width: 150px;
+    }
+
   }
 }

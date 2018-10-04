@@ -1,37 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class ShowListing extends Component{
+export default (props) => <div className="listing">
+    <div className="listing-date">
+        {props.show.date}
+    </div>
 
-
-    constructor(props) {
-        super(props)
-    }
-
-    render() {
-        return (
-            <div className="listing">
-                <div className="listing-date">
-                    {this.props.show.date}
-                </div>
-
-                <div className="listing-location">
-                    <div className="listing-venue">
-                        <a href={this.props.show.venue.googleMapsLink} className="alert-link" target="blank">
-                            {this.props.show.venue.name}
-                        </a>
-                    </div>
-                    <div className="listing-city">
-                        {this.props.show.venue.city.name}, {this.props.show.venue.city.state.abbreviation}
-                    </div>
-                </div>
-            </div>
-        )
-    }
-}
-
-
-export default ShowListing;
-
-
-
-
+    <div className="listing-location">
+        <div className="listing-venue">
+            <a href={props.show.venueLink} className="alert-link" target="blank">
+                {props.show.venueName}
+            </a>
+        </div>
+        <div className="listing-city">
+            {props.show.cityString}
+        </div>
+    </div>
+</div>;

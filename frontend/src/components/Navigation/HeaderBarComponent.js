@@ -14,8 +14,8 @@ import {getAllSongs} from "../../actions/GetAllSongs";
 import {getAllShows} from "../../actions/GetAllShows";
 
 class HeaderBar extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             menubarCollapsed: true
         };

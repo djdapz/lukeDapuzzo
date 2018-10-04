@@ -24,15 +24,15 @@ class ShowRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<ShowEntity
     }
 
     override fun getAll(): List<ShowEntity> = jdbcTemplate
-                    .queryForList("SELECT * FROM SHOW")
-                    .map {
-                        ShowEntity(
-                                it["id"] as Int,
-                                it["venue_id"] as Int,
-                                (it["date"] as Date).toLocalDate(),
-                                it["style"] as String
-                        )
-                    }
+            .queryForList("SELECT * FROM SHOW")
+            .map {
+                ShowEntity(
+                        it["id"] as Int,
+                        it["venue_id"] as Int,
+                        (it["date"] as Date).toLocalDate(),
+                        it["style"] as String
+                )
+            }
 
     override fun getById(id: Any): ShowEntity = jdbcTemplate
             .queryForObject(
@@ -60,4 +60,5 @@ class ShowRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<ShowEntity
         )
     }
 
+    fun delete(id: Int) = jdbcTemplate.update("DELETE FROM show where id=?", id)
 }

@@ -49,7 +49,12 @@ open class ShowServiceTest {
     internal fun `should call getState`(){
         subject.getShow(showEntity.id)
         verify(venueService).getVenue(expected.venue.id)
+    }
 
+    @Test
+    fun shouldDeleteSong(){
+        subject.deleteShow(123)
+        verify(showRepository.delete(123))
     }
 
 }

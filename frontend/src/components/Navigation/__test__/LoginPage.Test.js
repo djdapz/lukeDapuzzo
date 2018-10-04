@@ -2,7 +2,6 @@ import React from "react";
 import {shallow} from "enzyme";
 
 import LoginPage from "../LoginPage";
-import routes from "../../../constants/routes";
 
 import {mockStore} from "../../../../testConfig/testUtils";
 import {loginAction} from "../../../actions/UserActions";
@@ -37,11 +36,6 @@ describe("Login Page", () => {
         expect(passwordInput.prop("type")).toEqual("password");
         expect(passwordInput.prop("className")).toEqual("form-control");
         expect(passwordInput.prop("placeholder")).toEqual("Password");
-    });
-
-    it("should register a page change when the component mounts", () => {
-        renderWithLoginState(CLEAN);
-        expect(routeChanged).toHaveBeenCalledWith(routes.LOGIN)
     });
 
     it('should render a submit button', function () {

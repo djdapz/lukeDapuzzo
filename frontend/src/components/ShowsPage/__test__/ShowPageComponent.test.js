@@ -2,9 +2,10 @@ import React from 'react';
 import {shallow} from "enzyme";
 
 import ShowPageComponent from "../ShowPageComponent";
-import routes from "../../../constants/routes";
+import Table from "../TableComponent"
 
 import {mockStore} from "../../../../testConfig/testUtils";
+import {routeChanged} from "../../../actions/RouteChangedAction";
 
 
 jest.mock('../../../actions/GetAllShows');
@@ -39,10 +40,6 @@ const shows = [latestAfter, earliestAfter, earliestBefore, latestBefore];
 
 describe('Show Page Component', () => {
 
-    it('should dispatch the the route has changed', function () {
-        shallow(<ShowPageComponent store={mockStore({shows: []})}/>).dive();
-        expect(routeChanged).toHaveBeenCalledWith(routes.SHOWS)
-    });
 
     it('should sort shows', function () {
         const sortedDates = ShowPageComponent.processDatesAround(new Date("2018-03-01"), shows);
@@ -61,7 +58,7 @@ describe('Show Page Component', () => {
         let showPageComponent = shallow(<ShowPageComponent store={mockStore({shows: shows})}/>).dive();
         let tables = showPageComponent
             .find("#show-page")
-            .find("Table");
+            .find(Table);
 
         expect(tables).toHaveLength(2);
 

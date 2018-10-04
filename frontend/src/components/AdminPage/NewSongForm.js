@@ -45,7 +45,7 @@ class NewSongForm extends Component {
                     </select>
                 </div>
                 <div className="table-content">
-                    <div className={"song-listing"}>
+                    <div className={"admin-listing"}>
                         <div className="name-column song-input">
                             <input
                                 placeholder="Name of Song"

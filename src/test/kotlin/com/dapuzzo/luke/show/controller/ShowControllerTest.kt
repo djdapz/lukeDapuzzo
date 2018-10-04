@@ -23,7 +23,7 @@ class ShowControllerTest {
     private val expectedList = ArrayList<Show>()
 
     private val mockShowService: ShowService = mock {
-        on {getAllShows()} doReturn expectedList
+        on { getAllShows() } doReturn expectedList
     }
 
     private val controller = ShowController(mockShowService)
@@ -44,7 +44,7 @@ class ShowControllerTest {
     }
 
     @Test
-    internal fun `should return list of shows`(){
+    fun shouldReturnListOfShows() {
         val actualJson = mockMvc
                 .perform(MockMvcRequestBuilders.get("/shows"))
                 .andExpect(MockMvcResultMatchers.status().isOk)
@@ -53,6 +53,17 @@ class ShowControllerTest {
         val actual: List<Show> = JsonConfig.objectMapper().readValue(actualJson)
 
         Assertions.assertThat(actual).containsExactlyElementsOf(actual)
+    }
+
+    @Test
+    fun shouldDeleteShow() {
+        mockMvc
+                .perform(MockMvcRequestBuilders.delete("/shows/123"))
+                .andExpect(MockMvcResultMatchers.status().isOk)
+                .andReturn().response.contentAsString
+
+        verify(mockShowService).deleteShow(123)
+
     }
 
 //    @Test

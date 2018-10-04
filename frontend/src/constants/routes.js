@@ -56,7 +56,6 @@ const routes = {
         header: "Login",
         menubarClassName: "login-menubar"
     }
-
 };
 
 export default routes;

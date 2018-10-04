@@ -2,8 +2,9 @@ import ShowListing from "../ShowListingComponent";
 
 import React from 'react';
 import {shallow} from "enzyme";
+import {Show} from "../../../classes/Show";
 
-const show = {
+const show = Show.fromJson({
     "id": 1,
     "date": "2017-07-23",
     "style": "Acoustic",
@@ -20,7 +21,7 @@ const show = {
             }
         }
     }
-};
+});
 
 describe('Listing Component', () => {
     it('should render a div with class listing ', function () {
@@ -44,8 +45,6 @@ describe('Listing Component', () => {
 
     it('should render the venue name in a link under listing-location > listing-venue', () => {
         let venueName = shallow(<ShowListing show={show}/>)
-            .find(".listing-location")
-            .find(".listing-venue")
             .find(".alert-link")
             .text();
 
@@ -54,8 +53,6 @@ describe('Listing Component', () => {
 
     it('should add a google maps link around the listing name', function () {
         let venueLink = shallow(<ShowListing show={show}/>)
-            .find(".listing-location")
-            .find(".listing-venue")
             .find(".alert-link");
 
         expect(venueLink.prop("href")).toBe("https://goo.gl/maps/6cwSXNDx9bF2");
@@ -63,7 +60,6 @@ describe('Listing Component', () => {
 
     it("shold combine city name and city state under listing-city", function () {
         let cityText = shallow(<ShowListing show={show}/>)
-            .find(".listing-location")
             .find(".listing-city")
             .text();
 

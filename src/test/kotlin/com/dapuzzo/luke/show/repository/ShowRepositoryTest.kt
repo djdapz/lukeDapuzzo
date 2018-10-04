@@ -40,4 +40,13 @@ class ShowRepositoryTest : DatabaseBase() {
 
         assertThat(actualShow).isEqualTo(firstShow)
     }
+
+    @Test
+    fun shouldDeleteSong(){
+        showRepository.delete(firstShow.id)
+
+        val all = showRepository.getAll()
+
+        assertThat(all).containsExactly(secondShow)
+    }
 }

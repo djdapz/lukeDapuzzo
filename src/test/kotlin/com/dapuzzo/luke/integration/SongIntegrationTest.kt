@@ -14,13 +14,13 @@ class SongIntegrationTest: IntegrationTest() {
     fun shouldCreateSpotifySongAndSoundcloudSongWithSameID() {
         assertSongCanCreateSuccessfully(
                 id = "123",
-                name = "I love carla",
+                name = "theFirstSong",
                 type = SPOTIFY_SONG
         )
 
         assertSongCanCreateSuccessfully(
                 id = "123",
-                name = "...Like a lot a lot",
+                name = "the soundcloud songs",
                 type = SOUNDCLOUD_SONG
         )
     }

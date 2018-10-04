@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import SongRow from "./SongRowComponent";
+import SongRow from "./SongRow";
 
 export default class SongTable extends Component {
 

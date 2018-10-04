@@ -1,8 +1,10 @@
 import React from 'react';
 import Table from "../TableComponent";
+import ShowListing from '../ShowListingComponent'
 import {shallow} from "enzyme";
 
 describe('Table Component', () => {
+
     it("should save passed show as prop", () => {
         const headerTitle = shallow(<Table title={"A table-guy"}/>)
             .find(".live-table")
@@ -13,8 +15,7 @@ describe('Table Component', () => {
     });
 
     it('should tell the user that there are no upcoming shows when no shows are passed', function () {
-        const message = shallow(<Table/>)
-            .find(".table-message");
+        const message = shallow(<Table/>).find(".table-message");
 
         expect(message).toHaveLength(2);
         expect(message.at(0).text()).toBe("No upcoming shows");
@@ -24,9 +25,10 @@ describe('Table Component', () => {
     });
 
     it('should list all of the shows when they are passed', function () {
-        let show1 = {id: 6};
-        let show2 = {id: 9};
-        const showListing = shallow(<Table shows={[show1, show2]} />).find("ShowListing");
+        const show1 = {id: 6};
+        const show2 = {id: 9};
+        const table = shallow(<Table shows={[show1, show2]}/>);
+        const showListing = table.find(ShowListing);
 
         expect(showListing).toHaveLength(2);
 

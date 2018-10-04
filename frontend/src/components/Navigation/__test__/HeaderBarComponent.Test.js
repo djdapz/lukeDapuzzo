@@ -14,21 +14,20 @@ jest.mock("../../../actions/GetAllShows");
 jest.mock("react-router-redux");
 
 describe("Header Bar Component", () => {
-    it('should initially have the dropdown collapsed', function () {
-        const headerbar = shallow(<HeaderBar store={mockStore({
-            route: {
-                name: "/some-route"
+    const reduxRouter = {
+        reduxRouter: {
+            location: {
+                pathname: "/some-route"
             }
-        })}/>).dive();
+        }
+    };
+    it('should initially have the dropdown collapsed', function () {
+        const headerbar = shallow(<HeaderBar store={mockStore(reduxRouter)}/>).dive();
         expect(headerbar.find("Connect(Menubar)").prop("menubarClass")).toEqual("menubar-collapsed");
     });
 
     it('should expand the dropdown when a user clicks the hamburger', function () {
-        const headerbar = shallow(<HeaderBar store={mockStore({
-            route: {
-                name: "/some-route"
-            }
-        })}/>).dive();
+        const headerbar = shallow(<HeaderBar store={mockStore(reduxRouter)}/>).dive();
 
         let socialMediaHamburger = headerbar.find("#social-media-hamburger");
         socialMediaHamburger.simulate("click");
@@ -37,11 +36,7 @@ describe("Header Bar Component", () => {
     });
 
     it('should collapse the dropdown when a user navigates', function () {
-        const headerbar = shallow(<HeaderBar store={mockStore({
-            route: {
-                name: "/some-route"
-            }
-        })}/>).dive();
+        const headerbar = shallow(<HeaderBar store={mockStore(reduxRouter)}/>).dive();
 
         const socialMediaHamburger = headerbar.find("#social-media-hamburger");
         socialMediaHamburger.simulate("click");
@@ -57,24 +52,16 @@ describe("Header Bar Component", () => {
     });
 
     it("should call PUSH on redux-router when title is clicked", () => {
-        const headerbar = shallow(<HeaderBar store={mockStore({
-            route: {
-                name: "/some-route"
-            }
-        })}/>).dive();
+        const headerbar = shallow(<HeaderBar store={mockStore(reduxRouter)}/>).dive();
 
         let title = headerbar.find(".title");
         title.simulate("click");
 
         expect(push).toHaveBeenCalledWith("/")
-    })
+    });
 
     it('should call getall songs and shows when the page initially loads', function () {
-        shallow(<HeaderBar store={mockStore({
-            route: {
-                name: "/some-route"
-            }
-        })}/>).dive();
+        shallow(<HeaderBar store={mockStore(reduxRouter)}/>).dive();
 
         expect(getAllSongs).toHaveBeenCalled();
         expect(getAllShows).toHaveBeenCalled();

@@ -4,21 +4,12 @@
 
 export const DELETE_SONG_FAILED = "DELETE_SONG_FAILED";
 export const DELETE_SONG = "DELETE_SONG";
-export const CLEAR_DELETE_SONG = "CLEAR_DELETE_SONG";
 export const SONG_DELETED = "SONG_DELETED";
 
 export const deleteSong = (id, type) => {
     return {
         type: DELETE_SONG,
         payload: {id, type}
-    }
-};
-
-
-export const clearDeleteSong = () => {
-    return {
-        type: CLEAR_DELETE_SONG,
-        payload: []
     }
 };
 

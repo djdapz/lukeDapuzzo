@@ -2,8 +2,9 @@ import {shallow} from "enzyme";
 
 import React from "react";
 import SongAdmin from "../SongAdmin"
+import {mockStore} from "../../../../testConfig/testUtils";
 
-describe("song admin", () =>{
+describe("song admin", () => {
     it('should render a table for each music type', () => {
         let songs = [
             {
@@ -28,7 +29,7 @@ describe("song admin", () =>{
             }
         ];
 
-        let adminPage = shallow(<SongAdmin songs={songs}/>);
+        let adminPage = shallow(<SongAdmin store={mockStore({songs})}/>).dive();
 
         expect(adminPage.find("SongTable").length).toBe(3);
     });
@@ -47,7 +48,7 @@ describe("song admin", () =>{
             }
         ];
 
-        let adminPage = shallow(<SongAdmin songs={songs}/>);
+        let adminPage = shallow(<SongAdmin store={mockStore({songs})}/>).dive();
 
         expect(adminPage.find("SongTable").length).toBe(1);
     })

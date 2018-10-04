@@ -18,7 +18,7 @@ class SongRow extends Component {
 
     render() {
         return (
-            <div className="song-listing">
+            <div className="admin-listing">
                 <div className="name-column  song-column">
                     <p>
                         {this.props.details.name}
@@ -43,7 +43,6 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({deleteSong}, dispatch)
 }
 
-//null means no redux state necessary
 export default connect(null, mapDispatchToProps)(SongRow);
 
 

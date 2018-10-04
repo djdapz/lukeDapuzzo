@@ -33,4 +33,6 @@ class ShowService(
         )
     }
 
+    fun deleteShow(id: Int) = showRepository.delete(id)
+
 }
