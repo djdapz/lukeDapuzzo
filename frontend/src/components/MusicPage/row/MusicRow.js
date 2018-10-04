@@ -2,13 +2,16 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import VerticalLabel from "../../Multipurpose/VerticalLabel";
 
-class SongRow extends Component {
+class MusicRow extends Component {
 
     renderSongs() {
         return this.props.songs.map(this.props.renderMethod)
     }
 
     render() {
+        if(this.props.songs.length === 0){
+            return <div/>
+        }
         return <div className={"outer-music-row"}>
             <VerticalLabel label={this.props.label}/>
             <div className={"inner-music-row"}>
@@ -19,7 +22,7 @@ class SongRow extends Component {
 }
 
 
-SongRow.propTypes = {
+MusicRow.propTypes = {
     songs: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired
@@ -29,4 +32,4 @@ SongRow.propTypes = {
 };
 
 
-export default SongRow;
+export default MusicRow;

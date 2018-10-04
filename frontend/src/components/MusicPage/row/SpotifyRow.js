@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {SPOTIFY_ALBUM, SPOTIFY_SONG} from "../../../constants/musicTypes";
 import PropTypes from "prop-types";
-import SongRow from "./SongRow";
+import MusicRow from "./MusicRow";
 import MusicComponent from "../MusicComponent";
 
 class SpotifyRow extends Component {
@@ -13,18 +13,18 @@ class SpotifyRow extends Component {
     }
 
     getSongs() {
-        return [...this.getSongsFor(SPOTIFY_ALBUM),
-            ...this.getSongsFor(SPOTIFY_SONG)]
+        return [...this.getSongsFor(SPOTIFY_ALBUM), ...this.getSongsFor(SPOTIFY_SONG)]
     }
 
-    static renderSpotifySong(song){
+    static renderSpotifySong(song) {
         const type = song.type === SPOTIFY_ALBUM ? "album" : "track";
         let s = `https://embed.spotify.com/?uri=spotify:${type}:${song.id}&theme=white`;
         return <MusicComponent url={s} key={song.id}/>
     }
+
     render() {
 
-        return <SongRow songs={this.getSongs()} label={"spotify"}
+        return <MusicRow songs={this.getSongs()} label={"spotify"}
                         renderMethod={SpotifyRow.renderSpotifySong}/>
     }
 }

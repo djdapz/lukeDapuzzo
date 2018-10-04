@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {SOUNDCLOUD_SONG} from "../../../constants/musicTypes";
 import PropTypes from "prop-types";
-import SongRow from "./SongRow";
+import MusicRow from "./MusicRow";
 import MusicComponent from "../MusicComponent";
 
 class SoundcloudRow extends Component {
@@ -18,7 +18,7 @@ class SoundcloudRow extends Component {
     }
 
     render() {
-        return <SongRow songs={this.getSongs()} label={"soundcloud"}
+        return <MusicRow songs={this.getSongs()} label={"soundcloud"}
                         renderMethod={SoundcloudRow.renderSoundcloudSong}/>
     }
 }
