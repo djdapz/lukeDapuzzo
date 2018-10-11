@@ -13,7 +13,7 @@ class NavButton extends Component {
     }
 
     render() {
-        return <div key={this.props.route.name} className={`menubar-row ${this.maybeActive}`} onClick={this.navigate}>
+        return <div key={this.props.route.name} className={`menubar-row ${this.maybeActive()}`} onClick={this.navigate}>
             <h3 className="menubar-link"> {this.props.route.name}</h3>
         </div>
     }
@@ -23,9 +23,8 @@ class NavButton extends Component {
         this.props.push(this.props.route.href);
     }
 
-    maybeActive = () => this.isActive() ? " menubar-active" : "";
+    maybeActive = () => this.props.route.href === this.props.router.location.pathname ? " menubar-active" : "";
 
-    isActive = () => this.props.route.href === this.props.router.location.pathname
 }
 
 NavButton.propTypes = {

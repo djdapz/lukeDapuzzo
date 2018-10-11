@@ -10,54 +10,54 @@ a:hover {
 
 .menubar-collapsed {
   .menubar-row {
-    height: 0;
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 0;
-    transition: margin $transition-speed, height $transition-speed, padding $transition-speed;;
   }
 
   top: 0;
   height: 0;
-  padding: 0;
 }
 
 .menubar-expanded {
   .menubar-row {
-    //margin-bottom: 1%;
-    padding-top: 2.5%;
-    padding-bottom: 2.5%;
-    height: 12%;
-    transition: margin $transition-speed, height $transition-speed, padding $transition-speed;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
   }
 
-  top: $header-bar-height;
-  padding: 1em;
+  top: 0;
   height: 100%;
-  padding-bottom: $header-bar-height;
+  padding-top: $header-bar-height;
+  box-sizing: border-box;
 }
 
 .menubar {
+  .menubar-row {
+    flex: 1;
+    text-align: center;
+    width: 100%;
+    transition: height $transition-speed, flex $transition-speed, padding $transition-speed;
+  }
+
+  overflow: hidden;
+  transition: height $transition-speed, padding $transition-speed;;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   align-content: center;
+
   position: fixed;
+  right: 0;
+  left: 0;
+  width: 100%;
+
+
   font-family: "Carter One", cursive;
   font-size: larger;
-  right: 0;
-  width: 100%;
   background-color: $transparent-aqua-background;
   z-index: 1;
-
-  transition: height $transition-speed, padding $transition-speed, top $transition-speed;
-
-  .menubar-row {
-    text-align: center;
-    width: 100%;
-  }
-
   .social-media-icon {
     font-size: $header-bar-height /1.5;
     margin-right: auto;
