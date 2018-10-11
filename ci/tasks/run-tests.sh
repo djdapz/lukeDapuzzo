@@ -14,6 +14,6 @@ pushd repo
     ./gradlew clean test --info
     pushd frontend
         npm install
-        npm test
+        CI=true npm test
     popd
 popd
