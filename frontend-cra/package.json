@@ -1,0 +1,9 @@
+{
+  "name": "frontend-cra",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "create-react-app": "^2.0.3"
+  }
+}
