@@ -34,7 +34,12 @@ describe("Nav Button", () => {
 
 const renderNavBar = (callback) => shallow(<NavButton
     store={mockStore({
-        route: {href: "/admin"}
+        route: {href: "/admin"},
+        reduxRouter: {
+            location: {
+                pathname: "/some-route"
+            }
+        }
     })}
     route={{
         displayInMenuBar: true,
