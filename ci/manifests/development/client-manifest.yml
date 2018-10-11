@@ -4,5 +4,3 @@ applications:
   memory: 512M
   instances: 1
   command: npm run launch
-  env:
-    LUKE_ENV: dev

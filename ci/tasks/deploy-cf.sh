@@ -22,9 +22,7 @@ popd
 ## push client ##
 #################
 
-pushd repo
-    pushd frontend-server
-        /root/bin/aws s3 cp "s3://luke-dapuzzo/app/bundle-${BUILD_VERSION}.js"  ./dist/bundle.js
-        cf push -f "../ci/manifests/$PCF_SPACE/client-manifest.yml"
-    popd
-popd
+/root/bin/aws s3 cp "./frontend-server.zip"
+
+/root/bin/aws s3 cp  "s3://luke-dapuzzo/app/frontend-server-{BUILD_VERSION}.zip"  ./frontend-server-build.zip
+cf push -f "../ci/manifests/$PCF_SPACE/client-manifest.yml" -p ./frontend-server-build.zip
