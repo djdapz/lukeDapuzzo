@@ -2,6 +2,7 @@ import React from "react";
 import {shallow} from "enzyme";
 
 import LoginPage from "../LoginPage";
+import {Button, TextField} from "@material-ui/core"
 
 import {mockStore} from "../../../../testConfig/testUtils";
 import {loginAction} from "../../../actions/UserActions";
@@ -22,7 +23,7 @@ describe("Login Page", () => {
 
     it('should render login input boxes in the login-window', function () {
         const inputs = renderWithLoginState(CLEAN)
-            .find("input");
+            .find(TextField);
 
         expect(inputs.length).toBe(2);
 
@@ -39,9 +40,9 @@ describe("Login Page", () => {
     });
 
     it('should render a submit button', function () {
-        let button = renderWithLoginState(CLEAN).find("button");
+        let button = renderWithLoginState(CLEAN).find(Button);
 
-        expect(button.text()).toBe("Send it!");
+        expect(button.length).toBe(1);
     });
 
     it('should include a title saying "login"', function () {
@@ -52,7 +53,7 @@ describe("Login Page", () => {
 
     it('should try to login the user when the login button is clicked', function () {
         let loginPage = renderWithLoginState(CLEAN);
-        let button = loginPage.find("button");
+        let button = loginPage.find(Button);
 
         loginPage.setState({"username": "joe", "password": "secretPassword:O"});
 
@@ -65,20 +66,20 @@ describe("Login Page", () => {
         let loginPage = renderWithLoginState(SUBMITTED);
 
         expect(loginPage.find("#loading-wheel").length).toBe(1);
-        expect(loginPage.find("button").length).toBe(0);
+        expect(loginPage.find(Button).length).toBe(0);
     });
 
     it('should render the button wheel when passed state is FAILED or CLEAN', function () {
         let loginPage = renderWithLoginState(CLEAN);
 
-        expect(loginPage.find("button").length).toBe(1);
+        expect(loginPage.find(Button).length).toBe(1);
         expect(loginPage.find("#loading-wheel").length).toBe(0);
     });
 
     it('should render the button wheel when passed state is CLEAN', function () {
         let loginPage = renderWithLoginState(CLEAN);
 
-        expect(loginPage.find("button").length).toBe(1);
+        expect(loginPage.find(Button).length).toBe(1);
         expect(loginPage.find("#loading-wheel").length).toBe(0);
     });
 
