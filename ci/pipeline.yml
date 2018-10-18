@@ -42,8 +42,6 @@ jobs:
   - get: version
   - get: repo
     trigger: true
-  - get: openjdk-node-cf
-    params: {save: true}
   - get: postgres
     params: {save: true}
   - task: run-tests
@@ -59,9 +57,8 @@ jobs:
     trigger: true
   - get: openjdk-node-cf
     params: {save: true}
-  - get: postgres
-    params: {save: true}
   - task: run-tests
+    image: openjdk-node-cf
     privileged: true
     file: repo/ci/tasks/run-tests-frontend.yml
 
