@@ -5,7 +5,7 @@ const socialMediaIcons = [
     },
     {
         fontAwesomeName: "youtube",
-        href: "https://www.youtube.com/channel/UCH14cP9eNx0gDy8kxZqfNZQ"
+        href: "https://www.youtube.com/channel/UCz-21g_mn4YuMVtrb9Mlxig"
     },
     {
         fontAwesomeName: "instagram",
