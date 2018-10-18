@@ -47,6 +47,7 @@ jobs:
   - get: postgres
     params: {save: true}
   - task: run-tests
+    image: openjdk-node-cf
     privileged: true
     file: repo/ci/tasks/run-tests-backend.yml
 
