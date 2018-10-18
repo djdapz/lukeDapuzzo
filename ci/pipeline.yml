@@ -36,7 +36,7 @@ resources:
 
 jobs:
 
-- name: run-tests-backend
+- name: run-tests
   public: true
   plan:
   - get: version
@@ -47,9 +47,10 @@ jobs:
   - get: postgres
     params: {save: true}
   - task: run-tests
-    image: openjdk-node-cf
     privileged: true
-    file: repo/ci/tasks/run-tests-backend.yml
+    file: repo/ci/tasks/run-tests.yml
+  - put: version
+    params: {bump: patch}
 
 - name: run-tests-frontend
   public: true
@@ -70,7 +71,7 @@ jobs:
   plan:
   - get: repo
     trigger: true
-    passed: ["run-tests-frontend", "run-tests-backend"]
+    passed: ["run-tests-frontend", "run-tests"]
   - put: version
     params: {bump: patch}
 

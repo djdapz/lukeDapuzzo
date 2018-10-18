@@ -13,14 +13,15 @@ inputs:
 - name: openjdk-node-cf
 
 caches:
-  - path: .gradle/
+- path: .gradle/
 
 run:
   path: sh
   args:
   - -exc
   - |
-    source /docker-lib .sh
+    source /docker-lib.sh
+    source repo/ci/tasks/common.sh
 
     start_docker
 
