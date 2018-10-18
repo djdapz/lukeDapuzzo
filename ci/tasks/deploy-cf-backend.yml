@@ -14,6 +14,3 @@ params:
 
 run:
   path: repo/ci/tasks/deploy-cf-backend.sh
-
-caches:
-  - path: gradle

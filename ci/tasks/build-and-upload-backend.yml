@@ -11,6 +11,3 @@ params:
 
 run:
   path: repo/ci/tasks/build-and-upload-backend.sh
-
-caches:
-  - path: gradle
