@@ -7,6 +7,9 @@ import {bindActionCreators} from "redux";
 
 import {loginAction} from "../../actions/UserActions";
 import {FAILED, SUBMITTED} from "../../constants/formStates";
+import TextField from "@material-ui/core/TextField/TextField";
+import NavButton from "./NavButton";
+import Button from "@material-ui/core/Button/Button";
 
 
 class LoginPage extends Component {
@@ -45,12 +48,15 @@ class LoginPage extends Component {
                 <div id={"login-window"}>
                     {this.renderWarning()}
                     <h2>Login</h2>
-                    <input className={"form-control"} placeholder={"Username"} type={"text"}
-                           value={this.state.username} onChange={this.handleUsernameChange}
-                           onKeyUp={this.listenForSubmit}/>
-                    <input className={"form-control"} id={"password-field"} placeholder={"Password"} type={"password"}
+                    <TextField className={"form-control"} placeholder={"Username"} type={"text"}
+                               value={this.state.username} onChange={this.handleUsernameChange}
+                               onKeyUp={this.listenForSubmit}
+                               variant="outlined">
+                    </TextField>
+                    <TextField className={"form-control"} id={"password-field"} placeholder={"Password"} type={"password"}
                            value={this.state.password} onChange={this.handlePasswordChange}
-                           onKeyUp={this.listenForSubmit}/>
+                           onKeyUp={this.listenForSubmit}
+                               variant="outlined"/>
                     {this.renderButtonOrSpinnyWheel()}
                 </div>
             </div>
@@ -67,7 +73,7 @@ class LoginPage extends Component {
         if (this.props.loginState === SUBMITTED) {
             return <FontAwesomeIcon id={"loading-wheel"} icon={["fa", "spinner"]} pulse size={"2x"}/>
         } else {
-            return <button className="btn btn-outline-primary float-none" onClick={this.submitLogin}>Send it!</button>
+            return <Button className="btn btn-outline-primary float-none"  variant="outlined" color="primary"  onClick={this.submitLogin}>Send it!</Button>
         }
     }
 
