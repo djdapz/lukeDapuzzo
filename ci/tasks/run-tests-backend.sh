@@ -2,6 +2,8 @@
 
 set -e
 
+source repo/ci/tasks/common.sh
+
 export GRADLE_HOME="/gradle/.gradle"
 export GRADLE_USER_HOME="/gradle/.usergradle"
 export GRADLE_CACHE="/gradle/caches"
@@ -12,8 +14,4 @@ export LUKE_DB_PASSWORD=lukepwd
 
 pushd repo
     ./gradlew clean test --info
-    pushd frontend
-        npm install
-        CI=true npm test
-    popd
 popd
