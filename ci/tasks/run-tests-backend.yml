@@ -19,7 +19,6 @@ run:
   - -exc
   - |
     source /docker-lib.sh
-    source repo/ci/tasks/common.sh
 
     start_docker
 
