@@ -1,0 +1,19 @@
+---
+platform: linux
+
+inputs:
+- name: repo
+- name: version
+
+params:
+  pcf-username:
+  pcf-password:
+  pcf-space:
+  AWS_ACCESS_KEY_ID:
+  AWS_SECRET_ACCESS_KEY:
+
+run:
+  path: repo/ci/tasks/deploy-cf-backend.sh
+
+caches:
+  - path: gradle

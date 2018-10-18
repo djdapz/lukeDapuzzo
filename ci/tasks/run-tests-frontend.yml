@@ -1,0 +1,9 @@
+---
+platform: linux
+
+inputs:
+- name: version
+- name: repo
+
+run:
+  path: repo/ci/tasks/run-tests-frontend.sh
