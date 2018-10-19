@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import SongRow from "./SongRow";
+import Paper from "@material-ui/core/Paper/Paper";
 
 export default class SongTable extends Component {
 
@@ -18,9 +19,8 @@ export default class SongTable extends Component {
 
     render() {
         return (
-            <div>
-                <hr/>
-                <div className="admin-table">
+            <Paper>
+                <div className="admin-table admin-table-content">
                     <div className={"table-header"}>
                         <h4>
                             {this.props.type.display}s
@@ -31,7 +31,7 @@ export default class SongTable extends Component {
                         {this.renderSongRows()}
                     </div>
                 </div>
-            </div>
+            </Paper>
 
         )
     }

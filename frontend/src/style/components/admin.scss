@@ -1,9 +1,26 @@
 @import "../variables";
 
 #admin-page {
+
   text-align: center;
+
+  .nav-tabs {
+    margin-bottom: 1rem;
+  }
+
+  #new-song-form {
+    .table-header {
+      margin: 0
+    }
+  }
+
   .admin-table {
+    padding: 1rem 0;
     display: flex;
+    margin-bottom: 2rem;
+  }
+  #music-type-dropdown {
+    width: 8rem;
   }
 
   .table-header, .padding-for-centering {
@@ -44,7 +61,7 @@
   .admin-listing {
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
     text-align: left;
 
     @media screen and (min-width: $lg-md) {
@@ -53,7 +70,7 @@
     }
 
     .song-column, .show-column {
-      padding: 0.375rem 0.75rem;
+      padding: 0 0.75rem;
     }
 
     .song-input {
@@ -61,7 +78,6 @@
     }
 
     .action-column {
-
       width: 100px;
     }
 
@@ -91,6 +107,5 @@
     .city-column {
       width: 150px;
     }
-
   }
 }

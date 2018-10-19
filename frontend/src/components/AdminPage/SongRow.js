@@ -4,6 +4,7 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import Button from "@material-ui/core/Button/Button";
 
 class SongRow extends Component {
 
@@ -30,9 +31,9 @@ class SongRow extends Component {
                     </p>
                 </div>
                 <div className={"action-column  song-column"}>
-                    <button className="btn btn-danger" onClick={this.deleteSong}>
+                    <Button variant={'outlined'} color={'secondary'} className="btn btn-danger" onClick={this.deleteSong}>
                         <FontAwesomeIcon icon={["fa", "trash"]}/>
-                    </button>
+                    </Button>
                 </div>
             </div>
         )

@@ -74,7 +74,39 @@ html, body {
   height: 100%;
 }
 
-h2 , h3, h4, h5, h6, h1{
+h2, h3, h4, h5, h6, h1 {
   color: black;
   font-family: $header-font;
 }
+
+.dark-dropdown {
+  fieldset {
+    color: white
+  }
+  fieldset:not(:focus) {
+    border: 2px solid rgba(255, 255, 255, .2);
+  }
+
+  fieldset:hover:not(:focus) {
+    border: 2px solid rgba(255, 255, 255, .8);
+  }
+}
+
+.dark-input {
+  border-radius: 4px;
+  text-align: center;
+  input {
+    border-radius: 4px;
+    color: white
+  }
+  input:not(:focus) {
+    border: 2px solid rgba(255, 255, 255, .2);
+  }
+
+  input:hover:not(:focus) {
+    border: 2px solid rgba(255, 255, 255, .8);
+  }
+}
+
+
+

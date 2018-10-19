@@ -7,6 +7,7 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import Button from "@material-ui/core/Button/Button";
 
 class ShowRow extends Component {
 
@@ -32,9 +33,9 @@ class ShowRow extends Component {
             {this.props.show.cityString}
         </div>
         <div className={"action-column  show-column"}>
-            <button className="btn btn-danger" onClick={this.deleteShow}>
+            <Button variant={'outlined'} color={'secondary'} className="btn btn-danger" onClick={this.deleteShow}>
                 <FontAwesomeIcon icon={["fa", "trash"]}/>
-            </button>
+            </Button>
         </div>
     </div>;
 

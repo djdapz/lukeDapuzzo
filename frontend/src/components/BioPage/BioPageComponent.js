@@ -8,7 +8,8 @@ class BioPage extends Component {
 
                 <div className="main-content">
                     <p>
-                        Luke Dapuzzo is a solo independent recording artist and songwriter from Boulder Colorado.  His unique sound blends together a variety of genres from rockabilly to metalcore.
+                        Luke Dapuzzo is a solo independent recording artist and songwriter from Boulder, Colorado. His
+                        unique sound blends together a variety of genres from rockabilly to metalcore.
                     </p>
 
                     <p>

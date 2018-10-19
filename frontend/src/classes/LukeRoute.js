@@ -1,6 +1,9 @@
 import {Redirect, Route} from "react-router";
 import {Link} from "react-router-dom";
 import React from 'react';
+import Paper from "@material-ui/core/Paper/Paper";
+import Tabs from "@material-ui/core/Tabs/Tabs";
+import Tab from "@material-ui/core/Tab/Tab";
 
 function required() {
     throw Error("Required field missing")
@@ -23,13 +26,17 @@ export class LukeRoutes {
 
 
     toLinks(pathname) {
-        return <ul className="nav nav-tabs">
-            {this.routes.map(route =>
-                <li className="nav-item" key={route.name}>
-                    <Link className={"nav-link" + this.isActive(route, pathname)}
-                          to={this.basePath + route.path}>{route.name}</Link>
-                </li>)}
-        </ul>
+        return <Paper className="nav nav-tabs">
+            <Tabs value={pathname}>
+                {this.routes.map((route, index) =>
+                    <Tab className="nav-item"
+                         key={route.name}
+                         label={route.name}
+                         component={Link}
+                         to={this.basePath + route.path}
+                    />)}
+            </Tabs>
+        </Paper>
     }
 
     renderRedirect = () => this.defaultPath.length > 0 ?

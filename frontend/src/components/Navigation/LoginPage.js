@@ -48,12 +48,12 @@ class LoginPage extends Component {
                 <div id={"login-window"}>
                     {this.renderWarning()}
                     <h2>Login</h2>
-                    <TextField className={"form-control"} placeholder={"Username"} type={"text"}
+                    <TextField className={"form-control dark-input"} placeholder={"Username"} type={"text"}
                                value={this.state.username} onChange={this.handleUsernameChange}
                                onKeyUp={this.listenForSubmit}
                                variant="outlined">
                     </TextField>
-                    <TextField className={"form-control"} id={"password-field"} placeholder={"Password"} type={"password"}
+                    <TextField className={"form-control dark-input"} id={"password-field"} placeholder={"Password"} type={"password"}
                            value={this.state.password} onChange={this.handlePasswordChange}
                            onKeyUp={this.listenForSubmit}
                                variant="outlined"/>
