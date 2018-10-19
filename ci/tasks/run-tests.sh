@@ -6,12 +6,12 @@ export GRADLE_HOME="/gradle/.gradle"
 export GRADLE_USER_HOME="/gradle/.usergradle"
 export GRADLE_CACHE="/gradle/caches"
 
-export GRADLE_HOME
-export $GRADLE_HOME
-export GRADLE_USER_HOME
-export $GRADLE_USER_HOME
-export GRADLE_CACHE
-export $GRADLE_CACHE
+echo GRADLE_HOME
+echo $GRADLE_HOME
+echo GRADLE_USER_HOME
+echo $GRADLE_USER_HOME
+echo GRADLE_CACHE
+echo $GRADLE_CACHE
 
 
 export LUKE_DB_URL="jdbc:postgresql://luke-db:5432/luke-test?user=lukeuser&password=lukepwd"
