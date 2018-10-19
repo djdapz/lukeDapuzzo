@@ -13,7 +13,7 @@ inputs:
 - name: openjdk-node-cf
 
 caches:
-- path: .gradle/
+  - path: .gradle/
 
 run:
   path: sh

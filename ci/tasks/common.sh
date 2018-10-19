@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 GRADLE_HOME="${HOME}/.gradle"
-GRADLE_USER_HOME="${HOME}/.usergradle"
-
 ROOT_FOLDER=$(pwd)
 GRADLE_CACHE="${ROOT_FOLDER}/gradle"
 

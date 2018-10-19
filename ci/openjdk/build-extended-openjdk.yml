@@ -24,4 +24,3 @@ run:
     cp ./repo/ci/openjdk/install-cf-cli.sh "${output_dir}/install-cf-cli.sh"
     cp ./repo/ci/openjdk/install-npm.sh "${output_dir}/install-npm.sh"
     cp ./repo/ci/openjdk/install-aws.sh "${output_dir}/install-aws.sh"
-    cp ./repo/ci/openjdk/install-zip.sh "${output_dir}/install-zip.sh"

@@ -52,80 +52,39 @@ jobs:
   - put: version
     params: {bump: patch}
 
-- name: run-tests-frontend
-  public: true
-  plan:
-  - get: version
-  - get: repo
-    trigger: true
-  - get: openjdk-node-cf
-    params: {save: true}
-  - task: run-tests
-    image: openjdk-node-cf
-    privileged: true
-    file: repo/ci/tasks/run-tests-frontend.yml
-
-- name: bump-version
-  plan:
-  - get: repo
-    trigger: true
-    passed: ["run-tests-frontend", "run-tests"]
-  - put: version
-    params: {bump: patch}
-
-- name: build-and-upload-frontend
+- name: build-and-upload
   public: true
   plan:
   - get: version
     trigger: true
-    passed: ["bump-version"]
+    passed: ["run-tests"]
   - get: repo
     trigger: true
-    passed: ["bump-version"]
+    passed: ["run-tests"]
   - get: openjdk-node-cf
     params: {save: true}
   - task: build-and-upload
     privileged: true
-    file: repo/ci/tasks/build-and-upload-frontend.yml
+    file: repo/ci/tasks/build-and-upload.yml
     image: openjdk-node-cf
     params:
       AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
       AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
 
-- name: build-and-upload-backend
+- name: deploy-development
   public: true
   plan:
   - get: version
     trigger: true
-    passed: ["bump-version"]
+    passed: ["build-and-upload"]
   - get: repo
     trigger: true
-    passed: ["bump-version"]
-  - get: openjdk-node-cf
-    params: {save: true}
-  - task: build-and-upload
-    privileged: true
-    file: repo/ci/tasks/build-and-upload-backend.yml
-    image: openjdk-node-cf
-    params:
-      AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
-      AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
-
-
-- name: deploy-development-frontend
-  public: true
-  plan:
-  - get: version
-    trigger: true
-    passed: ["build-and-upload-frontend"]
-  - get: repo
-    trigger: true
-    passed: ["build-and-upload-frontend"]
+    passed: ["build-and-upload"]
   - get: openjdk-node-cf
     params: {save: true}
   - task: deploy
     privileged: true
-    file: repo/ci/tasks/deploy-cf-frontend.yml
+    file: repo/ci/tasks/deploy-cf.yml
     image: openjdk-node-cf
     params:
       PCF_USERNAME: ((PCF_USERNAME))
@@ -135,63 +94,18 @@ jobs:
       PCF_SPACE: development
       LUKE_ENV: dev
 
-- name: deploy-development-backend
+- name: deploy-production
   public: true
   plan:
   - get: version
-    trigger: true
-    passed: ["build-and-upload-backend"]
+    passed: ["deploy-development"]
   - get: repo
-    trigger: true
-    passed: ["build-and-upload-backend"]
-  - get: openjdk-node-cf
-    params: {save: true}
-  - task: deploy
-    privileged: true
-    file: repo/ci/tasks/deploy-cf-backend.yml
-    image: openjdk-node-cf
-    params:
-      PCF_USERNAME: ((PCF_USERNAME))
-      PCF_PASSWORD: ((PCF_PASSWORD))
-      AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
-      AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
-      PCF_SPACE: development
-      LUKE_ENV: dev
-
-- name: deploy-production-backend
-  public: true
-  plan:
-  - get: version
-    passed: ["deploy-development-backend"]
-  - get: repo
-    passed: ["deploy-development-backend"]
+    passed: ["deploy-development"]
   - get: openjdk-node-cf
     params: {save: true}
   - task: build-and-deploy
     privileged: true
-    file: repo/ci/tasks/deploy-cf-backend.yml
-    image: openjdk-node-cf
-    params:
-      PCF_USERNAME: ((PCF_USERNAME))
-      PCF_PASSWORD: ((PCF_PASSWORD))
-      AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
-      AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
-      PCF_SPACE: production
-      LUKE_ENV: prod
-
-
-- name: deploy-production-frontend
-  public: true
-  plan:
-  - get: version
-    passed: ["deploy-development-frontend"]
-  - get: repo
-    passed: ["deploy-development-frontend"]
-  - get: openjdk-node-cf
-    params: {save: true}
-  - task: build-and-deploy
-    privileged: true
-    file: repo/ci/tasks/deploy-cf-frontend.yml
+    file: repo/ci/tasks/deploy-cf.yml
     image: openjdk-node-cf
     params:
       PCF_USERNAME: ((PCF_USERNAME))

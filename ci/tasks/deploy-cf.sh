@@ -2,6 +2,8 @@
 
 set -e
 
+source repo/ci/tasks/common.sh
+
 export BUILD_VERSION=`cat version/number`
 
 cf login -a api.run.pivotal.io -s $PCF_SPACE -u $PCF_USERNAME -p $PCF_PASSWORD

@@ -2,6 +2,8 @@
 
 set -ex
 
+source repo/ci/tasks/common.sh
+
 export BUILD_VERSION=`cat version/number`
 
 pushd repo
