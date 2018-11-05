@@ -14,7 +14,6 @@ import InputLabel from "@material-ui/core/InputLabel/InputLabel";
 import Select from "@material-ui/core/Select/Select";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import OutlinedInput from "@material-ui/core/OutlinedInput/OutlinedInput";
-import FilledInput from "@material-ui/core/FilledInput/FilledInput";
 import Paper from "@material-ui/core/Paper/Paper";
 
 class NewSongForm extends Component {
@@ -54,20 +53,21 @@ class NewSongForm extends Component {
                             ref={ref => {
                                 this.InputLabelRef = ref;
                             }}
-                            htmlFor="music-type-select"
-                        >
+                            htmlFor="music-type-select">
                             Song Type
                         </InputLabel>
                         <Select
                             value={this.state.type}
                             id={"music-type-select"}
                             onChange={(event) => this.setState({type: event.target.value})}
-                            input={<OutlinedInput name="type" labelWidth={"100rem"}/>}
+                            input={<OutlinedInput name="type"
+                                                  labelWidth={"100rem"}/>}
                         >
                             <MenuItem value="">
                                 <em>None</em>
                             </MenuItem>
-                            {musicTypes.map(type => <MenuItem key={type.api} value={type.api}>{type.display}</MenuItem>)}
+                            {musicTypes.map(type => <MenuItem key={type.api}
+                                                              value={type.api}>{type.display}</MenuItem>)}
                         </Select>
                     </FormControl>
                 </div>
@@ -104,9 +104,15 @@ class NewSongForm extends Component {
 
     renderButtonOrSpinnyWheel() {
         if (this.props.newSongState === SUBMITTED) {
-            return <FontAwesomeIcon id={"loading-wheel"} icon={["fa", "spinner"]} pulse/>
+            return <FontAwesomeIcon id={"loading-wheel"}
+                                    icon={["fa", "spinner"]}
+                                    pulse/>
         } else {
-            return <Button variant="contained" color="primary" className="btn btn-primary" id={"create-song-button"} onClick={this.createSong}>Send
+            return <Button variant="contained"
+                           color="primary"
+                           className="btn btn-primary"
+                           id={"create-song-button"}
+                           onClick={this.createSong}>Send
                 It</Button>
         }
     }

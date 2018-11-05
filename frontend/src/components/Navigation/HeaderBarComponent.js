@@ -8,8 +8,6 @@ import {bindActionCreators} from "redux";
 
 import {socialMediaIconColors, socialMediaIcons} from "../../constants/socialMediaIcons";
 import {push} from "react-router-redux"
-
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import {getAllSongs} from "../../actions/GetAllSongs";
 import {getAllShows} from "../../actions/GetAllShows";
 import Button from "@material-ui/core/Button/Button";

@@ -8,9 +8,7 @@ import {bindActionCreators} from "redux";
 import {loginAction} from "../../actions/UserActions";
 import {FAILED, SUBMITTED} from "../../constants/formStates";
 import TextField from "@material-ui/core/TextField/TextField";
-import NavButton from "./NavButton";
 import Button from "@material-ui/core/Button/Button";
-
 
 class LoginPage extends Component {
     constructor() {

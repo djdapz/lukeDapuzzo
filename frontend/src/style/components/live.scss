@@ -61,7 +61,7 @@ h2 {
 .listing {
   padding-bottom: 1.5em;
   padding-top: 1em;
-  border-top: 1px solid black;
+  border-top: 1px solid rgba(0,0,0,.20);
 
   @media screen and (min-width: $lg-md) {
     width: 75%;
