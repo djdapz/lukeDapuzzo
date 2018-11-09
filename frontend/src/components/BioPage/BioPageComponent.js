@@ -3,21 +3,21 @@ import Image from './outside_picture.jpg'
 
 class BioPage extends Component {
     render() {
-        return (<div id="bio-page">
-                <img src={Image} alt={"Luke preforming guitar, drums, and singing"}/>
+        return <div id="bio-page">
+            <img src={Image}
+                 alt={"Luke preforming guitar, drums, and singing"}/>
 
-                <div className="main-content">
-                    <p>
-                        Luke Dapuzzo is a solo independent recording artist and songwriter from Boulder, Colorado. His
-                        unique sound blends together a variety of genres from rockabilly to metalcore.
-                    </p>
+            <div className="main-content">
+                <p>
+                    Luke Dapuzzo is a solo independent recording artist and songwriter from Boulder, Colorado. His
+                    unique sound blends together a variety of genres from rockabilly to metalcore.
+                </p>
 
-                    <p>
-                        All music released by this artist was performed, recorded, and mixed by Luke himself.
-                    </p>
-                </div>
+                <p>
+                    All music released by this artist was performed, recorded, and mixed by Luke himself.
+                </p>
             </div>
-        )
+        </div>
     }
 }
 
