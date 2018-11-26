@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class VenueController(val venueService: VenueService) {
 
-    @GetMapping("/api/venues")
-    fun shows(): List<Venue> {
-        return venueService.getAllVenues()
-    }
+    data class VenuesResponseBody(val venues: List<Venue>)
+
+    @GetMapping("/venues")
+    fun venues() = VenuesResponseBody(venueService.getAllVenues())
 }

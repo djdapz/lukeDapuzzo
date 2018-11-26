@@ -8,7 +8,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.BodyInserters
 
 
-class SongIntegrationTest: IntegrationTest() {
+class SongIntegrationTest : IntegrationTest() {
 
     @Test
     fun shouldCreateSpotifySongAndSoundcloudSongWithSameID() {
@@ -25,7 +25,7 @@ class SongIntegrationTest: IntegrationTest() {
         )
     }
 
-    private fun assertSongCanCreateSuccessfully(id : String, name: String, type: MusicEntity.MusicType) {
+    private fun assertSongCanCreateSuccessfully(id: String, name: String, type: MusicEntity.MusicType) {
         webClient.post().uri("/music")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", encodedCredentials)

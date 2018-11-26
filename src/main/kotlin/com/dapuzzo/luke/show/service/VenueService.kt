@@ -9,6 +9,7 @@ class VenueService(
         val venueRepository: VenueRepository,
         val cityService: CityService
 ) {
+    
     fun getVenue(id: Int): Venue =
             with(venueRepository.getById(id)) {
                 Venue(
@@ -19,7 +20,13 @@ class VenueService(
                 )
             }
 
-    fun getAllVenues(): List<Venue> = emptyList()
-
+    fun getAllVenues(): List<Venue> = venueRepository.getAll().map {
+        Venue(
+                id = it.id,
+                name = it.name,
+                googleMapsLink = it.googleMapsLink,
+                city = cityService.getCityById(it.city_id)
+        )
+    }
 }
 

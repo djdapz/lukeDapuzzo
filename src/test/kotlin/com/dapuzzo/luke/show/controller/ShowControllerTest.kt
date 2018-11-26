@@ -12,10 +12,13 @@ import com.nhaarman.mockito_kotlin.whenever
 import org.assertj.core.api.Assertions
 import org.junit.Before
 import org.junit.Test
+import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import java.time.LocalDate
 import java.util.*
 
 class ShowControllerTest {
@@ -63,35 +66,22 @@ class ShowControllerTest {
                 .andReturn().response.contentAsString
 
         verify(mockShowService).deleteShow(123)
-
     }
 
-//    @Test
-//    fun `should request correct mapping for post`() {
-//        mockMvc
-//                .perform(post("/shows")
-//                        .content(expectedJson)
-//                        .contentType(APPLICATION_JSON))
-//                .andExpect(status().isOk)
-//    }
+    @Test
+    fun `should delegate to show service on post`() {
+        mockMvc
+                .perform(post("/shows")
+                        //language=json
+                        .content("""
+                            {
+                              "venueId": "12",
+                              "style": "Acoustic",
+                              "date": "2018-12-10"
+                            }
+                        """.trimIndent())
+                        .contentType(APPLICATION_JSON))
 
-//    @Test
-//    fun `should delegate to show service on post`() {
-//        mockMvc
-//                .perform(post("/shows")
-//                        .content(expectedJson)
-//                        .contentType(APPLICATION_JSON))
-//        verify(mockShowService).createShow(expected)
-//    }
-//
-//    @Test
-//    fun `should return show that was created after post`() {
-//        val actualJson = mockMvc
-//                .perform(post("/shows")
-//                        .content(expectedJson)
-//                        .contentType(APPLICATION_JSON))
-//                .andReturn().response.contentAsString
-//        val actual = objectMapper.readValue(actualJson, ShowView::class.java)
-//        assertThat(actual).isEqualTo(expected)
-//    }
+        verify(mockShowService).createShow(12,  "Acoustic", LocalDate.parse("2018-12-10"))
+    }
 }

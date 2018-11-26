@@ -4,7 +4,7 @@ import com.dapuzzo.luke.show.domain.Show
 import java.time.LocalDate
 
 data class ShowEntity(
-        var id: Int,
+        var id: Int?,
         var venueId: Int,
         val date: LocalDate,
         val style: String

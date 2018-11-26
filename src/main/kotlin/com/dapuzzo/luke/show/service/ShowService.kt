@@ -1,8 +1,10 @@
 package com.dapuzzo.luke.show.service
 
 import com.dapuzzo.luke.show.domain.Show
+import com.dapuzzo.luke.show.domain.entity.ShowEntity
 import com.dapuzzo.luke.show.repository.ShowRepository
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class ShowService(
@@ -14,7 +16,7 @@ class ShowService(
                 .getAll()
                 .map {
                     Show(
-                            id = it.id,
+                            id = it.id!!,
                             venue = venueService.getVenue(it.venueId),
                             style = it.style,
                             date = it.date
@@ -34,5 +36,12 @@ class ShowService(
     }
 
     fun deleteShow(id: Int) = showRepository.delete(id)
+    fun createShow(venueId: Int, style: String, date: LocalDate) = showRepository.add(ShowEntity(
+            null,
+            venueId,
+            date,
+            style
+    ))
+
 
 }

@@ -24,9 +24,10 @@ export const createSongFailed = function (error) {
     }
 };
 
-export const createSongCleared = function(){
-    return {
-        type: CREATE_SONG_CLEARED,
-        payload: {}
-    }
-};
+export const SONG_FORM_CHANGE_ID = "SONG_FORM_CHANGE_ID";
+export const SONG_FORM_CHANGE_NAME = "SONG_FORM_CHANGE_NAME";
+export const SONG_FORM_CHANGE_TYPE = "SONG_FORM_CHANGE_TYPE";
+
+export const songFormChangeId = (id ) => ({type: SONG_FORM_CHANGE_ID, payload: id});
+export const songFormChangeName = (name ) => ({type: SONG_FORM_CHANGE_NAME, payload: name});
+export const songFormChangeType = (type ) => ({type: SONG_FORM_CHANGE_TYPE, payload: type});

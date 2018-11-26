@@ -1,4 +1,4 @@
-import {call, put, takeEvery} from "redux-saga/effects"
+import {call, put, takeEvery, select} from "redux-saga/effects"
 import {deleteSecure, getNoCredentials, postSecure} from "../api/Api";
 import {allSongsFetched, GET_ALL_SONGS} from "../actions/GetAllSongs";
 import {CREATE_SONG_ACTION, createSongFailed, songCreated} from "../actions/CreateSongAction";
@@ -26,10 +26,15 @@ export function* getSongs() {
     }
 }
 
-export function* createSongSaga(song) {
+const getSongForm = (state) => {
+    return state.newSong;
+}
+
+export function* createSongSaga() {
     try {
-        const response = yield call(postSecure, "/music", song.payload);
-        if(response.status !== 200) { // noinspection ExceptionCaughtLocallyJS
+        const song = yield select(getSongForm);
+        const response = yield call(postSecure, "/music", song);
+        if (response.status !== 200) { // noinspection ExceptionCaughtLocallyJS
             throw response;
         }
         yield put(songCreated(response.data));
@@ -43,7 +48,7 @@ export function* deleteSongSaga(song) {
     try {
         console.log(song);
         const response = yield call(deleteSecure, `/music/${song.payload.id}`);
-        if(response.status !== 200) { // noinspection ExceptionCaughtLocallyJS
+        if (response.status !== 200) { // noinspection ExceptionCaughtLocallyJS
             throw response;
         }
         yield put(songDeleted(song.payload.id, song.payload.type));

@@ -36,14 +36,14 @@ class ShowRepositoryTest : DatabaseBase() {
 
     @Test
     internal fun `should get show from id`() {
-        val actualShow = showRepository.getById(firstShow.id)
+        val actualShow = showRepository.getById(firstShow.id!!)
 
         assertThat(actualShow).isEqualTo(firstShow)
     }
 
     @Test
     fun shouldDeleteSong(){
-        showRepository.delete(firstShow.id)
+        showRepository.delete(firstShow.id!!)
 
         val all = showRepository.getAll()
 

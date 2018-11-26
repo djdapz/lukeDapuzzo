@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {createSong, createSongCleared} from "../../actions/CreateSongAction";
+import {createSong, songFormChangeId, songFormChangeName, songFormChangeType} from "../../actions/CreateSongAction";
 import {FAILED, SUBMITTED} from "../../constants/formStates";
-
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import {musicTypes} from "../../constants/musicTypes";
@@ -17,34 +16,12 @@ import OutlinedInput from "@material-ui/core/OutlinedInput/OutlinedInput";
 import Paper from "@material-ui/core/Paper/Paper";
 
 class NewSongForm extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            id: "",
-            name: "",
-            type: ""
-        };
-
-        this.createSong = this.createSong.bind(this);
-        this.renderButtonOrSpinnyWheel = this.renderButtonOrSpinnyWheel.bind(this);
-    }
-
-    createSong() {
-        this.props.createSong({
-            id: this.state.id,
-            name: this.state.name,
-            type: this.state.type
-        });
-    }
-
     render() {
         return <Paper id="new-song-form">
             <div className="error-message">
                 {this.renderErrorMessage()}
             </div>
             <div className="admin-table">
-
                 <div className="table-header">
                     <FormControl variant="outlined"
                                  color={'secondary'}
@@ -57,11 +34,11 @@ class NewSongForm extends Component {
                             Song Type
                         </InputLabel>
                         <Select
-                            value={this.state.type}
+                            value={this.props.newSong.type ? this.props.newSong.type : ""}
                             id={"music-type-select"}
-                            onChange={(event) => this.setState({type: event.target.value})}
+                            onChange={(event) => this.props.songFormChangeType(event.target.value)}
                             input={<OutlinedInput name="type"
-                                                  labelWidth={"100rem"}/>}
+                                                  labelWidth={100}/>}
                         >
                             <MenuItem value="">
                                 <em>None</em>
@@ -78,20 +55,20 @@ class NewSongForm extends Component {
                                 variant="outlined"
                                 label="Name of Song"
                                 type="text"
-                                className="form-control dark-input"
-                                value={this.state.name}
+                                className="form-control"
+                                value={this.props.newSong.name ? this.props.newSong.name : ""}
                                 id={`name-new-song-field`}
-                                onChange={(event) => this.setState({name: event.target.value})}/>
+                                onChange={(event) => this.props.songFormChangeName(event.target.value)}/>
                         </div>
                         <div className="id-column song-input">
                             <TextField
                                 variant="outlined"
                                 label="Song Id"
                                 type="text"
-                                className="form-control dark-input"
-                                value={this.state.id}
+                                className="form-control"
+                                value={this.props.newSong.id ? this.props.newSong.id : ""}
                                 id={`id-new-song-field`}
-                                onChange={(event) => this.setState({id: event.target.value})}/>
+                                onChange={(event) => this.props.songFormChangeId(event.target.value)}/>
                         </div>
                         <div className={"action-column  song-column"}>
                             {this.renderButtonOrSpinnyWheel()}
@@ -102,8 +79,8 @@ class NewSongForm extends Component {
         </Paper>
     }
 
-    renderButtonOrSpinnyWheel() {
-        if (this.props.newSongState === SUBMITTED) {
+    renderButtonOrSpinnyWheel = () => {
+        if (this.props.newSong.status === SUBMITTED) {
             return <FontAwesomeIcon id={"loading-wheel"}
                                     icon={["fa", "spinner"]}
                                     pulse/>
@@ -112,13 +89,13 @@ class NewSongForm extends Component {
                            color="primary"
                            className="btn btn-primary"
                            id={"create-song-button"}
-                           onClick={this.createSong}>Send
+                           onClick={() => this.props.createSong()}>Send
                 It</Button>
         }
-    }
+    };
 
     renderErrorMessage() {
-        if (this.props.newSongState === FAILED) {
+        if (this.props.newSong.status === FAILED) {
             return <div className={"song-listing"}>
                 <div id={"error-message"}>Creating the new song failed :( try again?</div>
             </div>
@@ -128,11 +105,16 @@ class NewSongForm extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({createSong, createSongCleared}, dispatch)
+    return bindActionCreators({
+        createSong,
+        songFormChangeId,
+        songFormChangeName,
+        songFormChangeType
+    }, dispatch)
 }
 
 function mapStateToProps(state) {
-    return ({newSongState: state.newSong});
+    return ({newSong: state.newSong});
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewSongForm);

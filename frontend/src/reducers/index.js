@@ -8,6 +8,8 @@ import {loginFormReducer} from "./LoginFormReducer";
 import newSongReducer from "./NewSongReducer";
 
 import {routerReducer} from 'react-router-redux'
+import {createShowForm} from "../actions/CreateShowActions";
+import {venueReducer} from "./VenueReducer";
 
 const userReducer = combineReducers({
     isAuthenticated: userAuthenticationReducer,
@@ -20,9 +22,11 @@ const rootReducer = combineReducers({
     shows: showsReducer,
     songs: songsReducer,
     newSong: newSongReducer,
+    newShow: createShowForm.reducer,
     user: userReducer,
     router: routeReducer,
-    reduxRouter: routerReducer
+    reduxRouter: routerReducer,
+    venues: venueReducer
 });
 
 export default rootReducer;

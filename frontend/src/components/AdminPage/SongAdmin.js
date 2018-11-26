@@ -21,7 +21,7 @@ class SongAdmin extends Component {
 
     render() {
         return <div>
-            < NewSongForm/>
+            <NewSongForm/>
             {this.renderTableForAllTypes()}
         </div>
     }
@@ -36,7 +36,9 @@ class SongAdmin extends Component {
                     }
                 })
                 .filter(songList => songList.songs.length > 0)
-                .map(songList => <SongTable songs={songList.songs} type={songList.type}/>);
+                .map(songList => <SongTable key={songList.type}
+                                            songs={songList.songs}
+                                            type={songList.type}/>);
         }
 
     }

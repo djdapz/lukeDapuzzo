@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.stereotype.Repository
 
+
 @Repository
 class VenueRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<VenueEntity> {
 

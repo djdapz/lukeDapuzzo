@@ -15,37 +15,37 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
-class VenueControllerTest{
+class VenueControllerTest {
 
-    val expectedList = randomList{ randomVenue()}
+    val expectedList = randomList { randomVenue() }
 
     val venueService = mock<VenueService> {
-        on{getAllVenues()} doReturn expectedList
+        on { getAllVenues() } doReturn expectedList
     }
 
     val subject = VenueController(venueService)
     val mockMvc = MockMvcBuilders.standaloneSetup(subject).build()
 
     @Test
-    internal fun `should delegate to service`(){
+    internal fun `should delegate to service`() {
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/venues"))
+                .perform(MockMvcRequestBuilders.get("/venues"))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
         verify(venueService).getAllVenues()
     }
-    
+
     @Test
-    internal fun `should return list of venues`(){
+    internal fun `should return list of venues in a response object`() {
         val actualJson = mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/venues"))
+                .perform(MockMvcRequestBuilders.get("/venues"))
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andReturn().response.contentAsString
 
-        val actual: List<Venue> = JsonConfig.objectMapper().readValue(actualJson)
+        val actual: VenueController.VenuesResponseBody = JsonConfig.objectMapper().readValue(actualJson)
 
-        assertThat(actual).containsExactlyElementsOf(actual)
+        assertThat(actual.venues).isEqualTo(expectedList)
     }
-    
-    
+
+
 }

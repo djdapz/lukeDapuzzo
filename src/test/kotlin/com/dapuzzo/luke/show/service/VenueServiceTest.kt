@@ -13,7 +13,7 @@ import org.junit.Test
 
 class VenueServiceTest {
     val venueEntity = randomVenueEntity()
-    val expected = with(venueEntity){
+    val expected = with(venueEntity) {
         Venue(
                 id = id,
                 city = randomCity(city_id),
@@ -33,21 +33,26 @@ class VenueServiceTest {
 
 
     @Test
-    internal fun `should get venue by id`() {
+    fun `should get venue by id`() {
         val actual = subject.getVenue(venueEntity.id)
         Assertions.assertThat(actual).isEqualTo(expected)
     }
 
     @Test
-    internal fun `should call getVenueById`() {
+    fun `should call getVenueById`() {
         subject.getVenue(venueEntity.id)
         verify(venueRepository).getById(venueEntity.id)
     }
 
     @Test
-    internal fun `should call getCityById`() {
+    fun `should call getCityById`() {
         subject.getVenue(venueEntity.id)
         verify(cityService).getCityById(expected.city.id)
+    }
 
+    @Test
+    fun `should get all venues`() {
+        subject.getAllVenues()
+        verify(venueRepository).getAll()
     }
 }
