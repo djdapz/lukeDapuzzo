@@ -10,14 +10,17 @@ class ShowAdmin extends Component {
     render() {
         return <div>
             <NewShowForm/>
-            {this.props.shows.map(show => <ShowRow key={JSON.stringify(show)} show={show}/>)}
+            {this.props.shows.map(show => <ShowRow key={JSON.stringify(show)}
+                                                   show={show}/>)}
         </div>
     }
 }
 
 
 function mapStateToProps(state) {
-    return ({shows: state.shows})
+    return ({
+        shows: state.shows.sort((a, b) => new Date(b.date) - new Date(a.date))
+    })
 }
 
 export default connect(mapStateToProps)(ShowAdmin);

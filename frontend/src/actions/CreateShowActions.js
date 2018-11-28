@@ -14,6 +14,7 @@
 // }
 
 import {declareForm} from "./FormActions";
+import {getAllShows} from "./GetAllShows";
 
 export const createShowForm = declareForm(
     "newShow",
@@ -22,4 +23,6 @@ export const createShowForm = declareForm(
         {name: "venueId", required: true},
         {name: "style", required: true}
     ],
-    "/show");
+    "/shows",
+    getAllShows
+);

@@ -93,8 +93,16 @@ describe("FormActions", () => {
             reducer = form.reducer;
         });
 
-        it('should create a reducer that has each field empty to start', function () {
-            expect(reducer(undefined, {type: "SOME_TYPE"})).toEqual({
+        it('should create a null form when form is successful', function () {
+            expect(reducer({thing: "HI"}, {type: "TEST_FORM_SUBMISSION_SUCCESS"})).toEqual(null)
+        });
+
+        it("should create a null form when the form is created", function () {
+            expect(reducer(undefined, {type: "SOME_OTHER_ACTION"})).toEqual(null)
+        });
+
+        it('should create a reducer that has each field empty whgen new form is created', function () {
+            expect(reducer(undefined, {type: "OPEN_FORM_TEST"})).toEqual({
                 field1: "",
                 field2: "",
                 valid: false
@@ -128,6 +136,10 @@ describe("FormActions", () => {
                 field2: "BYE",
                 valid: true
             })
+        });
+
+        it('should ', function () {
+
         });
     })
 });

@@ -27,47 +27,56 @@ const BottomButton = withStyles({
             zIndex: "1000"
         }
     }
-)(Button)
+)(Button);
 
 
-const NewShowFormPopout = (props) =>
-    <Drawer anchor="right"
-            open={props.open}>
-        <NewShowFormStyled>
-            <LukeDatePicker
-                value={props.newShow.date}
-                onChange={props.updateDate}
-                label={"Date"}
-            />
-            <LukeSelect
-                value={props.newShow.venueId}
-                onChange={props.updateVenue}
-                label="Venue"
-                options={props.venues}
-                optionToMenuItem={(venue) => ({value: venue.id, label: venue.name})}
-            />
-            <LukeTextField
-                value={props.newShow.style}
-                onChange={props.updateStyle}
-                label={"Style"}
-            />
-            <StyledFormControl>
-                <Button
-                    disabled={!props.newShow.valid}
-                    variant="contained"
+const NewShowFormPopout = (props) => {
+    return <div>
+        <BottomButton variant="fab"
+                      color="primary"
+                      onClick={props.openForm}
+                      aria-label="Add">
+            <AddIcon/>
+        </BottomButton>
+        <Drawer anchor="right"
+                open={props.newShow.isOpen}>
+            <NewShowFormStyled>
+                <LukeDatePicker
+                    value={props.newShow.date}
+                    onChange={props.updateDate}
+                    label={"Date"}
+                />
+                <LukeSelect
+                    value={props.newShow.venueId}
+                    onChange={props.updateVenue}
+                    label="Venue"
+                    options={props.venues}
+                    optionToMenuItem={(venue) => ({value: venue.id, label: venue.name})}
+                />
+                <LukeTextField
+                    value={props.newShow.style}
+                    onChange={props.updateStyle}
+                    label={"Style"}
+                />
+                <StyledFormControl>
+                    <Button
+                        disabled={!props.newShow.valid}
+                        variant="contained"
+                        color="primary"
+                        onClick={props.submitForm}>
+                        Send It
+                    </Button>
+                </StyledFormControl>
+                <BottomButton
+                    variant="fab"
                     color="primary"
-                    onClick={props.submitForm}>
-                    Send It
-                </Button>
-            </StyledFormControl>
-            <BottomButton
-                variant="fab"
-                color="primary"
-                onClick={props.closeMe}>
-                <ClearIcon/>
-            </BottomButton>
-        </NewShowFormStyled>
-    </Drawer>;
+                    onClick={props.closeForm}>
+                    <ClearIcon/>
+                </BottomButton>
+            </NewShowFormStyled>
+        </Drawer>
+    </div>;
+};
 
 
 const mapStateToProps = (state) => {
@@ -81,29 +90,10 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
         updateVenue: createShowForm.actions.venueId,
         updateDate: createShowForm.actions.date,
         updateStyle: createShowForm.actions.style,
-        submitForm: createShowForm.submitForm
+        submitForm: createShowForm.submitForm,
+        openForm: createShowForm.openForm,
+        closeForm: createShowForm.closeForm
     }, dispatch
 );
 
-const ConnectedNewShowPopout = connect(mapStateToProps, mapDispatchToProps)(NewShowFormPopout)
-
-export default class NewShowForm extends React.Component {
-    state = {
-        open: false
-    };
-
-    toggleFormState = () => this.setState({open: !this.state.open});
-
-    render() {
-        return <div>
-            <BottomButton variant="fab"
-                          color="primary"
-                          onClick={this.toggleFormState}
-                          aria-label="Add">
-                <AddIcon/>
-            </BottomButton>
-            <ConnectedNewShowPopout open={this.state.open}
-                                    closeMe={this.toggleFormState}/>
-        </div>;
-    }
-}
+export default connect(mapStateToProps, mapDispatchToProps)(NewShowFormPopout)

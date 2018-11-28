@@ -25,7 +25,9 @@ export const LukeDatePicker = (props) =>
                     variant="outlined"
                     label={props.label}
                     value={props.value === "" ? null : props.value}
-                    onChange={props.onChange}
+                    onChange={val => {
+                        return props.onChange(val.toSQLDate());
+                    }}
                     format="MM-dd-yyyy"
                     mask={[/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
                 />
