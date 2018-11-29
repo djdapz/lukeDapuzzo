@@ -5,11 +5,11 @@ import showsReducer from "./ShowsReducer";
 import songsReducer from "./SongsReducer";
 import userAuthenticationReducer from "./UserAuthenticationReducer";
 import {loginFormReducer} from "./LoginFormReducer";
-import newSongReducer from "./NewSongReducer";
 
 import {routerReducer} from 'react-router-redux'
 import {createShowForm} from "../actions/CreateShowActions";
 import {venueReducer} from "./VenueReducer";
+import {createSongForm} from "../actions/CreateSongAction";
 
 const userReducer = combineReducers({
     isAuthenticated: userAuthenticationReducer,
@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
     email: emailReducer,
     shows: showsReducer,
     songs: songsReducer,
-    newSong: newSongReducer,
+    newSong: createSongForm.reducer,
     newShow: createShowForm.reducer,
     user: userReducer,
     router: routeReducer,

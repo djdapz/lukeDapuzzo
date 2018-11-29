@@ -10,24 +10,13 @@ import {withStyles} from "@material-ui/core";
 import {connect} from "react-redux";
 import {createShowForm} from "../../actions/CreateShowActions";
 import {bindActionCreators} from "redux";
-import {LukeDatePicker, LukeSelect, LukeTextField, StyledFormControl} from "../Multipurpose/FormComponents";
-
-const NewShowFormStyled = styled.div`
-  padding: .5rem;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-`
-
-const BottomButton = withStyles({
-        root: {
-            position: "fixed",
-            bottom: "2rem",
-            right: "2rem",
-            zIndex: "1000"
-        }
-    }
-)(Button);
+import {
+    BottomButton,
+    LukeDatePicker,
+    LukeSelect,
+    LukeTextField, NewFormStyled,
+    StyledFormControl
+} from "../Multipurpose/FormComponents";
 
 
 const NewShowFormPopout = (props) => {
@@ -40,7 +29,7 @@ const NewShowFormPopout = (props) => {
         </BottomButton>
         <Drawer anchor="right"
                 open={props.newShow.isOpen}>
-            <NewShowFormStyled>
+            <NewFormStyled>
                 <LukeDatePicker
                     value={props.newShow.date}
                     onChange={props.updateDate}
@@ -73,7 +62,7 @@ const NewShowFormPopout = (props) => {
                     onClick={props.closeForm}>
                     <ClearIcon/>
                 </BottomButton>
-            </NewShowFormStyled>
+            </NewFormStyled>
         </Drawer>
     </div>;
 };

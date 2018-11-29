@@ -9,6 +9,27 @@ import TextField from "@material-ui/core/TextField/TextField";
 import React from "react";
 
 import LuxonUtils from '@date-io/luxon';
+import styled from "styled-components";
+import Button from "@material-ui/core/Button/Button";
+
+
+export const NewFormStyled = styled.div`
+  padding: .5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+`
+
+export const BottomButton = withStyles({
+        root: {
+            position: "fixed",
+            bottom: "2rem",
+            right: "2rem",
+            zIndex: "1000"
+        }
+    }
+)(Button);
+
 
 export const StyledFormControl = withStyles({
     root: {
@@ -60,7 +81,7 @@ export const LukeSelect = (props) => <StyledFormControl variant="outlined">
 
 export const LukeTextField = (props) => <StyledFormControl>
     <TextField variant={"outlined"}
-               label={"Style"}
+               label={props.label}
                value={props.value}
                onChange={(event) => props.onChange(event.target.value)}
     />
