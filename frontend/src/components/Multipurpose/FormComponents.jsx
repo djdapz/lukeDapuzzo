@@ -11,6 +11,8 @@ import React from "react";
 import LuxonUtils from '@date-io/luxon';
 import styled from "styled-components";
 import Button from "@material-ui/core/Button/Button";
+import AddIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import Drawer from "@material-ui/core/Drawer/Drawer";
 
 
 export const NewFormStyled = styled.div`
@@ -36,6 +38,38 @@ export const StyledFormControl = withStyles({
         margin: ".5rem"
     }
 })(FormControl);
+
+
+export const PopoutForm = (props) =>
+    <div>
+        <BottomButton variant="fab"
+                      color="primary"
+                      onClick={props.openForm}
+                      aria-label="Add">
+            <AddIcon/>
+        </BottomButton>
+        <Drawer anchor="right"
+                open={props.isOpen}>
+            <NewFormStyled>
+                {props.children}
+                <StyledFormControl>
+                    <Button
+                        disabled={!props.isValid}
+                        variant="contained"
+                        color="primary"
+                        onClick={props.submitForm}>
+                        Send It
+                    </Button>
+                </StyledFormControl>
+                <BottomButton
+                    variant="fab"
+                    color="primary"
+                    onClick={props.closeForm}>
+                    <ClearIcon/>
+                </BottomButton>
+            </NewFormStyled>
+        </Drawer>
+    </div>;
 
 export const LukeDatePicker = (props) =>
     <StyledFormControl>

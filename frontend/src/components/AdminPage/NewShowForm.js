@@ -14,75 +14,36 @@ import {
     BottomButton,
     LukeDatePicker,
     LukeSelect,
-    LukeTextField, NewFormStyled,
+    LukeTextField, NewFormStyled, PopoutForm,
     StyledFormControl
 } from "../Multipurpose/FormComponents";
 
-
-const NewShowFormPopout = (props) => {
-    return <div>
-        <BottomButton variant="fab"
-                      color="primary"
-                      onClick={props.openForm}
-                      aria-label="Add">
-            <AddIcon/>
-        </BottomButton>
-        <Drawer anchor="right"
-                open={props.newShow.isOpen}>
-            <NewFormStyled>
-                <LukeDatePicker
-                    value={props.newShow.date}
-                    onChange={props.updateDate}
-                    label={"Date"}
-                />
-                <LukeSelect
-                    value={props.newShow.venueId}
-                    onChange={props.updateVenue}
-                    label="Venue"
-                    options={props.venues}
-                    optionToMenuItem={(venue) => ({value: venue.id, label: venue.name})}
-                />
-                <LukeTextField
-                    value={props.newShow.style}
-                    onChange={props.updateStyle}
-                    label={"Style"}
-                />
-                <StyledFormControl>
-                    <Button
-                        disabled={!props.newShow.valid}
-                        variant="contained"
-                        color="primary"
-                        onClick={props.submitForm}>
-                        Send It
-                    </Button>
-                </StyledFormControl>
-                <BottomButton
-                    variant="fab"
-                    color="primary"
-                    onClick={props.closeForm}>
-                    <ClearIcon/>
-                </BottomButton>
-            </NewFormStyled>
-        </Drawer>
-    </div>;
-};
+const NewShowFormPopout = (props) =>
+    <PopoutForm openForm={props.openForm}
+                closeForm={props.closeForm}
+                submitForm={props.submitForm}
+                isValid={props.newShow.valid}
+                isOpen={props.newShow.isOpen}>
+        <LukeDatePicker
+            value={props.newShow.date}
+            onChange={props.update_date}
+            label={"Date"}
+        />
+        <LukeSelect
+            value={props.newShow.venueId}
+            onChange={props.update_venueId}
+            label="Venue"
+            options={props.venues}
+            optionToMenuItem={(venue) => ({value: venue.id, label: venue.name})}
+        />
+        <LukeTextField
+            value={props.newShow.style}
+            onChange={props.update_style}
+            label={"Style"}
+        />
+    </PopoutForm>;
 
 
-const mapStateToProps = (state) => {
-    return ({
-        venues: state.venues,
-        newShow: state.newShow,
-    });
-};
+const mapStateToProps = (state) => ({venues: state.venues});
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-        updateVenue: createShowForm.actions.venueId,
-        updateDate: createShowForm.actions.date,
-        updateStyle: createShowForm.actions.style,
-        submitForm: createShowForm.submitForm,
-        openForm: createShowForm.openForm,
-        closeForm: createShowForm.closeForm
-    }, dispatch
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewShowFormPopout)
+export default connect(mapStateToProps)(createShowForm.connect(NewShowFormPopout))

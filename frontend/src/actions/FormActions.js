@@ -1,6 +1,8 @@
 import {LUKE_API} from "../config/appConfig";
 import axios from "axios";
 import {postSecure} from "../api/Api";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
 
 export const declareForm = (formName, fields, endpoint, refreshDataElementActionCreator) => {
     const successActionType = `${formName}_SUCCESS`;
@@ -28,8 +30,8 @@ export const declareForm = (formName, fields, endpoint, refreshDataElementAction
 
     const actions = fieldNames.reduce((prev, curr) => ({
         ...prev,
-        [curr]: (payload) => ({type: actionType(curr), payload})
-    }), {open: () => ({type: openFormActionType})});
+        [`update_${curr}`]: (payload) => ({type: actionType(curr), payload})
+    }), {});
 
     const reducer = (state = emptyForm, action) => {
         const updater = storeUpdaters[action.type];
@@ -54,8 +56,8 @@ export const declareForm = (formName, fields, endpoint, refreshDataElementAction
             .catch((err) => dispatch({type: failureActionType, payload: err}))
     };
 
-    const openForm = () => ({type: openFormActionType})
-    const closeForm = () => ({type: closeFormActionType})
+    const openForm = () => ({type: openFormActionType});
+    const closeForm = () => ({type: closeFormActionType});
 
     const validate = (form) => {
         const requiredFields = fields
@@ -70,13 +72,26 @@ export const declareForm = (formName, fields, endpoint, refreshDataElementAction
         return true
     };
 
+    const mapStateToProps = (state) => ({
+        [formName]: state[formName]
+    });
+
+    const mapDispatchToProps = (dispatch) => bindActionCreators(
+        {
+            ...actions,
+            openForm,
+            closeForm,
+            submitForm,
+        }, dispatch
+    );
+
+    const connectToForm = (component) => connect(mapStateToProps, mapDispatchToProps)(component);
+
     return {
         emptyForm,
         actions,
         reducer,
-        submitForm,
         validate,
-        openForm,
-        closeForm
+        connect: connectToForm
     };
 };

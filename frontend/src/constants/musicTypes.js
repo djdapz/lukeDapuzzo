@@ -8,7 +8,6 @@ export const musicTypes = [
     {
         display: "Spotify Song",
         api: SPOTIFY_SONG
-
     },
     {
         display: "Spotify Album",

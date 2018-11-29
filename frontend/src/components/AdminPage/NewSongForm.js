@@ -11,80 +11,38 @@ import {
     BottomButton,
     LukeSelect,
     LukeTextField,
-    NewFormStyled,
+    NewFormStyled, PopoutForm,
     StyledFormControl
 } from "../Multipurpose/FormComponents";
 import ClearIcon from '@material-ui/icons/Clear';
 import AddIcon from '@material-ui/icons/Add';
 
+const NewSongFormPopout = (props) =>
+    <PopoutForm openForm={props.openForm}
+                closeForm={props.closeForm}
+                submitForm={props.submitForm}
+                isValid={props.newSong.valid}
+                isOpen={props.newSong.isOpen}>
+        <LukeSelect
+            value={props.newSong.type}
+            onChange={props.update_type}
+            label="Type"
+            options={musicTypes}
+            optionToMenuItem={(musicType) => ({value: musicType.api, label: musicType.display})}
+
+        />
+        <LukeTextField
+            value={props.newSong.name}
+            onChange={props.update_name}
+            label={"Name"}
+        />
+        <LukeTextField
+            value={props.newSong.id}
+            onChange={props.update_id}
+            label={"Id"}
+        />
+    </PopoutForm>;
 
 
-
-const NewSongFormPopout = (props) => {
-    return <div>
-        <BottomButton variant="fab"
-                      color="primary"
-                      onClick={props.openForm}
-                      aria-label="Add">
-            <AddIcon/>
-        </BottomButton>
-        <Drawer anchor="right"
-                open={props.newSong.isOpen}>
-            <NewFormStyled>
-                <LukeSelect
-                    value={props.newSong.type}
-                    onChange={props.updateType}
-                    label="Type"
-                    options={musicTypes}
-                    optionToMenuItem={(musicType) => ({value: musicType.api, label: musicType.display})}
-
-                />
-                <LukeTextField
-                    value={props.newSong.name}
-                    onChange={props.updateName}
-                    label={"Name"}
-                />
-                <LukeTextField
-                    value={props.newSong.id}
-                    onChange={props.updateId}
-                    label={"Id"}
-                />
-                <StyledFormControl>
-                    <Button
-                        disabled={!props.newSong.valid}
-                        variant="contained"
-                        color="primary"
-                        onClick={props.submitForm}>
-                        Send It
-                    </Button>
-                </StyledFormControl>
-                <BottomButton
-                    variant="fab"
-                    color="primary"
-                    onClick={props.closeForm}>
-                    <ClearIcon/>
-                </BottomButton>
-            </NewFormStyled>
-        </Drawer>
-    </div>;
-};
-
-
-const mapStateToProps = (state) => {
-    return ({
-        newSong: state.newSong,
-    });
-};
-
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-        updateName: createSongForm.actions.name,
-        updateId: createSongForm.actions.id,
-        updateType: createSongForm.actions.type,
-        submitForm: createSongForm.submitForm,
-        openForm: createSongForm.openForm,
-        closeForm: createSongForm.closeForm
-    }, dispatch
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewSongFormPopout)
+export default createSongForm.connect(NewSongFormPopout)
 
