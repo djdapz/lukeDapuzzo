@@ -24,7 +24,6 @@ export function* getSongs() {
 
 export function* deleteSongSaga(song) {
     try {
-        console.log(song);
         const response = yield call(deleteSecure, `/music/${song.payload.id}`);
         if (response.status !== 200) { // noinspection ExceptionCaughtLocallyJS
             throw response;

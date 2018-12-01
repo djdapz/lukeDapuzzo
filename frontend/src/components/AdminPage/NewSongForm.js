@@ -18,11 +18,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import AddIcon from '@material-ui/icons/Add';
 
 const NewSongFormPopout = (props) =>
-    <PopoutForm openForm={props.openForm}
-                closeForm={props.closeForm}
-                submitForm={props.submitForm}
-                isValid={props.newSong.valid}
-                isOpen={props.newSong.isOpen}>
+    <PopoutForm {...props}>
         <LukeSelect
             value={props.newSong.type}
             onChange={props.update_type}
@@ -33,7 +29,7 @@ const NewSongFormPopout = (props) =>
         />
         <LukeTextField
             value={props.newSong.name}
-            onChange={props.update_name}
+            onChange={(thing) => props.update_name(thing)}
             label={"Name"}
         />
         <LukeTextField

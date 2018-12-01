@@ -10,6 +10,7 @@ import {routerReducer} from 'react-router-redux'
 import {createShowForm} from "../actions/CreateShowActions";
 import {venueReducer} from "./VenueReducer";
 import {createSongForm} from "../actions/CreateSongAction";
+import {authForm} from "../actions/AuthFormAction";
 
 const userReducer = combineReducers({
     isAuthenticated: userAuthenticationReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     songs: songsReducer,
     newSong: createSongForm.reducer,
     newShow: createShowForm.reducer,
+    authForm: authForm.reducer,
     user: userReducer,
     router: routeReducer,
     reduxRouter: routerReducer,

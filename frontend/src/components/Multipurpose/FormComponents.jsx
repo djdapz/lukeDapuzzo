@@ -11,15 +11,16 @@ import React from "react";
 import LuxonUtils from '@date-io/luxon';
 import styled from "styled-components";
 import Button from "@material-ui/core/Button/Button";
-import AddIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import Drawer from "@material-ui/core/Drawer/Drawer";
-
+import AddIcon from '@material-ui/icons/Add';
+import ClearIcon from '@material-ui/icons/Clear';
 
 export const NewFormStyled = styled.div`
   padding: .5rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  width: 15rem;
 `
 
 export const BottomButton = withStyles({
@@ -39,6 +40,18 @@ export const StyledFormControl = withStyles({
     }
 })(FormControl);
 
+const ErrorMessage = styled.div`
+  margin: .5rem;
+  
+  color: #400000;
+  background-color: rgba(255,0,0,0.14);
+  border: #400000 1px solid ;
+  border-radius: 3px;
+  padding: .5rem;
+`;
+
+const MaybeError = (props) => props.error ? <ErrorMessage>{props.error}</ErrorMessage> : "";
+
 
 export const PopoutForm = (props) =>
     <div>
@@ -54,13 +67,14 @@ export const PopoutForm = (props) =>
                 {props.children}
                 <StyledFormControl>
                     <Button
-                        disabled={!props.isValid}
+                        disabled={!props.valid}
                         variant="contained"
                         color="primary"
                         onClick={props.submitForm}>
                         Send It
                     </Button>
                 </StyledFormControl>
+                <MaybeError error={props.error}/>
                 <BottomButton
                     variant="fab"
                     color="primary"
@@ -103,20 +117,22 @@ export const LukeSelect = (props) => <StyledFormControl variant="outlined">
                 name={props.label}
                 id={`${props.label}-input`}
             />
-        }
-    >
+        }>
         <MenuItem value="">
             <em>None</em>
         </MenuItem>
         {props.options.map(props.optionToMenuItem).map(option =>
-            <MenuItem value={option.value}>{option.label}</MenuItem>)}
+            <MenuItem key={option.value}
+                      value={option.value}>{option.label}</MenuItem>)}
     </Select>
 </StyledFormControl>;
 
-export const LukeTextField = (props) => <StyledFormControl>
-    <TextField variant={"outlined"}
-               label={props.label}
-               value={props.value}
-               onChange={(event) => props.onChange(event.target.value)}
-    />
-</StyledFormControl>;
+export const LukeTextField = (props) => {
+    const {onChange, ...rest} = props;
+    return <StyledFormControl>
+        <TextField variant={"outlined"}
+                   onChange={(event) => onChange(event.target.value)}
+                   {...rest}
+        />
+    </StyledFormControl>
+};

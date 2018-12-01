@@ -1,63 +1,95 @@
 import {LUKE_API} from "../config/appConfig";
 import axios from "axios";
-import {postSecure} from "../api/Api";
+import {postNoCredentials, postSecure} from "../api/Api";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
-export const declareForm = (formName, fields, endpoint, refreshDataElementActionCreator) => {
-    const successActionType = `${formName}_SUCCESS`;
-    const failureActionType = `${formName}_FAILURE`;
-    const openFormActionType = `OPEN_${formName}`;
-    const closeFormActionType = `CLOSE_${formName}`;
+export const declareForm = (config) => {
+    const {formName, fields, path, onSuccess, isInsecure, errorMessage} = config;
 
+    const actionTypes = {
+        successActionType: `${formName}_SUCCESS`,
+        failureActionType: `${formName}_FAILURE`,
+        openFormActionType: `OPEN_${formName}`,
+        closeFormActionType: `CLOSE_${formName}`,
+    };
 
-    const fieldNames = fields.map(field => field.name);
     const actionType = (fieldName) => `UPDATE_FORM_${formName.toUpperCase()}_${fieldName.toUpperCase()}`;
+    const post = isInsecure === true ? postNoCredentials : postSecure;
+    const submitForm = () => (dispatch, getState) => {
+        const uri = `${LUKE_API}${path}`;
+        const body = getState()[formName];
 
-    const emptyForm = fieldNames.reduce((prev, curr) => ({
-        ...prev,
-        [curr]: ""
-    }), {valid: false, isOpen: false});
+        post(uri, body)
+            .then((response) => {
+                onSuccess(dispatch, getState, response.data)
+            })
+            .then(() => dispatch({type: actionTypes.successActionType}))
+            .catch((err) => dispatch({type: actionTypes.failureActionType, payload: err}))
+    };
 
-    const storeUpdaters = fieldNames.reduce((prev, fieldName) => ({
-        ...prev,
-        [actionType(fieldName)]: (state, newValue) => ({...state, [fieldName]: newValue})
-    }), {
-        [successActionType]: () => ({emptyForm}),
-        [openFormActionType]: () => ({...emptyForm, isOpen: true}),
-        [closeFormActionType]: () => ({emptyForm})
+    const reducer = createReducer(fields, actionType, actionTypes, errorMessage);
+    const actions = createActions(fields, actionType);
+    const connectToForm = createConnector(formName, actions, submitForm, actionTypes);
+
+    return {
+        actions,
+        reducer,
+        connect: connectToForm
+    };
+};
+
+const createConnector = (formName, actions, submitForm, actionTypes) => {
+
+    const openForm = () => ({type: actionTypes.openFormActionType});
+    const closeForm = () => ({type: actionTypes.closeFormActionType});
+
+    const mapStateToProps = (state) => ({
+        [formName]: state[formName],
+        error: state[formName].error,
+        isOpen: state[formName].isOpen,
+        valid: state[formName].valid
     });
 
-    const actions = fieldNames.reduce((prev, curr) => ({
+    const mapDispatchToProps = (dispatch) => bindActionCreators(
+        {
+            ...actions,
+            openForm,
+            closeForm,
+            submitForm,
+        }, dispatch
+    );
+    return (component) => connect(mapStateToProps, mapDispatchToProps)(component);
+};
+
+
+const createActions = (fields, actionType) => fields
+    .map(field => field.name)
+    .reduce((prev, curr) => ({
         ...prev,
         [`update_${curr}`]: (payload) => ({type: actionType(curr), payload})
     }), {});
 
-    const reducer = (state = emptyForm, action) => {
-        const updater = storeUpdaters[action.type];
 
-        if (updater !== undefined) {
-            const updatedForm = updater(state, action.payload);
-            if (updatedForm === null) {
-                return updatedForm
-            }
-            return {...updatedForm, valid: validate(updatedForm)}
-        }
+const createReducer = (fields, actionType, actionTypes, errorMessage = "") => {
 
-        return state
+    const fieldNames = fields.map(field => field.name);
+
+    const defaultFormState = {valid: false, isOpen: false, error: ""};
+
+    const emptyForm = fieldNames.reduce((prev, curr) => ({
+        ...prev,
+        [curr]: ""
+    }), defaultFormState);
+
+
+    const defaultStoreUpdaters = {
+        [actionTypes.successActionType]: () => ({emptyForm}),
+        [actionTypes.openFormActionType]: () => ({...emptyForm, isOpen: true}),
+        [actionTypes.closeFormActionType]: () => ({emptyForm}),
+        [actionTypes.failureActionType]: (state) => ({...state, error: errorMessage}),
     };
 
-    const submitForm = () => (dispatch, getState) => {
-        const uri = `${LUKE_API}${endpoint}`;
-        const body = getState()[formName];
-        postSecure(uri, body)
-            .then(() => dispatch({type: successActionType}))
-            .then(() => dispatch(refreshDataElementActionCreator()))
-            .catch((err) => dispatch({type: failureActionType, payload: err}))
-    };
-
-    const openForm = () => ({type: openFormActionType});
-    const closeForm = () => ({type: closeFormActionType});
 
     const validate = (form) => {
         const requiredFields = fields
@@ -72,26 +104,24 @@ export const declareForm = (formName, fields, endpoint, refreshDataElementAction
         return true
     };
 
-    const mapStateToProps = (state) => ({
-        [formName]: state[formName]
-    });
+    const storeUpdaters = fieldNames.reduce((prev, fieldName) => ({
+        ...prev,
+        [actionType(fieldName)]: (state, newValue) => ({...state, error: "", [fieldName]: newValue})
+    }), defaultStoreUpdaters);
 
-    const mapDispatchToProps = (dispatch) => bindActionCreators(
-        {
-            ...actions,
-            openForm,
-            closeForm,
-            submitForm,
-        }, dispatch
-    );
 
-    const connectToForm = (component) => connect(mapStateToProps, mapDispatchToProps)(component);
+    return (state = emptyForm, action) => {
+        const updater = storeUpdaters[action.type];
 
-    return {
-        emptyForm,
-        actions,
-        reducer,
-        validate,
-        connect: connectToForm
+        if (updater !== undefined) {
+            const updatedForm = updater(state, action.payload);
+            if (updatedForm === null) {
+                return updatedForm
+            }
+            return {...updatedForm, valid: validate(updatedForm)}
+        }
+
+        return state
     };
 };
+
