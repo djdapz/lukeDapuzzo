@@ -2,6 +2,7 @@ package com.dapuzzo.luke.show.repository
 
 import com.dapuzzo.luke.core.BaseRepository
 import com.dapuzzo.luke.show.domain.entity.CityEntity
+import org.springframework.dao.DataAccessException
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.stereotype.Repository
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository
 class CityRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<CityEntity> {
 
     override fun getAll(): List<CityEntity> =
-             jdbcTemplate.queryForList(
+            jdbcTemplate.queryForList(
                     "SELECT * FROM city")
                     .map {
                         CityEntity(
@@ -27,22 +28,30 @@ class CityRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<CityEntity
                 item.stateAbbreviation,
                 item.name)
         return item.apply {
-            id = getCityByStateAndName(item)!!.id
+            id = getCityByStateAndName(
+                    city = item.name,
+                    stateAbbreviation = item.stateAbbreviation
+            )!!.id
         }
     }
 
-    override fun getById(id: Any): CityEntity =
+    override fun getById(id: Any): CityEntity? =
             jdbcTemplate.queryForObject(
                     "SELECT * FROM city WHERE id = ?",
                     getRowMapper(),
-                    id)!!
+                    id)
 
-    fun getCityByStateAndName(city: CityEntity): CityEntity? =
-            jdbcTemplate.queryForObject(
-                    "SELECT * FROM city WHERE name = ? AND state = ?",
-                    getRowMapper(),
-                    city.name,
-                    city.stateAbbreviation)
+    fun getCityByStateAndName(city: String, stateAbbreviation: String): CityEntity? =
+            try {
+                jdbcTemplate.queryForObject(
+                        "SELECT * FROM city WHERE name = ? AND state = ?",
+                        getRowMapper(),
+                        city,
+                        stateAbbreviation)
+            } catch (e: DataAccessException) {
+                null
+            }
+
 
     override fun getRowMapper(): RowMapper<CityEntity> {
         return RowMapper { rs, _ ->
@@ -54,3 +63,4 @@ class CityRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<CityEntity
         }
     }
 }
+

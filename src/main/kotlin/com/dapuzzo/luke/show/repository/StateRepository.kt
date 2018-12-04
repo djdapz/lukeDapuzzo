@@ -32,11 +32,11 @@ class StateRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<StateEnti
         return item
     }
 
-    override fun getById(id: Any): StateEntity =
+    override fun getById(id: Any): StateEntity? =
             jdbcTemplate.queryForObject(
                     "SELECT * FROM state WHERE abbreviation = ?",
                     getRowMapper(),
-                    id)!!
+                    id)
 
     override fun getRowMapper(): RowMapper<StateEntity> =
             RowMapper { rs, _ ->

@@ -15,7 +15,7 @@ class CityServiceTest {
 
     val cityEntity = randomCityEntity()
     val expected = City(
-            id= cityEntity.id,
+            id= cityEntity.id!!,
             state = randomState(cityEntity.stateAbbreviation),
             name = cityEntity.name
     )
@@ -33,20 +33,19 @@ class CityServiceTest {
 
     @Test
     internal fun `should get state by abbreviation`() {
-        val actual = subject.getCityById(cityEntity.id)
+        val actual = subject.getCityById(cityEntity.id!!)
         Assertions.assertThat(actual).isEqualTo(expected)
     }
 
     @Test
     internal fun `should call getCityByID`(){
-        subject.getCityById(cityEntity.id)
-        verify(cityRepository).getById(cityEntity.id)
+        subject.getCityById(cityEntity.id!!)
+        verify(cityRepository).getById(cityEntity.id!!)
     }
 
     @Test
     internal fun `should call getState`(){
-        subject.getCityById(cityEntity.id)
+        subject.getCityById(cityEntity.id!!)
         verify(stateService).getState(expected.state.abbreviation)
-
     }
 }

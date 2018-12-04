@@ -2,9 +2,10 @@ package com.dapuzzo.luke.integration
 
 import com.dapuzzo.luke.core.random.faker
 import com.dapuzzo.luke.core.random.randomLocalDate
-import com.dapuzzo.luke.song.domain.MusicEntity
-import com.dapuzzo.luke.song.domain.MusicEntity.MusicType.SOUNDCLOUD_SONG
-import com.dapuzzo.luke.song.domain.MusicEntity.MusicType.SPOTIFY_SONG
+import com.dapuzzo.luke.show.controller.VenueController
+import com.dapuzzo.luke.show.domain.City
+import com.dapuzzo.luke.show.domain.Venue
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,32 +29,26 @@ class ShowIntegrationTest : IntegrationTest() {
 
     @Test
     fun shouldGetAListOfAllVenuesAndIds() {
-            webClient.get().uri("/venues")
+        val returnResult = webClient.get().uri("/venues")
                 .header("Authorization", encodedCredentials)
                 .exchange()
-                .expectBody()
-                .json(
-                //language=json
-                """
-                    {
-                      "venues": [
-                        {
-                          "id": "13",
-                          "name":  "The Beebop"
-                        },
-                        {
-                          "id": "14",
-                          "name":  "Daves Bar"
-                        }
-                      ]
-                    }
+                .returnResult(VenueController.VenuesResponseBody::class.java)
+                .responseBody
+                .next()
+                .block()!!
 
-                """.trimIndent())
+        val boulder = City(12, "Boulder", com.dapuzzo.luke.show.domain.State("CO", "Colorado"))
+
+        assertThat(returnResult.venues).containsExactlyElementsOf(
+                listOf(
+                        Venue(city = boulder, id = 13, name = "The Beebop", googleMapsLink = "http://maps.io/venue1"),
+                        Venue(city = boulder, id = 14, name = "Daves Bar", googleMapsLink = "http://maps.io/venue2")
+                )
+        )
     }
 
     @Test
-    fun shouldBeAbleToCreateANewShowWithAVenueThatExists(){
-        faker().rockBand()
+    fun shouldBeAbleToCreateANewShowWithAVenueThatExists() {
         webClient.post().uri("/shows")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", encodedCredentials)
@@ -61,8 +56,27 @@ class ShowIntegrationTest : IntegrationTest() {
                 .body(BodyInserters.fromObject("""
                         {
                           "venueId": "13",
-                          "style": "${faker().rockBand().name()}"
+                          "style": "${faker().rockBand().name()}",
                           "date": "${randomLocalDate()}"
+                        }
+                    """.trimIndent()))
+                .exchange()
+                .expectStatus()
+                .isCreated
+    }
+
+    @Test
+    fun shouldBeAbleToCreateANewVenueWithACityThatDidntPreviouslyExist() {
+        webClient.post().uri("/venues")
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", encodedCredentials)
+                //language=json
+                .body(BodyInserters.fromObject("""
+                        {
+                          "name": "${faker().rockBand().name()}",
+                          "googleMapsLink": "${faker().rockBand().name()}",
+                          "city": "${faker().rockBand().name()}",
+                          "state": "CO"
                         }
                     """.trimIndent()))
                 .exchange()

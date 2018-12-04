@@ -9,7 +9,7 @@ class StateService(
         val stateRepository: StateRepository
 ) {
     fun getState(abbreviation: String): State =
-            with(stateRepository.getById(abbreviation)) {
+            stateRepository.getById(abbreviation)!!.run {
                 State(
                         abbreviation = abbreviation,
                         name = name

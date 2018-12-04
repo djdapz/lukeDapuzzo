@@ -8,17 +8,17 @@ const environment = function () {
     switch (window.location.origin) {
         case ("http://localhost:3000"):
             return LOCAL;
-        case("https://luke-dapuzzo-client.cfapps.iocd "):
+        case("https://luke-dapuzzo-client.cfapps.io"):
             return DEV;
-        case("https://luke-dapuzzo-client-static.cfapps.iocd "):
+        case("https://luke-dapuzzo-client-static.cfapps.io"):
             return DEV;
         case("http://lukedapuzzo.com"):
             return PROD;
         case("http://www.lukedapuzzo.com"):
             return PROD;
-        case("https://luke-dapuzzo-client-prod.cfapps.iocd "):
+        case("https://luke-dapuzzo-client-prod.cfapps.io"):
             return PROD;
-        case("https://luke-dapuzzo-dot-com-prod.cfapps.iocd "):
+        case("https://luke-dapuzzo-dot-com-prod.cfapps.io"):
             return PROD;
         default:
             return TEST

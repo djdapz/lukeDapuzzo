@@ -34,11 +34,11 @@ class VenueRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<VenueEnti
         }
     }
 
-    override fun getById(id: Any): VenueEntity {
+    override fun getById(id: Any): VenueEntity? {
         return jdbcTemplate.queryForObject(
                 "SELECT * from venue WHERE id = ?",
                 getRowMapper(),
-                id)!!
+                id)
     }
 
     fun getVenueByNameAndCity(venue: VenueEntity): VenueEntity {
@@ -59,5 +59,4 @@ class VenueRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<VenueEnti
             )
         }
     }
-
 }

@@ -35,7 +35,7 @@ class CityRepositoryTest : DatabaseBase (){
 
     @Test
     fun shouldGetAllCititesbyAbbreviation() {
-        val actualState = cityRepository.getById(firstCity.id)
+        val actualState = cityRepository.getById(firstCity.id!!)
 
         assertThat(actualState).isEqualTo(firstCity)
     }

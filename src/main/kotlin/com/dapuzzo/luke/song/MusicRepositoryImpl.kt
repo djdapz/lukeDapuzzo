@@ -38,13 +38,13 @@ class MusicRepositoryImpl(jdbcTemplate: JdbcTemplate) : MusicRepository {
     )
 
 
-    override fun getById(id: Any): MusicEntity {
+    override fun getById(id: Any): MusicEntity? {
         return jdbc.queryForObject(
                 "SELECT * FROM song WHERE id=:id",
                 MapSqlParameterSource()
                         .addValue("id", id),
                 getRowMapper()
-        )!!
+        )
     }
 
     override fun getRowMapper(): RowMapper<MusicEntity> {

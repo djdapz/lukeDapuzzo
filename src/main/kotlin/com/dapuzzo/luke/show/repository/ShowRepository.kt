@@ -34,12 +34,12 @@ class ShowRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<ShowEntity
                 )
             }
 
-    override fun getById(id: Any): ShowEntity = jdbcTemplate
+    override fun getById(id: Any): ShowEntity? = jdbcTemplate
             .queryForObject(
                     "SELECT * FROM show WHERE id = ? ",
                     getRowMapper(),
                     id
-            )!!
+            )
 
 
     fun getShowByVenueDateAndStyle(show: ShowEntity): ShowEntity? = jdbcTemplate

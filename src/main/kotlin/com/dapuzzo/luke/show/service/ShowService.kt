@@ -26,7 +26,7 @@ class ShowService(
     }
 
 
-    fun getShow(id: Int): Show = with(showRepository.getById(id)) {
+    fun getShow(id: Int): Show = showRepository.getById(id)!!.run {
         Show(
                 id = id,
                 venue = venueService.getVenue(venueId),

@@ -10,7 +10,7 @@ class MusicController(val musicService: MusicService) {
     fun getAllSongs(): List<MusicEntity> = musicService.getAllMusic()
 
     @GetMapping("/music/{musicId}")
-    fun getSongById(@PathVariable musicId: String): MusicEntity = musicService.getMusicById(musicId)
+    fun getSongById(@PathVariable musicId: String): MusicEntity = musicService.getMusicById(musicId)!!
 
     @PostMapping("/music")
     fun createSong(@RequestBody music: MusicEntity): MusicEntity = musicService.createMusic(music)

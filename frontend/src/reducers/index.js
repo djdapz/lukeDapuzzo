@@ -10,6 +10,7 @@ import {routerReducer} from 'react-router-redux'
 import {createShowForm} from "../actions/CreateShowActions";
 import {venueReducer} from "./VenueReducer";
 import {createSongForm} from "../actions/CreateSongAction";
+import {createVenueForm} from "../actions/CreateVenueAction";
 import {authForm} from "../actions/AuthFormAction";
 
 const userReducer = combineReducers({
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     songs: songsReducer,
     newSong: createSongForm.reducer,
     newShow: createShowForm.reducer,
+    newVenue: createVenueForm.reducer,
     authForm: authForm.reducer,
     user: userReducer,
     router: routeReducer,

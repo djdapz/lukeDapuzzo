@@ -36,9 +36,8 @@ class VenueRepositoryTest : DatabaseBase (){
 
     @Test
     internal fun `should get venue by id`() {
-        val actualState = venueRepository.getById(firstVenue.id)
+        val actualState = venueRepository.getById(firstVenue.id!!)
 
         Assertions.assertThat(actualState).isEqualTo(firstVenue)
     }
-
 }

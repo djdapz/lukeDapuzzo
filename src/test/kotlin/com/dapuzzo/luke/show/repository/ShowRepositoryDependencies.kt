@@ -45,7 +45,6 @@ class ShowRepositoryDependencies(
         setupShowDependencies(firstShow, secondShow)
         showRepository.add(firstShow)
         showRepository.add(secondShow)
-
     }
 
     fun setupShowDependencies(firstShow: ShowEntity, secondShow: ShowEntity) {
@@ -55,8 +54,8 @@ class ShowRepositoryDependencies(
 
         setupVenue(firstVenue, secondVenue)
 
-        firstShow.venueId = firstVenue.id
-        secondShow.venueId = secondVenue.id
+        firstShow.venueId = firstVenue.id!!
+        secondShow.venueId = secondVenue.id!!
 
         setupVenue(randomVenueEntity(firstShow), randomVenueEntity(secondShow))
     }
@@ -68,8 +67,8 @@ class ShowRepositoryDependencies(
 
         setupCity(firstCity, secondCity)
 
-        firstVenue.city_id = firstCity.id
-        secondVenue.city_id = secondCity.id
+        firstVenue.city_id = firstCity.id!!
+        secondVenue.city_id = secondCity.id!!
     }
 
     fun setupCityDependencies(firstCity: CityEntity, secondCity: CityEntity) {
