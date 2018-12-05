@@ -16,7 +16,7 @@ class AdminPage extends Component {
         return (
             <div id="admin-page"
                  className="main-content">
-                {AdminRoutes.toLinks(this.props.location.pathname)}
+                {AdminRoutes.toLinks(this.props.path)}
                 {AdminRoutes.renderRedirect()}
                 {AdminRoutes.toRoutes()}
             </div>
@@ -25,7 +25,10 @@ class AdminPage extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({getAllVenues}, dispatch);
+const mapStateToProps = (state) => ({
+    path: state.reduxRouter.location.pathname
+});
 
-export default connect(null, mapDispatchToProps)(AdminPage);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminPage);
 
 

@@ -18,7 +18,7 @@ class ShowService(
                     Show(
                             id = it.id!!,
                             venue = venueService.getVenue(it.venueId),
-                            style = it.style,
+                            notes = it.notes,
                             date = it.date
 
                     )
@@ -30,7 +30,7 @@ class ShowService(
         Show(
                 id = id,
                 venue = venueService.getVenue(venueId),
-                style = style,
+                notes = notes,
                 date = date
         )
     }

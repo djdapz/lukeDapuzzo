@@ -23,11 +23,14 @@ const VenuePopup = styled.div`
     outline: none;
   }
 `;
+
 const NewVenueForm = (props) =>
     <div>
         <StyledFormControl>
-            <Button variant={'outlined'}
-                    onClick={props.openForm}>Or Create Venue</Button>
+            <Button
+                color="primary"
+                variant={'contained'}
+                onClick={props.openForm}>(New Venue)</Button>
         </StyledFormControl>
         <Modal
             open={props.isOpen}

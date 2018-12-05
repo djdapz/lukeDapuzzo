@@ -21,9 +21,11 @@ const NewShowFormPopout = (props) =>
         />
         <NewVenueForm/>
         <LukeTextField
-            value={props.newShow.style}
-            onChange={props.update_style}
-            label={"Style"}
+            multiline
+            rows={3}
+            value={props.newShow.notes}
+            onChange={props.update_notes}
+            label={"Notes"}
         />
     </PopoutForm>;
 

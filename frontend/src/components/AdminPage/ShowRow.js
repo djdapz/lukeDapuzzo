@@ -8,39 +8,66 @@ import {connect} from "react-redux";
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import Button from "@material-ui/core/Button/Button";
+import Card from "@material-ui/core/Card/Card";
+import List from "@material-ui/core/List/List";
+import styled from 'styled-components'
 
-class ShowRow extends Component {
+const ShowCard = styled(Card)`
+  margin: .5rem 0;
+  padding: .5rem;
+  display: flex;
+`;
 
-    constructor(props) {
-        super(props);
-        this.deleteShow = this.deleteShow.bind(this);
-    }
+const ShowColumn = styled.div`
+  margin: 0 1rem;
+`;
 
-    render = () => <div className={"admin-listing"}>
-        <div className="show-column date-column">
-            {this.props.show.date}
-        </div>
-        <div className="show-column venue-column">
-            {this.props.show.venueName}
-        </div>
-        <div className="show-column venue-link-column">
-            {this.props.show.venueLink}
-        </div>
-        <div className="show-column style-column">
-            {this.props.show.style}
-        </div>
-        <div className="show-column city-column">
-            {this.props.show.cityString}
-        </div>
-        <div className={"action-column  show-column"}>
-            <Button variant={'outlined'} color={'secondary'} className="btn btn-danger" onClick={this.deleteShow}>
+const LeftPane = styled(ShowColumn)`
+  width: 11rem;
+  min-width: 11rem;
+`;
+
+const ListRow = styled.div`
+  padding: .5rem 0;
+`;
+
+const Notes = styled(ShowColumn)`
+flex-grow: 1;
+`;
+
+const ButtonSlot = styled(ShowColumn)`
+  width: 4rem;
+  min-width: 4rem;
+`;
+
+
+const ShowRow = (props) => {
+    const deleteShow = () => props.deleteShow(props.show.id);
+
+    return <ShowCard className={"admin-listing"}>
+
+        <LeftPane>
+            <ListRow>{props.show.date}</ListRow>
+            <ListRow>{props.show.venueName}</ListRow>
+            <ListRow>{props.show.cityString}</ListRow>
+        </LeftPane>
+        {/*<div }
+            {/*{props.show.venueLink}*/}
+        {/*</div>*/}
+        <Notes>
+            {props.show.notes}
+        </Notes>
+        <ButtonSlot>
+            <Button variant={'outlined'}
+                    color={'secondary'}
+                    className="btn btn-danger"
+                    onClick={deleteShow}>
                 <FontAwesomeIcon icon={["fa", "trash"]}/>
             </Button>
-        </div>
-    </div>;
+        </ButtonSlot>
+    </ShowCard>;
 
-    deleteShow = () => this.props.deleteShow(this.props.show.id)
-}
+};
 
 
 ShowRow.propTypes = {

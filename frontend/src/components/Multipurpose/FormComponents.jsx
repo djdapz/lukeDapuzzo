@@ -16,12 +16,13 @@ import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
 
 export const NewFormStyled = styled.div`
-  padding: .5rem;
+  padding: .5rem  1rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   width: 15rem;
-`
+   align-items: flex-end;
+`;
 
 export const BottomButton = withStyles({
         root: {
@@ -36,13 +37,14 @@ export const BottomButton = withStyles({
 
 export const StyledFormControl = withStyles({
     root: {
-        margin: ".5rem"
+        marginTop: ".5rem",
+        marginBottom: ".5rem",
+        width: "100%"
     }
 })(FormControl);
 
 const ErrorMessage = styled.div`
   margin: .5rem;
-  
   color: #400000;
   background-color: rgba(255,0,0,0.14);
   border: #400000 1px solid ;

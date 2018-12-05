@@ -7,12 +7,12 @@ data class ShowEntity(
         var id: Int?,
         var venueId: Int,
         val date: LocalDate,
-        val style: String
+        val notes: String
 ) {
     constructor(show: Show) : this(
             show.id,
             show.venue.id,
             show.date,
-            show.style
+            show.notes
     )
 }

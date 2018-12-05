@@ -27,12 +27,14 @@ export class LukeRoutes {
 
     toLinks(pathname) {
         return <Paper className="nav nav-tabs">
-            <Tabs value={pathname}>
+            <Tabs indicatorColor={"primary"} value={pathname}>
                 {this.routes.map((route) =>
-                    <Tab className="nav-item"
+                    <Tab value={`${this.basePath}${route.path}`}
+                         className="nav-item"
                          key={route.name}
                          label={route.name}
                          component={Link}
+
                          to={this.basePath + route.path}
                     />)}
             </Tabs>
@@ -40,13 +42,15 @@ export class LukeRoutes {
     }
 
     renderRedirect = () => this.defaultPath.length > 0 ?
-        <Route exact path={this.basePath}
+        <Route exact
+               path={this.basePath}
                render={() => <Redirect to={`${this.basePath}${this.defaultPath}`}/>}/> : '';
 
     toRoutes() {
         return this.routes.map((route, i) =>
-            <Route key={`${route.href}-${i}`} exact path={`/admin${route.path}`} render={route.render}/>)
+            <Route key={`${route.href}-${i}`}
+                   exact
+                   path={`/admin${route.path}`}
+                   render={route.render}/>)
     }
-
-    isActive = (route, pathname) => pathname.indexOf(route.path) >= 0 ? " active" : "";
 }

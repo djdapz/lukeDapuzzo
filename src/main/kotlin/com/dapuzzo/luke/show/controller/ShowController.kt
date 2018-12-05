@@ -9,7 +9,7 @@ import java.time.LocalDate
 @RestController
 class ShowController(val showService: ShowService) {
 
-    data class CreateShowRequest(val date: LocalDate, val venueId: Int, val style: String)
+    data class CreateShowRequest(val date: LocalDate, val venueId: Int, val notes: String)
 
     @GetMapping("/shows")
     fun shows(): List<Show> = showService.getAllShows()
@@ -19,7 +19,7 @@ class ShowController(val showService: ShowService) {
 
     @PostMapping("/shows")
     @ResponseStatus(HttpStatus.CREATED)
-    fun new(@RequestBody request: CreateShowRequest) = showService.createShow(request.venueId, request.style, request.date)
+    fun new(@RequestBody request: CreateShowRequest) = showService.createShow(request.venueId, request.notes, request.date)
 
 }
 

@@ -11,7 +11,7 @@ fun randomShow(): Show =
                 id = randomInt(),
                 venue = randomVenue(),
                 date = randomLocalDate(),
-                style = randomString()
+                notes = randomString()
         )
 
 

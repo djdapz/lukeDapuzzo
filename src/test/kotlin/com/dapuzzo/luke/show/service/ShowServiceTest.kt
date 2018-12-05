@@ -18,7 +18,7 @@ open class ShowServiceTest {
     private val expected = Show(
             id= showEntity.id!!,
             venue = randomVenue(showEntity.venueId),
-            style = showEntity.style,
+            notes = showEntity.notes,
             date = showEntity.date
     )
 

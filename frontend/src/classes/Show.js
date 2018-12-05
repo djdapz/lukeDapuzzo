@@ -3,16 +3,16 @@ export class Show {
         return new Show(
             json.date,
             json.id,
-            json.style,
+            json.notes,
             Venue.fromJson(json.venue)
         )
     }
 
-    constructor(date, id, style, venue) {
+    constructor(date, id, notes, venue) {
         this.id = id;
         this.venue = venue;
         this.date = date;
-        this.style = style;
+        this.notes = notes;
     }
 
     get venueName(){

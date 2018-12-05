@@ -76,7 +76,7 @@ class ShowControllerTest {
                         .content("""
                             {
                               "venueId": "12",
-                              "style": "Acoustic",
+                              "notes": "Acoustic",
                               "date": "2018-12-10"
                             }
                         """.trimIndent())

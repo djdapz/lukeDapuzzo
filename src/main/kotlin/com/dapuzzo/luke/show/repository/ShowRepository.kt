@@ -16,10 +16,10 @@ class ShowRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<ShowEntity
 
     override fun add(item: ShowEntity): ShowEntity {
         jdbcTemplate.update(
-                "INSERT INTO show(venue_id, date, style) VALUES(?,?::DATE,?)",
+                "INSERT INTO show(venue_id, date, notes) VALUES(?,?::DATE,?)",
                 item.venueId,
                 item.date.toString(),
-                item.style)
+                item.notes)
         return getShowByVenueDateAndStyle(item)!!
     }
 
@@ -30,7 +30,7 @@ class ShowRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<ShowEntity
                         it["id"] as Int,
                         it["venue_id"] as Int,
                         (it["date"] as Date).toLocalDate(),
-                        it["style"] as String
+                        it["notes"] as String
                 )
             }
 
@@ -44,11 +44,11 @@ class ShowRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<ShowEntity
 
     fun getShowByVenueDateAndStyle(show: ShowEntity): ShowEntity? = jdbcTemplate
             .queryForObject(
-                    "SELECT * FROM show WHERE venue_id = ? AND date = ?::DATE AND style = ? ",
+                    "SELECT * FROM show WHERE venue_id = ? AND date = ?::DATE AND notes = ? ",
                     getRowMapper(),
                     show.venueId,
                     show.date.toString(),
-                    show.style
+                    show.notes
             )
 
     override fun getRowMapper(): RowMapper<ShowEntity> = RowMapper { rs, _ ->
@@ -56,7 +56,7 @@ class ShowRepository(val jdbcTemplate: JdbcTemplate) : BaseRepository<ShowEntity
                 rs.getInt("id"),
                 rs.getInt("venue_id"),
                 LocalDate.parse(rs.getString("date")),
-                rs.getString("style")
+                rs.getString("notes")
         )
     }
 

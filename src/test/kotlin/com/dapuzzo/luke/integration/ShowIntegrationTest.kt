@@ -56,7 +56,7 @@ class ShowIntegrationTest : IntegrationTest() {
                 .body(BodyInserters.fromObject("""
                         {
                           "venueId": "13",
-                          "style": "${faker().rockBand().name()}",
+                          "notes": "${faker().rockBand().name()}",
                           "date": "${randomLocalDate()}"
                         }
                     """.trimIndent()))

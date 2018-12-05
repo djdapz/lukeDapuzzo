@@ -5,6 +5,6 @@ import java.time.LocalDate
 data class Show(
         val id: Int,
         val date: LocalDate,
-        val style: String,
+        val notes: String,
         val venue: Venue
 )
