@@ -3,7 +3,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {createShowForm} from "../../actions/CreateShowActions";
 import {LukeDatePicker, LukeSelect, LukeTextField, PopoutForm} from "../Multipurpose/FormComponents";
-import NewVenueForm from "./NewVenueForm";
+import NewVenueForm, {OpenNewVenueForm} from "./NewVenueForm";
 
 const NewShowFormPopout = (props) =>
     <PopoutForm {...props}>
@@ -18,8 +18,8 @@ const NewShowFormPopout = (props) =>
             label="Venue"
             options={props.venues}
             optionToMenuItem={(venue) => ({value: venue.id, label: venue.name})}
+            noneComponent={() => <OpenNewVenueForm/>}
         />
-        <NewVenueForm/>
         <LukeTextField
             multiline
             rows={3}
@@ -27,6 +27,7 @@ const NewShowFormPopout = (props) =>
             onChange={props.update_notes}
             label={"Notes"}
         />
+        <NewVenueForm/>
     </PopoutForm>;
 
 

@@ -16,6 +16,7 @@ export const declareForm = (config) => {
 
     const actionType = (fieldName) => `UPDATE_FORM_${formName.toUpperCase()}_${fieldName.toUpperCase()}`;
     const post = isInsecure === true ? postNoCredentials : postSecure;
+
     const submitForm = () => (dispatch, getState) => {
         const uri = `${LUKE_API}${path}`;
         const body = getState()[formName];

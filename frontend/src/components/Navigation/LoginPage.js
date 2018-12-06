@@ -1,13 +1,4 @@
 import React, {Component} from "react";
-
-import {connect} from "react-redux";
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-
-import {bindActionCreators} from "redux";
-
-import {loginAction} from "../../actions/UserActions";
-import {FAILED, SUBMITTED} from "../../constants/formStates";
-import TextField from "@material-ui/core/TextField/TextField";
 import Button from "@material-ui/core/Button/Button";
 import {LukeTextField} from "../Multipurpose/FormComponents";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";

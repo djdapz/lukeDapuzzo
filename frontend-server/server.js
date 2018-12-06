@@ -8,10 +8,19 @@ const buildDir = __dirname + "/build";
 
 app.use(express.static(buildDir));
 
-app.get('*', function (request, response) {
+app.get('/*', function (request, response) {
     response.sendFile(path.resolve(buildDir, 'index.html'))
 });
 
 
 app.listen(port);
-console.log("Listening on port: " + port);
+console.log(`Example app listening on port ${port}! Go to https://localhost:${port}/`)
+//
+// https.createServer(options, app).listen(port);
+// console.log("Listening on port: " + port);
+
+// https
+//     .createServer(options, app)
+//     .listen(port, function () {
+//         console.log(`Example app listening on port ${port}! Go to https://localhost:${port}/`)
+//     });

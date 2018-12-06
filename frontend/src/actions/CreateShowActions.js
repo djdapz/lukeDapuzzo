@@ -6,7 +6,7 @@ export const createShowForm = declareForm({
         fields: [
             {name: "date", required: true},
             {name: "venueId", required: true},
-            {name: "notes", required: true}
+            {name: "notes", required: false}
         ],
         path: "/shows",
         onSuccess: (dispatch) => dispatch(getAllShows()),

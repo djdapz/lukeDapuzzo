@@ -16,6 +16,8 @@ const environment = function () {
             return PROD;
         case("http://www.lukedapuzzo.com"):
             return PROD;
+        case("https://www.lukedapuzzo.com"):
+            return PROD;
         case("https://luke-dapuzzo-client-prod.cfapps.io"):
             return PROD;
         case("https://luke-dapuzzo-dot-com-prod.cfapps.io"):

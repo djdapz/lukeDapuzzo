@@ -34,7 +34,7 @@ class HeaderBar extends Component {
                     this.props.push("/");
                     this.setState({menubarCollapsed: true});
                 }} className={titleClassName}>
-                    Luke D'Apuzzo
+                    <img src={"/header.png"} alt={"Luke Dapuzzo"}/>
                 </div>
                 {this.props.route === routes.HOME
                     ? <h5 className="sub-title">A solo songwriter and musician from Boulder, Colorado</h5>

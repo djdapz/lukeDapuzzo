@@ -63,8 +63,10 @@ export const PopoutForm = (props) =>
                       aria-label="Add">
             <AddIcon/>
         </BottomButton>
+
         <Drawer anchor="right"
-                open={props.isOpen}>
+                open={props.isOpen}
+                onClose={props.closeForm}>
             <NewFormStyled>
                 {props.children}
                 <StyledFormControl>
@@ -120,9 +122,13 @@ export const LukeSelect = (props) => <StyledFormControl variant="outlined">
                 id={`${props.label}-input`}
             />
         }>
+        {props.noneComponent ? <MenuItem value={""}>
+            {props.noneComponent()}
+        </MenuItem> : ""}
         <MenuItem value="">
             <em>None</em>
         </MenuItem>
+
         {props.options.map(props.optionToMenuItem).map(option =>
             <MenuItem key={option.value}
                       value={option.value}>{option.label}</MenuItem>)}
