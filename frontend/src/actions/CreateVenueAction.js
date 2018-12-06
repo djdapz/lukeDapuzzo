@@ -1,6 +1,7 @@
 import {declareForm} from "./FormActions";
 import {getAllSongs} from "./GetAllSongs";
 import {getAllVenues} from "./VenueActions";
+import {createShowForm} from "./CreateShowActions";
 
 export const createVenueForm = declareForm({
     formName: "newVenue",
@@ -11,6 +12,10 @@ export const createVenueForm = declareForm({
         {name: "state", required: true}
     ],
     path: "/venues",
-    onSuccess: (dispatch) => dispatch(getAllVenues()),
+    onSuccess: (dispatch, getState, responseData) => {
+        const updateVenueAction = createShowForm.actions.update_venueId;
+        dispatch(updateVenueAction(responseData));
+        dispatch(getAllVenues());
+    },
     errorMessage: "There was an issue making your song, make sure you're not trying to create a duplicate"
 });
