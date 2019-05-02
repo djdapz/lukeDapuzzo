@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Button from "@material-ui/core/Button/Button";
 import {LukeTextField} from "../Multipurpose/FormComponents";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
-import {createMuiTheme} from "@material-ui/core";
+import {createMuiTheme} from "@material-ui/core/styles";
 
 import {authForm} from "../../actions/AuthFormAction";
 

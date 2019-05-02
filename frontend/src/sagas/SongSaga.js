@@ -1,5 +1,5 @@
-import {call, put, takeEvery, select} from "redux-saga/effects"
-import {deleteSecure, getNoCredentials, postSecure} from "../api/Api";
+import {call, put, takeEvery} from "redux-saga/effects"
+import {deleteSecure, getNoCredentials} from "../api/Api";
 import {allSongsFetched, GET_ALL_SONGS} from "../actions/GetAllSongs";
 import {DELETE_SONG, deleteSongFailed, songDeleted} from "../actions/DeleteSongAction";
 

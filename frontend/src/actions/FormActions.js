@@ -1,5 +1,4 @@
 import {LUKE_API} from "../config/appConfig";
-import axios from "axios";
 import {postNoCredentials, postSecure} from "../api/Api";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";

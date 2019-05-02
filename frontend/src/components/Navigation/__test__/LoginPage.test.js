@@ -2,7 +2,8 @@ import React from "react";
 import {shallow} from "enzyme";
 
 import LoginPage from "../LoginPage";
-import {Button, TextField} from "@material-ui/core"
+import Button from "@material-ui/core/Button"
+import TextField from "@material-ui/core/TextField"
 
 import {mockStore} from "../../../../testConfig/testUtils";
 import {loginAction} from "../../../actions/UserActions";

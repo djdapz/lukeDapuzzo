@@ -1,4 +1,4 @@
-import {withStyles} from "@material-ui/core";
+import {withStyles} from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl/FormControl";
 import {InlineDatePicker, MuiPickersUtilsProvider} from "material-ui-pickers";
 import InputLabel from "@material-ui/core/InputLabel/InputLabel";

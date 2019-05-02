@@ -26,6 +26,16 @@ class HeaderBar extends Component {
         this.props.getAllShows();
     }
 
+    renderDescription() {
+        const r = routes.HOME.href;
+        const l = this.props.route.location.pathname;
+        if (r === l) {
+            return <h5 className="sub-title">A solo songwriter and musician from Boulder, Colorado</h5>
+        } else {
+            return ""
+        }
+    }
+
     renderHomeLink() {
         const titleClassName = "title" + (this.props.route.location.pathname === routes.HOME.href ? " title-active" : "");
         return (
@@ -33,13 +43,12 @@ class HeaderBar extends Component {
                 <div onClick={() => {
                     this.props.push("/");
                     this.setState({menubarCollapsed: true});
-                }} className={titleClassName}>
-                    <img src={"/header.png"} alt={"Luke Dapuzzo"}/>
+                }}
+                     className={titleClassName}>
+                    <img src={"/header.png"}
+                         alt={"Luke Dapuzzo"}/>
                 </div>
-                {this.props.route === routes.HOME
-                    ? <h5 className="sub-title">A solo songwriter and musician from Boulder, Colorado</h5>
-                    : ""
-                }
+                {this.renderDescription()}
             </div>
 
         )
@@ -55,7 +64,8 @@ class HeaderBar extends Component {
     renderMenuButton() {
         return (
             <div className="social-media-icons">
-                <Button onClick={this.socialHamburgerPressed} id={"social-media-hamburger"}
+                <Button onClick={this.socialHamburgerPressed}
+                        id={"social-media-hamburger"}
                         aria-label="Add">
                     <MenuIcon/>
                 </Button>
@@ -65,12 +75,15 @@ class HeaderBar extends Component {
 
     renderMenubar() {
         return (
-            <Menubar menubarClass={this.determineMenubarClass()} routes={routes} callback={this.collapseMenuBar}/>
+            <Menubar menubarClass={this.determineMenubarClass()}
+                     routes={routes}
+                     callback={this.collapseMenuBar}/>
         )
     }
 
     static renderSocialMediaIcons() {
-        const iconElements = socialMediaIcons.map(icon => <SocialMediaIcon key={icon.href} icon={icon}
+        const iconElements = socialMediaIcons.map(icon => <SocialMediaIcon key={icon.href}
+                                                                           icon={icon}
                                                                            colors={socialMediaIconColors.header}/>);
 
         return (

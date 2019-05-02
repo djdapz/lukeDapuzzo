@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {Show} from "../../classes/Show";
 
@@ -9,7 +9,6 @@ import {connect} from "react-redux";
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import Button from "@material-ui/core/Button/Button";
 import Card from "@material-ui/core/Card/Card";
-import List from "@material-ui/core/List/List";
 import styled from 'styled-components'
 
 const ShowCard = styled(Card)`
@@ -51,9 +50,6 @@ const ShowRow = (props) => {
             <ListRow>{props.show.venueName}</ListRow>
             <ListRow>{props.show.cityString}</ListRow>
         </LeftPane>
-        {/*<div }
-            {/*{props.show.venueLink}*/}
-        {/*</div>*/}
         <Notes>
             {props.show.notes}
         </Notes>
