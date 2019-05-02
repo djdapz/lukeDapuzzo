@@ -5,7 +5,6 @@
 
 ci/credentials.yml
 
-gradle/
 .gradle/
 out/
 build/
