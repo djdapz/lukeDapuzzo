@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import Image from './outside_picture.jpg'
 import Paper from "@material-ui/core/Paper/Paper";
