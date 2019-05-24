@@ -1,7 +1,7 @@
 package com.dapuzzo.luke
 
-import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.SpringApplication
 
 @SpringBootApplication
 class LukeDapuzzoApplication {
@@ -12,5 +12,4 @@ class LukeDapuzzoApplication {
             SpringApplication.run(LukeDapuzzoApplication::class.java, *args)
         }
     }
-
 }

@@ -12,6 +12,7 @@ import {venueReducer} from "./VenueReducer";
 import {createSongForm} from "../actions/CreateSongAction";
 import {createVenueForm} from "../actions/CreateVenueAction";
 import {authForm} from "../actions/AuthFormAction";
+import {bioReducer} from "./BioReducer";
 
 const userReducer = combineReducers({
     isAuthenticated: userAuthenticationReducer,
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
     user: userReducer,
     router: routeReducer,
     reduxRouter: routerReducer,
-    venues: venueReducer
+    venues: venueReducer,
+    bio: bioReducer
 });
 
 export default rootReducer;

@@ -12,6 +12,7 @@ import {getAllSongs} from "../../actions/GetAllSongs";
 import {getAllShows} from "../../actions/GetAllShows";
 import Button from "@material-ui/core/Button/Button";
 import MenuIcon from '@material-ui/icons/Menu';
+import {getBio} from "../../actions/BioActions";
 
 class HeaderBar extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class HeaderBar extends Component {
     componentDidMount() {
         this.props.getAllSongs();
         this.props.getAllShows();
+        this.props.getBio();
     }
 
     renderDescription() {
@@ -120,7 +122,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(
         {
-            push, getAllShows, getAllSongs
+            push, getAllShows, getAllSongs, getBio
         },
         dispatch
     )
