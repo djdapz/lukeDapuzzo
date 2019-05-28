@@ -4,8 +4,8 @@ import com.dapuzzo.luke.config.JsonConfig.Companion.asObject
 import com.dapuzzo.luke.core.*
 import com.dapuzzo.luke.core.random.faker
 import com.dapuzzo.luke.core.random.randomAccount
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.springframework.http.MediaType

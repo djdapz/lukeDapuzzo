@@ -6,10 +6,10 @@ import com.dapuzzo.luke.song.domain.MusicEntity
 import com.dapuzzo.luke.song.domain.MusicEntity.MusicType.SPOTIFY_ALBUM
 import com.dapuzzo.luke.song.domain.MusicEntity.MusicType.SPOTIFY_SONG
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*

@@ -8,7 +8,7 @@ import com.dapuzzo.luke.show.domain.State
 import com.dapuzzo.luke.show.domain.Venue
 import com.dapuzzo.luke.show.domain.entity.VenueEntity
 import com.dapuzzo.luke.show.repository.VenueRepository
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockitokotlin2.*
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before

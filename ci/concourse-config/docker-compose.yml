@@ -10,25 +10,23 @@ services:
     - PGDATA=/database
 
   concourse-web:
-    image: concourse/concourse:4.2.1
+    image: concourse/concourse:5.2.0
     command: web
     links: [concourse-db]
     depends_on: [concourse-db]
     ports: ["8080:8080"]
     volumes: ["./keys/web:/concourse-keys"]
     environment:
-    - CONCOURSE_BASIC_AUTH_USERNAME=concourse
-    - CONCOURSE_BASIC_AUTH_PASSWORD=changeme
-    - CONCOURSE_POSTGRES_HOST=concourse-db
-    - CONCOURSE_POSTGRES_USER=concourse_user
-    - CONCOURSE_POSTGRES_PASSWORD=concourse_pass
-    - CONCOURSE_POSTGRES_DATABASE=concourse
-    - CONCOURSE_EXTERNAL_URL
-    - CONCOURSE_ADD_LOCAL_USER=test:password
-    - CONCOURSE_MAIN_TEAM_ALLOW_ALL_USERS=true
+      CONCOURSE_POSTGRES_HOST: concourse-db
+      CONCOURSE_POSTGRES_USER: concourse_user
+      CONCOURSE_POSTGRES_PASSWORD: concourse_pass
+      CONCOURSE_POSTGRES_DATABASE: concourse
+      CONCOURSE_EXTERNAL_URL: http://localhost:8080
+      CONCOURSE_ADD_LOCAL_USER: test:test
+      CONCOURSE_MAIN_TEAM_LOCAL_USER: test
 
   concourse-worker:
-    image: concourse/concourse:4.2.1
+    image: concourse/concourse:5.2.0
     command: worker
     privileged: true
     links: [concourse-web]

@@ -5,10 +5,10 @@ import com.dapuzzo.luke.core.random.randomShow
 import com.dapuzzo.luke.show.domain.Show
 import com.dapuzzo.luke.show.service.ShowService
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions
 import org.junit.Before
 import org.junit.Test
@@ -49,7 +49,7 @@ class ShowControllerTest {
     @Test
     fun shouldReturnListOfShows() {
         val actualJson = mockMvc
-                .perform(MockMvcRequestBuilders.get("/shows"))
+                .perform(get("/shows"))
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andReturn().response.contentAsString
 

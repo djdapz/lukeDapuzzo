@@ -4,10 +4,10 @@ import com.dapuzzo.luke.core.random.randomCityEntity
 import com.dapuzzo.luke.core.random.randomState
 import com.dapuzzo.luke.show.domain.City
 import com.dapuzzo.luke.show.repository.CityRepository
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
 import org.assertj.core.api.Assertions
 import org.junit.Test
 

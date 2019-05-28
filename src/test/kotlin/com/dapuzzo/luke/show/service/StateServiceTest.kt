@@ -3,9 +3,9 @@ package com.dapuzzo.luke.show.service
 import com.dapuzzo.luke.core.random.randomStateEntity
 import com.dapuzzo.luke.show.domain.State
 import com.dapuzzo.luke.show.repository.StateRepository
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
