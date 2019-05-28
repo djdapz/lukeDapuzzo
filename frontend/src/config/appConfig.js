@@ -12,9 +12,7 @@ const environment = function () {
             return DEV;
         case("https://luke-dapuzzo-client-static.cfapps.io"):
             return DEV;
-        case("http://lukedapuzzo.com"):
-            return PROD;
-        case("http://www.lukedapuzzo.com"):
+        case("https://lukedapuzzo.com"):
             return PROD;
         case("https://www.lukedapuzzo.com"):
             return PROD;
