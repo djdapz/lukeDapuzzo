@@ -10,7 +10,7 @@ const BioPage = ({bio}) => {
             <img src={Image}
                  alt={"Luke preforming guitar, drums, and singing"}/>
             <Paper className="bio">
-                {bio.map(it => <p>{it}</p>)}
+                {bio.split("\n").map(it => <p>{it}</p>)}
             </Paper>
         </div>
     </div>

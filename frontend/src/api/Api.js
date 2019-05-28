@@ -22,6 +22,16 @@ export function postSecure(url, body) {
     })
 }
 
+export function putSecure(url, body) {
+    return axiosInstance.put(url, body, {
+        auth: {
+            username: localStorage.getItem("username"),
+            password: localStorage.getItem("password")
+        }
+    })
+}
+
+
 export function deleteSecure(url) {
     return axiosInstance.delete(url, {
         auth: {

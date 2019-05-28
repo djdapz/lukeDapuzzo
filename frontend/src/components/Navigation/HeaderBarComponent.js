@@ -13,6 +13,8 @@ import {getAllShows} from "../../actions/GetAllShows";
 import Button from "@material-ui/core/Button/Button";
 import MenuIcon from '@material-ui/icons/Menu';
 import {getBio} from "../../actions/BioActions";
+import {store} from "../../config/reduxConfig";
+import {loginAction} from "../../actions/UserActions";
 
 class HeaderBar extends Component {
     constructor(props) {
@@ -26,6 +28,10 @@ class HeaderBar extends Component {
         this.props.getAllSongs();
         this.props.getAllShows();
         this.props.getBio();
+        const username = localStorage.getItem("username");
+        const password = localStorage.getItem("password");
+
+        store.dispatch(loginAction(username, password))
     }
 
     renderDescription() {

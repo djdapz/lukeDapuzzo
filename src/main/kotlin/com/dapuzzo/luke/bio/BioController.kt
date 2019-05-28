@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
-data class BioResponseBody(val bio: List<String>)
-data class BioRequestBody(val bio: List<String>)
+data class BioResponseBody(val bio: String)
+data class BioRequestBody(val bio: String)
 
 @RestController
 class BioController(val bioService: BioService) {

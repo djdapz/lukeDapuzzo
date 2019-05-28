@@ -14,28 +14,31 @@ class BioRepositoryTest : DatabaseBase() {
 
     @Test
     fun shouldUpdateRepositoryWithParsedListOfParagraphs() {
-        val newBio = listOf("i am a musician", "please stream me on spootify")
+        val newBio = "i am a musician\nplease stream me on spootify"
         val original = subject.getBio()
         assertThat(original).isNotEqualTo(newBio)
 
         subject.updateBio(newBio)
         val bio = subject.getBio()
 
-        assertThat(bio).isEqualTo(listOf("i am a musician", "please stream me on spootify"))
+        assertThat(bio).isEqualTo(
+            """
+                i am a musician
+                please stream me on spootify""".trimIndent()
+        )
     }
-
 
 
     @Test
     fun shouldPlayNiceWithApostrophes() {
-        val newBio = listOf("i'm a musician")
+        val newBio = ("i'm a musician")
         val original = subject.getBio()
         assertThat(original).isNotEqualTo(newBio)
 
         subject.updateBio(newBio)
         val bio = subject.getBio()
 
-        assertThat(bio).isEqualTo(listOf("i'm a musician"))
+        assertThat(bio).isEqualTo("i'm a musician")
     }
 
     @Test
@@ -44,6 +47,6 @@ class BioRepositoryTest : DatabaseBase() {
 
         val bio = subject.getBio()
 
-        assertThat(bio).isEqualTo(listOf("some stuff"))
+        assertThat(bio).isEqualTo(("some stuff"))
     }
 }

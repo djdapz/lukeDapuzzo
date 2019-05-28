@@ -4,6 +4,6 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 interface BioService {
-    fun updateBio(new: List<String>)
-    fun getBio(): List<String>
+    fun updateBio(new: String)
+    fun getBio(): String
 }

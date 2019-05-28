@@ -6,4 +6,4 @@ TRUNCATE TABLE account CASCADE;
 TRUNCATE TABLE state CASCADE;
 TRUNCATE TABLE bio CASCADE;
 
-INSERT INTO bio (bio) values ('Luke Dapuzzo is a solo independent recording artist and songwriter from Boulder, Colorado. His unique sound blends together a variety of genres from rockabilly to metalcore.<BREAK>All music released by this artist was performed, recorded, and mixed by Luke himself.')
+INSERT INTO bio (bio) values ('Luke Dapuzzo is a solo independent recording artist and songwriter from Boulder, Colorado. His unique sound blends together a variety of genres from rockabilly to metalcore.\\nAll music released by this artist was performed, recorded, and mixed by Luke himself.')

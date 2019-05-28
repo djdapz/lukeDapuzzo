@@ -3,7 +3,7 @@ import {all, fork} from 'redux-saga/effects';
 import { watchDeleteSong, watchGetSongs} from "./SongSaga";
 import {watchDeleteShow, watchGetShows} from "./ShowSaga";
 import {watchGetVenues} from "./VenueSaga";
-import {watchGetBio} from "./BioSaga";
+import {watchGetBio, watchSaveBio} from "./BioSaga";
 
 export function* lukeSaga() {
     yield all([
@@ -12,6 +12,7 @@ export function* lukeSaga() {
         fork(watchGetBio),
         fork(watchDeleteSong),
         fork(watchDeleteShow),
-        fork(watchGetVenues)
+        fork(watchGetVenues),
+        fork(watchSaveBio)
     ]);
 }

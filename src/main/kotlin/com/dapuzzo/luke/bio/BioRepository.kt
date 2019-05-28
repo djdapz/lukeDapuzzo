@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class BioRepository(val jdbcTemplate: JdbcTemplate) : BioService {
 
-    override fun getBio(): List<String> = jdbcTemplate.query("SELECT bio from bio") { rs, _ ->
+    override fun getBio(): String = jdbcTemplate.query("SELECT bio from bio") { rs, _ ->
         rs.getString("bio")
-    }.last().replace("<APOSTROPHE>", "'").split("<BREAK>")
+    }.last().replace("<APOSTROPHE>", "'")
 
-    override fun updateBio(new: List<String>) {
-        val toInsert = new.joinToString("<BREAK>").replace("'", "<APOSTROPHE>")
+    override fun updateBio(new: String) {
+        val toInsert = new.replace("'", "<APOSTROPHE>")
         val sql = "INSERT INTO bio (bio) values ('$toInsert')"
         jdbcTemplate.update(sql)
     }

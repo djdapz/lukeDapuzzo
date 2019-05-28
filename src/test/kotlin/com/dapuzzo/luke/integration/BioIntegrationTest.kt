@@ -21,7 +21,7 @@ class BioIntegrationTest : IntegrationTest() {
                 BodyInserters.fromObject(
                     """
                         {
-                          "bio": ["Yo my name is luke and i'm dope listen to my stuff"]
+                          "bio": "Yo my name is luke and i'm dope \nlisten to my stuff"
                         }
 
                     """.trimIndent()
@@ -31,7 +31,7 @@ class BioIntegrationTest : IntegrationTest() {
             .expectStatus().isOk
 
         val updatedBio = getBio().bio
-        assertThat(updatedBio).isEqualTo(listOf("Yo my name is luke and i'm dope listen to my stuff"))
+        assertThat(updatedBio).isEqualTo(listOf("Yo my name is luke and i'm dope \nlisten to my stuff"))
     }
 
     private fun getBio(): BioResponseBody {
@@ -44,8 +44,6 @@ class BioIntegrationTest : IntegrationTest() {
             .block()!!
     }
 
-    val originalBio = listOf(
-        "Luke Dapuzzo is a solo independent recording artist and songwriter from Boulder, Colorado. His unique sound blends together a variety of genres from rockabilly to metalcore.",
-        "All music released by this artist was performed, recorded, and mixed by Luke himself."
-    )
+    val originalBio =
+        "Luke Dapuzzo is a solo independent recording artist and songwriter from Boulder, Colorado. His unique sound blends together a variety of genres from rockabilly to metalcore.\nAll music released by this artist was performed, recorded, and mixed by Luke himself."
 }

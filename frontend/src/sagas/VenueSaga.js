@@ -6,7 +6,6 @@ export function* watchGetVenues() {
     yield takeEvery(GET_ALL_VENUES, getVenues);
 }
 
-
 export function* getVenues() {
     try {
         const response = yield call(getNoCredentials, "/venues");

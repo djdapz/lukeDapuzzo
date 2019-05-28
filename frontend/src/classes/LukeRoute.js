@@ -24,17 +24,25 @@ export class LukeRoutes {
         this.basePath = basePath;
     }
 
+    getValue = (pathname) => {
+        const paths = this.routes.map(it => `${this.basePath}${it.path}`);
+        if (paths.includes(pathname)) {
+            return pathname
+        }
+        return false
+    };
 
     toLinks(pathname) {
+        const value = this.getValue(pathname);
+
         return <Paper className="nav nav-tabs">
-            <Tabs indicatorColor={"primary"} value={pathname}>
+            <Tabs indicatorColor={"primary"} value={value}>
                 {this.routes.map((route) =>
                     <Tab value={`${this.basePath}${route.path}`}
                          className="nav-item"
                          key={route.name}
                          label={route.name}
                          component={Link}
-
                          to={this.basePath + route.path}
                     />)}
             </Tabs>
