@@ -5,4 +5,6 @@ cd repo
 
 pwd
 
+env
+
 ./gradlew clean test

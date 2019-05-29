@@ -17,3 +17,7 @@ services:
     command: "./repo/ci/tasks/run-tests.sh"
     volumes:
       - ../:/repo
+    environment:
+      LUKE_DB_URL: jdbc:postgresql://luke-db:5432/luke-test
+      LUKE_DB_PASSWORD: lukeuser
+      LUKE_DB_USERNAME: lukepwd
