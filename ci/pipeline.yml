@@ -51,6 +51,29 @@ resources:
       private_key: ((github-private-key))
 
 jobs:
+  - name: stop-dev-environment
+    public: true
+    plan:
+      - get: openjdk-node-cf
+        params: {save: true}
+      - task: stop-frontend
+        privileged: true
+        image: openjdk-node-cf
+        config:
+          platform: linux
+          run:
+            path: sh
+            args:
+              - -exc
+              - |
+                set -e
+                cf login -u ${PCF_USERNAME} -p ${PCF_PASSWORD} -s development -o dapuzzo
+                cf stop luke-dapuzzo-api-dev
+                cf stop luke-dapuzzo-client
+        params:
+          PCF_USERNAME: ((PCF_USERNAME))
+          PCF_PASSWORD: ((PCF_PASSWORD))
+
 
   - name: run-tests-backend
     public: true
@@ -114,7 +137,6 @@ jobs:
       - task: build-and-upload
         privileged: true
         image: openjdk-node-cf
-
         config:
           platform: linux
           inputs:
