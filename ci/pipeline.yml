@@ -18,6 +18,12 @@ resources:
     source:
       repository: postgres
 
+  - name: node
+    type: docker-image
+    source:
+      repository: node
+      tag: 12
+
   - name: openjdk-node-cf
     type: docker-image
     source:
@@ -41,6 +47,35 @@ resources:
       organization: dapuzzo
       space: production
 
+  - name: frontend-s3
+    type: s3
+    source:
+      region_name: us-west-2
+      bucket: luke-dapuzzo
+      regexp: frontend/frontend-(.*).zip
+      access_key_id: ((AWS_ACCESS_KEY_ID))
+      secret_access_key: ((AWS_SECRET_ACCESS_KEY))
+
+  - name: backend-s3
+    type: s3
+    source:
+      region_name: us-west-2
+      bucket: luke-dapuzzo
+      regexp: backend/backend-(.*).zip
+      access_key_id: ((AWS_ACCESS_KEY_ID))
+      secret_access_key: ((AWS_SECRET_ACCESS_KEY))
+
+
+
+
+  - name: after-midnight
+    type: time
+    source:
+      start: 12:00 AM
+      stop: 1:00 AM
+      location: America/Chicago
+
+
   - name: version
     type: semver
     source:
@@ -56,6 +91,8 @@ jobs:
     plan:
       - get: openjdk-node-cf
         params: {save: true}
+      - get: after-midnight
+        trigger: true
       - task: stop-frontend
         privileged: true
         image: openjdk-node-cf
@@ -67,7 +104,7 @@ jobs:
               - -exc
               - |
                 set -e
-                cf login -u ${PCF_USERNAME} -p ${PCF_PASSWORD} -s development -o dapuzzo
+                cf login -a https://api.run.pivotal.io -u ${PCF_USERNAME} -p ${PCF_PASSWORD} -s development -o dapuzzo
                 cf stop luke-dapuzzo-api-dev
                 cf stop luke-dapuzzo-client
         params:
@@ -132,16 +169,18 @@ jobs:
       - get: repo
         trigger: true
         passed: ["run-tests-backend"]
-      - get: openjdk-node-cf
+      - get: node
         params: {save: true}
       - task: build-and-upload
         privileged: true
-        image: openjdk-node-cf
+        image: node
         config:
           platform: linux
           inputs:
             - name: repo
             - name: version
+          outputs:
+            - name: frontend-s3
           caches:
             - path: repo/frontend/node_modules
           run:
@@ -150,7 +189,6 @@ jobs:
               - -exc
               - |
                 #!/bin/bash
-
                 set -ex
 
                 export BUILD_VERSION=`cat version/number`
@@ -158,22 +196,12 @@ jobs:
                 cd repo/frontend
                 npm install
                 npm run build
-
-                echo " >>>> Zipping Frontend"
                 touch build/Staticfile
                 cd build
-                zip -r ../frontend.zip *
-                cd ..
-                echo " <<<< Frontend Zipped"
-
-                echo " >>>> Uploading frontend-server.zip to aws"
-                /root/bin/aws s3 cp "./frontend.zip" "s3://lukeDapuzzo/app/frontend-${BUILD_VERSION}.zip"
-                echo " <<<< Uploaded frontend-server.zip to aws"
-
-          params:
-            AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
-            AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
-
+                zip -r ../../../frontend-s3/frontend-${BUILD_VERSION}.zip *
+      - put: frontend-s3
+        params:
+          file: frontend-s3/frontend-*.zip
 
   - name: build-and-upload-backend
     public: true
@@ -184,50 +212,49 @@ jobs:
       - get: repo
         trigger: true
         passed: ["run-tests-backend"]
-      - get: openjdk-node-cf
+      - get: openjdk
         params: {save: true}
       - task: build-and-upload
         privileged: true
-        image: openjdk-node-cf
+        image: openjdk
         config:
           platform: linux
           inputs:
             - name: repo
             - name: version
+          outputs:
+            - name: backend-s3
           run:
             path: sh
             args:
               - -exc
               - |
                 #!/bin/bash
-
                 set -ex
 
                 export BUILD_VERSION=`cat version/number`
-
                 cd repo
+
                 ./gradlew clean assemble -Pversion=$BUILD_VERSION
-
-                ls -lsa build/libs
-
-                echo " >>>> Uploading jar to aws"
-
-                /root/bin/aws s3 cp "build/libs/lukeDapuzzo-${BUILD_VERSION}.jar" "s3://lukeDapuzzo/app/lukeDapuzzo-${BUILD_VERSION}.jar"
-                echo " <<<< Uploaded jar to aws"
-          params:
-            AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
-            AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
+                pwd
+                cp build/libs/luke-dapuzzo-${BUILD_VERSION}.jar ../backend-s3/backend-${BUILD_VERSION}.jar
+      - put: backend-s3
+        params:
+          file: backend-s3/backend-*.jar
 
   - name: deploy-acceptance
     plan:
-      - get: version
-        trigger: true
-        passed: ["build-and-upload-backend", "build-and-upload-frontend"]
       - get: repo
         trigger: true
         passed: ["build-and-upload-backend", "build-and-upload-frontend"]
       - get: openjdk-node-cf
         params: {save: true}
+      - get: backend-s3
+        trigger: true
+        passed:  ["build-and-upload-backend"]
+      - get: frontend-s3
+        trigger: true
+        passed:  ["build-and-upload-frontend"]
       - task: download-jar
         privileged: true
         image: openjdk-node-cf
@@ -244,18 +271,13 @@ jobs:
               - -exc
               - |
                 #!/bin/bash
-
-                export BUILD_VERSION=`cat version/number`
-
                 set -ex
 
-                /root/bin/aws s3 cp  "s3://lukeDapuzzo/app/lukeDapuzzo-${BUILD_VERSION}.jar"  ./deploy/backend.jar
+                cp backend-s3/backend-*.jar  ./deploy/backend.jar
                 cp ./repo/ci/manifests/acceptance/server-manifest.yml ./deploy/manifest-backend.yml
 
-                /root/bin/aws s3 cp  "s3://lukeDapuzzo/app/frontend-${BUILD_VERSION}.zip"  ./deploy/frontend.zip
+                cp frontend-s3/frontend-*.zip  ./deploy/frontend.zip
                 cp ./repo/ci/manifests/acceptance/client-manifest.yml ./deploy/manifest-frontend.yml
-                export BUILD_VERSION=`cat version/number`
-
           params:
             AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
             AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
@@ -274,12 +296,15 @@ jobs:
 
   - name: deploy-backend-production
     plan:
-      - get: version
-        trigger: false
-        passed: ["deploy-acceptance"]
       - get: repo
         trigger: false
         passed: ["deploy-acceptance"]
+      - get: backend-s3
+        trigger: true
+        passed:  ["deploy-acceptance"]
+      - get: frontend-s3
+        trigger: true
+        passed:  ["deploy-acceptance"]
       - get: openjdk-node-cf
         params: {save: true}
       - task: download-jar
@@ -301,10 +326,10 @@ jobs:
 
                  export BUILD_VERSION=`cat version/number`
 
-                 /root/bin/aws s3 cp  "s3://lukeDapuzzo/app/lukeDapuzzo-${BUILD_VERSION}.jar"  ./deploy/backend.jar
+                 /root/bin/aws s3 cp  "s3://luke-dapuzzo/app/luke-dapuzzo-${BUILD_VERSION}.jar"  ./deploy/backend.jar
                  cp ./repo/ci/manifests/production/server-manifest.yml ./deploy/manifest-backend.yml
 
-                 /root/bin/aws s3 cp  "s3://lukeDapuzzo/app/frontend-${BUILD_VERSION}.zip"  ./deploy/frontend.zip
+                 /root/bin/aws s3 cp  "s3://luke-dapuzzo/app/frontend-${BUILD_VERSION}.zip"  ./deploy/frontend.zip
                  cp ./repo/ci/manifests/production/client-manifest.yml ./deploy/manifest-frontend.yml
           params:
             AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
