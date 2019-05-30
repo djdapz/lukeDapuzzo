@@ -18,11 +18,11 @@ resources:
     source:
       repository: postgres
 
-  - name: node
+  - name: cypress-image
     type: docker-image
     source:
-      repository: node
-      tag: 12
+      repository: cypress/browsers
+      tag: chrome67
 
   - name: openjdk-node-cf
     type: docker-image
@@ -61,12 +61,9 @@ resources:
     source:
       region_name: us-west-2
       bucket: luke-dapuzzo
-      regexp: backend/backend-(.*).zip
+      regexp: backend/backend-(.*).jar
       access_key_id: ((AWS_ACCESS_KEY_ID))
       secret_access_key: ((AWS_SECRET_ACCESS_KEY))
-
-
-
 
   - name: after-midnight
     type: time
@@ -169,11 +166,11 @@ jobs:
       - get: repo
         trigger: true
         passed: ["run-tests-backend"]
-      - get: node
+      - get: openjdk-node-cf
         params: {save: true}
       - task: build-and-upload
         privileged: true
-        image: node
+        image: openjdk-node-cf
         config:
           platform: linux
           inputs:
@@ -195,6 +192,7 @@ jobs:
 
                 cd repo/frontend
                 npm install
+                npm rebuild node-sass
                 npm run build
                 touch build/Staticfile
                 cd build
@@ -245,16 +243,16 @@ jobs:
   - name: deploy-acceptance
     plan:
       - get: repo
-        trigger: true
         passed: ["build-and-upload-backend", "build-and-upload-frontend"]
       - get: openjdk-node-cf
         params: {save: true}
-      - get: backend-s3
-        trigger: true
-        passed:  ["build-and-upload-backend"]
-      - get: frontend-s3
-        trigger: true
-        passed:  ["build-and-upload-frontend"]
+      - in_parallel:
+        - get: backend-s3
+          passed:  ["build-and-upload-backend"]
+          trigger: true
+        - get: frontend-s3
+          passed:  ["build-and-upload-frontend"]
+          trigger: true
       - task: download-jar
         privileged: true
         image: openjdk-node-cf
@@ -262,7 +260,8 @@ jobs:
           platform: linux
           inputs:
             - name: repo
-            - name: version
+            - name: frontend-s3
+            - name: backend-s3
           outputs:
             - name: deploy
           run:
@@ -274,10 +273,10 @@ jobs:
                 set -ex
 
                 cp backend-s3/backend-*.jar  ./deploy/backend.jar
-                cp ./repo/ci/manifests/acceptance/server-manifest.yml ./deploy/manifest-backend.yml
+                cp ./repo/ci/manifests/development/server-manifest.yml ./deploy/manifest-backend.yml
 
                 cp frontend-s3/frontend-*.zip  ./deploy/frontend.zip
-                cp ./repo/ci/manifests/acceptance/client-manifest.yml ./deploy/manifest-frontend.yml
+                cp ./repo/ci/manifests/development/client-manifest.yml ./deploy/manifest-frontend.yml
           params:
             AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
             AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
@@ -294,11 +293,34 @@ jobs:
           path: deploy/frontend.zip
           manifest: deploy/manifest-frontend.yml
 
+  - name: e2e-test
+    plan:
+      - get: repo
+        trigger: true
+        passed: ["deploy-acceptance"]
+      - get: cypress-image
+        params: {save: true}
+      - task: download-jar
+        privileged: true
+        image: cypress-image
+        config:
+          platform: linux
+          inputs:
+            - name: repo
+          run:
+            path: sh
+            args:
+              - -exc
+              - |
+                #!/bin/bash
+                cd repo/e2e
+                npm run test:headless
+
   - name: deploy-backend-production
     plan:
       - get: repo
         trigger: false
-        passed: ["deploy-acceptance"]
+        passed: ["e2e-test"]
       - get: backend-s3
         trigger: true
         passed:  ["deploy-acceptance"]
