@@ -13,11 +13,6 @@ resources:
       repository: openjdk
       tag: 8
 
-  - name: postgres
-    type: docker-image
-    source:
-      repository: postgres
-
   - name: cypress-image
     type: docker-image
     source:
@@ -124,6 +119,8 @@ jobs:
       - get: version
       - get: repo
         trigger: true
+      - get: openjdk-node-cf
+        params: {save: true}
       - task: run-tests
         privileged: true
         image: openjdk-node-cf
@@ -150,10 +147,6 @@ jobs:
       - get: version
       - get: repo
         trigger: true
-      - get: openjdk
-        params: {save: true}
-      - get: postgres
-        params: {save: true}
       - task: run-tests
         privileged: true
         config:

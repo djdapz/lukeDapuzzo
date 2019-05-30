@@ -9,7 +9,7 @@ const socialMediaIcons = [
     },
     {
         fontAwesomeName: "instagram",
-        href: "https://www.instagram.com/l.p.dapz/"
+        href: "https://www.instagram.com/lukedapuzzo/"
     }
 ];
 
