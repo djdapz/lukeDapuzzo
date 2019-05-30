@@ -10,7 +10,7 @@
     "cy:ci": "cypress run",
     "cy": "cypress open",
     "test:int": "PORT=3210 start-server-and-test  start http://localhost:3210 cy",
-    "test:int:ci": "PORT=3210 start-server-and-test  start http://localhost:3210 cy:headless"
+    "test:int:ci": "PORT=3210 start-server-and-test  start http://localhost:3210 cy:ci"
   },
   "dependencies": {
     "@date-io/luxon": "0.0.2",
