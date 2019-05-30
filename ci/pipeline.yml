@@ -142,9 +142,6 @@ jobs:
                 cd repo/frontend
                 npm i
                 npm run test:int:ci
-      - put: version
-        params: {bump: patch}
-
 
   - name: run-tests-backend
     public: true
@@ -191,8 +188,6 @@ jobs:
 
                 docker-compose -f repo/ci/docker-compose.tests.yml down
                 docker volume rm $(docker volume ls -q)
-      - put: version
-        params: {bump: patch}
 
   - name: build-and-upload-frontend
     public: true
@@ -229,10 +224,10 @@ jobs:
 
                 cd repo/frontend
                 npm install
-                npm rebuild node-sass
                 npm run build
                 touch build/Staticfile
                 cd build
+                ls -lsa
                 zip -r ../../../frontend-s3/frontend-${BUILD_VERSION}.zip *
       - put: frontend-s3
         params:
