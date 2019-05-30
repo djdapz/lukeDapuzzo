@@ -108,6 +108,41 @@ jobs:
           PCF_USERNAME: ((PCF_USERNAME))
           PCF_PASSWORD: ((PCF_PASSWORD))
 
+  - name: bump-version
+    public: true
+    plan:
+      - get: version
+        passed: ["run-tests-backend", "run-tests-frontend"]
+        trigger: true
+      - put: version
+        params: {bump: patch}
+
+
+  - name: run-tests-frontend
+    public: true
+    plan:
+      - get: version
+      - get: repo
+        trigger: true
+      - task: run-tests
+        privileged: true
+        image: openjdk-node-cf
+        config:
+          platform: linux
+          inputs:
+            - name: repo
+          run:
+            path: sh
+            args:
+              - -exc
+              - |
+                set -e
+                cd repo/frontend
+                npm i
+                npm run test:int:ci
+      - put: version
+        params: {bump: patch}
+
 
   - name: run-tests-backend
     public: true
@@ -162,7 +197,7 @@ jobs:
     plan:
       - get: version
         trigger: true
-        passed: ["run-tests-backend"]
+        passed: ["bump-version"]
       - get: repo
         trigger: true
         passed: ["run-tests-backend"]
@@ -206,7 +241,7 @@ jobs:
     plan:
       - get: version
         trigger: true
-        passed: ["run-tests-backend"]
+        passed: ["bump-version"]
       - get: repo
         trigger: true
         passed: ["run-tests-backend"]

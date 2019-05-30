@@ -6,7 +6,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cy:ci": "cypress run",
+    "cy": "cypress open",
+    "test:int": "PORT=3210 start-server-and-test  start http://localhost:3210 cy",
+    "test:int:ci": "PORT=3210 start-server-and-test  start http://localhost:3210 cy:headless"
   },
   "dependencies": {
     "@date-io/luxon": "0.0.2",
@@ -18,12 +22,9 @@
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
     "history": "^4.7.2",
-    "jquery": "^3.4.1",
     "luxon": "^1.8.0",
     "material-ui-pickers": "^2.0.2",
     "node-sass": "^4.12.0",
-    "npm": "^5.10.0",
-    "popper.js": "^1.14.3",
     "prop-types": "15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -33,7 +34,6 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "^3.0.1",
-    "react-select": "^2.1.2",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-saga": "^0.16.0",
@@ -42,13 +42,15 @@
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.15.0",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
+    "cypress": "^3.3.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.2",
     "enzyme-redux": "^0.2.1",
-    "jest-enzyme": "^6.0.0",
+    "jest-enzyme": "^7.0.2",
     "react-router-enzyme-context": "^1.2.0",
-    "react-test-renderer": "^16.3.2",
-    "redux-mock-store": "^1.5.1"
+    "react-test-renderer": "^16.8.6",
+    "redux-mock-store": "^1.5.3",
+    "start-server-and-test": "^1.9.1"
   },
   "eslintConfig": {
     "extends": "react-app"

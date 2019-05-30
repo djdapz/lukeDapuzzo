@@ -2,12 +2,15 @@ const LOCAL = "LOCAL";
 const DEV = "DEV";
 const PROD = "PROD";
 const TEST = "TEST";
+const CYPRESS = "CYPRESS";
 
 
 const environment = function () {
     switch (window.location.origin) {
         case ("http://localhost:3000"):
             return LOCAL;
+        case ("http://localhost:3210"):
+            return CYPRESS;
         case("https://luke-dapuzzo-client.cfapps.io"):
             return DEV;
         case("https://luke-dapuzzo-client-static.cfapps.io"):
@@ -34,7 +37,8 @@ let LUKE_API = loadEnv({
     LOCAL: "http://localhost:8081",
     DEV: "https://luke-dapuzzo-api-dev.cfapps.io",
     PROD: "https://luke-dapuzzo-api.cfapps.io",
-    TEST: "www.garbage-url.com"
+    TEST: "www.garbage-url.com",
+    CYPRESS: "http://localhost:3210"
 });
 
 export {LUKE_API}
