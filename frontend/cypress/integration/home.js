@@ -103,7 +103,7 @@ describe("Home page", () => {
           })
           cy.get(".music-label-container").should(it => {
             expect(it.length).to.eql(1)
-            expect(it[0].innerText).to.eql("spotify")
+            expect(it[0].innerText).to.contain("spotify")
           })
         })
 

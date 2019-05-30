@@ -13,6 +13,11 @@ resources:
       repository: openjdk
       tag: 8
 
+  - name: postgres
+    type: docker-image
+    source:
+      repository: postgres
+
   - name: cypress-image
     type: docker-image
     source:
@@ -119,11 +124,11 @@ jobs:
       - get: version
       - get: repo
         trigger: true
-      - get: openjdk-node-cf
+      - get: cypress-image
         params: {save: true}
       - task: run-tests
         privileged: true
-        image: openjdk-node-cf
+        image: cypress-image
         config:
           platform: linux
           inputs:
@@ -147,6 +152,10 @@ jobs:
       - get: version
       - get: repo
         trigger: true
+      - get: openjdk
+        params: {save: true}
+      - get: postgres
+        params: {save: true}
       - task: run-tests
         privileged: true
         config:
@@ -344,7 +353,7 @@ jobs:
                 cd repo/e2e
                 npm run test:headless
 
-  - name: deploy-backend-production
+  - name: deploy-production
     plan:
       - get: repo
         trigger: false
