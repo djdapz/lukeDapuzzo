@@ -158,6 +158,9 @@ jobs:
             - name: repo
             - name: postgres
             - name: openjdk
+          caches:
+            - path: repo/frontend/node_modules
+            - path: /root/.cache/Cypress
           image_resource:
             type: docker-image
             source:
@@ -352,7 +355,7 @@ jobs:
                 set -ex
 
                 cp backend-s3/backend-*.jar  ./deploy/backend.jar
-                cp ./repo/ci/manifests/development/server-manifest.yml ./deploy/manifest-backend.yml
+                cp ./repo/ci/manifests/production/server-manifest.yml ./deploy/manifest-backend.yml
           params:
             AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
             AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
@@ -363,7 +366,7 @@ jobs:
           path: deploy/backend.jar
           manifest: deploy/manifest-backend.yml
 
-  - name: e2e-test
+  - name: e2e-tests
     plan:
       - get: repo
         trigger: true
@@ -381,6 +384,8 @@ jobs:
           platform: linux
           inputs:
             - name: repo
+          caches:
+            - path: repo/frontend/node_modules
           run:
             path: sh
             args:
@@ -391,25 +396,24 @@ jobs:
                 npm i
                 npm run test:headless
 
-  - name: deploy-production
+
+  - name: deploy-frontend-production
     plan:
       - get: repo
-        trigger: false
-        passed: ["e2e-test"]
-      - get: backend-s3
-        passed:  ["e2e-test"]
-      - get: frontend-s3
-        passed:  ["e2e-test"]
-      - get: openjdk-node-cf
+        passed: [ "e2e-tests"]
+      - get: alpine
         params: {save: true}
-      - task: download-jar
+      - get: frontend-s3
+        passed:  ["e2e-tests"]
+        trigger: true
+      - task: deploy
         privileged: true
-        image: openjdk-node-cf
+        image: alpine
         config:
           platform: linux
           inputs:
             - name: repo
-            - name: version
+            - name: frontend-s3
           outputs:
             - name: deploy
           run:
@@ -418,14 +422,10 @@ jobs:
               - -exc
               - |
                 #!/bin/bash
+                set -ex
 
-                 export BUILD_VERSION=`cat version/number`
-
-                 /root/bin/aws s3 cp  "s3://luke-dapuzzo/app/luke-dapuzzo-${BUILD_VERSION}.jar"  ./deploy/backend.jar
-                 cp ./repo/ci/manifests/production/server-manifest.yml ./deploy/manifest-backend.yml
-
-                 /root/bin/aws s3 cp  "s3://luke-dapuzzo/app/frontend-${BUILD_VERSION}.zip"  ./deploy/frontend.zip
-                 cp ./repo/ci/manifests/production/client-manifest.yml ./deploy/manifest-frontend.yml
+                cp frontend-s3/frontend-*.zip  ./deploy/frontend.zip
+                cp ./repo/ci/manifests/production/client-manifest.yml ./deploy/manifest-frontend.yml
           params:
             AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
             AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
@@ -435,6 +435,41 @@ jobs:
             - name: deploy
           path: deploy/frontend.zip
           manifest: deploy/manifest-frontend.yml
+
+
+
+  - name: deploy-backend-production
+    plan:
+      - get: repo
+        passed: ["e2e-tests"]
+      - get: alpine
+        params: {save: true}
+      - get: backend-s3
+        passed:  ["e2e-tests"]
+        trigger: true
+      - task: download
+        privileged: true
+        image: alpine
+        config:
+          platform: linux
+          inputs:
+            - name: repo
+            - name: backend-s3
+          outputs:
+            - name: deploy
+          run:
+            path: sh
+            args:
+              - -exc
+              - |
+                #!/bin/bash
+                set -ex
+
+                cp backend-s3/backend-*.jar  ./deploy/backend.jar
+                cp ./repo/ci/manifests/development/server-manifest.yml ./deploy/manifest-backend.yml
+          params:
+            AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
+            AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
       - put: production
         params:
           inputs:

@@ -1,6 +1,6 @@
 import {AUTHORIZE_USER, FAIL_LOGIN} from "../actions/UserActions";
 
-const userAuthenticationReducer = (state = true, action) => {
+const userAuthenticationReducer = (state = false, action) => {
     if (action.type === AUTHORIZE_USER) {
         return true;
     }
