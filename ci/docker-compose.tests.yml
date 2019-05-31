@@ -10,7 +10,7 @@ services:
       PGDATA: /database
 
   unit-integration-tests:
-    image: openjdk
+    image: openjdk:8
     privileged: true
     links: [luke-db]
     depends_on: [luke-db]

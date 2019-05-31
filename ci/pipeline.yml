@@ -13,6 +13,12 @@ resources:
       repository: openjdk
       tag: 8
 
+  - name: alpine
+    type: docker-image
+    source:
+      repository: alpine
+      tag: latest
+
   - name: postgres
     type: docker-image
     source:
@@ -231,7 +237,6 @@ jobs:
                 cd frontend-server
                 rm -rf build
                 cp -rf ../frontend/build ./build
-                cf push -f ../ci/manifests/production/client-manifest.yml
                 npm install
                 zip -r ../../frontend-s3/frontend-${BUILD_VERSION}.zip *
       - put: frontend-s3
@@ -282,14 +287,14 @@ jobs:
     plan:
       - get: repo
         passed: [ "build-and-upload-frontend"]
-      - get: openjdk-node-cf
+      - get: alpine
         params: {save: true}
       - get: frontend-s3
         passed:  ["build-and-upload-frontend"]
         trigger: true
       - task: deploy
         privileged: true
-        image: openjdk-node-cf
+        image: alpine
         config:
           platform: linux
           inputs:
@@ -323,14 +328,14 @@ jobs:
     plan:
       - get: repo
         passed: ["build-and-upload-backend"]
-      - get: openjdk-node-cf
+      - get: alpine
         params: {save: true}
       - get: backend-s3
         passed:  ["build-and-upload-backend"]
         trigger: true
-      - task: download-jar
+      - task: download
         privileged: true
-        image: openjdk-node-cf
+        image: alpine
         config:
           platform: linux
           inputs:
