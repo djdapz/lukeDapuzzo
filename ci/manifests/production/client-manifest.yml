@@ -4,6 +4,7 @@ applications:
   memory: 512M
   instances: 1
   stack: cflinuxfs3
+  command: npm run launch
   routes:
       - route: lukedapuzzo.com
       - route: www.lukedapuzzo.com
