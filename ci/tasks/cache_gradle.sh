@@ -9,5 +9,4 @@ if [[ "$GRADLE_CACHE" != "$GRADLE_HOME" ]];
         ln -s ${GRADLE_CACHE} ${GRADLE_HOME}
 fi
 
-cd HOME
 ls -lsa

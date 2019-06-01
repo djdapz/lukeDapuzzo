@@ -162,6 +162,7 @@ jobs:
         params: {save: true}
       - task: run-tests
         privileged: true
+        image: dcind
         config:
           platform: linux
           inputs:
@@ -205,6 +206,7 @@ jobs:
         trigger: true
       - put: version
         params: {bump: patch}
+
   - name: build-and-upload-frontend
     public: true
     plan:
@@ -290,7 +292,6 @@ jobs:
                         ln -s $GRADLE_CACHE $GRADLE_HOME
                 fi
 
-                cd HOME
                 ls -lsa
 
                 export BUILD_VERSION=`cat version/number`
