@@ -130,6 +130,9 @@ jobs:
           platform: linux
           inputs:
             - name: repo
+          caches:
+            - path: repo/frontend/node_modules
+            - path: ../../../root/.cache
           run:
             path: sh
             args:
@@ -158,9 +161,6 @@ jobs:
             - name: repo
             - name: postgres
             - name: openjdk
-          caches:
-            - path: repo/frontend/node_modules
-            - path: /root/.cache/Cypress
           image_resource:
             type: docker-image
             source:
@@ -280,6 +280,7 @@ jobs:
                 ./gradlew clean assemble -Pversion=$BUILD_VERSION
                 pwd
                 cp build/libs/luke-dapuzzo-${BUILD_VERSION}.jar ../backend-s3/backend-${BUILD_VERSION}.jar
+
       - put: backend-s3
         params:
           file: backend-s3/backend-*.jar
@@ -355,7 +356,7 @@ jobs:
                 set -ex
 
                 cp backend-s3/backend-*.jar  ./deploy/backend.jar
-                cp ./repo/ci/manifests/production/server-manifest.yml ./deploy/manifest-backend.yml
+                cp ./repo/ci/manifests/development/server-manifest.yml ./deploy/manifest-backend.yml
           params:
             AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
             AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
@@ -385,7 +386,8 @@ jobs:
           inputs:
             - name: repo
           caches:
-            - path: repo/frontend/node_modules
+            - path: repo/e2e/node_modules
+            - path: ../../../root/.cache
           run:
             path: sh
             args:
@@ -393,6 +395,7 @@ jobs:
               - |
                 #!/bin/bash
                 cd repo/e2e
+                ls -lsa node_modules
                 npm i
                 npm run test:headless
 
@@ -466,7 +469,7 @@ jobs:
                 set -ex
 
                 cp backend-s3/backend-*.jar  ./deploy/backend.jar
-                cp ./repo/ci/manifests/development/server-manifest.yml ./deploy/manifest-backend.yml
+                cp ./repo/ci/manifests/production/server-manifest.yml ./deploy/manifest-backend.yml
           params:
             AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
             AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
