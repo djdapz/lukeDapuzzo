@@ -172,7 +172,6 @@ jobs:
             - name: openjdk
           caches:
             - path: gradle
-
           run:
             path: sh
             args:
@@ -230,6 +229,7 @@ jobs:
             - name: frontend-s3
           caches:
             - path: repo/frontend/node_modules
+            - path: repo/frontend-server/node_modules
             - path: ../../../root/.cache
           run:
             path: sh
@@ -254,6 +254,7 @@ jobs:
       - put: frontend-s3
         params:
           file: frontend-s3/frontend-*.zip
+
   - name: build-and-upload-backend
     public: true
     plan:
@@ -283,17 +284,7 @@ jobs:
               - |
                 #!/bin/bash
                 set -ex
-
-                GRADLE_HOME="${HOME}/.gradle"
-                ROOT_FOLDER=$(pwd)
-                GRADLE_CACHE="${ROOT_FOLDER}/gradle"
-
-                if [ "$GRADLE_CACHE" != "$GRADLE_HOME" ];
-                    then
-                        ln -s $GRADLE_CACHE $GRADLE_HOME
-                fi
-
-                ls -lsa
+                ./repo/ci/tasks/cache_gradle.sh
 
                 export BUILD_VERSION=`cat version/number`
                 cd repo
@@ -337,9 +328,6 @@ jobs:
 
                 cp frontend-s3/frontend-*.zip  ./deploy/frontend.zip
                 cp ./repo/ci/manifests/development/client-manifest.yml ./deploy/manifest-frontend.yml
-          params:
-            AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
-            AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
       - put: acceptance
         params:
           inputs:
@@ -378,9 +366,6 @@ jobs:
 
                 cp backend-s3/backend-*.jar  ./deploy/backend.jar
                 cp ./repo/ci/manifests/development/server-manifest.yml ./deploy/manifest-backend.yml
-          params:
-            AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
-            AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
       - put: acceptance
         params:
           inputs:
@@ -450,16 +435,12 @@ jobs:
 
                 cp frontend-s3/frontend-*.zip  ./deploy/frontend.zip
                 cp ./repo/ci/manifests/production/client-manifest.yml ./deploy/manifest-frontend.yml
-          params:
-            AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
-            AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
       - put: production
         params:
           inputs:
             - name: deploy
           path: deploy/frontend.zip
           manifest: deploy/manifest-frontend.yml
-
 
 
   - name: deploy-backend-production
@@ -491,9 +472,6 @@ jobs:
 
                 cp backend-s3/backend-*.jar  ./deploy/backend.jar
                 cp ./repo/ci/manifests/production/server-manifest.yml ./deploy/manifest-backend.yml
-          params:
-            AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
-            AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
       - put: production
         params:
           inputs:
