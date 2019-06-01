@@ -35,6 +35,11 @@ resources:
     source:
       repository: djdapz/openjdk-node-cf
 
+  - name: dcind
+    type: docker-image
+    source:
+      repository: amidos/dcind
+
   - name: acceptance
     type: cf
     source:
@@ -153,6 +158,8 @@ jobs:
         params: {save: true}
       - get: postgres
         params: {save: true}
+      - get: dcind
+        params: {save: true}
       - task: run-tests
         privileged: true
         config:
@@ -161,10 +168,9 @@ jobs:
             - name: repo
             - name: postgres
             - name: openjdk
-          image_resource:
-            type: docker-image
-            source:
-              repository: amidos/dcind
+          caches:
+            - path: gradle
+
           run:
             path: sh
             args:
@@ -199,7 +205,6 @@ jobs:
         trigger: true
       - put: version
         params: {bump: patch}
-
   - name: build-and-upload-frontend
     public: true
     plan:
@@ -222,6 +227,7 @@ jobs:
             - name: frontend-s3
           caches:
             - path: repo/frontend/node_modules
+            - path: ../../../root/.cache
           run:
             path: sh
             args:
@@ -245,7 +251,6 @@ jobs:
       - put: frontend-s3
         params:
           file: frontend-s3/frontend-*.zip
-
   - name: build-and-upload-backend
     public: true
     plan:
@@ -266,6 +271,8 @@ jobs:
             - name: version
           outputs:
             - name: backend-s3
+          caches:
+            - path: gradle
           run:
             path: sh
             args:
@@ -273,6 +280,18 @@ jobs:
               - |
                 #!/bin/bash
                 set -ex
+
+                GRADLE_HOME="${HOME}/.gradle"
+                ROOT_FOLDER=$(pwd)
+                GRADLE_CACHE="${ROOT_FOLDER}/gradle"
+
+                if [ "$GRADLE_CACHE" != "$GRADLE_HOME" ];
+                    then
+                        ln -s $GRADLE_CACHE $GRADLE_HOME
+                fi
+
+                cd HOME
+                ls -lsa
 
                 export BUILD_VERSION=`cat version/number`
                 cd repo
