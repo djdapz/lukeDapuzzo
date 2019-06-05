@@ -15,9 +15,6 @@ import org.springframework.web.reactive.function.BodyInserters
 
 
 class ShowIntegrationTest : IntegrationTest() {
-    @Autowired
-    lateinit var jdbcTemplate: JdbcTemplate
-
     @Before
     override fun setUp() {
         super.setUp()

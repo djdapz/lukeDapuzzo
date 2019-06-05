@@ -10,45 +10,60 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Repository
 import java.sql.ResultSet
+import kotlin.random.Random
 
 
 @Repository
 class SecurityRepositoryImpl(jdbcTemplate: JdbcTemplate, val passwordEncoder: PasswordEncoder) : SecurityRepository {
 
+
     val namedParameterJdbcTemplate = NamedParameterJdbcTemplate(jdbcTemplate)
 
-    override fun createAccount(credentials: Credentials): Result<Account, LukeException> = Result
-            .of {
-                namedParameterJdbcTemplate.update("INSERT INTO account (username, password) VALUES(:username, :password)",
-                        MapSqlParameterSource()
-                                .addValue("username", credentials.username)
-                                .addValue("password", passwordEncoder.encode(credentials.password))
-                )
-            }
-            .getAndMap(
-                    { getUser(credentials) },
-                    { Failure(LukeException(DUPLICATE_USER_MESSAGE)) }
-            )
-
-
-    override fun login(credentials: Credentials): Result<Account, LukeException> {
-        return Result
-                .of {
-                    namedParameterJdbcTemplate.query(
-                            "SELECT * FROM account WHERE username = :username",
-                            MapSqlParameterSource().addValue("username", credentials.username),
-                            rsToCredentials).first()
-                }.getAndMap(
-                        {
-                            return@getAndMap validatePassword(it, credentials)
-
-                        },
-                        { Failure(LukeException(UNAUTHORIZED_MESSAGE)) }
-                ).getAndMap(
-                        getUser,
-                        { Failure(LukeException(UNAUTHORIZED_MESSAGE)) }
-                )
+    override fun createAccount(credentials: Credentials): Result<Account, LukeException> = of {
+        namedParameterJdbcTemplate.update(
+            "INSERT INTO account (username, password) VALUES(:username, :password)",
+            MapSqlParameterSource()
+                .addValue("username", credentials.username)
+                .addValue("password", passwordEncoder.encode(credentials.password))
+        )
     }
+        .run { refreshToken(credentials) }
+        .getAndMap(
+            {
+                getUser(credentials)
+            },
+            { Failure(LukeException(DUPLICATE_USER_MESSAGE)) }
+        )
+
+
+    override fun login(credentials: Credentials): Result<Account, LukeException> =
+        of {
+            namedParameterJdbcTemplate.query(
+                "SELECT * FROM account WHERE username = :username",
+                MapSqlParameterSource().addValue("username", credentials.username),
+                rsToCredentials
+            ).first()
+        }.getAndMap(
+            { validatePassword(it, credentials) },
+            { Failure(LukeException(UNAUTHORIZED_MESSAGE)) }
+        ).run {
+            refreshToken(it)
+        }.getAndMap(
+            getUser,
+            { Failure(LukeException(UNAUTHORIZED_MESSAGE)) }
+        )
+
+    fun refreshToken(creds: Credentials) =
+        namedParameterJdbcTemplate.update(
+            """
+                UPDATE account
+                SET token=:token
+                WHERE username=:username
+        """.trimIndent(),
+            MapSqlParameterSource()
+                .addValue("username", creds.username)
+                .addValue("token", Random.nextLong())
+        )
 
     private fun validatePassword(it: Credentials, credentials: Credentials): Result<Credentials, LukeException> {
         if (passwordEncoder.matches(credentials.password, it.password)) {
@@ -59,24 +74,26 @@ class SecurityRepositoryImpl(jdbcTemplate: JdbcTemplate, val passwordEncoder: Pa
 
     val rsToAccount: (ResultSet, Int) -> Account = { rs, _ ->
         Account(
-                username = rs.getString("username"),
-                role = Role.valueOf(rs.getString("role"))
+            username = rs.getString("username"),
+            role = Role.valueOf(rs.getString("role")),
+            token = rs.getString("token")
         )
     }
 
     val rsToCredentials: (ResultSet, Int) -> Credentials = { rs, _ ->
         Credentials(
-                username = rs.getString("username"),
-                password = rs.getString("password")
+            username = rs.getString("username"),
+            password = rs.getString("password")
         )
     }
 
     val getUser: (Credentials) -> Result<Account, LukeException> = {
         of {
             namedParameterJdbcTemplate.query(
-                    "SELECT * FROM account WHERE username = :username",
-                    MapSqlParameterSource().addValue("username", it.username),
-                    rsToAccount).first()
+                "SELECT * FROM account WHERE username = :username",
+                MapSqlParameterSource().addValue("username", it.username),
+                rsToAccount
+            ).first()
         }.mapFailure { LukeException(it.message ?: "Error mapping account") }
     }
 }

@@ -8,6 +8,7 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.context.junit4.SpringRunner
@@ -23,6 +24,9 @@ abstract class IntegrationTest {
 
     @Autowired
     lateinit var webClient: WebTestClient
+
+    @Autowired
+    lateinit var jdbcTemplate: JdbcTemplate
 
     val credentialsJson = credentialsJson(
             username = "carla",

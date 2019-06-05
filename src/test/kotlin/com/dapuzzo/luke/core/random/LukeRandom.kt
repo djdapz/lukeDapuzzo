@@ -73,5 +73,6 @@ fun randomCredentials(username: String = randomString(), password: String = rand
 )
 
 fun randomAccount(): Account = Account(
-        username = faker().gameOfThrones().character()
+        username = faker().gameOfThrones().character(),
+        token = faker().phoneNumber().phoneNumber()
 )

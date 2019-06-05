@@ -1,8 +1,6 @@
 package com.dapuzzo.luke.security
 
-import com.dapuzzo.luke.core.Cleanup
-import com.dapuzzo.luke.core.DatabaseBase
-import com.dapuzzo.luke.core.execute
+import com.dapuzzo.luke.core.*
 import com.dapuzzo.luke.core.random.randomCredentials
 import com.dapuzzo.luke.core.random.randomString
 import com.dapuzzo.luke.security.SecurityRepository.Companion.DUPLICATE_USER_MESSAGE
@@ -16,7 +14,7 @@ import java.sql.ResultSet
 import kotlin.test.fail
 
 @Cleanup
-class SecurityRepositoryImplTest : DatabaseBase(){
+class SecurityRepositoryImplTest : DatabaseBase() {
     @Autowired
     lateinit var subject: SecurityRepository
 
@@ -29,10 +27,10 @@ class SecurityRepositoryImplTest : DatabaseBase(){
         subject.createAccount(credentials)
 
         subject.login(credentials)
-                .execute(
-                        { account -> assertThat(account).isEqualTo(Account(credentials.username)) },
-                        { error -> Assertions.fail(error.message) }
-                )
+            .execute(
+                { account -> assertThat(account.username).isEqualTo(credentials.username) },
+                { error -> Assertions.fail(error.message) }
+            )
     }
 
     @Test
@@ -44,19 +42,19 @@ class SecurityRepositoryImplTest : DatabaseBase(){
         jdbcTemplate.execute("UPDATE account \nSET role='ADMIN'  \nWHERE username = '${credentials.username}'")
 
         subject.login(credentials)
-                .execute(
-                        { account -> assertThat(account).isEqualTo(Account(credentials.username, Role.ADMIN)) },
-                        { error -> Assertions.fail(error.message) }
-                )
+            .execute(
+                { account -> assertThat(account.role).isEqualTo(Role.ADMIN) },
+                { error -> Assertions.fail(error.message) }
+            )
     }
 
     @Test
     fun shouldNotValidateARecordThatHasNotBeenSaved() {
         subject.login(randomCredentials())
-                .execute(
-                        { _ -> Assertions.fail("It should have errored") },
-                        { errorMessage -> assertThat(errorMessage.message).isEqualTo(UNAUTHORIZED_MESSAGE) }
-                )
+            .execute(
+                { Assertions.fail("It should have errored") },
+                { errorMessage -> assertThat(errorMessage.message).isEqualTo(UNAUTHORIZED_MESSAGE) }
+            )
     }
 
     @Test
@@ -67,28 +65,40 @@ class SecurityRepositoryImplTest : DatabaseBase(){
 
         subject.createAccount(credentials)
         subject.createAccount(secondAccount).execute(
-                { fail() },
-                { errorMessage -> assertThat(errorMessage.message).isEqualTo(DUPLICATE_USER_MESSAGE) }
+            { fail() },
+            { errorMessage -> assertThat(errorMessage.message).isEqualTo(DUPLICATE_USER_MESSAGE) }
         )
     }
-
 
     @Test
     fun shouldSaveHashedPasswordToRepoForLogin() {
         val credentials: Credentials = randomCredentials(username = randomString())
 
         subject.createAccount(credentials).execute(
-                {},
-                { fail() }
+            {},
+            { fail() }
         )
 
         val savedAccount = jdbcTemplate.queryForObject(
-                "SELECT * FROM account\nWHERE username='${credentials.username}'",
-                { resultSet: ResultSet, _: Int ->
-                    Credentials(username = resultSet.getString("username"), password = resultSet.getString("password"))
-                })!!
+            "SELECT * FROM account\nWHERE username='${credentials.username}'"
+        ) { resultSet, _ ->
+            Credentials(username = resultSet.getString("username"), password = resultSet.getString("password"))
+        }!!
 
         assertThat(savedAccount.password).isNotEqualToIgnoringCase(credentials.password)
         assertThat(encoder.matches(credentials.password, savedAccount.password)).isTrue()
     }
+
+    @Test
+    fun shouldReturnFreshTokenAfterLogin() {
+        val credentials: Credentials = randomCredentials(username = randomString())
+
+        subject.createAccount(credentials)
+        val firstToken = subject.login(credentials).getOrThrow(Exception("didn't get user :(")).token
+        val secondToken = subject.login(credentials).getOrThrow(Exception("didn't get user :(")).token
+
+
+        assertThat(firstToken).isNotEqualTo(secondToken)
+    }
+
 }

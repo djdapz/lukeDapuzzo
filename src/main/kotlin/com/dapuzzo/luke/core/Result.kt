@@ -25,6 +25,16 @@ fun <V, E> Result<V, E>.execute(successHandler: (V) -> Unit, errorHandler: (E) -
 }
 
 
+fun <V, E> Result<V, E>.run(thingToDo: (V) -> Any): Result<V, E> {
+    return when (this) {
+        is Success -> {
+            thingToDo(this.value)
+            this
+        }
+        is Failure -> this
+    }
+}
+
 fun <V, E, T> Result<V, E>.getAndMap(successHandler: (V) -> T, errorHandler: (E) -> T): T {
     return when (this) {
         is Success -> successHandler(this.value)
@@ -33,8 +43,8 @@ fun <V, E, T> Result<V, E>.getAndMap(successHandler: (V) -> T, errorHandler: (E)
 }
 
 inline fun <V, E, U, F> Result<V, E>.map(
-        success: (V) -> U,
-        failure: (E) -> F
+    success: (V) -> U,
+    failure: (E) -> F
 ): Result<U, F> = when (this) {
     is Success -> Success(success(value))
     is Failure -> Failure(failure(value))
@@ -42,29 +52,27 @@ inline fun <V, E, U, F> Result<V, E>.map(
 
 
 fun <V, E> Result<V, E>.getOrThrow(exception: Throwable): V =
-        when (this) {
-            is Success -> this.value
-            is Failure -> throw exception
-        }
-
-
+    when (this) {
+        is Success -> this.value
+        is Failure -> throw exception
+    }
 
 
 fun <V, E, U> Result<V, E>.mapSuccess(success: (V) -> U): Result<U, E> =
-        when (this) {
-            is Success -> Success(success(this.value))
-            is Failure -> this
-        }
+    when (this) {
+        is Success -> Success(success(this.value))
+        is Failure -> this
+    }
 
 fun <V, E, F> Result<V, E>.mapFailure(failure: (E) -> F): Result<V, F> =
-        when (this) {
-            is Success -> this
-            is Failure -> Failure(failure(this.value))
-        }
+    when (this) {
+        is Success -> this
+        is Failure -> Failure(failure(this.value))
+    }
 
 fun <V, E, U> Result<V, E>.mapSuccessToResult(success: (V) -> Result<U, E>): Result<U, E> =
-        when (this) {
-            is Success -> success(this.value)
-            is Failure -> this
-        }
+    when (this) {
+        is Success -> success(this.value)
+        is Failure -> this
+    }
 

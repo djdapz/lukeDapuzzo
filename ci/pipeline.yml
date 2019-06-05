@@ -414,7 +414,6 @@ jobs:
         params: {save: true}
       - get: frontend-s3
         passed:  ["e2e-tests"]
-        trigger: true
       - task: deploy
         privileged: true
         image: alpine
@@ -451,7 +450,6 @@ jobs:
         params: {save: true}
       - get: backend-s3
         passed:  ["e2e-tests"]
-        trigger: true
       - task: download
         privileged: true
         image: alpine
