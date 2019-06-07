@@ -1,5 +1,5 @@
 import {call, put, takeEvery} from "redux-saga/effects"
-import {getNoCredentials} from "../api/Api";
+import Api from "../api/Api";
 import {allVenuesFetched, GET_ALL_VENUES} from "../actions/VenueActions";
 
 export function* watchGetVenues() {
@@ -8,7 +8,7 @@ export function* watchGetVenues() {
 
 export function* getVenues() {
     try {
-        const response = yield call(getNoCredentials, "/venues");
+        const response = yield call(Api.get, "/venues");
         yield put(allVenuesFetched(response.data));
     } catch (e) {
         console.error(e)

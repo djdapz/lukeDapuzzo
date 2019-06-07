@@ -24,14 +24,15 @@ class LoginPage extends Component {
                     {this.renderWarning()}
                     <MuiThemeProvider theme={this.theme}>
                         <LukeTextField label={"Username"}
+                                       id={"username"}
                                        type={"text"}
                                        value={this.props.username}
                                        onChange={this.props.update_username}
                                        onKeyUp={this.listenForSubmit}
                                        variant="outlined"/>
-                        <LukeTextField id={"password-field"}
-                                       label={"Password"}
+                        <LukeTextField label={"Password"}
                                        type={"password"}
+                                       id={"password"}
                                        value={this.props.password}
                                        onChange={this.props.update_password}
                                        onKeyUp={this.listenForSubmit}
@@ -39,6 +40,7 @@ class LoginPage extends Component {
                         <Button className="btn btn-outline-primary float-none"
                                 variant="outlined"
                                 color="primary"
+                                id={"login-button"}
                                 onClick={() => {
                                     this.props.submitForm()
                                 }}>Send it!</Button>

@@ -1,20 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component } from "react"
 
-import {connect} from "react-redux";
-import SocialMediaIcon from "./SocialMediaIcon";
-import routes from "../../constants/routes";
+import { connect } from "react-redux"
+import routes from "../../constants/routes"
 import Menubar from "./MenuBarContainer"
-import {bindActionCreators} from "redux";
-
-import {socialMediaIconColors, socialMediaIcons} from "../../constants/socialMediaIcons";
-import {push} from "react-router-redux"
-import {getAllSongs} from "../../actions/GetAllSongs";
-import {getAllShows} from "../../actions/GetAllShows";
-import Button from "@material-ui/core/Button/Button";
-import MenuIcon from '@material-ui/icons/Menu';
-import {getBio} from "../../actions/BioActions";
-import {store} from "../../config/reduxConfig";
-import {loginAction} from "../../actions/UserActions";
+import { bindActionCreators } from "redux"
+import { push } from "react-router-redux"
+import { getAllSongs } from "../../actions/GetAllSongs"
+import Button from "@material-ui/core/Button/Button"
+import MenuIcon from "@material-ui/icons/Menu"
+import { getBio } from "../../actions/BioActions"
+import { getAllShows } from "../../actions/ShowActions"
 
 class HeaderBar extends Component {
     constructor(props) {
@@ -28,10 +23,6 @@ class HeaderBar extends Component {
         this.props.getAllSongs();
         this.props.getAllShows();
         this.props.getBio();
-        const username = localStorage.getItem("username");
-        const password = localStorage.getItem("password");
-
-        store.dispatch(loginAction(username, password))
     }
 
     renderDescription() {
@@ -86,20 +77,6 @@ class HeaderBar extends Component {
             <Menubar menubarClass={this.determineMenubarClass()}
                      routes={routes}
                      callback={this.collapseMenuBar}/>
-        )
-    }
-
-    static renderSocialMediaIcons() {
-        const iconElements = socialMediaIcons.map(icon => <SocialMediaIcon key={icon.href}
-                                                                           icon={icon}
-                                                                           colors={socialMediaIconColors.header}/>);
-
-        return (
-            <div className="social-media-icons">
-                <div id="social-media-expanded">
-                    {iconElements}
-                </div>
-            </div>
         )
     }
 

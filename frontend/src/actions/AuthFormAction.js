@@ -1,6 +1,7 @@
-import {declareForm} from "./FormActions";
-import {authorizeUser, loginAction} from "./UserActions";
-import {push} from "react-router-redux/actions";
+import { declareForm } from "./FormActions"
+import { authorizeUser } from "./UserActions"
+import { push } from "react-router-redux/actions"
+import api from "../api/Api"
 
 export const authForm = declareForm({
         formName: "authForm",
@@ -10,11 +11,9 @@ export const authForm = declareForm({
         ],
         path: "/login",
         onSuccess: (dispatch, getState, response) => {
-            const {username, password} = getState().authForm;
-            dispatch(loginAction(username, password));
             dispatch(authorizeUser(response));
-            window.localStorage.setItem("username", username);
-            window.localStorage.setItem("password", password);
+            api.authorizeAxiosInstance(response.token)
+            window.localStorage.setItem("token", response.token);
             dispatch(push("/admin"));
         },
         isInsecure: true,

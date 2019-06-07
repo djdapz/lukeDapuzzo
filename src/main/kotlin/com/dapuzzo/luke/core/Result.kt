@@ -6,7 +6,6 @@ sealed class Result<out V, out E> {
             return try {
                 Success(function.invoke())
             } catch (ex: Exception) {
-                ex.printStackTrace()
                 Failure(ex)
             }
         }

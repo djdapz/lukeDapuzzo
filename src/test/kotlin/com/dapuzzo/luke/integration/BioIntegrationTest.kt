@@ -15,7 +15,7 @@ class BioIntegrationTest : IntegrationTest() {
 
         webClient.put().uri("/bio")
             .contentType(MediaType.APPLICATION_JSON)
-            .header("Authorization", encodedCredentials)
+            .header("Authorization", token)
             //language=json
             .body(
                 BodyInserters.fromObject(

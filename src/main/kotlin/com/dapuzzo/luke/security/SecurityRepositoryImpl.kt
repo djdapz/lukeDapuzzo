@@ -27,11 +27,8 @@ class SecurityRepositoryImpl(jdbcTemplate: JdbcTemplate, val passwordEncoder: Pa
                 .addValue("password", passwordEncoder.encode(credentials.password))
         )
     }
-        .run { refreshToken(credentials) }
         .getAndMap(
-            {
-                getUser(credentials)
-            },
+            { getUser(credentials) },
             { Failure(LukeException(DUPLICATE_USER_MESSAGE)) }
         )
 
@@ -43,26 +40,11 @@ class SecurityRepositoryImpl(jdbcTemplate: JdbcTemplate, val passwordEncoder: Pa
                 MapSqlParameterSource().addValue("username", credentials.username),
                 rsToCredentials
             ).first()
-        }.getAndMap(
-            { validatePassword(it, credentials) },
-            { Failure(LukeException(UNAUTHORIZED_MESSAGE)) }
-        ).run {
-            refreshToken(it)
+        }.run {
+            validatePassword(it, credentials)
         }.getAndMap(
             getUser,
             { Failure(LukeException(UNAUTHORIZED_MESSAGE)) }
-        )
-
-    fun refreshToken(creds: Credentials) =
-        namedParameterJdbcTemplate.update(
-            """
-                UPDATE account
-                SET token=:token
-                WHERE username=:username
-        """.trimIndent(),
-            MapSqlParameterSource()
-                .addValue("username", creds.username)
-                .addValue("token", Random.nextLong())
         )
 
     private fun validatePassword(it: Credentials, credentials: Credentials): Result<Credentials, LukeException> {
@@ -75,8 +57,7 @@ class SecurityRepositoryImpl(jdbcTemplate: JdbcTemplate, val passwordEncoder: Pa
     val rsToAccount: (ResultSet, Int) -> Account = { rs, _ ->
         Account(
             username = rs.getString("username"),
-            role = Role.valueOf(rs.getString("role")),
-            token = rs.getString("token")
+            role = Role.valueOf(rs.getString("role"))
         )
     }
 

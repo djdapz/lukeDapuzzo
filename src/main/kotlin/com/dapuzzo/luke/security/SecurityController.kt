@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RestController
 class SecurityController(val securityService: SecurityService) {
 
     @PostMapping("/login")
-    fun login(@RequestBody credentials: Credentials): ResponseEntity<Account> = securityService
-            .login(credentials)
-            .getAndMap(
-                    { ResponseEntity(it, HttpStatus.OK) },
-                    { ResponseEntity(HttpStatus.UNAUTHORIZED) }
-            )
+    fun login(@RequestBody credentials: Credentials): ResponseEntity<AuthorizedAccount> = securityService
+        .login(credentials)
+        .getAndMap(
+            { ResponseEntity(it, HttpStatus.OK) },
+            { ResponseEntity(HttpStatus.UNAUTHORIZED) }
+        )
 
     @PostMapping("/account/create")
     fun createAccount(@RequestBody credentials: Credentials) = securityService
-            .createAccount(credentials)
-            .getAndMap(
-                    { ResponseEntity(it, HttpStatus.OK) },
-                    { ResponseEntity(it.message, it.getErrorCode()) }
-            )
+        .createAccount(credentials)
+        .getAndMap(
+            { ResponseEntity(it, HttpStatus.OK) },
+            { ResponseEntity(it.message, it.getErrorCode()) }
+        )
 
 }

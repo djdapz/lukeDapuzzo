@@ -8,9 +8,7 @@ import com.dapuzzo.luke.show.domain.Venue
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
-import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.web.reactive.function.BodyInserters
 
 
@@ -27,7 +25,7 @@ class ShowIntegrationTest : IntegrationTest() {
     @Test
     fun shouldGetAListOfAllVenuesAndIds() {
         val returnResult = webClient.get().uri("/venues")
-                .header("Authorization", encodedCredentials)
+                .header("Authorization", token)
                 .exchange()
                 .returnResult(VenueController.VenuesResponseBody::class.java)
                 .responseBody
@@ -48,7 +46,7 @@ class ShowIntegrationTest : IntegrationTest() {
     fun shouldBeAbleToCreateANewShowWithAVenueThatExists() {
         webClient.post().uri("/shows")
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("Authorization", encodedCredentials)
+                .header("Authorization", token)
                 //language=json
                 .body(BodyInserters.fromObject("""
                         {
@@ -66,7 +64,7 @@ class ShowIntegrationTest : IntegrationTest() {
     fun shouldBeAbleToCreateANewVenueWithACityThatDidntPreviouslyExist() {
         webClient.post().uri("/venues")
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("Authorization", encodedCredentials)
+                .header("Authorization", token)
                 //language=json
                 .body(BodyInserters.fromObject("""
                         {

@@ -1,26 +1,14 @@
-export const BIO_FETCHED = "BIO_FETCHED";
-export const GET_BIO = "GET_BIO";
-export const SAVE_BIO = "SAVE_BIO";
+import Api from "../api/Api"
 
-export const bioFetched = function (venues) {
-    return {
-        type: BIO_FETCHED,
-        payload: venues
-    }
-};
+export const BIO_FETCHED = "BIO_FETCHED"
 
-export const getBio = function () {
-    return {
-        type: GET_BIO,
-        payload: {}
-    }
-};
+export const getBio = () => (dispatch) => Api.get("/bio")
+  .then(response => response.data)
+  .then(data => dispatch({
+    type: BIO_FETCHED,
+    payload: data
+  }))
 
-export const saveBio = function(bio){
-    return {
-        type: SAVE_BIO,
-        payload: {
-            bio
-        }
-    }
-};
+export const saveBio = (bio) => (dispatch) =>
+  Api.put("/bio", { bio })
+    .then(() => dispatch(getBio()))

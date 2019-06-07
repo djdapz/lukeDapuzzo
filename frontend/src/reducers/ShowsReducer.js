@@ -1,9 +1,5 @@
-/**
- * Created by devondapuzzo on 9/22/17.
- */
-import {ALL_SHOWS_FETCHED} from "../actions/GetAllShows";
 import {Show} from "../classes/Show";
-import {SHOW_DELETED} from "../actions/DeleteShowAction";
+import { ALL_SHOWS_FETCHED, SHOW_DELETED } from "../actions/ShowActions"
 
 const showsReducer = (state = [], action) => {
     switch (action.type) {

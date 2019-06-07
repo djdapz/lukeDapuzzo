@@ -2,6 +2,7 @@ package com.dapuzzo.luke.core.random
 
 import com.dapuzzo.luke.email.EmailRequest
 import com.dapuzzo.luke.security.Account
+import com.dapuzzo.luke.security.AuthorizedAccount
 import com.dapuzzo.luke.security.Credentials
 import com.github.javafaker.Faker
 import java.sql.Date
@@ -44,7 +45,7 @@ fun randomDate(): Date {
     val maxDay = LocalDate.of(2015, 12, 31).toEpochDay()
     val randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay)
     val randomDate = LocalDate.ofEpochDay(randomDay)
-    return java.sql.Date(randomDate.toEpochDay())
+    return Date(randomDate.toEpochDay())
 }
 
 fun randomLocalDate(): LocalDate {
@@ -58,21 +59,25 @@ fun randomLocalDate(): LocalDate {
 fun <T> randomList(producer: () -> T): List<T> = (1..randomInt(5)).map { producer() }
 
 fun randomEmailRequest() =
-        EmailRequest(
-                randomString(),
-                randomEmailAddress(),
-                randomString()
-        )
+    EmailRequest(
+        randomString(),
+        randomEmailAddress(),
+        randomString()
+    )
 
 private fun randomEmailAddress(): String = faker().internet().emailAddress()
 
 
 fun randomCredentials(username: String = randomString(), password: String = randomString()): Credentials = Credentials(
-        username,
-        password
+    username,
+    password
 )
 
 fun randomAccount(): Account = Account(
-        username = faker().gameOfThrones().character(),
-        token = faker().phoneNumber().phoneNumber()
+    username = faker().gameOfThrones().character()
+)
+
+fun randomAuthorizedAccount(): AuthorizedAccount = AuthorizedAccount(
+    username = faker().gameOfThrones().character(),
+    token = faker().rickAndMorty().quote()
 )

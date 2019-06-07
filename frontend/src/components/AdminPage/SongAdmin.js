@@ -1,54 +1,40 @@
-import React, {Component} from "react";
-import {getAllSongs} from "../../actions/GetAllSongs";
-import {musicTypes} from "../../constants/musicTypes";
-import NewSongForm from "./NewSongForm";
-import SongTable from "./SongTableComponent";
-import {connect} from "react-redux";
+import React from "react"
+import { musicTypes } from "../../constants/musicTypes"
+import NewSongForm from "./NewSongForm"
+import SongTable from "./SongTableComponent"
+import { connect } from "react-redux"
 
-class SongAdmin extends Component {
-    constructor() {
-        super();
-        this.renderTableForAllTypes = this.renderTableForAllTypes.bind(this);
+const SongAdmin = ({ songs }) => {
+
+  const renderTableForAllTypes = () => {
+    if (songs && songs.length > 0) {
+      return musicTypes
+        .map(type => {
+          return {
+            "type": type,
+            "songs": songs.filter(song => song.type === type.api)
+          }
+        })
+        .filter(songList => songList.songs.length > 0)
+        .map(songList => <SongTable key={songList.type}
+                                    songs={songList.songs}
+                                    type={songList.type}/>)
     }
 
-    reactToSongDeleted() {
-        if (this.props.deleteSong.status === 200) {
-            getAllSongs();
-            this.props.clearDeleteSong();
-        }
-    }
+  }
 
+  return <div>
+    <NewSongForm/>
+    {renderTableForAllTypes()}
+  </div>
 
-    render() {
-        return <div>
-            <NewSongForm/>
-            {this.renderTableForAllTypes()}
-        </div>
-    }
-
-    renderTableForAllTypes() {
-        if (this.props.songs && this.props.songs.length > 0) {
-            return musicTypes
-                .map(type => {
-                    return {
-                        "type": type,
-                        "songs": this.props.songs.filter(song => song.type === type.api)
-                    }
-                })
-                .filter(songList => songList.songs.length > 0)
-                .map(songList => <SongTable key={songList.type}
-                                            songs={songList.songs}
-                                            type={songList.type}/>);
-        }
-
-    }
 }
 
-function mapStateToProps(state) {
-    return ({
-        songs: state.songs
-    });
+function mapStateToProps (state) {
+  return ({
+    songs: state.songs
+  })
 }
 
-export default connect(mapStateToProps)(SongAdmin);
+export default connect(mapStateToProps)(SongAdmin)
 

@@ -61,14 +61,16 @@ dependencies {
             "org.springframework.boot:spring-boot-starter-web:$spring_boot_version",
             "org.springframework.boot:spring-boot-starter-security:$spring_boot_version",
             "org.springframework.boot:spring-boot-starter-webflux:$spring_boot_version",
-            "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0"
+            "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0",
+            'io.jsonwebtoken:jjwt:0.9.1'
+
     )
 
     testCompile(
             "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0",
             "io.rest-assured:rest-assured:3.0.5",
             "org.jetbrains.kotlin:kotlin-test",
-            "org.jetbrains.kotlin:kotlin-test-junit",
+            "org.junit.jupiter:junit-jupiter-engine:5.1.0",
             "com.github.javafaker:javafaker:0.14",
             'com.jayway.jsonpath:json-path-assert:2.4.0',
     )

@@ -195,7 +195,6 @@ jobs:
 
                 docker-compose -f repo/ci/docker-compose.tests.yml down
                 docker volume rm $(docker volume ls -q)
-
   - name: bump-version
     public: true
     plan:
@@ -334,8 +333,6 @@ jobs:
             - name: deploy
           path: deploy/frontend.zip
           manifest: deploy/manifest-frontend.yml
-
-
 
   - name: deploy-backend-acceptance
     plan:

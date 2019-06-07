@@ -19,6 +19,32 @@
 //
 // -- This is a dual command --
 // Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
+Cypress.Commands.add("setupDefaultServer", () => {
+  cy.fixture("bio").as("bioJson")
+  cy.fixture("music").as("musicJson")
+  cy.fixture("shows").as("showsJson")
+
+  cy.server()
+
+  cy.route({
+    method: "GET",
+    url: "/bio",
+    response: "@bioJson"
+  }).as("getBio")
+
+  cy.route({
+    method: "GET",
+    url: "/shows",
+    response: "@showsJson"
+  }).as("getShows")
+
+  cy.route({
+    method: "GET",
+    url: "/music",
+    response: "@musicJson"
+  }).as("getMusic")
+
+})
 //
 //
 // -- This is will overwrite an existing command --

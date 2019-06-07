@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Show} from "../../classes/Show";
 
-import {deleteShow} from "../../actions/DeleteShowAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
@@ -10,6 +9,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import Button from "@material-ui/core/Button/Button";
 import Card from "@material-ui/core/Card/Card";
 import styled from 'styled-components'
+import { deleteShow } from "../../actions/ShowActions"
 
 const ShowCard = styled(Card)`
   margin: .5rem 0;

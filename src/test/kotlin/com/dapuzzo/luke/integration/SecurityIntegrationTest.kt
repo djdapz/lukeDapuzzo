@@ -6,9 +6,55 @@ import com.dapuzzo.luke.security.Account
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.reactive.function.BodyInserters
 
+@RestController
+class TestRestController {
+    @PostMapping("/security-test")
+    fun somePostEndpoint() = "HI"
+
+    @PutMapping("/security-test")
+    fun somePutEndpoint() = "HI"
+
+    @DeleteMapping("/security-test")
+    fun someDeleteEndpoint() = "HI"
+
+    @GetMapping("/security-test")
+    fun someGetEndpoint() = "HI"
+}
+
 class SecurityIntegrationTest : IntegrationTest() {
+
+    @Test
+    fun shouldNotAllowForCallsToAnyPostWithoutAuth() {
+        webClient.post().uri("/security-test")
+            .contentType(MediaType.APPLICATION_JSON)
+            .exchange()
+            .expectStatus().isUnauthorized
+    }
+
+    @Test
+    fun shouldNotAllowForCallsToAnyPutWithoutAuth() {
+        webClient.put().uri("/security-test")
+            .contentType(MediaType.APPLICATION_JSON)
+            .exchange()
+            .expectStatus().isUnauthorized
+    }
+
+    @Test
+    fun shouldNotAllowForCallsToAnyDeleteWithoutAuth() {
+        webClient.delete().uri("/security-test")
+            .exchange()
+            .expectStatus().isUnauthorized
+    }
+
+    @Test
+    fun shouldAllowCallsToAnyGetWithoutAuth() {
+        webClient.get().uri("/security-test")
+            .exchange()
+            .expectStatus().isOk
+    }
 
     @Test
     fun shouldCreateAccountAndLogin() {
@@ -31,23 +77,10 @@ class SecurityIntegrationTest : IntegrationTest() {
             .expectStatus().isOk
 
 
-        val account = webClient.post().uri("/login")
+        webClient.post().uri("/login")
             .contentType(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromObject(credentialsJson))
             .exchange()
             .expectStatus().isOk
-            .returnResult(Account::class.java).responseBody.blockFirst()
-
-        val token: String = jdbcTemplate
-            .queryForObject("SELECT token from account WHERE username='$username'")
-            { row, _ -> row.getString("token") }!!
-
-
-        val expectedAccount = Account(
-            username = username,
-            token = token
-
-        )
-        assertThat(account).isEqualTo(expectedAccount)
     }
 }

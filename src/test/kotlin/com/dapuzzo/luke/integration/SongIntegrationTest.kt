@@ -28,7 +28,7 @@ class SongIntegrationTest : IntegrationTest() {
     private fun assertSongCanCreateSuccessfully(id: String, name: String, type: MusicEntity.MusicType) {
         webClient.post().uri("/music")
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("Authorization", encodedCredentials)
+                .header("Authorization", token)
                 //language=json
                 .body(BodyInserters.fromObject("""
                         {

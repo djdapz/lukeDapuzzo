@@ -1,42 +1,24 @@
-import axios from 'axios';
-import {LUKE_API} from "../config/appConfig";
+import axios from "axios"
+import { LUKE_API } from "../config/appConfig"
 
-let axiosInstance = axios.create({
-    baseURL: LUKE_API
-});
+const axiosInstance = axios.create({
+  baseURL: LUKE_API
+})
 
-export function postNoCredentials(url, body) {
-    return axiosInstance.post(url, body);
-}
+const authorizeAxiosInstance = (token) => axiosInstance.defaults.headers["authorization"] = `Bearer ${token}`
 
-export function getNoCredentials(url) {
-    return axiosInstance.get(url);
-}
+const post = (url, body) => axiosInstance.post(url, body)
 
-export function postSecure(url, body) {
-    return axiosInstance.post(url, body, {
-        auth: {
-            username: localStorage.getItem("username"),
-            password: localStorage.getItem("password")
-        }
-    })
-}
+const get = (url) => axiosInstance.get(url)
 
-export function putSecure(url, body) {
-    return axiosInstance.put(url, body, {
-        auth: {
-            username: localStorage.getItem("username"),
-            password: localStorage.getItem("password")
-        }
-    })
-}
+const put = (url, body) => axiosInstance.put(url, body)
 
+const deleteFunction = (url) => axiosInstance.delete(url)
 
-export function deleteSecure(url) {
-    return axiosInstance.delete(url, {
-        auth: {
-            username: localStorage.getItem("username"),
-            password: localStorage.getItem("password")
-        }
-    })
+export default {
+  authorizeAxiosInstance,
+  post: post,
+  get: get,
+  put: put,
+  delete: deleteFunction
 }

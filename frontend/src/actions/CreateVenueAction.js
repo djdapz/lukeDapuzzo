@@ -1,6 +1,6 @@
 import {declareForm} from "./FormActions";
 import {getAllVenues} from "./VenueActions";
-import {createShowForm} from "./CreateShowActions";
+import {createShowForm} from "./ShowActions"
 
 export const createVenueForm = declareForm({
     formName: "newVenue",

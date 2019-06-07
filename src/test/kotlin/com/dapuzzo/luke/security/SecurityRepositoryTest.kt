@@ -1,6 +1,8 @@
 package com.dapuzzo.luke.security
 
-import com.dapuzzo.luke.core.*
+import com.dapuzzo.luke.core.Cleanup
+import com.dapuzzo.luke.core.DatabaseBase
+import com.dapuzzo.luke.core.execute
 import com.dapuzzo.luke.core.random.randomCredentials
 import com.dapuzzo.luke.core.random.randomString
 import com.dapuzzo.luke.security.SecurityRepository.Companion.DUPLICATE_USER_MESSAGE
@@ -10,7 +12,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
-import java.sql.ResultSet
 import kotlin.test.fail
 
 @Cleanup
@@ -89,16 +90,5 @@ class SecurityRepositoryImplTest : DatabaseBase() {
         assertThat(encoder.matches(credentials.password, savedAccount.password)).isTrue()
     }
 
-    @Test
-    fun shouldReturnFreshTokenAfterLogin() {
-        val credentials: Credentials = randomCredentials(username = randomString())
-
-        subject.createAccount(credentials)
-        val firstToken = subject.login(credentials).getOrThrow(Exception("didn't get user :(")).token
-        val secondToken = subject.login(credentials).getOrThrow(Exception("didn't get user :(")).token
-
-
-        assertThat(firstToken).isNotEqualTo(secondToken)
-    }
 
 }

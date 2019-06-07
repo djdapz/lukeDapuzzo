@@ -16,7 +16,12 @@ server:
 
 dapuzzo:
   luke:
+    whitelist: /account/create, /login
+    email-distribution-list: devon@dapuzzo.com,djdapz@aol.com
+    jwt:
+      secret: IM_SUPER_SECRET_YO
+      seconds-token-is-valid: 10000
+      issuer: luke-test.io
     client:
       url: http://localhost:9000/bundle.js
-    email-distribution-list: devon@dapuzzo.com,djdapz@aol.com
 

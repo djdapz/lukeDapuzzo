@@ -1,62 +1,7 @@
 describe("Home page", () => {
   beforeEach(function () {
-    cy.server()
-
-    cy.route({
-      method: "GET",
-      url: "/bio",
-      response: {
-        bio: "I am luke and I am great musician\ncheck me out on soundcloud"
-      }
-    }).as("getBio")
-
-    cy.route({
-      method: "GET",
-      url: "/shows",
-      response: [
-        {
-          "id": 1,
-          "date": "2017-07-23",
-          "notes": "Acoustic",
-          "venue": {
-            "id": 6,
-            "name": "The Beebop",
-            "googleMapsLink": "https://goo.gl/maps/6cwSXNDx9bF2",
-            "city": { "id": 3, "name": "Boston", "state": { "abbreviation": "MA", "name": "Massachusetts" } }
-          }
-        },
-        {
-          "id": 2,
-          "date": "2017-07-23",
-          "notes": "Acoustic",
-          "venue": {
-            "id": 6,
-            "name": "The Beebop",
-            "googleMapsLink": "https://goo.gl/maps/6cwSXNDx9bF2",
-            "city": { "id": 3, "name": "Boston", "state": { "abbreviation": "MA", "name": "Massachusetts" } }
-          }
-        }
-      ]
-    }).as("getShows")
-
-    cy.route({
-      method: "GET",
-      url: "/music",
-      response: [
-        {
-          "id": "58aKFIYVnNLw5ruYQOPRiv",
-          "name": "Ignorance Is Bliss",
-          "type": "SPOTIFY_ALBUM"
-        },
-        {
-          "id": "6fg9COUD9wwohdHuSBJuuI",
-          "name": "Nostalgia",
-          "type": "SPOTIFY_SONG"
-        }
-      ]
-    }).as("getMusic")
-
-    cy.visit("http://localhost:3210")
+    cy.setupDefaultServer()
+    cy.visit("/")
   })
 
   it("should display lukes mini bio", function () {
@@ -106,7 +51,6 @@ describe("Home page", () => {
             expect(it[0].innerText).to.contain("spotify")
           })
         })
-
 
       })
     })

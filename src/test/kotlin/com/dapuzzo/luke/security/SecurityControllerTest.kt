@@ -4,6 +4,7 @@ import com.dapuzzo.luke.config.JsonConfig.Companion.asObject
 import com.dapuzzo.luke.core.*
 import com.dapuzzo.luke.core.random.faker
 import com.dapuzzo.luke.core.random.randomAccount
+import com.dapuzzo.luke.core.random.randomAuthorizedAccount
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import org.assertj.core.api.Assertions.assertThat
@@ -22,9 +23,10 @@ open class SecurityControllerTest {
     private val badUsername = faker().rickAndMorty().character()
 
     private val account = randomAccount()
+    private val authorizedAccount = randomAuthorizedAccount()
 
     private val securityService = mock<SecurityService> {
-        on { login(Credentials(goodUsername, goodPassword)) } doReturn Success(account)
+        on { login(Credentials(goodUsername, goodPassword)) } doReturn Success(authorizedAccount)
         on { login(Credentials(badUsername, badPassword)) } doReturn Failure(LukeException("Not Authorized"))
         on { createAccount(Credentials(goodUsername, goodPassword)) } doReturn Success(account)
         on { createAccount(Credentials(badUsername, badPassword)) } doReturn Failure(DuplicateKeyException("User already Exists"))
@@ -43,9 +45,9 @@ open class SecurityControllerTest {
                 .andExpect(status().isOk)
                 .andReturn().response.contentAsString
 
-        val actualAccount = asObject(contentAsString, Account::class.java)
+        val actualAccount = asObject(contentAsString, AuthorizedAccount::class.java)
 
-        assertThat(actualAccount).isEqualTo(account)
+        assertThat(actualAccount).isEqualTo(authorizedAccount)
     }
 
     @Test
