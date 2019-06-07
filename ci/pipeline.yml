@@ -298,15 +298,19 @@ jobs:
 
 
 
-  - name: deploy-frontend-acceptance
+  - name: deploy-acceptance
     plan:
       - get: repo
         passed: [ "build-and-upload-frontend"]
       - get: alpine
         params: {save: true}
-      - get: frontend-s3
-        passed:  ["build-and-upload-frontend"]
-        trigger: true
+      - in_parallel:
+        - get: frontend-s3
+          passed:  ["build-and-upload-frontend"]
+          trigger: true
+        - get: backend-s3
+          passed:  ["build-and-upload-backend"]
+          trigger: true
       - task: deploy
         privileged: true
         image: alpine
@@ -315,6 +319,7 @@ jobs:
           inputs:
             - name: repo
             - name: frontend-s3
+            - name: backend-s3
           outputs:
             - name: deploy
           run:
@@ -327,58 +332,29 @@ jobs:
 
                 cp frontend-s3/frontend-*.zip  ./deploy/frontend.zip
                 cp ./repo/ci/manifests/development/client-manifest.yml ./deploy/manifest-frontend.yml
-      - put: acceptance
-        params:
-          inputs:
-            - name: deploy
-          path: deploy/frontend.zip
-          manifest: deploy/manifest-frontend.yml
-
-  - name: deploy-backend-acceptance
-    plan:
-      - get: repo
-        passed: ["build-and-upload-backend"]
-      - get: alpine
-        params: {save: true}
-      - get: backend-s3
-        passed:  ["build-and-upload-backend"]
-        trigger: true
-      - task: download
-        privileged: true
-        image: alpine
-        config:
-          platform: linux
-          inputs:
-            - name: repo
-            - name: backend-s3
-          outputs:
-            - name: deploy
-          run:
-            path: sh
-            args:
-              - -exc
-              - |
-                #!/bin/bash
-                set -ex
 
                 cp backend-s3/backend-*.jar  ./deploy/backend.jar
                 cp ./repo/ci/manifests/development/server-manifest.yml ./deploy/manifest-backend.yml
-      - put: acceptance
-        params:
-          inputs:
-            - name: deploy
-          path: deploy/backend.jar
-          manifest: deploy/manifest-backend.yml
+      - in_parallel:
+        - put: acceptance
+          params:
+            inputs:
+              - name: deploy
+            path: deploy/frontend.zip
+            manifest: deploy/manifest-frontend.yml
+        - put: acceptance
+          params:
+            inputs:
+              - name: deploy
+            path: deploy/backend.jar
+            manifest: deploy/manifest-backend.yml
+
 
   - name: e2e-tests
     plan:
       - get: repo
         trigger: true
-        passed: ["deploy-backend-acceptance", "deploy-frontend-acceptance"]
-      - get: frontend-s3
-        passed:  ["deploy-frontend-acceptance"]
-      - get: backend-s3
-        passed:  ["deploy-backend-acceptance"]
+        passed: ["deploy-acceptance"]
       - get: cypress-image
         params: {save: true}
       - task: download-jar
@@ -403,14 +379,17 @@ jobs:
                 npm run test:headless
 
 
-  - name: deploy-frontend-production
+  - name: deploy-production
     plan:
       - get: repo
         passed: [ "e2e-tests"]
       - get: alpine
         params: {save: true}
-      - get: frontend-s3
-        passed:  ["e2e-tests"]
+      - in_parallel:
+        - get: backend-s3
+          passed:  ["deploy-acceptance"]
+        - get: frontend-s3
+          passed:  ["deploy-acceptance"]
       - task: deploy
         privileged: true
         image: alpine
@@ -419,41 +398,6 @@ jobs:
           inputs:
             - name: repo
             - name: frontend-s3
-          outputs:
-            - name: deploy
-          run:
-            path: sh
-            args:
-              - -exc
-              - |
-                #!/bin/bash
-                set -ex
-
-                cp frontend-s3/frontend-*.zip  ./deploy/frontend.zip
-                cp ./repo/ci/manifests/production/client-manifest.yml ./deploy/manifest-frontend.yml
-      - put: production
-        params:
-          inputs:
-            - name: deploy
-          path: deploy/frontend.zip
-          manifest: deploy/manifest-frontend.yml
-
-
-  - name: deploy-backend-production
-    plan:
-      - get: repo
-        passed: ["e2e-tests"]
-      - get: alpine
-        params: {save: true}
-      - get: backend-s3
-        passed:  ["e2e-tests"]
-      - task: download
-        privileged: true
-        image: alpine
-        config:
-          platform: linux
-          inputs:
-            - name: repo
             - name: backend-s3
           outputs:
             - name: deploy
@@ -467,9 +411,20 @@ jobs:
 
                 cp backend-s3/backend-*.jar  ./deploy/backend.jar
                 cp ./repo/ci/manifests/production/server-manifest.yml ./deploy/manifest-backend.yml
-      - put: production
-        params:
-          inputs:
-            - name: deploy
-          path: deploy/backend.jar
-          manifest: deploy/manifest-backend.yml
+
+                cp frontend-s3/frontend-*.zip  ./deploy/frontend.zip
+                cp ./repo/ci/manifests/production/client-manifest.yml ./deploy/manifest-frontend.yml
+
+      - in_parallel:
+        - put: production
+          params:
+            inputs:
+              - name: deploy
+            path: deploy/frontend.zip
+            manifest: deploy/manifest-frontend.yml
+        - put: production
+          params:
+            inputs:
+              - name: deploy
+            path: deploy/backend.jar
+            manifest: deploy/manifest-backend.yml

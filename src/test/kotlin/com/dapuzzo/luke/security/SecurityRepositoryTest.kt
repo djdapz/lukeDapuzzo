@@ -90,5 +90,22 @@ class SecurityRepositoryImplTest : DatabaseBase() {
         assertThat(encoder.matches(credentials.password, savedAccount.password)).isTrue()
     }
 
+    @Test
+    fun shouldOnlyLoginWithValidPassword(){
+        val credentials: Credentials = randomCredentials(username = randomString())
+
+        subject.createAccount(credentials)
+
+        subject.login(Credentials(username = credentials.username, password = "BADD PASWORD")).execute(
+            {fail()},
+            {}
+        )
+
+        subject.login(credentials).execute(
+            {},
+            {fail()}
+        )
+    }
+
 
 }

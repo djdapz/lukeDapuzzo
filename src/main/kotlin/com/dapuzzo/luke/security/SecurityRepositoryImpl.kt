@@ -37,12 +37,15 @@ class SecurityRepositoryImpl(jdbcTemplate: JdbcTemplate, val passwordEncoder: Pa
         of {
             namedParameterJdbcTemplate.query(
                 "SELECT * FROM account WHERE username = :username",
-                MapSqlParameterSource().addValue("username", credentials.username),
+                MapSqlParameterSource()
+                    .addValue("username", credentials.username)
+                ,
                 rsToCredentials
             ).first()
-        }.run {
-            validatePassword(it, credentials)
         }.getAndMap(
+            { validatePassword(it, credentials) },
+            { Failure(LukeException(UNAUTHORIZED_MESSAGE)) }
+        ).getAndMap(
             getUser,
             { Failure(LukeException(UNAUTHORIZED_MESSAGE)) }
         )

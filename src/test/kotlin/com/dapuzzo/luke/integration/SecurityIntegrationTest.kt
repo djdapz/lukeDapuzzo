@@ -3,6 +3,7 @@ package com.dapuzzo.luke.integration
 import com.dapuzzo.luke.core.credentialsJson
 import com.dapuzzo.luke.core.random.faker
 import com.dapuzzo.luke.security.Account
+import com.dapuzzo.luke.security.Credentials
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.springframework.http.MediaType
@@ -82,5 +83,38 @@ class SecurityIntegrationTest : IntegrationTest() {
             .body(BodyInserters.fromObject(credentialsJson))
             .exchange()
             .expectStatus().isOk
+    }
+
+    @Test
+    fun shouldVerfiyPasswordWhenLoggingIn() {
+        val username = faker().gameOfThrones().character()
+        val credentialsJson = credentialsJson(
+            username = username,
+            password = faker().rickAndMorty().location()
+        )
+
+        val badCredentials = Credentials(
+            username= username,
+            password = faker().gameOfThrones().quote()
+        )
+
+        webClient.post().uri("/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(BodyInserters.fromObject(credentialsJson))
+            .exchange()
+            .expectStatus().isUnauthorized
+
+        webClient.post().uri("/account/create")
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(BodyInserters.fromObject(credentialsJson))
+            .exchange()
+            .expectStatus().isOk
+
+
+        webClient.post().uri("/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(BodyInserters.fromObject(badCredentials))
+            .exchange()
+            .expectStatus().isUnauthorized
     }
 }
