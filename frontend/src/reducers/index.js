@@ -7,11 +7,11 @@ import userAuthenticationReducer from "./UserAuthenticationReducer"
 
 import { routerReducer } from "react-router-redux"
 import { venueReducer } from "./VenueReducer"
-import { createSongForm } from "../actions/CreateSongAction"
-import { createVenueForm } from "../actions/CreateVenueAction"
+import { createSongForm } from "../actions/SongActions"
 import { createShowForm } from "../actions/ShowActions"
 import { authForm } from "../actions/AuthFormAction"
 import { bioReducer } from "./BioReducer"
+import { createVenueForm } from "../actions/VenueActions"
 
 const userReducer = combineReducers({
     isAuthenticated: userAuthenticationReducer,

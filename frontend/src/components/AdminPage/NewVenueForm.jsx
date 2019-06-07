@@ -1,9 +1,9 @@
 import {LukeTextField, StyledFormControl} from "../Multipurpose/FormComponents";
 import React from "react";
-import {createVenueForm} from "../../actions/CreateVenueAction";
 import Button from "@material-ui/core/Button/Button";
 import Modal from "@material-ui/core/Modal/Modal";
 import styled from "styled-components";
+import { createVenueForm } from "../../actions/VenueActions"
 
 const VenuePopup = styled.div`
   margin-left: auto;

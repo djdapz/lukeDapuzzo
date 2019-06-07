@@ -1,25 +1,19 @@
-/**
- * Created by devondapuzzo on 8/24/17.
- */
-import axios from "axios";
+import Api from "../api/Api"
 
-const SEND_EMAIL_ACTION = "SEND_EMAIL_ACTION";
+const SEND_EMAIL_ACTION = "SEND_EMAIL_ACTION"
 
-let sendEmail =  function(emailData){
-    let postRequest = axios.post("/api/email",
-        {
-            email: emailData.email,
-            name: emailData.name,
-            message: emailData.message
-        });
-
-    return {
-        type: SEND_EMAIL_ACTION,
-        payload: postRequest
-    }
-};
+let sendEmail = ({ email, name, message }) => (dispatch) => Api
+  .post("/api/email", {
+    email,
+    name,
+    message,
+  })
+  .then(() => dispatch({
+    type: SEND_EMAIL_ACTION,
+    payload: { email, name, message }
+  }))
 
 export {
-    sendEmail,
-    SEND_EMAIL_ACTION
-};
+  sendEmail,
+  SEND_EMAIL_ACTION
+}

@@ -3,9 +3,9 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 
 import PropTypes from 'prop-types';
-import {getAllSongs} from "../../actions/GetAllSongs";
 import SpotifyRow from "./row/SpotifyRow";
 import SoundcloudRow from "./row/SoundcloudRow";
+import { getAllSongs } from "../../actions/SongActions"
 
 
 class MusicPage extends Component {
