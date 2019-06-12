@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {push} from "react-router-redux/actions"
+import {push} from "connected-react-router"
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 
@@ -31,7 +31,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     return {
-        router: state.reduxRouter
+        router: state.router
     }
 }
 

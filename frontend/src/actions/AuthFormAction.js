@@ -1,6 +1,6 @@
 import { declareForm } from "./FormActions"
 import { authorizeUser } from "./UserActions"
-import { push } from "react-router-redux/actions"
+import { push } from "connected-react-router"
 import api from "../api/Api"
 
 export const authForm = declareForm({

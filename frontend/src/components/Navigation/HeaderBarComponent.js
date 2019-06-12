@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import routes from "../../constants/routes"
 import Menubar from "./MenuBarContainer"
 import { bindActionCreators } from "redux"
-import { push } from "react-router-redux"
+import { push } from "connected-react-router"
 import { getAllSongs } from "../../actions/SongActions"
 import Button from "@material-ui/core/Button/Button"
 import MenuIcon from "@material-ui/icons/Menu"
@@ -98,7 +98,7 @@ class HeaderBar extends Component {
 
 function mapStateToProps(state) {
     return {
-        route: state.reduxRouter
+        route: state.router
     }
 }
 

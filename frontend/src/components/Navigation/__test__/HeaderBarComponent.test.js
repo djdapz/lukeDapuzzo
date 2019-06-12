@@ -3,7 +3,7 @@ import {shallow} from "enzyme";
 
 import HeaderBar from "../HeaderBarComponent"
 import {mockStore} from "../../../../testConfig/testUtils";
-import {push} from "react-router-redux"
+import {push} from "connected-react-router"
 import MenuBarContainer from "../MenuBarContainer";
 import {getAllSongs} from "../../../actions/GetAllSongs";
 import {getAllShows} from "../../../actions/GetAllShows";
@@ -11,7 +11,7 @@ import {getAllShows} from "../../../actions/GetAllShows";
 jest.mock("../../../actions/GetAllSongs");
 jest.mock("../../../actions/GetAllShows");
 
-jest.mock("react-router-redux");
+jest.mock("connected-react-router");
 
 describe("Header Bar Component", () => {
     const reduxRouter = {

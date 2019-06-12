@@ -26,7 +26,7 @@ class AdminPage extends Component {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({getAllVenues}, dispatch);
 const mapStateToProps = (state) => ({
-    path: state.reduxRouter.location.pathname
+    path: state.router.location.pathname
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminPage);

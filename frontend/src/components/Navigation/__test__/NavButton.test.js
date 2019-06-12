@@ -2,10 +2,10 @@ import NavButton from "../NavButton";
 import React from "react";
 import {shallow} from "enzyme";
 
-import {push} from "react-router-redux/actions"
+import {push} from "connected-react-router"
 import {mockStore} from "../../../../testConfig/testUtils";
 
-jest.mock("react-router-redux/actions");
+jest.mock("connected-react-router");
 
 push.mockReturnValue({type: "PUSH ACTION"});
 
