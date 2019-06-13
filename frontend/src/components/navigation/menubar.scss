@@ -1,0 +1,82 @@
+@import "../../variables";
+@import url("https://fonts.googleapis.com/css?family=Righteous");
+
+$transparent-aqua-background: rgba(98, 247, 200, 0.9);
+$transition-speed: .5s;
+
+a:hover {
+  text-decoration: none;
+}
+
+.menubar-collapsed {
+  .menubar-row {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  top: 0;
+  height: 0;
+}
+
+.menubar-expanded {
+  .menubar-row {
+  }
+
+  top: 0;
+  height: 100%;
+  padding-top: $header-bar-height;
+  box-sizing: border-box;
+}
+
+.menubar {
+  .menubar-row {
+    flex: 1;
+    text-align: center;
+    width: 100%;
+    transition: height $transition-speed, flex $transition-speed, padding $transition-speed;
+  }
+
+  overflow: hidden;
+  transition: height $transition-speed, padding $transition-speed;;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: center;
+
+  position: fixed;
+  right: 0;
+  left: 0;
+  width: 100%;
+
+
+  font-family: "Carter One", cursive;
+  font-size: larger;
+  background-color: $transparent-aqua-background;
+  z-index: 1;
+  .social-media-icon {
+    font-size: $header-bar-height /1.5;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+  }
+
+  .menubar-row:hover, .menubar-active {
+    cursor: pointer;
+
+    h3 {
+      color: white;
+    }
+  }
+
+  h3 {
+    color: black;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+  }
+}

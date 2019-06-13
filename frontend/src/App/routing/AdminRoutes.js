@@ -1,8 +1,8 @@
 import React from "react"
 import { LukeRoute, LukeRoutes } from "./LukeRoute"
-import SongAdmin from "../../music/admin/SongAdmin"
-import ShowAdmin from "../../shows/ShowAdmin"
-import BioAdmin from "../../bio/BioAdmin"
+import { SongAdmin } from "../../components/music"
+import { ShowAdmin } from "../../components/shows"
+import { BioAdmin } from "../../components/bio"
 
 export const AdminRoutes = new LukeRoutes([
   new LukeRoute("Songs", "/songs", () => <SongAdmin/>),

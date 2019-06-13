@@ -1,16 +1,13 @@
 import { combineReducers } from "redux"
-import showsReducer from "../shows/ShowsReducer"
-import songsReducer from "../music/SongsReducer"
-import userAuthenticationReducer from "../user/UserAuthenticationReducer"
+import { showsReducer, createShowForm, } from "../components/shows"
+import { songsReducer } from "../components/music"
+import { authForm, userAuthenticationReducer } from "../components/user"
 
-import { venueReducer } from "../shows/VenueReducer"
-import { createSongForm } from "../music/SongActions"
-import { createShowForm } from "../shows/ShowActions"
-import { authForm } from "../user/AuthFormAction"
-import { bioReducer } from "../bio/BioReducer"
-import { createVenueForm } from "../shows/VenueActions"
+import { createSongForm } from "../components/music"
+import { bioReducer } from "../components/bio/BioReducer"
 import { connectRouter } from "connected-react-router"
-import emailReducer from "../contact/EmailReducer"
+import { emailReducer } from "../components/contact"
+import { venueReducer, createVenueForm } from "../components/venue"
 
 const userReducer = combineReducers({
   isAuthenticated: userAuthenticationReducer,

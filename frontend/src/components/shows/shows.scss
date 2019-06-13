@@ -1,0 +1,71 @@
+@import "../../variables";
+
+#show-page {
+  color: black;
+}
+
+.table-message {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table-header {
+  margin: 1em auto;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  color: black;
+  font-family: $header-font;
+}
+
+.location {
+  width: 50%;
+  display: inline;
+}
+
+.listing-venue {
+  font-size: 150%;
+
+  @media screen and (max-width: $md-sm) and (min-width: $sm-xs) {
+    font-size: 150%;
+  }
+
+  @media screen and (max-width: $sm-xs) {
+    font-size: 100%;
+  }
+}
+
+.listing-date {
+  font-size: 200%;
+  font-weight: bold;
+  width: 50%;
+  float: right;
+  text-align: right;
+
+  @media screen and (max-width: $md-sm) and (min-width: $sm-xs) {
+    font-size: 150%;
+  }
+
+  @media screen and (max-width: $sm-xs) {
+    font-size: 100%;
+  }
+}
+
+.listing-city {
+  font-size: 100%;
+}
+
+.listing {
+  padding-bottom: 1.5em;
+  padding-top: 1em;
+  border-top: 1px solid rgba(0,0,0,.20);
+
+  @media screen and (min-width: $lg-md) {
+    width: 75%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}

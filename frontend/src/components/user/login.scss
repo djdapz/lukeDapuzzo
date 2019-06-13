@@ -1,0 +1,39 @@
+@import "../../variables";
+
+#login-window {
+  box-sizing: border-box;
+  width: 24em;
+  margin-left: auto;
+  margin-right: auto;
+  background: #000000;
+  border-radius: 1px;
+  padding: 3rem 5rem;
+  box-shadow: -20px 19px #888888;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .form-control {
+    margin-bottom: 2em;
+    width: 9rem;
+  }
+
+  .btn, #loading-wheel {
+    margin: 0 auto;
+    display: block;
+    color: white
+  }
+
+  h2 {
+    color: white;
+    padding-bottom: 1em;
+  }
+
+  #user-alert {
+    color: #f36969
+  }
+
+  ::placeholder {
+    color: $aqua-luke;
+    font-weight: bolder;
+  }
+}

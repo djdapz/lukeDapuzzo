@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { AdminRoutes } from "../App/routing"
 import { useDispatch, useSelector } from "react-redux"
-import { getAllVenues } from "../shows/VenueActions"
+import { getAllVenues } from "./venue"
 import "./admin.scss"
 
 export default () => {

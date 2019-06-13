@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import Billboard from "./reusable/BillboardComponent";
+import {Billboard} from "./reusable";
 import MediaQuery from "react-responsive";
 import {mobileCutoff} from "../constants/constants";
 import "./home.scss"

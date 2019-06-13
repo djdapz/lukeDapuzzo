@@ -1,34 +1,23 @@
-import React, {Component} from 'react';
-import {Redirect, Route, Switch} from 'react-router'
+import React from "react"
+import { Redirect, Route, Switch } from "react-router"
 
-import ShowPage from "../../shows/ShowPageComponent";
-import HomePage from "../../components/HomePageComponent";
-import MusicPage from "../../music/MusicPageComponent";
-import BioPage from "../../bio/BioPageComponent";
-import AdminPage from "../../components/AdminPageComponent";
-
-import ContactPage from "../../contact/ContactPageComponent"
+import { AdminPage, HomePage } from "../../components"
+import { ShowPage } from "../../components/shows"
+import { MusicPage } from "../../components/music"
+import { BioPage } from "../../components/bio"
+import { ContactPage } from "../../components/contact"
+import { LoginPage } from "../../components/user"
 
 import routes from "../../constants/routes"
-import LoginPage from "../../user/LoginPage";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "./PrivateRoute"
 
-class RouterComponent extends Component {
-    render() {
-        return (
-            <Switch>
-                <Route exact path={routes.HOME.href} component={HomePage}/>
-                <Route path={routes.SHOWS.href} component={ShowPage}/>
-                <Route path={routes.MUSIC.href} component={MusicPage}/>
-                <Route path={routes.BIO.href} component={BioPage}/>
-                <Route path={routes.CONTACT.href} component={ContactPage}/>
-                <Route path={routes.LOGIN.href} component={LoginPage}/>
-                <PrivateRoute path={routes.ADMIN.href} component={AdminPage}/>
-                <Redirect from="*" to={routes.HOME.href}/>
-            </Switch>
-        )
-    }
-}
-
-
-export default RouterComponent;
+export default () => <Switch>
+  <Route exact path={routes.HOME.href} component={HomePage}/>
+  <Route path={routes.SHOWS.href} component={ShowPage}/>
+  <Route path={routes.MUSIC.href} component={MusicPage}/>
+  <Route path={routes.BIO.href} component={BioPage}/>
+  <Route path={routes.CONTACT.href} component={ContactPage}/>
+  <Route path={routes.LOGIN.href} component={LoginPage}/>
+  <PrivateRoute path={routes.ADMIN.href} component={AdminPage}/>
+  <Redirect from="*" to={routes.HOME.href}/>
+</Switch>
