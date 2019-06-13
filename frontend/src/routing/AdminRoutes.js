@@ -1,8 +1,8 @@
 import {LukeRoute, LukeRoutes} from "../classes/LukeRoute";
-import SongAdmin from "../components/AdminPage/SongAdmin";
+import SongAdmin from "../music/admin/SongAdmin";
 import React from "react";
 import ShowAdmin from "../components/AdminPage/ShowAdmin";
-import BioAdmin from "../components/AdminPage/BioAdmin";
+import BioAdmin from "../bio/BioAdmin"
 
 export const AdminRoutes = new LukeRoutes([
     new LukeRoute("Songs", "/songs", () => <SongAdmin/>),

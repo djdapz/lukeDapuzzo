@@ -1,4 +1,4 @@
-import {SONG_DELETED, ALL_SONGS_FETCHED} from "../actions/SongActions";
+import { ALL_SONGS_FETCHED, SONG_DELETED } from "./SongActions"
 
 const songsReducer = (state = [], action) => {
 

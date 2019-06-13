@@ -1,4 +1,4 @@
-import {BIO_FETCHED} from "../actions/BioActions";
+import { BIO_FETCHED } from "./BioActions"
 
 export const bioReducer = (state = "", action) => {
     if (action.type === BIO_FETCHED) {

@@ -1,17 +1,17 @@
 import { combineReducers } from "redux"
 import routeReducer from "./RouteReducer"
-import emailReducer from "./EmailReducer"
 import showsReducer from "./ShowsReducer"
-import songsReducer from "./SongsReducer"
+import songsReducer from "../music/SongsReducer"
 import userAuthenticationReducer from "./UserAuthenticationReducer"
 
 import { venueReducer } from "./VenueReducer"
-import { createSongForm } from "../actions/SongActions"
+import { createSongForm } from "../music/SongActions"
 import { createShowForm } from "../actions/ShowActions"
 import { authForm } from "../actions/AuthFormAction"
-import { bioReducer } from "./BioReducer"
+import { bioReducer } from "../bio/BioReducer"
 import { createVenueForm } from "../actions/VenueActions"
 import { connectRouter } from 'connected-react-router'
+import emailReducer from "../contact/EmailReducer"
 
 const userReducer = combineReducers({
     isAuthenticated: userAuthenticationReducer,

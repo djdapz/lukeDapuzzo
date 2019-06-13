@@ -5,10 +5,10 @@ import routes from "../../constants/routes"
 import Menubar from "./MenuBarContainer"
 import { bindActionCreators } from "redux"
 import { push } from "connected-react-router"
-import { getAllSongs } from "../../actions/SongActions"
+import { getAllSongs } from "../../music/SongActions"
 import Button from "@material-ui/core/Button/Button"
 import MenuIcon from "@material-ui/icons/Menu"
-import { getBio } from "../../actions/BioActions"
+import { getBio } from "../../bio/BioActions"
 import { getAllShows } from "../../actions/ShowActions"
 
 class HeaderBar extends Component {

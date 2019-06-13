@@ -1,38 +1,21 @@
-import React from 'react';
+ import React from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { push } from "connected-react-router"
 
-import {push} from "connected-react-router"
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
+export default ({ callback, route }) => {
 
+  const dispatch = useDispatch()
+  const router = useSelector(store => store.router)
 
-const NavButton = ({callback, route, router, push}) => {
-    const navigate = () => {
-        callback();
-        push(route.href);
-    };
+  const navigate = () => {
+    callback()
+    dispatch(push(route.href))
+  }
 
-    const maybeActive = () => route.href === router.location.pathname ? " menubar-active" : "";
-
-    return <div key={route.name}
-                className={`menubar-row ${maybeActive()}`}
-                onClick={navigate}>
-        <h3 className="menubar-link"> {route.name}</h3>
-    </div>
+  return <div key={route.name}
+              className={`menubar-row ${route.href === router.location.pathname && " menubar-active"}`}
+              onClick={navigate}>
+    <h3 className="menubar-link"> {route.name}</h3>
+  </div>
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(
-        {
-            push: push
-        },
-        dispatch
-    )
-}
-
-function mapStateToProps(state) {
-    return {
-        router: state.router
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavButton);

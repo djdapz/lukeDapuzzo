@@ -1,34 +1,22 @@
-import React, {Component} from 'react';
-import {AdminRoutes} from "../../routing/AdminRoutes";
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import {getAllVenues} from "../../actions/VenueActions";
+import React, { useEffect } from 'react';
+import { AdminRoutes } from "../../routing/AdminRoutes"
+import { useDispatch, useSelector } from "react-redux"
+import { getAllVenues } from "../../actions/VenueActions"
 
-class AdminPage extends Component {
+export default () => {
+  const dispatch = useDispatch()
+  const path = useSelector(state => state.router.location.pathname)
 
-    constructor(props) {
-        super(props);
-        props.getAllVenues()
-    }
+  useEffect(() => {
+    dispatch(getAllVenues())
+  }, [dispatch])
 
-
-    render() {
-        return (
-            <div id="admin-page"
-                 className="main-content">
-                {AdminRoutes.toLinks(this.props.path)}
-                {AdminRoutes.renderRedirect()}
-                {AdminRoutes.toRoutes()}
-            </div>
-        )
-    }
+  return (
+    <div id="admin-page"
+         className="main-content">
+      {AdminRoutes.toLinks(path)}
+      {AdminRoutes.renderRedirect()}
+      {AdminRoutes.toRoutes()}
+    </div>
+  )
 }
-
-const mapDispatchToProps = (dispatch) => bindActionCreators({getAllVenues}, dispatch);
-const mapStateToProps = (state) => ({
-    path: state.router.location.pathname
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminPage);
-
-

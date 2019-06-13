@@ -2,9 +2,10 @@ import React from "react"
 import { musicTypes } from "../../constants/musicTypes"
 import NewSongForm from "./NewSongForm"
 import SongTable from "./SongTableComponent"
-import { connect } from "react-redux"
+import { useSelector } from "react-redux"
 
-const SongAdmin = ({ songs }) => {
+export default () => {
+  const songs = useSelector(state => state.songs)
 
   const renderTableForAllTypes = () => {
     if (songs && songs.length > 0) {
@@ -29,12 +30,3 @@ const SongAdmin = ({ songs }) => {
   </div>
 
 }
-
-function mapStateToProps (state) {
-  return ({
-    songs: state.songs
-  })
-}
-
-export default connect(mapStateToProps)(SongAdmin)
-

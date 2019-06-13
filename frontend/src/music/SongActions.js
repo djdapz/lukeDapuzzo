@@ -1,10 +1,9 @@
-import { declareForm } from "./FormActions"
 import Api from "../api/Api"
+import { declareForm } from "../actions/FormActions"
 
 export const ALL_SONGS_FETCHED = "ALL_SONGS_FETCHED"
 
 export const DELETE_SONG_FAILED = "DELETE_SONG_FAILED"
-export const DELETE_SONG = "DELETE_SONG"
 export const SONG_DELETED = "SONG_DELETED"
 
 export const deleteSong = (id, type) => (dispatch) => Api.delete(`/music/${id}`)

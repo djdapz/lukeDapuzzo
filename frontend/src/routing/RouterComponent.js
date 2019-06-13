@@ -3,10 +3,11 @@ import {Redirect, Route, Switch} from 'react-router'
 
 import ShowPage from "../components/ShowsPage/ShowPageComponent";
 import HomePage from "../components/HomePage/HomePageComponent";
-import MusicPage from "../components/MusicPage/MusicPageComponent";
-import BioPage from "../components/BioPage/BioPageComponent";
-import ContactPage from "../components/ContactPage/ContactPageComponent";
+import MusicPage from "../music/MusicPageComponent";
+import BioPage from "../bio/BioPageComponent";
 import AdminPage from "../components/AdminPage/AdminPageComponent";
+
+import ContactPage from "../contact/ContactPageComponent"
 
 import routes from "../constants/routes"
 import LoginPage from "../components/Navigation/LoginPage";
