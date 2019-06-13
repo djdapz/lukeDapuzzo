@@ -1,4 +1,4 @@
-import Api from "../api/Api"
+import { http } from "../api"
 
 export const UPDATE_EMAIL_FORM = "UPDATE_EMAIL_FORM"
 
@@ -12,7 +12,8 @@ export const sendEmail = ({ email, name, message }) => (dispatch) => {
     type: UPDATE_EMAIL_FORM,
     payload: SENDING_EMAIL
   }))
-  return Api
+
+  return http
     .post("/api/email", {
       email,
       name,

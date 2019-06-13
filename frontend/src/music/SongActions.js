@@ -1,4 +1,4 @@
-import Api from "../api/Api"
+import { http } from "../api"
 import { declareForm } from "../actions/FormActions"
 
 export const ALL_SONGS_FETCHED = "ALL_SONGS_FETCHED"
@@ -6,7 +6,7 @@ export const ALL_SONGS_FETCHED = "ALL_SONGS_FETCHED"
 export const DELETE_SONG_FAILED = "DELETE_SONG_FAILED"
 export const SONG_DELETED = "SONG_DELETED"
 
-export const deleteSong = (id, type) => (dispatch) => Api.delete(`/music/${id}`)
+export const deleteSong = (id, type) => (dispatch) => http.delete(`/music/${id}`)
   .then(() => dispatch({
     type: SONG_DELETED,
     payload: { id, type }
@@ -16,7 +16,7 @@ export const deleteSong = (id, type) => (dispatch) => Api.delete(`/music/${id}`)
     payload: { status, id }
   }))
 
-export const getAllSongs = () => (dispatch) => Api.get("/music")
+export const getAllSongs = () => (dispatch) => http.get("/music")
   .then((response) => response.data)
   .then(songs => ({
     type: ALL_SONGS_FETCHED,

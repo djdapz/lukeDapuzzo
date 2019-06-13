@@ -1,5 +1,5 @@
 import React from "react"
-import VerticalLabel from "../../components/Multipurpose/VerticalLabel"
+import VerticalLabel from "../../components/reusable/VerticalLabel"
 
 const MusicRow = ({label, children}) => <div className={"outer-music-row"}>
     <VerticalLabel label={label}/>

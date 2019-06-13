@@ -1,8 +1,8 @@
-import Api from "../api/Api"
+import { http } from "../api"
 
 export const BIO_FETCHED = "BIO_FETCHED"
 
-export const getBio = () => (dispatch) => Api.get("/bio")
+export const getBio = () => (dispatch) => http.get("/bio")
   .then(response => response.data)
   .then(data => dispatch({
     type: BIO_FETCHED,
@@ -10,5 +10,5 @@ export const getBio = () => (dispatch) => Api.get("/bio")
   }))
 
 export const saveBio = (bio) => (dispatch) =>
-  Api.put("/bio", { bio })
+  http.put("/bio", { bio })
     .then(() => dispatch(getBio()))

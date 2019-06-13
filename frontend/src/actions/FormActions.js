@@ -1,5 +1,5 @@
-import { LUKE_API } from "../config/appConfig"
-import api from "../api/Api"
+import { LUKE_API } from "../appConfig"
+import { http } from "../api"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 
@@ -23,7 +23,7 @@ export const declareForm = (config) => {
     delete body.isOpen
     delete body.valid
 
-    api.post(uri, body)
+    http.post(uri, body)
       .then((response) => {
         onSuccess(dispatch, getState, response.data)
       })

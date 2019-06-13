@@ -1,6 +1,6 @@
 import React from "react"
 import { musicTypes } from "../../constants/musicTypes"
-import { LukeSelect, LukeTextField, PopoutForm } from "../../components/Multipurpose/FormComponents"
+import { LukeSelect, LukeTextField, PopoutForm } from "../../components/reusable/FormComponents"
 import {createSongForm} from "../SongActions"
 
 const NewSongFormPopout = (props) =>
