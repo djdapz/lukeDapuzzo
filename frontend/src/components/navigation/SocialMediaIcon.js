@@ -1,40 +1,20 @@
-import React, {Component} from 'react';
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import React, { useState } from "react"
+import FontAwesomeIcon from "@fortawesome/react-fontawesome"
 
-class SocialMediaIcon extends Component {
+const SocialMediaIcon = ({ icon, hoveredColor, defaultColor }) => {
+  const [hover, setHover] = useState(false)
 
-    constructor() {
-        super();
-
-        this.state = {
-            isHovered: false
-        };
-
-        this.handleHover = this.handleHover.bind(this);
-    }
-
-    handleHover() {
-        this.setState({
-            isHovered: !this.state.isHovered
-        });
-    };
-
-    render() {
-        const color = this.state.isHovered ? this.props.colors.hovered : this.props.colors.default;
-        return (
-            <div className={"menubar-row"}>
-                <a href={this.props.icon.href} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover} target={"_blank"}>
-                    <FontAwesomeIcon className="social-media-icon"
-                                     icon={["fab", this.props.icon.fontAwesomeName]}
-                                     color={color}/>
-                </a>
-            </div>
-
-        )
-    }
+  return <div className={"menubar-row"}>
+    <a href={icon.href} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+       target={"_blank"}>
+      <FontAwesomeIcon className="social-media-icon"
+                       icon={["fab", icon.fontAwesomeName]}
+                       color={hover ? hoveredColor : defaultColor}/>
+    </a>
+  </div>
 }
 
-export default SocialMediaIcon;
+export default SocialMediaIcon
 
 
 

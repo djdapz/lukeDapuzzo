@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import { useDispatch } from "react-redux"
 import routes from "../../constants/routes"
-import {Menubar} from "./MenuBarContainer"
+import { Menubar } from "./MenuBarContainer"
 import { push } from "connected-react-router"
 import { getAllSongs } from "../../components/music"
 import Button from "@material-ui/core/Button/Button"
@@ -11,9 +11,6 @@ import { getBio } from "../../components/bio"
 import { useSelector } from "react-redux"
 import { getAllShows } from "../shows"
 import "./header.scss"
-
-const Description = ({ route }) => route.location.pathname === routes.HOME.href &&
-  <h5 className="sub-title">A solo songwriter and musician from Boulder, Colorado</h5>
 
 const HomeLink = ({ setCollapsed, route }) => {
   const dispatch = useDispatch()
@@ -30,20 +27,10 @@ const HomeLink = ({ setCollapsed, route }) => {
   </div>
 }
 
-const MenuButton = ({ toggleCollapsed }) =>
-  <div className="social-media-icons">
-    <Button onClick={toggleCollapsed}
-            id={"social-media-hamburger"}
-            aria-label="Add">
-      <MenuIcon/>
-    </Button>
-  </div>
-
 const HeaderBar = () => {
   const [collapsed, setCollapsed] = useState(true)
   const dispatch = useDispatch()
   const route = useSelector(state => state.router)
-
 
   useEffect(() => {
     dispatch(getAllShows())
@@ -55,9 +42,17 @@ const HeaderBar = () => {
     <div className="row header-bar">
       <div className="title-container">
         <HomeLink route={route} setCollapsed={setCollapsed}/>
-        {route.location && <Description route={route}/>}
+        {
+          route.location
+          && route.location.pathname === routes.HOME.href
+          && <h5 className="sub-title">A solo songwriter and musician from Boulder, Colorado</h5>
+        }
       </div>
-      <MenuButton toggleCollapsed={() => setCollapsed(!collapsed)}/>
+      <Button onClick={() => setCollapsed(!collapsed)}
+              id={"social-media-hamburger"}
+              aria-label="Add">
+        <MenuIcon/>
+      </Button>
     </div>
     <Menubar isCollapsed={collapsed}
              routes={routes}

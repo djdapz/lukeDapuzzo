@@ -8,12 +8,6 @@ import { useSelector } from "react-redux"
 import routes from "../../constants/routes"
 import "./menubar.scss"
 
-const SocialMediaIcons = () =><>
-  {socialMediaIcons
-    .map(icon => <SocialMediaIcon icon={icon} key={icon.href}
-                                  colors={socialMediaIconColors.dropdown}/>)}
-</>
-
 const Links = ({ collapse }) => {
   const authenticated = useSelector(state => state.isAuthenticated)
 
@@ -21,21 +15,22 @@ const Links = ({ collapse }) => {
     route.displayInMenuBar &&
     (!route.isProtected || (route.isProtected && authenticated))
 
-  return <React.Fragment>
+  return <>
     {Object
       .values(routes)
       .map(route =>
         shouldDisplayRoute(route) && <NavButton route={route} collapse={collapse} key={route.name}/>)}
-  </React.Fragment>
+  </>
 }
 
-export const Menubar = ({ isCollapsed, collapse }) => {
-  const menubarState = isCollapsed ? "menubar-collapsed" : "menubar-expanded"
-  return <div className={`menubar ${menubarState}`}>
+export const Menubar = ({ isCollapsed, collapse }) =>
+  <div className={`menubar ${isCollapsed ? "menubar-collapsed" : "menubar-expanded"}`}>
     <Links collapse={collapse}/>
-    <SocialMediaIcons/>
+    {socialMediaIcons
+      .map(icon => <SocialMediaIcon icon={icon} key={icon.href}
+                                    hoveredColor={socialMediaIconColors.dropdown.hovered}
+                                    defaultColor={socialMediaIconColors.dropdown.default}/>)}
   </div>
-}
 
 
 
