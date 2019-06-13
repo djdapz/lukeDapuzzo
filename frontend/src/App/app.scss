@@ -1,15 +1,4 @@
-@import "custom";
-@import "variables";
-@import "components/admin";
-@import "components/billboard";
-@import "components/contact";
-@import "components/header";
-@import "components/home";
-@import "components/live";
-@import "components/menubar";
-@import "components/music";
-@import "components/login";
-@import "components/bio";
+@import "../variables";
 
 body {
   background-size: cover;

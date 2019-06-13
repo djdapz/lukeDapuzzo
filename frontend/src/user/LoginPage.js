@@ -4,6 +4,7 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import {createMuiTheme} from "@material-ui/core/styles";
 import {authForm} from "./AuthFormAction"
 import { LukeTextField } from "../components/reusable/FormComponents"
+import "./login.scss"
 
 class LoginPage extends Component {
     theme = createMuiTheme({

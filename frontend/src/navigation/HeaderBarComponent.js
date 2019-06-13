@@ -10,6 +10,7 @@ import MenuIcon from "@material-ui/icons/Menu"
 import { getBio } from "../bio/BioActions"
 import { useSelector } from "react-redux"
 import { getAllShows } from "../shows/ShowActions"
+import "./header.scss"
 
 const Description = ({ route }) => route.location.pathname === routes.HOME.href &&
   <h5 className="sub-title">A solo songwriter and musician from Boulder, Colorado</h5>

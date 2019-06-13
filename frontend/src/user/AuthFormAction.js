@@ -1,7 +1,7 @@
 import { authorizeUser } from "./UserActions"
 import { push } from "connected-react-router"
 import { authorizeHttp } from "../api"
-import { declareForm } from "../actions/FormActions"
+import { declareForm } from "../FormActions"
 
 export const authForm = declareForm({
     formName: "authForm",

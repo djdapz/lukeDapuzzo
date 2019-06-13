@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./billboard.scss"
 
 const SubHeader = (props) => <div className="text-in-header">
     <h1>

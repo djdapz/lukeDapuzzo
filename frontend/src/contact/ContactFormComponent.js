@@ -15,6 +15,7 @@ import {
   SENDING_EMAIL,
   UPDATE_EMAIL_FORM
 } from "./SendEmailAction"
+import "./contact.scss"
 
 const ResetFormButton = ({ children }) => {
   const dispatch = useDispatch()

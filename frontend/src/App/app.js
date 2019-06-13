@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import HeaderBar from "../navigation/HeaderBarComponent";
 import Router from "./routing/RouterComponent";
+import "./app.scss"
 
 import fontawesome from '@fortawesome/fontawesome'
 import brands from '@fortawesome/fontawesome-free-brands'

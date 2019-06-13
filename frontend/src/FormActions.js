@@ -1,5 +1,5 @@
-import { LUKE_API } from "../appConfig"
-import { http } from "../api"
+import { LUKE_API } from "./appConfig"
+import { http } from "./api"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 

@@ -2,6 +2,7 @@ import React from "react"
 import Image from "./outside_picture.jpg"
 import Paper from "@material-ui/core/Paper/Paper"
 import { useSelector } from "react-redux"
+import "./bio.scss"
 
 export default () => {
   const bio = useSelector(state => state.bio)

@@ -6,6 +6,7 @@ import SocialMediaIcon from "./SocialMediaIcon"
 import NavButton from "./NavButton"
 import { useSelector } from "react-redux"
 import routes from "../constants/routes"
+import "./menubar.scss"
 
 const SocialMediaIcons = () =><>
   {socialMediaIcons

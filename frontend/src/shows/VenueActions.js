@@ -1,5 +1,5 @@
 import { http } from "../api"
-import { declareForm } from "../actions/FormActions"
+import { declareForm } from "../FormActions"
 import { createShowForm } from "./ShowActions"
 
 export const ALL_VENUES_FETCHED = "ALL_VENUES_FETCHED"

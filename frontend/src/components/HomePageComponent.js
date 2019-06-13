@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import Billboard from "./reusable/BillboardComponent";
 import MediaQuery from "react-responsive";
 import {mobileCutoff} from "../constants/constants";
+import "./home.scss"
 
 class HomePage extends Component{
     render() {

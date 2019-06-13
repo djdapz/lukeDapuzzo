@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import SpotifyRow from "./row/SpotifyRow"
 import SoundcloudRow from "./row/SoundcloudRow"
 import { SOUNDCLOUD_SONG, SPOTIFY_ALBUM, SPOTIFY_SONG } from "../constants/musicTypes"
+import "./music.scss"
 
 const MusicPage = () => {
   const spotifySongs = useSelector(state => state.songs.filter(song => song.type === SPOTIFY_SONG || song.type === SPOTIFY_ALBUM))
