@@ -11,6 +11,11 @@ export const getAllVenues = () => (dispach) => http.get("/venues")
   }))
 
 
+// export const createNewVenue = ({name, googleMapsLink, city, state}) => (dispatch) => http
+//   .post("/venues", {name, googleMapsLink, city, state})
+//   .then((response) => dispatch(updateVenueAction()))
+  // .post()
+
 export const createVenueForm = declareForm({
   formName: "newVenue",
   fields: [

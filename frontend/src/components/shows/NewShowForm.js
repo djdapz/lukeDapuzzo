@@ -17,7 +17,7 @@ const NewShowFormPopout = (props) => {
       label={"Date"}
     />
     <LukeSelect
-
+      id={"select-venue"}
       value={newShow.venueId}
       onChange={update_venueId}
       label="Venue"
