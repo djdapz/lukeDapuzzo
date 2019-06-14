@@ -1,13 +1,15 @@
 import React from "react"
 
-import { connect } from "react-redux"
-import { LukeDatePicker, LukeSelect, LukeTextField, PopoutForm } from "../reusable"
+import {useSelector} from "react-redux"
+import {LukeDatePicker, LukeSelect, LukeTextField, PopoutForm} from "../reusable"
 import {createShowForm} from "../shows/ShowActions"
-import { NewVenueForm, OpenNewVenueForm } from "../venue"
+import {NewVenueForm, OpenNewVenueForm} from "../venue"
 
 
 const NewShowFormPopout = (props) => {
-  const { newShow, update_date, update_venueId, update_notes, venues } = props
+  const {newShow, update_date, update_venueId, update_notes} = props
+  const venues = useSelector(state => state.venues)
+
   return <PopoutForm {...props} formName={"new-show"}>
     <LukeDatePicker
       value={newShow.date}
@@ -20,7 +22,7 @@ const NewShowFormPopout = (props) => {
       onChange={update_venueId}
       label="Venue"
       options={venues}
-      optionToMenuItem={(venue) => ({ value: venue.id, label: venue.name })}
+      optionToMenuItem={(venue) => ({value: venue.id, label: venue.name})}
       renderWhenNoOptions={() => <OpenNewVenueForm/>}
     />
     <LukeTextField
@@ -34,6 +36,5 @@ const NewShowFormPopout = (props) => {
   </PopoutForm>
 }
 
-const mapStateToProps = (state) => ({ venues: state.venues })
 
-export default connect(mapStateToProps)(createShowForm.connect(NewShowFormPopout))
+export default createShowForm.connect(NewShowFormPopout)

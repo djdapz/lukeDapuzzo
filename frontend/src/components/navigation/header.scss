@@ -67,14 +67,12 @@
 
 #social-media-hamburger {
   font-size: $header-bar-height  / 1.6;
-  margin-right: auto;
-  margin-left: auto;
   width: $header-bar-height / 1.1;
   display: block;
   cursor: pointer;
+  margin-right: $left-gutter;
 }
 
-//behaviour specific styling
 .title:hover {
   cursor: pointer;
   color: $aqua-luke;
