@@ -7,7 +7,7 @@ import { createSongForm } from "../components/music"
 import { bioReducer } from "../components/bio/BioReducer"
 import { connectRouter } from "connected-react-router"
 import { emailReducer } from "../components/contact"
-import { venueReducer, createVenueForm } from "../components/venue"
+import { venueReducer, venueFormOpen } from "../components/venue"
 
 const userReducer = combineReducers({
   isAuthenticated: userAuthenticationReducer,
@@ -19,8 +19,8 @@ const rootReducer = (history) => combineReducers({
   songs: songsReducer,
   newSong: createSongForm.reducer,
   newShow: createShowForm.reducer,
-  newVenue: createVenueForm.reducer,
   authForm: authForm.reducer,
+  venueFormOpen: venueFormOpen,
   user: userReducer,
   router: connectRouter(history),
   venues: venueReducer,

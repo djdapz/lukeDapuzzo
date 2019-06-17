@@ -23,6 +23,7 @@ Cypress.Commands.add("setupDefaultServer", () => {
   cy.fixture("bio").as("bioJson")
   cy.fixture("music").as("musicJson")
   cy.fixture("shows").as("showsJson")
+  cy.fixture("venues").as("venuesJson")
 
   cy.server()
 
@@ -43,6 +44,12 @@ Cypress.Commands.add("setupDefaultServer", () => {
     url: "/music",
     response: "@musicJson"
   }).as("getMusic")
+
+  cy.route({
+    method: "GET",
+    url: "/venues",
+    response: "@venuesJson"
+  }).as("getVenues")
 
 })
 //

@@ -1,0 +1,30 @@
+{
+  "venues": [
+    {
+      "id": 1,
+      "name": "The Powder Keg",
+      "googleMapsLink": "https://goo.gl/maps/ccwkfpo6Lbu",
+      "city": {
+        "id": 4,
+        "name": "Niwot",
+        "state": {
+          "abbreviation": "CO",
+          "name": "Colorado"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Bootstrap Brewing Co",
+      "googleMapsLink": "https://goo.gl/maps/omD8BmU78tv",
+      "city": {
+        "id": 1,
+        "name": "Boulder",
+        "state": {
+          "abbreviation": "CO",
+          "name": "Colorado"
+        }
+      }
+    }
+  ]
+}
