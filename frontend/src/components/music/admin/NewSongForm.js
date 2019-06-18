@@ -1,31 +1,42 @@
-import React from "react"
+import React, { useState } from "react"
 import { musicTypes } from "../../../constants/musicTypes"
 import { LukeSelect, LukeTextField, PopoutForm } from "../../reusable"
-import {createSongForm} from "../SongActions"
+import { createSong } from "../SongActions"
+import { useDispatch } from "react-redux"
 
-const NewSongFormPopout = (props) =>
-  <PopoutForm {...props} formName={"new-song"}>
+const NewSongFormPopout = () => {
+  const [type, setType] = useState("")
+  const [name, setName] = useState("")
+  const [id, setId] = useState("")
+  const dispatch = useDispatch()
+
+  const isValid = type && name && id
+
+  return <PopoutForm valid={isValid}
+                     submitForm={() => dispatch(createSong({ id, name, type }))}
+                     formName={"new-song"}>
     <LukeSelect
       id={"select-song-type"}
-      value={props.newSong.type}
-      onChange={props.update_type}
+      value={type}
+      onChange={setType}
       label="Type"
       options={musicTypes}
       optionToMenuItem={(musicType) => ({ value: musicType.api, label: musicType.display })}
     />
     <LukeTextField
       id={"new-song-name"}
-      value={props.newSong.name}
-      onChange={(thing) => props.update_name(thing)}
+      value={name}
+      onChange={setName}
       label={"Name"}
     />
     <LukeTextField
       id={"new-song-id"}
-      value={props.newSong.id}
-      onChange={props.update_id}
+      value={id}
+      onChange={setId}
       label={"Id"}
     />
   </PopoutForm>
+}
 
-export default createSongForm.connect(NewSongFormPopout)
+export default NewSongFormPopout
 

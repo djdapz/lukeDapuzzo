@@ -3,7 +3,6 @@ import { showsReducer, createShowForm, } from "../components/shows"
 import { songsReducer } from "../components/music"
 import { userAuthenticationReducer } from "../components/user"
 
-import { createSongForm } from "../components/music"
 import { bioReducer } from "../components/bio/BioReducer"
 import { connectRouter } from "connected-react-router"
 import { emailReducer } from "../components/contact"
@@ -17,7 +16,6 @@ const rootReducer = (history) => combineReducers({
   email: emailReducer,
   shows: showsReducer,
   songs: songsReducer,
-  newSong: createSongForm.reducer,
   newShow: createShowForm.reducer,
   venueFormOpen: venueFormOpen,
   user: userReducer,

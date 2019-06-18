@@ -6,7 +6,7 @@ import Select from "@material-ui/core/Select/Select"
 import OutlinedInput from "@material-ui/core/OutlinedInput/OutlinedInput"
 import MenuItem from "@material-ui/core/MenuItem/MenuItem"
 import TextField from "@material-ui/core/TextField/TextField"
-import React from "react"
+import React, { useState } from "react"
 
 import LuxonUtils from "@date-io/luxon"
 import styled from "styled-components"
@@ -53,18 +53,27 @@ const ErrorMessage = styled.div`
 
 const MaybeError = (props) => props.error ? <ErrorMessage>{props.error}</ErrorMessage> : ""
 
-export const PopoutForm = ({ isOpen, children, valid, submitForm, error, openForm, closeForm, formName }) =>
-  <div>
+export const PopoutForm = ({
+                             children,
+                             valid,
+                             submitForm,
+                             formName,
+                             error,
+                           }) => {
+  const [open, setOpen] = useState(false)
+
+  return <>
     <BottomButton variant="fab"
                   color="primary"
                   id={`open-${formName}`}
-                  onClick={openForm}
+                  onClick={() => setOpen(true)}
                   aria-label="Add">
       <AddIcon/>
     </BottomButton>
+
     <Drawer anchor="right"
-            open={isOpen}
-            onClose={closeForm}>
+            open={open}
+            onClose={() => setOpen(false)}>
       <NewFormStyled>
         {children}
         <StyledFormControl>
@@ -81,12 +90,13 @@ export const PopoutForm = ({ isOpen, children, valid, submitForm, error, openFor
           id={`close-${formName}`}
           variant="fab"
           color="primary"
-          onClick={closeForm}>
+          onClick={() => setOpen(false)}>
           <ClearIcon/>
         </BottomButton>
       </NewFormStyled>
     </Drawer>
-  </div>
+  </>
+}
 
 export const LukeDatePicker = (props) =>
   <StyledFormControl>
@@ -115,7 +125,8 @@ export const LukeSelect = ({
                              optionToMenuItem,
                              renderWhenNoOptions,
                              label
-                           }) => <StyledFormControl variant="outlined" id={id}>
+                           }) => <StyledFormControl variant="outlined"
+                                                    id={id}>
   <InputLabel htmlFor={`${label}-input`}>
     {label}
   </InputLabel>

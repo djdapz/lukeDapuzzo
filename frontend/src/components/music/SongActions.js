@@ -1,5 +1,4 @@
 import { http } from "../../api"
-import { declareForm } from "../../FormActions"
 
 export const ALL_SONGS_FETCHED = "ALL_SONGS_FETCHED"
 
@@ -24,14 +23,6 @@ export const getAllSongs = () => (dispatch) => http.get("/music")
   }))
   .then(dispatch)
 
-export const createSongForm = declareForm({
-  formName: "newSong",
-  fields: [
-    { name: "id", required: true },
-    { name: "name", required: true },
-    { name: "type", required: true }
-  ],
-  path: "/music",
-  onSuccess: (dispatch) => dispatch(getAllSongs()),
-  errorMessage: "There was an issue making your song, make sure you're not trying to create a duplicate"
-})
+export const createSong = ({ id, name, type }) => dispatch =>
+  http.post("/music", { id, name, type })
+    .then(() => dispatch(getAllSongs()))

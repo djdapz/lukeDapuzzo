@@ -7,26 +7,20 @@ import { useSelector } from "react-redux"
 export default () => {
   const songs = useSelector(state => state.songs)
 
-  const renderTableForAllTypes = () => {
-    if (songs && songs.length > 0) {
-      return musicTypes
-        .map(type => {
-          return {
-            "type": type,
-            "songs": songs.filter(song => song.type === type.api)
-          }
-        })
-        .filter(songList => songList.songs.length > 0)
-        .map(songList => <SongTable key={songList.type}
-                                    songs={songList.songs}
-                                    type={songList.type}/>)
-    }
-
-  }
+  const songsByType =
+    songs.length && musicTypes
+      .map(type => ({
+        "type": type,
+        "songs": songs.filter(song => song.type === type.api)
+      }))
+      .filter(songList => songList.songs.length)
 
   return <div>
     <NewSongForm/>
-    {renderTableForAllTypes()}
+    {songsByType.map(songList =>
+      <SongTable key={songList.type.api}
+                 songs={songList.songs}
+                 type={songList.type}/>)}
   </div>
 
 }
