@@ -4,5 +4,3 @@ export { default as showsReducer } from "./ShowsReducer"
 
 export { default as ShowPage } from "./ShowPageComponent"
 export { default as ShowAdmin } from "./ShowAdmin"
-
-export { createShowForm } from "./ShowActions"

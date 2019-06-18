@@ -1,5 +1,4 @@
 import { http } from "../../api"
-import { declareForm } from "../../FormActions"
 
 export const ALL_SHOWS_FETCHED = "ALL_SHOWS_FETCHED"
 
@@ -24,15 +23,6 @@ export const getAllShows = () => (dispatch) => http
     payload: response.data
   }))
 
-export const createShowForm = declareForm({
-    formName: "newShow",
-    fields: [
-      { name: "date", required: true },
-      { name: "venueId", required: true },
-      { name: "notes", required: false }
-    ],
-    path: "/shows",
-    onSuccess: (dispatch) => dispatch(getAllShows()),
-    errorMessage: "There was an issue making your show"
-  }
-)
+export const createShow = ({date, venueId, name}) => dispatch => http
+  .post("/shows", {date, venueId, name})
+  .then(() => dispatch(getAllShows()))

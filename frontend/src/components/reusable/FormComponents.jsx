@@ -98,18 +98,17 @@ export const PopoutForm = ({
   </>
 }
 
-export const LukeDatePicker = (props) =>
+export const LukeDatePicker = ({label, value, id, onChange}) =>
   <StyledFormControl>
     <MuiPickersUtilsProvider utils={LuxonUtils}>
       <div className="picker">
         <InlineDatePicker
+          id={id}
           keyboard
           variant="outlined"
-          label={props.label}
-          value={props.value === "" ? null : props.value}
-          onChange={val => {
-            return props.onChange(val.toSQLDate())
-          }}
+          label={label}
+          value={value === "" ? null : value}
+          onChange={val => onChange(val.toSQLDate())}
           format="MM-dd-yyyy"
           mask={[/\d/, /\d/, "-", /\d/, /\d/, "-", /\d/, /\d/, /\d/, /\d/]}
         />

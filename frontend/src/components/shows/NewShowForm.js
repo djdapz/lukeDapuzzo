@@ -1,40 +1,48 @@
-import React from "react"
+import React, { useState } from "react"
 
-import {useSelector} from "react-redux"
-import {LukeDatePicker, LukeSelect, LukeTextField, PopoutForm} from "../reusable"
-import {createShowForm} from "../shows/ShowActions"
-import {NewVenueForm, OpenNewVenueForm} from "../venue"
+import { useDispatch, useSelector } from "react-redux"
+import { LukeDatePicker, LukeSelect, LukeTextField, PopoutForm } from "../reusable"
+import { createShow } from "../shows/ShowActions"
+import { NewVenueForm, OpenNewVenueForm } from "../venue"
 
+const NewShowFormPopout = () => {
 
-const NewShowFormPopout = (props) => {
-  const {newShow, update_date, update_venueId, update_notes} = props
+  const [date, setDate] = useState("")
+  const [venueId, setVenueId] = useState("")
+  const [notes, setNotes] = useState("")
+
   const venues = useSelector(state => state.venues)
+  const dispatch = useDispatch()
 
-  return <PopoutForm {...props} formName={"new-show"}>
+  const valid = date && venueId
+
+  return <PopoutForm valid={valid}
+                     submitForm={() => dispatch(createShow({ date, venueId, notes }))}
+                     formName={"new-show"}>
     <LukeDatePicker
-      value={newShow.date}
-      onChange={update_date}
+      id={"new-show-date"}
+      value={date}
+      onChange={setDate}
       label={"Date"}
     />
     <LukeSelect
       id={"select-venue"}
-      value={newShow.venueId}
-      onChange={update_venueId}
+      value={venueId}
+      onChange={setVenueId}
       label="Venue"
       options={venues}
-      optionToMenuItem={(venue) => ({value: venue.id, label: venue.name})}
+      optionToMenuItem={(venue) => ({ value: venue.id, label: venue.name })}
       renderWhenNoOptions={() => <OpenNewVenueForm/>}
     />
     <LukeTextField
       multiline
       rows={3}
-      value={newShow.notes}
-      onChange={update_notes}
+      value={notes}
+      onChange={setNotes}
       label={"Notes"}
     />
     <NewVenueForm/>
   </PopoutForm>
 }
 
-
-export default createShowForm.connect(NewShowFormPopout)
+export default NewShowFormPopout
