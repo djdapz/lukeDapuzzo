@@ -1,22 +1,16 @@
-import { authorizeUser } from "./UserActions"
 import { push } from "connected-react-router"
-import { authorizeHttp } from "../../api"
-import { declareForm } from "../../FormActions"
+import { authorizeHttp, http } from "../../api"
+import { LUKE_API } from "../../appConfig"
+import { authorizeUser } from "./UserActions"
 
-export const authForm = declareForm({
-    formName: "authForm",
-    fields: [
-      { name: "username", required: true },
-      { name: "password", required: true }
-    ],
-    path: "/login",
-    onSuccess: (dispatch, getState, response) => {
-      dispatch(authorizeUser(response))
-      authorizeHttp(response.token)
-      window.localStorage.setItem("token", response.token)
-      dispatch(push("/admin"))
-    },
-    isInsecure: true,
-    errorMessage: "sorry it didnt work "
-  }
-)
+export const login = ({ password, username, onError }) =>
+  dispatch => http
+    .post(`${LUKE_API}/login`, { password, username })
+    .then(response => {
+      const token = response.data.token
+      authorizeHttp(token)
+      window.localStorage.setItem("token", token)
+    })
+    .then(() => dispatch(authorizeUser()))
+    .then(() => dispatch(push("/admin")))
+    .catch(() => onError("Sorry, we were unable to log you in."))

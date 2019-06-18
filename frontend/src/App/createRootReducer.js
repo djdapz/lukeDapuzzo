@@ -1,7 +1,7 @@
 import { combineReducers } from "redux"
 import { showsReducer, createShowForm, } from "../components/shows"
 import { songsReducer } from "../components/music"
-import { authForm, userAuthenticationReducer } from "../components/user"
+import { userAuthenticationReducer } from "../components/user"
 
 import { createSongForm } from "../components/music"
 import { bioReducer } from "../components/bio/BioReducer"
@@ -19,7 +19,6 @@ const rootReducer = (history) => combineReducers({
   songs: songsReducer,
   newSong: createSongForm.reducer,
   newShow: createShowForm.reducer,
-  authForm: authForm.reducer,
   venueFormOpen: venueFormOpen,
   user: userReducer,
   router: connectRouter(history),
