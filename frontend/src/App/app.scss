@@ -39,8 +39,6 @@ a:active {
   padding-top: $header-bar-height + 16px;
   padding-left: 1em;
   padding-right: 1em;
-  overflow-y: scroll;
-  height: 100%;
   box-sizing: border-box;
 
   @media screen and (min-width: $lg-md) {
