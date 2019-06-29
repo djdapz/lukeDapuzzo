@@ -383,7 +383,6 @@ jobs:
     plan:
       - get: repo
         passed: [ "e2e-tests"]
-        trigger: true
       - get: alpine
         params: {save: true}
       - in_parallel:

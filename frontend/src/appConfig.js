@@ -31,7 +31,7 @@ function loadEnv (options) {
   return options[environment] || options[LOCAL]
 }
 
-let LUKE_API = loadEnv({
+export const LUKE_API = loadEnv({
   LOCAL: "http://localhost:8081",
   DEV: "https://luke-dapuzzo-api-dev.cfapps.io",
   PROD: "https://luke-dapuzzo-api.cfapps.io",
@@ -39,4 +39,10 @@ let LUKE_API = loadEnv({
   CYPRESS: "http://localhost:3210"
 })
 
-export { LUKE_API }
+export const GOOGLE_ANALYTICS_ID = loadEnv({
+  LOCAL: "UA-143002675-1",
+  DEV: "UA-143002675-1",
+  PROD: "UA-143002675-2",
+  TEST: "UA-143002675-1",
+  CYPRESS: "UA-143002675-1"
+})

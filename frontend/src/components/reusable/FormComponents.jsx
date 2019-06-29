@@ -6,7 +6,8 @@ import Select from "@material-ui/core/Select/Select"
 import OutlinedInput from "@material-ui/core/OutlinedInput/OutlinedInput"
 import MenuItem from "@material-ui/core/MenuItem/MenuItem"
 import TextField from "@material-ui/core/TextField/TextField"
-import React, { useState } from "react"
+// noinspection ES6CheckImport
+import React from "react"
 
 import LuxonUtils from "@date-io/luxon"
 import styled from "styled-components"
@@ -59,9 +60,9 @@ export const PopoutForm = ({
                              submitForm,
                              formName,
                              error,
+                             setOpen,
+                             open
                            }) => {
-  const [open, setOpen] = useState(false)
-
   return <>
     <BottomButton variant="fab"
                   color="primary"
@@ -70,11 +71,10 @@ export const PopoutForm = ({
                   aria-label="Add">
       <AddIcon/>
     </BottomButton>
-
     <Drawer anchor="right"
             open={open}
             onClose={() => setOpen(false)}>
-      <NewFormStyled>
+      <NewFormStyled id={`${formName}-form`}>
         {children}
         <StyledFormControl>
           <Button
@@ -98,7 +98,7 @@ export const PopoutForm = ({
   </>
 }
 
-export const LukeDatePicker = ({label, value, id, onChange}) =>
+export const LukeDatePicker = ({ label, value, id, onChange }) =>
   <StyledFormControl>
     <MuiPickersUtilsProvider utils={LuxonUtils}>
       <div className="picker">

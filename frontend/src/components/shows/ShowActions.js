@@ -1,4 +1,5 @@
 import { http } from "../../api"
+import { SET_SHOW_FORM_OPEN } from "../../App/createRootReducer"
 
 export const ALL_SHOWS_FETCHED = "ALL_SHOWS_FETCHED"
 
@@ -23,6 +24,7 @@ export const getAllShows = () => (dispatch) => http
     payload: response.data
   }))
 
-export const createShow = ({date, venueId, name}) => dispatch => http
-  .post("/shows", {date, venueId, name})
+export const createShow = ({ date, venueId, name }) => dispatch => http
+  .post("/shows", { date, venueId, name })
   .then(() => dispatch(getAllShows()))
+  .then(() => dispatch({ type: SET_SHOW_FORM_OPEN, payload: false }))

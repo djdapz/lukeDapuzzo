@@ -102,7 +102,7 @@ describe("Show Admin", () => {
         cy.contains("Send It").should("not.be.disabled")
       })
 
-      describe.only("When i fill out the form", () => {
+      describe("When i fill out the form", () => {
         beforeEach(function () {
           cy.get(".picker input").type("03022013")
           cy.get("#select-venue").click()
@@ -113,13 +113,17 @@ describe("Show Admin", () => {
 
         it("should create a new show", function () {
           cy.wait("@postShow").then(xhr => {
-            expect(xhr.requestBody).to.eql({ date: "2013-03-02", venueId: 1 })
+            expect(xhr.requestBody).to.eql({ date: "2013-03-02", venueId: 1, notes: "" })
           })
         })
 
         it("should refresh show list ", function () {
           cy.wait("@postShow")
           cy.wait("@getShows")
+        })
+
+        it("should hide form", function () {
+          cy.get("#new-show-form").should("not.exist")
         })
       })
     })

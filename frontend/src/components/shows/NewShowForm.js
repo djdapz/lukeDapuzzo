@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { LukeDatePicker, LukeSelect, LukeTextField, PopoutForm } from "../reusable"
 import { createShow } from "../shows/ShowActions"
 import { NewVenueForm, OpenNewVenueForm } from "../venue"
+import { SET_SHOW_FORM_OPEN } from "../../App/createRootReducer"
 
 const NewShowFormPopout = () => {
 
@@ -12,11 +13,16 @@ const NewShowFormPopout = () => {
   const [notes, setNotes] = useState("")
 
   const venues = useSelector(state => state.venues)
+  const open = useSelector(state => state.showsFormOpen)
   const dispatch = useDispatch()
 
   const valid = date && venueId
 
   return <PopoutForm valid={valid}
+                     open={open}
+                     setOpen={(open) => {
+                       debugger
+                       return dispatch({ type: SET_SHOW_FORM_OPEN, payload: open }) }}
                      submitForm={() => dispatch(createShow({ date, venueId, notes }))}
                      formName={"new-show"}>
     <LukeDatePicker
