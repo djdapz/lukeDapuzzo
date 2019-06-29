@@ -111,9 +111,11 @@ describe("Show Admin", () => {
           cy.contains("Send It").click()
         })
 
-        it("should create a new show", function () {
+        it.only("should create a new show", function () {
           cy.wait("@postShow").then(xhr => {
-            expect(xhr.requestBody).to.eql({ date: "2013-03-02", venueId: 1, notes: "" })
+            const actual = xhr.request.body
+            const expected = { date: "2013-03-02", venueId: 1 }
+            expect(actual).to.eq(expected)
           })
         })
 

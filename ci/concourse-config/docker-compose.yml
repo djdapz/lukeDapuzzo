@@ -10,7 +10,7 @@ services:
     - PGDATA=/database
 
   concourse-web:
-    image: concourse/concourse:5.2.0
+    image: concourse/concourse:5.3.0
     command: web
     links: [concourse-db]
     depends_on: [concourse-db]
@@ -26,7 +26,7 @@ services:
       CONCOURSE_MAIN_TEAM_LOCAL_USER: test
 
   concourse-worker:
-    image: concourse/concourse:5.2.0
+    image: concourse/concourse:5.3.0
     command: worker
     privileged: true
     links: [concourse-web]

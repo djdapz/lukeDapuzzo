@@ -84,4 +84,21 @@ class ShowControllerTest {
 
         verify(mockShowService).createShow(12,  "Acoustic", LocalDate.parse("2018-12-10"))
     }
+
+
+    @Test
+    fun `should send empty string for notes when not sent`() {
+        mockMvc
+            .perform(post("/shows")
+                //language=json
+                .content("""
+                            {
+                              "venueId": "12",
+                              "date": "2018-12-10"
+                            }
+                        """.trimIndent())
+                .contentType(APPLICATION_JSON))
+
+        verify(mockShowService).createShow(12,  "", LocalDate.parse("2018-12-10"))
+    }
 }

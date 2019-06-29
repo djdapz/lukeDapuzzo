@@ -20,9 +20,7 @@ const NewShowFormPopout = () => {
 
   return <PopoutForm valid={valid}
                      open={open}
-                     setOpen={(open) => {
-                       debugger
-                       return dispatch({ type: SET_SHOW_FORM_OPEN, payload: open }) }}
+                     setOpen={(open) =>  dispatch({ type: SET_SHOW_FORM_OPEN, payload: open }) }
                      submitForm={() => dispatch(createShow({ date, venueId, notes }))}
                      formName={"new-show"}>
     <LukeDatePicker
