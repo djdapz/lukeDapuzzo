@@ -63,7 +63,7 @@ dependencies {
             "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0",
             'io.jsonwebtoken:jjwt:0.9.1'
 
-    )Psr
+    )
 
     testCompile(
             "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0",
