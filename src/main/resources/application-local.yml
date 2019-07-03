@@ -6,7 +6,7 @@ spring:
 
 dapuzzo:
   luke:
-    whitelist: /login, /account/create, /api/email
+    whitelist: /login, /account/create, /email
     email-distribution-list: djdapz@aol.com
     email-service: http://localhost:8082
     jwt:

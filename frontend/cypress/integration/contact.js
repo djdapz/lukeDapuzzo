@@ -4,7 +4,7 @@ describe("Contact page", () => {
 
     cy.route({
       method: "POST",
-      url: "/api/email",
+      url: "/email",
       response: "good",
       delay: 200
     }).as("sendEmail")

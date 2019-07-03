@@ -3,7 +3,7 @@ server:
 
 dapuzzo:
   luke:
-    whitelist: /login, /api/email
+    whitelist: /login, /email
 
 spring:
   data:

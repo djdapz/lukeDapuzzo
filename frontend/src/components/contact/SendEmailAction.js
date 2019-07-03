@@ -14,7 +14,7 @@ export const sendEmail = ({ email, name, message }) => (dispatch) => {
   }))
 
   return http
-    .post("/api/email", {
+    .post("/email", {
       email,
       name,
       message,

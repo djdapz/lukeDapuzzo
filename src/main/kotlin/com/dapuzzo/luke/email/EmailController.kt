@@ -15,6 +15,5 @@ class EmailController(val emailService: EmailService) {
     fun sendEmail(@RequestBody emailRequest: EmailRequest) {
         val email = Email(name = emailRequest.name, email = emailRequest.email, message = emailRequest.message)
         emailService.send(email)
-
     }
 }
