@@ -1,5 +1,7 @@
 package com.dapuzzo.luke.email
 
+import com.dapuzzo.luke.config.EMAIL_DIST_LIST
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpMethod
@@ -11,7 +13,8 @@ import org.springframework.web.client.RestTemplate
 class EmailClient(
     val restTemplate: RestTemplate,
     @Value("\${dapuzzo.luke.email-service}") val emailServiceUrl: String,
-    @Value("\${dapuzzo.luke.email-distribution-list}") val recipients: List<String>
+    @Qualifier(EMAIL_DIST_LIST) val recipients: List<String>
+
 ) :
     EmailService {
     override fun send(email: Email) {

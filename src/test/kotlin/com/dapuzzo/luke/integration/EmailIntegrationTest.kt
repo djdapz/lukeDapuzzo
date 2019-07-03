@@ -62,7 +62,7 @@ class EmailIntegrationTest : IntegrationTest() {
                           {
                             "name": "Mr Producer",
                             "message": "I like your stuff guy",
-                            "to": ["luke@luke.luke"],
+                            "to": ["luke@luke.luke", "devon@devon.devon"],
                             "from": "boss@company.com"
                         }
 
