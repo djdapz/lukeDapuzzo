@@ -1,0 +1,3 @@
+dapuzzo:
+  luke:
+    email-service: ${EMAIL_SERVICE_URL}

@@ -1,6 +1,5 @@
 package com.dapuzzo.luke.core.random
 
-import com.dapuzzo.luke.email.EmailRequest
 import com.dapuzzo.luke.security.Account
 import com.dapuzzo.luke.security.AuthorizedAccount
 import com.dapuzzo.luke.security.Credentials
@@ -57,13 +56,6 @@ fun randomLocalDate(): LocalDate {
 
 
 fun <T> randomList(producer: () -> T): List<T> = (1..randomInt(5)).map { producer() }
-
-fun randomEmailRequest() =
-    EmailRequest(
-        randomString(),
-        randomEmailAddress(),
-        randomString()
-    )
 
 private fun randomEmailAddress(): String = faker().internet().emailAddress()
 

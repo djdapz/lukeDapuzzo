@@ -1,24 +1,20 @@
 package com.dapuzzo.luke.email
 
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
-@RestController
-class EmailController(
-        val emailService: EmailService) {
 
+@RestController("/email")
+class EmailController(val emailService: EmailService) {
 
-    @PostMapping("/api/email")
-    fun sendEmail(@RequestBody emailRequest: EmailRequest): ResponseEntity<*> {
-        if (!emailRequest.isValid) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(emailRequest.errorMessage)
-        }
+    data class EmailRequest(val name: String, val email: String, val message: String)
 
-        emailService.sendEmail(emailRequest)
+    @PostMapping
+    fun sendEmail(@RequestBody emailRequest: EmailRequest) {
+        val email = Email(name = emailRequest.name, email = emailRequest.email, message = emailRequest.message)
+        emailService.send(email)
 
-        return ResponseEntity.ok("Great Success")
     }
 }

@@ -17,7 +17,8 @@ server:
 dapuzzo:
   luke:
     whitelist: /account/create, /login
-    email-distribution-list: devon@dapuzzo.com,djdapz@aol.com
+    email-distribution-list: luke@luke.luke
+    email-service: http://localhost:8089
     jwt:
       secret: IM_SUPER_SECRET_YO
       seconds-token-is-valid: 10000
